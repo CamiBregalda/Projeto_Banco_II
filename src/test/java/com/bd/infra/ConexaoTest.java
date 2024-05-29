@@ -16,8 +16,8 @@ public class ConexaoTest {
     @BeforeAll
     public static void setUp() {
         login = Login.getInstance();
-        login.setUser("postgres");
-        login.setSenha("root");
+        login.setUser("valid_user");
+        login.setSenha("valid_password");
     }
 
     @Test
