@@ -62,3 +62,12 @@ Create table tb_itens(
 	PRIMARY KEY(ite_codigo)
 );
 
+Create table tb_usuario(
+	user_codigo varchar(45),
+	user_nome varchar(45),
+	user_cpf varchar(45),
+	user_funcao varchar(45),
+	user_username varchar(45),
+	user_senha varchar(45),
+	PRIMARY KEY(user_codigo)
+);
