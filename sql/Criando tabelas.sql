@@ -67,7 +67,7 @@ Create table tb_usuario(
 	user_senha varchar(11)
 );
 
-
+INSERT INTO tb_funcionarios VALUES('1','Franscisco Aguiar', '081.654.759-66','12345678','gerente');
 
 CREATE OR REPLACE FUNCTION gerar_registros_fornecedores()
 RETURNS VOID AS
@@ -149,68 +149,6 @@ LANGUAGE plpgsql;
 SELECT gerar_registros_produto();
 
 select * from tb_produtos;
-
-
-
-
-CREATE OR REPLACE FUNCTION gerar_registros_Funcionarios()
-RETURNS VOID AS
-$$
-DECLARE
-    i INTEGER := 1;
-    cpf_text TEXT;
-    nome TEXT[] := ARRAY['João', 'José', 'Antônio', 'Francisco', 'Carlos', 'Paulo', 'Lucas', 'Pedro', 'Marcos', 'Luiz', 'Gabriel', 'André', 'Bruno', 'Rafael', 'Felipe', 'Maria', 'Ana', 'Francisca', 'Adriana', 'Juliana', 'Fernanda', 'Patricia', 'Mariana', 'Vanessa', 'Amanda', 'Tatiane', 'Bianca', 'Marcela', 'Larissa', 'Paula'];
-    sobrenomes TEXT[] := ARRAY['Silva', 'Santos', 'Menezes', 'Souza', 'Pereira', 'Costa', 'Carvalho', 'Almeida', 'Ferreira', 'Rodrigues', 'Martins', 'Lima', 'Araújo', 'Fernandes', 'Oliveira', 'Rodrigues', 'Alves', 'Barbosa', 'Ribeiro', 'Gonçalves', 'Miranda', 'Cardoso', 'Castro', 'Rocha', 'Neves', 'Santos', 'Morais', 'Azevedo', 'Cunha', 'Mendes'];
-    posicaoNome INTEGER;
-    posicaoSobrenome INTEGER;
-    funcao VARCHAR;
-    caracteres TEXT := 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    senha TEXT := '';
-    
-BEGIN
-    WHILE i <= 100 LOOP
-        -- Formatar o CPF para ter 11 dígitos
-        cpf_text := LPAD(CAST(1000000000 + i AS TEXT), 11, '0');
-        
-        posicaoNome := FLOOR(RANDOM() * (30) + 1);
-        posicaoSobrenome := FLOOR(RANDOM() * (30) + 1);
-
-        -- Gerar um número aleatório entre 1 e 3
-        funcao := (FLOOR(RANDOM() * 3) + 1)::VARCHAR;
-
-        -- Mapear o número gerado para os valores desejados
-        CASE funcao
-            WHEN '1' THEN funcao := 'vendedor';
-            WHEN '2' THEN funcao := 'gerente';
-            WHEN '3' THEN funcao := 'analista';
-        END CASE;
-
-        -- Gerar a senha aleatória com até 10 dígitos
-        senha := '';
-        FOR j IN 1..10 LOOP
-            senha := senha || substring(caracteres, floor(random() * length(caracteres) + 1)::INT, 1);
-        END LOOP;
-
-        INSERT INTO tb_funcionarios(fun_codigo, fun_nome, fun_cpf, fun_senha, fun_funcao)
-        VALUES (
-            i,
-            nome[posicaoNome] || ' ' || sobrenomes[posicaoSobrenome],
-            CONCAT(
-                SUBSTRING(cpf_text FROM 1 FOR 3), '.', 
-                SUBSTRING(cpf_text FROM 4 FOR 3), '.', 
-                SUBSTRING(cpf_text FROM 7 FOR 3), '-',
-                SUBSTRING(cpf_text FROM 10 FOR 2)
-            ),
-            senha,
-            funcao
-        );
-        i := i + 1;
-    END LOOP;
-END;
-$$
-LANGUAGE plpgsql;
-
-select gerar_registros_Funcionarios();
  
 
 select *from tb_funcionarios;
