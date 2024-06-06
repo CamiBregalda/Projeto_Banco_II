@@ -7,22 +7,26 @@ body {
     background-color: #f0f0f0;
     margin: 0;
 }
-.login-container {
+
+.registration-container {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.login-container h2 {
+
+.registration-container h2 {
     margin-bottom: 20px;
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.login-container input[type="text"],
-.login-container input[type="password"],
-.login-container button {
+
+.registration-container input[type="text"],
+.registration-container input[type="cpf"],
+.registration-container input[type="password"],
+.registration-container button {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -30,13 +34,15 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
 }
-.login-container button {
+
+.registration-container button {
     background-color: #007BFF;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
 }
-.login-container button:hover {
+
+.registration-container button:hover {
     background-color: #0056b3;
 }
