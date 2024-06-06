@@ -1,0 +1,150 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu-bar {
+    position: absolute;
+    left: 10px;
+    top: 30px;
+    cursor: pointer;
+    font-size: 24px; /* Aumenta o tamanho da fonte */
+    padding: 10px 20px; /* Aumenta o padding */
+}
+
+.search-bar {
+    display: relative;
+    flex: 2;
+    justify-content: flex-start;
+    position: relative;
+    top: -40px;
+}
+
+.search-bar input[type="text"] {
+    padding: 5px;
+    width: 300px;
+    border: none;
+    border-radius: 4px;
+    margin-left: -1000px;
+
+}
+
+.search-bar button {
+    position: flex;
+    left: 615px;
+    top: 35px;
+    padding: 5px 10px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #003f7f;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.ad-banner {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ad-banner img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    width: 30%;
+    margin: 10px;
+}
+
+.item img {
+    max-width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.item h2 {
+    color: #333;
+    font-size: 1.5em;
+}
+
+.item p {
+    color: #666;
+}
+
+.item .price {
+    color: #007BFF;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.item button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 4px;
+}
+
+.item button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
