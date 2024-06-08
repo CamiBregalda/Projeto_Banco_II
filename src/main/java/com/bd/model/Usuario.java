@@ -4,9 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
@@ -14,16 +14,16 @@ import lombok.RequiredArgsConstructor;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codigo;
-    private String nome;
-    private String cpf;
-    private String username;
-    private String senha;
+    private Integer user_codigo;
+    private String user_nome;
+    private String user_cpf;
+    private String user_username;
+    private String user_senha;
 
-    public Usuario(Integer codigo, String nome, String cpf, String username) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.username = username;
+    public Usuario(Integer user_codigo, String user_nome, String user_cpf, String user_username) {
+        this.user_codigo = user_codigo;
+        this.user_nome = user_nome;
+        this.user_cpf = user_cpf;
+        this.user_username = user_username;
     }
 }

@@ -10,12 +10,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Funcionario {
+public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer fun_codigo;
-    private String fun_nome;
-    private String fun_cpf;
-    private String fun_senha;
-    private String fun_funcao;
+    private Integer for_codigo;
+    private String for_descricao;
 }
