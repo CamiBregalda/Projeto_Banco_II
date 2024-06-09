@@ -21,8 +21,10 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
 
-    public UserResponse cadastrarUsuario(UserRequest userRequest) {
+    public UserResponse cadastrarUsuario(UserRequest userRequest, UserLoginDTO userDTO) {
+        criarLogin(userDTO);
         Usuario user = usuarioMapper.postDtoToEntity(userRequest);
+
         return usuarioMapper.entityToResponse(usuarioRepository.cadastrarUsuario(user));
     }
 
