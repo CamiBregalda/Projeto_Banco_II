@@ -18,4 +18,12 @@ public class Funcionario {
     private String fun_cpf;
     private String fun_senha;
     private String fun_funcao;
+
+
+    public Funcionario(Integer fun_codigo, String fun_nome, String fun_cpf, String fun_funcao) {
+        this.fun_codigo = fun_codigo;
+        this.fun_nome = fun_nome;
+        this.fun_cpf = fun_cpf;
+        this.fun_funcao = fun_funcao;
+    }
 }
