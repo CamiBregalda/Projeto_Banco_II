@@ -21,9 +21,9 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
 
-    public void cadastrarUsuario(UserRequest userRequest) {
+    public UserResponse cadastrarUsuario(UserRequest userRequest) {
         Usuario user = usuarioMapper.postDtoToEntity(userRequest);
-        usuarioRepository.cadastrarUsuario(user);
+        return usuarioMapper.entityToResponse(usuarioRepository.cadastrarUsuario(user));
     }
 
     public boolean validarUsuario(UserLoginDTO userDTO) {
@@ -58,6 +58,17 @@ public class UsuarioService {
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar usuário: " + e.getMessage());
         }
+    }
+
+    public UserResponse atualizarUsuario(Long id, UserRequest userRequest, UserLoginDTO userDTO) {
+        Usuario user = usuarioMapper.postDtoToEntity(userRequest);
+        usuarioRepository.atualizarUsuario(id, user);
+
+        return usuarioMapper.entityToResponse(user);
+    }
+
+    public boolean deletarUsuario(Long id, UserLoginDTO userDTO) {
+        return usuarioRepository.deletarUsuario(id);
     }
 
     private void criarLogin(UserLoginDTO userDTO) {

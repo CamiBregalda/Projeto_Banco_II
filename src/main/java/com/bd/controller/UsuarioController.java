@@ -20,13 +20,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<String> cadastrarUsuario(@RequestBody UserRequest user) {
-        try {
-            usuarioService.cadastrarUsuario(user);
-            return ResponseEntity.ok("Usuário cadastrado com sucesso");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar usuário: " + e.getMessage());
-        }
+    public UserResponse cadastrarUsuario(@RequestBody UserRequest user) {
+        return usuarioService.cadastrarUsuario(user);
     }
 
     @PostMapping("/login")
@@ -51,5 +46,20 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public UserResponse buscarUsuarioPeloId(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         return usuarioService.buscarUsuarioPeloId(id, userDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponse> atualizarUsuario(@PathVariable Long id, @RequestBody UserRequest user, UserLoginDTO userDTO) {
+        return ResponseEntity.ok(usuarioService.atualizarUsuario(id, user, userDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarUsuario(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
+        try {
+            usuarioService.deletarUsuario(id, userDTO);
+            return ResponseEntity.ok("Usuário deletado com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar usuário: " + e.getMessage());
+        }
     }
 }

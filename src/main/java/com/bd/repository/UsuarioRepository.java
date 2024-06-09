@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class UsuarioRepository {
 
-    public void cadastrarUsuario(Usuario user) {
+    public Usuario cadastrarUsuario(Usuario user) {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "INSERT INTO usuarios (user_nome, user_cpf, user_username, user_senha) VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -24,6 +24,8 @@ public class UsuarioRepository {
                 statement.setString(5, user.getSenha());
                 statement.executeUpdate();
             }
+
+            return user;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao cadastrar usuário", ex);
         }
@@ -69,6 +71,36 @@ public class UsuarioRepository {
             }
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao buscar usuário", ex);
+        }
+    }
+
+    public Usuario atualizarUsuario(Long id, Usuario user){
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "UPDATE tb_usuario SET user_nome = ?, user_cpf = ?, user_username = ?, user_senha = ? WHERE user_codigo = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, user.getNome());
+                statement.setString(2, user.getCpf());
+                statement.setString(3, user.getUsername());
+                statement.setString(4, user.getSenha());
+                statement.setLong(5, id);
+                statement.executeUpdate();
+            }
+            return user;
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao atualizar usuário", ex);
+        }
+    }
+
+    public boolean deletarUsuario(Long id) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "DELETE FROM tb_usuario WHERE user_codigo = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setLong(1, id);
+                statement.executeUpdate();
+                return true;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao deletar usuário", ex);
         }
     }
 }
