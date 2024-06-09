@@ -20,8 +20,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping("/cadastrar")
-    public UserResponse cadastrarUsuario(@RequestBody UserRequest user) {
-        return usuarioService.cadastrarUsuario(user);
+    public UserResponse cadastrarUsuario(@RequestBody UserRequest user, UserLoginDTO userDTO) {
+        return usuarioService.cadastrarUsuario(user, userDTO);
     }
 
     @PostMapping("/login")
