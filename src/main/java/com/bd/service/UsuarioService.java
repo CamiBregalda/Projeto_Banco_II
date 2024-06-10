@@ -6,6 +6,7 @@ import com.bd.infra.Login;
 import com.bd.mapper.UsuarioMapper;
 import com.bd.model.Usuario;
 import com.bd.model.request.UserLoginDTO;
+import com.bd.model.request.UserRegistrationRequest;
 import com.bd.model.request.UserRequest;
 import com.bd.model.response.UserResponse;
 import com.bd.repository.UsuarioRepository;
@@ -21,9 +22,9 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
 
-    public UserResponse cadastrarUsuario(UserRequest userRequest, UserLoginDTO userDTO) {
-        criarLogin(userDTO);
-        Usuario user = usuarioMapper.postDtoToEntity(userRequest);
+    public UserResponse cadastrarUsuario(UserRegistrationRequest userRequest) {
+        criarLogin(userRequest.getUserLoginDTO());
+        Usuario user = usuarioMapper.postDtoToEntity(userRequest.getUserRequest());
 
         return usuarioMapper.entityToResponse(usuarioRepository.cadastrarUsuario(user));
     }
@@ -45,6 +46,7 @@ public class UsuarioService {
             for (Usuario usuario : usuarios) {
                 userResponses.add(usuarioMapper.entityToResponse(usuario));
             }
+
             return userResponses;
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar usuários: " + e.getMessage());
@@ -62,14 +64,16 @@ public class UsuarioService {
         }
     }
 
-    public UserResponse atualizarUsuario(Long id, UserRequest userRequest, UserLoginDTO userDTO) {
-        Usuario user = usuarioMapper.postDtoToEntity(userRequest);
+    public UserResponse atualizarUsuario(Long id, UserRegistrationRequest userRequest) {
+        criarLogin(userRequest.getUserLoginDTO());
+        Usuario user = usuarioMapper.postDtoToEntity(userRequest.getUserRequest());
         usuarioRepository.atualizarUsuario(id, user);
 
         return usuarioMapper.entityToResponse(user);
     }
 
     public boolean deletarUsuario(Long id, UserLoginDTO userDTO) {
+        criarLogin(userDTO);
         return usuarioRepository.deletarUsuario(id);
     }
 
