@@ -5,10 +5,7 @@ import com.bd.model.Usuario;
 import com.bd.model.Venda;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class VendaRepository {
             String sql = "INSERT INTO tb_vendas (ven_codigo, ven_horario, ven_valor_total, tb_funcionarios_fun_codigo) VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, venda.getVen_codigo());
-                statement.setTimestamp(2, venda.getVen_horario());
+                statement.setTimestamp(2, Timestamp.valueOf(venda.getVen_horario()));
                 statement.setDouble(3, venda.getVen_valor_total());
                 statement.setInt(4, venda.getTb_funcionarios_fun_codigo());
                 statement.executeUpdate();
@@ -41,7 +38,7 @@ public class VendaRepository {
                 while (resultado.next()) {
                     Venda venda = new Venda(
                             resultado.getInt("ven_codigo"),
-                            resultado.getTimestamp("ven_horario"),
+                            resultado.getTimestamp("ven_horario").toLocalDateTime(),
                             resultado.getDouble("ven_valor_total"),
                             resultado.getInt("tb_funcionarios_fun_codigo")
                     );
@@ -63,7 +60,7 @@ public class VendaRepository {
                 if (resultado.next()) {
                     return new Venda(
                             resultado.getInt("ven_codigo"),
-                            resultado.getTimestamp("ven_horario"),
+                            resultado.getTimestamp("ven_horario").toLocalDateTime(),
                             resultado.getDouble("ven_valor_total"),
                             resultado.getInt("tb_funcionarios_fun_codigo")
                     );
@@ -79,7 +76,7 @@ public class VendaRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "UPDATE tb_vendas SET ven_horario = ?, ven_valor_total = ? WHERE ven_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setTimestamp(1, venda.getVen_horario());
+                statement.setTimestamp(1, Timestamp.valueOf(venda.getVen_horario()));
                 statement.setDouble(2, venda.getVen_valor_total());
                 statement.setLong(3, id);
                 statement.executeUpdate();
