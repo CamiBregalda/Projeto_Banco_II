@@ -77,12 +77,11 @@ public class VendaRepository {
 
     public Venda atualizarVenda(Long id, Venda venda){
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "UPDATE tb_vendas SET ven_horario = ?, ven_valor_total = ?, tb_funcionarios_fun_codigo = ? WHERE ven_codigo = ?";
+            String sql = "UPDATE tb_vendas SET ven_horario = ?, ven_valor_total = ? WHERE ven_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setTimestamp(1, venda.getVen_horario());
                 statement.setDouble(2, venda.getVen_valor_total());
-                statement.setInt(3, venda.getTb_funcionarios_fun_codigo());
-                statement.setLong(4, id);
+                statement.setLong(3, id);
                 statement.executeUpdate();
             }
             return venda;

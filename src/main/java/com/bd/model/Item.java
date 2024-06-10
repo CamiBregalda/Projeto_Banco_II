@@ -17,5 +17,14 @@ public class Item {
     private double ite_valor_parcial;
     private Integer tb_produtos_pro_codigo;
     private Integer tb_vendas_ven_codigo;
+
+
+    public Item(Integer ite_codigo, Integer ite_quantidade, double ite_valor_parcial, Integer tb_produtos_pro_codigo, Integer tb_vendas_ven_codigo) {
+        this.ite_codigo = ite_codigo;
+        this.ite_quantidade = ite_quantidade;
+        this.ite_valor_parcial = ite_valor_parcial;
+        this.tb_produtos_pro_codigo = tb_produtos_pro_codigo;
+        this.tb_vendas_ven_codigo = tb_vendas_ven_codigo;
+    }
 }
 
