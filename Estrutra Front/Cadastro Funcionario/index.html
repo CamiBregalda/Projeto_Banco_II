@@ -11,7 +11,13 @@
         <h2>Cadastro do Funcionario</h2>
         <form id = "form-cadastro">
             <input type="text" id="nomeCompleto" placeholder="Nome Completo do Funcionario" required>
+            <p class="erro">
+                <b>O nome precisa estar completo</b>
+            </p>
             <input type="cpf" id="cpf" placeholder="CPF" required>
+            <p class="erro-cpf">
+                <b>O CPF precisa estar completo</b>
+            </p>
             <input type="password" id="senha" placeholder="Senha" required>
             <input type="hole" id="cargo" placeholder="Cargo do Funcionario" required>
             <button type="submit">Cadastrar</button>
