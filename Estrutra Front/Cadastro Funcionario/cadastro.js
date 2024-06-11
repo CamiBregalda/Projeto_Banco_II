@@ -5,13 +5,15 @@ function validaNome(nomeCompleto){
     return nomeComoArray.length >= 2;
 }
 
-form.addEventListener('submit', function(e){
-    e.preventDefault;
+form.addEventListener('submit', function(evento){
+    evento.preventDefault();
 
-    const nomeFuncionario = document.getElementsByName('firstname');
-    const cpfFuncionario = document.getElementsByName("cpf");
-    const senhaFuncionario = document.getElementsByName("password");
-    const cargoFuncionario = document.getElementsByName("hole");
+    const nomeFuncionario = document.getElementById('nomeCompleto');
+    if (!validaNome(nomeFuncionario.value)){
+        alert("O nome não está completo");
+    } else{
+        alert("tudo certo");
+    }
 })
 
 console.log(form);
