@@ -6,7 +6,6 @@ const senhaFuncionario = document.getElementById('senha');
 const cargoFuncionario = document.getElementById('cargo');
 
 
-
 form.addEventListener('submit', function(evento){
     evento.preventDefault();
 
@@ -18,8 +17,10 @@ form.addEventListener('submit', function(evento){
             cargo: cargoFuncionario.value
         }
 
-        console.log(dadosFuncionario)
 })
 
 
+function cadastrar(){
 
+    fetch(JSON)
+}
