@@ -8,15 +8,17 @@
 </head>
 <body>
     <div class="registration-container">
-        <h2>Realize seu Cadastro</h2>
+        <h1>Realize seu Cadastro</h1>
         <form id ="form-cadastro-usuário">
-            <input type="text" name="firstname" placeholder="Nome Completo" required>
-            <input type="text" name="username" placeholder="Nome do Usuário" required>
-            <input type="cpf" name="cpf" placeholder="CPF" required>
-            <input type="password" name="password" placeholder="Senha" required>
-            <input type="password" name="confirm-password" placeholder="Confirme sua Senha" required>
+            <input type="text" id = "nomeCompleto" placeholder="Nome Completo" required>
+            <input type="text" id = "nomeUsuario" placeholder="Nome do Usuário" required>
+            <input type="cpf" id = "cpfUsuario" placeholder="CPF" required>
+            <input type="password" id = "senhaUsuario" placeholder="Senha" required>
+            <input type="password" id = "confirmaSenha" placeholder="Confirme sua Senha" required>
             <button type="submit">Cadastrar</button>
         </form>
     </div>
+
+    <script src = "scriptCadastro.js">  </script>
 </body>
 </html>
