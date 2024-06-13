@@ -50,7 +50,6 @@ function validaNome(nomeCompletoUsuario){
 //ver se as senhas são iguais
 function SenhasIguais(senhaUsuario, confirmaSenha){
     if (senhaUsuario.value == confirmaSenha.value){
-        console.log("Senhas iguais");
         return true;
     }
 }
@@ -59,36 +58,27 @@ function SenhasIguais(senhaUsuario, confirmaSenha){
 formulario.addEventListener('submit', function(evento){
     evento.preventDefault();
 
-    console.log("apertou o botão")
-
     nomeEValido = validaNome(nomeCompletoUsuario);
     senhaEValida = SenhasIguais(senhaUsuario, confirmaSenha);
 
-
-
-    
-    
     if(nomeEValido && senhaEValida){
-        alert("Ebaaaaaaaaaa")
-    } else {
-        console.log("Não deu certo")
+        //cadastrar();
+        //mandar para a página inicial
+    
+        //limpar();
+    } else if (!nomeEValido && senhaEValida){
+        //avisar que o nome está incompleto
+        nomeCompletoUsuario.style.border
+        
+    } else if (nomeEValido && !senhaEValida){
+        //avisar que as senhas não estão iguais
+        
+    }else{
+        //mandar arrumar o nome e as senhas
+
     }
 
-
-    //cadastrar();
-
-    /*if ( (nomeEValido == true) && (senhaEValida == true)){
-        
-
-    } else if ((nomeEValido == false) && (senhaEValida == true)){
-        alert("Nome incompleto")
-
-    } else if ((nomeEValido == true) && (senhaEValida == false)){
-        alert("as senhas não são iguais")
-
-    } else{
-        alert("Nome incompleto e senhas diferentes")
-
-    }*/
+//display: none
+    
 
 })
