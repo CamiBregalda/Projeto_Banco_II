@@ -55,6 +55,9 @@ h1 {
 }
 
 .erro {
+    padding-top: 3%;
+    padding-bottom: 8px;
+    color: red;
     font-size: 10px;
     display: none;
 }

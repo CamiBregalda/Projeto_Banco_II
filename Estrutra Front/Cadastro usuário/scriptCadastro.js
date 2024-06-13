@@ -8,7 +8,7 @@ const confirmaSenha = document.getElementById('confirmaSenha');
 
 
 //contato com o back
-/*function cadastrar (){
+function cadastrar (){
 
     fetch("http://localhost:8080/users/cadastrar", {
 
@@ -31,7 +31,7 @@ const confirmaSenha = document.getElementById('confirmaSenha');
 
 };
 
-function limpar() {
+/*function limpar() {
     nomeCompletoUsuario.value = "";
     nomeUsuario.value = "";
     cpfUsuario.value = "";
@@ -62,13 +62,12 @@ formulario.addEventListener('submit', function(evento){
     senhaEValida = SenhasIguais(senhaUsuario, confirmaSenha);
 
     if(nomeEValido && senhaEValida){
-        //cadastrar();
+        cadastrar();
         //mandar para a página inicial
     
         //limpar();
     } else if (!nomeEValido && senhaEValida){
-        //avisar que o nome está incompleto
-        nomeCompletoUsuario.style.border
+        //avisar que o nome está incompleto;
         
     } else if (nomeEValido && !senhaEValida){
         //avisar que as senhas não estão iguais
