@@ -15,4 +15,20 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer for_codigo;
     private String for_descricao;
+
+
+    public Fornecedor(Integer forCodigo, String forDescricao) {
+        this.for_codigo = forCodigo;
+        this.for_descricao = forDescricao;
+    }
+
+    @Override
+    public String toString() {
+        return "Fornecedor{" +
+                "for_codigo=" + for_codigo + '\'' +
+                ", for_descricao=" + for_descricao + '\'' +
+                '}';
+    }
+
+
 }
