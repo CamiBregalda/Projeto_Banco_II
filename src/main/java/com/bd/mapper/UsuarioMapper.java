@@ -11,5 +11,5 @@ import java.util.List;
 public interface UsuarioMapper {
     Usuario postDtoToEntity(UserRequest userRequest);
 
-    UserResponse entityToResponse(Usuario usuarios);
+    UserResponse entityToResponse(Usuario usuario);
 }

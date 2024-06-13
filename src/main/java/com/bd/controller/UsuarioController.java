@@ -1,6 +1,7 @@
 package com.bd.controller;
 
 import com.bd.model.request.UserLoginDTO;
+import com.bd.model.request.UserRegistrationRequest;
 import com.bd.model.request.UserRequest;
 import com.bd.model.response.UserResponse;
 import com.bd.service.UsuarioService;
@@ -20,8 +21,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping("/cadastrar")
-    public UserResponse cadastrarUsuario(@RequestBody UserRequest user) {
-        return usuarioService.cadastrarUsuario(user);
+    public UserResponse cadastrarUsuario(@RequestBody UserRegistrationRequest userRequest) {
+        return usuarioService.cadastrarUsuario(userRequest);
     }
 
     @PostMapping("/login")
@@ -49,8 +50,8 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> atualizarUsuario(@PathVariable Long id, @RequestBody UserRequest user, UserLoginDTO userDTO) {
-        return ResponseEntity.ok(usuarioService.atualizarUsuario(id, user, userDTO));
+    public ResponseEntity<UserResponse> atualizarUsuario(@PathVariable Long id, @RequestBody UserRegistrationRequest userRequest) {
+        return ResponseEntity.ok(usuarioService.atualizarUsuario(id, userRequest));
     }
 
     @DeleteMapping("/{id}")

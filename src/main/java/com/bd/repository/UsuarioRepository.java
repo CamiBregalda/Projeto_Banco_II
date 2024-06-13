@@ -16,7 +16,7 @@ public class UsuarioRepository {
 
     public Usuario cadastrarUsuario(Usuario user) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO usuarios (user_nome, user_cpf, user_username, user_senha) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO tb_usuario (user_codigo, user_nome, user_cpf, user_username, user_senha) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, user.getUser_codigo());
                 statement.setString(2, user.getUser_nome());

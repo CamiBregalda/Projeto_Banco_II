@@ -1,3 +1,10 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -15,7 +22,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.registration-container h2 {
+h1 {
     margin-bottom: 20px;
     color: #333;
     display: flex;

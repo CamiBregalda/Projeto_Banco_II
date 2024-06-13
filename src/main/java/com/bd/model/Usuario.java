@@ -26,4 +26,15 @@ public class Usuario {
         this.user_cpf = user_cpf;
         this.user_username = user_username;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "user_codigo=" + user_codigo +
+                ", user_nome='" + user_nome + '\'' +
+                ", user_cpf='" + user_cpf + '\'' +
+                ", user_username='" + user_username + '\'' +
+                ", user_senha='" + user_senha + '\'' +
+                '}';
+    }
 }

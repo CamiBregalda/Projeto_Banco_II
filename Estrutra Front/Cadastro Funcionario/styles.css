@@ -8,14 +8,14 @@ body {
     margin: 0;
 }
 
-.registration-container {
+.container {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.registration-container h2 {
+h1 {
     margin-bottom: 20px;
     color: #333;
     display: flex;
@@ -23,11 +23,11 @@ body {
     align-items: center;
 }
 
-.registration-container input[type="text"],
-.registration-container input[type="cpf"],
-.registration-container input[type="password"],
-.registration-container input[type="hole"],
-.registration-container button {
+.container input[type="text"],
+.container input[type="cpf"],
+.container input[type="password"],
+.container input[type="hole"],
+.container button {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -36,7 +36,7 @@ body {
     box-sizing: border-box;
 }
 
-.registration-container button {
+.container button {
     background-color: #007BFF;
     color: white;
     border: none;
@@ -44,6 +44,20 @@ body {
     font-size: 16px;
 }
 
-.registration-container button:hover {
+.container button:hover {
     background-color: #0056b3;
+}
+
+.erro{
+    font-size: 10px;
+    background-color: white;
+    color: red;
+    display: none;
+}
+
+.erro-cpf{
+    font-size: 10px;
+    background-color: white;
+    color: red;
+    display: none;
 }
