@@ -42,7 +42,6 @@ function limpar() {
 let nomeEValido, senhaEValida = false;
 
 // ver se o nome é válido
-//não está rodando - split não funciona (refazer)
 function validaNome(nomeCompletoUsuario){
     const nomeComoArray = nomeCompletoUsuario.value.split(' ');
     return nomeComoArray.length >= 2;
@@ -50,8 +49,8 @@ function validaNome(nomeCompletoUsuario){
 
 //ver se as senhas são iguais
 function SenhasIguais(senhaUsuario, confirmaSenha){
-    console.log("chegou aqui - senhas iguais");
-    if (senhaUsuario.value == confirmaSenha){
+    if (senhaUsuario.value == confirmaSenha.value){
+        console.log("Senhas iguais");
         return true;
     }
 }
@@ -64,6 +63,9 @@ formulario.addEventListener('submit', function(evento){
 
     nomeEValido = validaNome(nomeCompletoUsuario);
     senhaEValida = SenhasIguais(senhaUsuario, confirmaSenha);
+
+
+
     
     
     if(nomeEValido && senhaEValida){
