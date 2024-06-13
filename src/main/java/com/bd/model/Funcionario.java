@@ -16,9 +16,8 @@ public class Funcionario {
     private Integer fun_codigo;
     private String fun_nome;
     private String fun_cpf;
-    private String fun_senha;
     private String fun_funcao;
-
+    private String fun_senha;
 
     public Funcionario(Integer fun_codigo, String fun_nome, String fun_cpf, String fun_funcao) {
         this.fun_codigo = fun_codigo;
@@ -26,4 +25,16 @@ public class Funcionario {
         this.fun_cpf = fun_cpf;
         this.fun_funcao = fun_funcao;
     }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "fun_codigo=" + fun_codigo + '\'' +
+                ", fun_nome=" + fun_nome + '\'' +
+                ", fun_cpf=" + fun_cpf + '\'' +
+                ", fun_senha=" + fun_senha + '\'' +
+                ", fun_funcao=" + fun_funcao + '\'' +
+                '}';
+    }
+
 }

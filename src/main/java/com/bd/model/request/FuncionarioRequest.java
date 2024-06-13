@@ -2,8 +2,12 @@ package com.bd.model.request;
 
 public record FuncionarioRequest(
 
-        Integer codigo,
-        String nome,
-        String cpf,
-        String senha,
-        String funcao) { }
+        Integer fun_codigo,
+        String fun_nome,
+        String fun_cpf,
+        String fun_funcao,
+        String fun_senha
+
+)
+
+{ }
