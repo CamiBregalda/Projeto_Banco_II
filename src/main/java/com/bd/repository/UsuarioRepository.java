@@ -18,10 +18,11 @@ public class UsuarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "INSERT INTO usuarios (user_nome, user_cpf, user_username, user_senha) VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, user.getNome());
-                statement.setString(2, user.getCpf());
-                statement.setString(4, user.getUsername());
-                statement.setString(5, user.getSenha());
+                statement.setInt(1, user.getUser_codigo());
+                statement.setString(2, user.getUser_nome());
+                statement.setString(3, user.getUser_cpf());
+                statement.setString(4, user.getUser_username());
+                statement.setString(5, user.getUser_senha());
                 statement.executeUpdate();
             }
 
@@ -78,10 +79,10 @@ public class UsuarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "UPDATE tb_usuario SET user_nome = ?, user_cpf = ?, user_username = ?, user_senha = ? WHERE user_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, user.getNome());
-                statement.setString(2, user.getCpf());
-                statement.setString(3, user.getUsername());
-                statement.setString(4, user.getSenha());
+                statement.setString(1, user.getUser_nome());
+                statement.setString(2, user.getUser_cpf());
+                statement.setString(3, user.getUser_username());
+                statement.setString(4, user.getUser_senha());
                 statement.setLong(5, id);
                 statement.executeUpdate();
             }

@@ -13,7 +13,7 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pro_codigo;
-    private String pro_descricao ;
+    private String pro_descricao;
     private double pro_valor;
     private Integer pro_quantidade;
     private Integer tb_fornecedores_for_codigo;
