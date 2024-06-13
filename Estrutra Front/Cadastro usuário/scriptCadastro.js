@@ -59,6 +59,8 @@ function validarTudo (){
 formulario.addEventListener('submit', function(evento){
     evento.preventDefault();
 
+    
+
     cadastrar();
 
 })
