@@ -6,21 +6,48 @@ const senhaFuncionario = document.getElementById('senha');
 const cargoFuncionario = document.getElementById('cargo');
 
 
-form.addEventListener('submit', function(evento){
-    evento.preventDefault();
+function cadastrar (){
 
+    fetch("", {
 
-        const dadosFuncionario = {
+        headers: {
+            'Accept': 'aplication/json',
+            'Content-Type': 'application/json'
+        },
+        method: "POST",
+
+        body: JSON.stringify({
             nome: nomeFuncionario.value,
             cpf: cpfFuncionario.value,
             senha: senhaFuncionario.value, 
             cargo: cargoFuncionario.value
-        }
+        })
+    })
+
+    .then(function(res) { console.log(res) })
+    .catch(function(res){ console.log(res) });
+
+};
+
+let nomeEValido = false;
+
+// ver se o nome está completo
+function validaNome(nomeFuncionario){
+    const nomeComoArray = nomeFuncionario.value.split(' ');
+    return nomeComoArray.length >= 2;
+}
+
+
+
+form.addEventListener('submit', function(evento){
+    evento.preventDefault();
+
+    nomeEValido = validaNome(nomeFuncionario);
+
+    if (nomeEValido){
+        cadastrar();
+    }
+
 
 })
 
-
-function cadastrar(){
-
-    fetch(JSON)
-}
