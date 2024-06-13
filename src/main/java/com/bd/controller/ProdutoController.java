@@ -1,13 +1,10 @@
 package com.bd.controller;
 
-import com.bd.model.Produto;
+import com.bd.model.request.ProdutoRegistrationRequest;
 import com.bd.model.request.ProdutoRequest;
 import com.bd.model.request.UserLoginDTO;
-import com.bd.model.request.UserRequest;
 import com.bd.model.response.ProdutoResponse;
-import com.bd.model.response.UserResponse;
 import com.bd.service.ProdutoService;
-import com.bd.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +19,8 @@ public class ProdutoController {
     private final ProdutoService produtoService;
 
     @PostMapping("/cadastrar")
-    public ProdutoResponse cadastrarProduto(@RequestBody ProdutoRequest produto) {
-        return produtoService.cadastrarProduto(produto);
+    public ProdutoResponse cadastrarProduto(@RequestBody ProdutoRegistrationRequest produtoRequest) {
+        return produtoService.cadastrarProduto(produtoRequest);
     }
 
     @GetMapping("")
@@ -37,8 +34,8 @@ public class ProdutoController {
     }
 
     @PutMapping("/id")
-    public ResponseEntity<ProdutoResponse> atualizarProdutos(@PathVariable Long id, @RequestBody ProdutoRequest produto, UserLoginDTO userDTO) {
-        return ResponseEntity.ok(produtoService.atualizarProduto(id, produto, userDTO));
+    public ResponseEntity<ProdutoResponse> atualizarProdutos(@PathVariable Long id, @RequestBody ProdutoRegistrationRequest produtoRequest) {
+        return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoRequest));
     }
 
     @DeleteMapping("/id")
