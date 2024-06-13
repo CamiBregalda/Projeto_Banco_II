@@ -9,6 +9,7 @@ import com.bd.model.Funcionario;
 import com.bd.model.Venda;
 import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
+import com.bd.model.request.VendaRegistrationRequest;
 import com.bd.model.request.VendaRequest;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.VendaResponse;
@@ -27,8 +28,9 @@ public class VendaService {
     private final VendaRepository vendaRepository;
     private final VendaMapper vendaMapper;
 
-    public VendaResponse cadastrarVenda(VendaRequest vendaRequest) {
-        Venda venda = vendaMapper.postDtoToEntity(vendaRequest);
+    public VendaResponse cadastrarVenda(VendaRegistrationRequest vendaRegistrationRequestRequest) {
+        criarLogin(vendaRegistrationRequestRequest.getUserLoginDTO());
+        Venda venda = vendaMapper.postDtoToEntity(vendaRegistrationRequestRequest.getVendaRequest());
         return vendaMapper.entityToResponse(vendaRepository.cadastrarVenda(venda));
     }
 
@@ -66,8 +68,9 @@ public class VendaService {
         }
     }
 
-    public VendaResponse atualizarVenda(Long id, VendaRequest vendaRequest, UserLoginDTO userDTO) {
-        Venda venda = vendaMapper.postDtoToEntity(vendaRequest);
+    public VendaResponse atualizarVenda(Long id, VendaRegistrationRequest vendaRegistrationRequest) {
+        criarLogin(vendaRegistrationRequest.getUserLoginDTO());
+        Venda venda = vendaMapper.postDtoToEntity(vendaRegistrationRequest.getVendaRequest());
         vendaRepository.atualizarVenda(id, venda);
 
         return vendaMapper.entityToResponse(venda);
