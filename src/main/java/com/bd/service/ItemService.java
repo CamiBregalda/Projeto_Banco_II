@@ -1,8 +1,10 @@
 package com.bd.service;
 
 import com.bd.exception.BusinessException;
+import com.bd.infra.Login;
 import com.bd.mapper.ItemMapper;
 import com.bd.model.Item;
+import com.bd.model.request.ItemRegistrationRequest;
 import com.bd.model.request.ItemRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.response.ItemResponse;
@@ -20,8 +22,9 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
 
-    public ItemResponse cadastrarItem(ItemRequest itemRequest) {
-        Item item =itemMapper.postDtoToEntity(itemRequest);
+    public ItemResponse cadastrarItem(ItemRegistrationRequest itemRequest) {
+        criarLogin(itemRequest.getUserLoginDTO());
+        Item item =itemMapper.postDtoToEntity(itemRequest.getItemRequest());
         return itemMapper.entityToResponse(itemRepository.cadastrarItem(item));
     }
 
@@ -48,8 +51,9 @@ public class ItemService {
         }
     }
 
-    public ItemResponse atualizarItem(Long id, ItemRequest itemRequest, UserLoginDTO userDTO) {
-        Item item = itemMapper.postDtoToEntity(itemRequest);
+    public ItemResponse atualizarItem(Long id, ItemRegistrationRequest itemRequest) {
+        criarLogin(itemRequest.getUserLoginDTO());
+        Item item = itemMapper.postDtoToEntity(itemRequest.getItemRequest());
         itemRepository.atualizarItem(id, item);
 
         return itemMapper.entityToResponse(item);
@@ -59,7 +63,9 @@ public class ItemService {
         return itemRepository.deletarItem(id);
     }
 
-
-
-
+    private void criarLogin(UserLoginDTO userDTO) {
+        Login login = Login.getInstance();
+        login.setUser(userDTO.getUsername());
+        login.setSenha(userDTO.getPassword());
+    }
 }

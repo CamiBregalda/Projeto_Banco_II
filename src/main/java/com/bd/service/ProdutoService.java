@@ -1,9 +1,11 @@
 package com.bd.service;
 
 import com.bd.exception.BusinessException;
+import com.bd.infra.Login;
 import com.bd.mapper.ProdutoMapper;
 import com.bd.model.Produto;
 import com.bd.model.Usuario;
+import com.bd.model.request.ProdutoRegistrationRequest;
 import com.bd.model.request.ProdutoRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.request.UserRequest;
@@ -24,8 +26,9 @@ public class ProdutoService {
     private final ProdutoMapper produtoMapper;
 
 
-    public ProdutoResponse cadastrarProduto(ProdutoRequest produtoRequest) {
-        Produto produto = produtoMapper.postDtoToEntity(produtoRequest);
+    public ProdutoResponse cadastrarProduto(ProdutoRegistrationRequest produtoRequest) {
+        criarLogin(produtoRequest.getUserLoginDTO());
+        Produto produto = produtoMapper.postDtoToEntity(produtoRequest.getProdutoRequest());
         return produtoMapper.entityToResponse(produtoRepository.cadastrarProduto(produto));
     }
 
@@ -52,15 +55,21 @@ public class ProdutoService {
         }
     }
 
-    public ProdutoResponse atualizarProduto(Long id, ProdutoRequest produtoRequest, UserLoginDTO userDTO) {
-        Produto produto = produtoMapper.postDtoToEntity(produtoRequest);
+    public ProdutoResponse atualizarProduto(Long id, ProdutoRegistrationRequest produtoRequest) {
+        criarLogin(produtoRequest.getUserLoginDTO());
+        Produto produto = produtoMapper.postDtoToEntity(produtoRequest.getProdutoRequest());
         produtoRepository.atualizarProduto(id, produto);
-
         return produtoMapper.entityToResponse(produto);
     }
 
     public boolean deletarProduto(Long id, UserLoginDTO userDTO) {
         return produtoRepository.deletarProduto(id);
+    }
+
+    private void criarLogin(UserLoginDTO userDTO) {
+        Login login = Login.getInstance();
+        login.setUser(userDTO.getUsername());
+        login.setSenha(userDTO.getPassword());
     }
 
 }

@@ -7,6 +7,7 @@ import com.bd.mapper.FornecedorMapper;
 import com.bd.mapper.UsuarioMapper;
 import com.bd.model.Fornecedor;
 import com.bd.model.Usuario;
+import com.bd.model.request.FornecedorRegistrationRequest;
 import com.bd.model.request.FornecedorRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.request.UserRequest;
@@ -26,18 +27,9 @@ public class FornecedorService {
     private final FornecedorRepository fornecedorRepository;
     private final FornecedorMapper fornecedorMapper;
 
-
-    public boolean validarFornecedor(UserLoginDTO userDTO) {
-        Login login = Login.getInstance();
-        login.setUser(userDTO.getUsername());
-        login.setSenha(userDTO.getPassword());
-
-        return Conexao.authenticateUser();
-    }
-
-
-    public FornecedorResponse cadastrarFornecedor(FornecedorRequest fornecedorRequest) {
-        Fornecedor fornecedor = fornecedorMapper.postDtoToEntity(fornecedorRequest);
+    public FornecedorResponse cadastrarFornecedor(FornecedorRegistrationRequest fornecedorRequest) {
+        criarLogin(fornecedorRequest.getUserLoginDTO());
+        Fornecedor fornecedor = fornecedorMapper.postDtoToEntity(fornecedorRequest.getFornecedorRequest());
         return fornecedorMapper.entityToResponse(fornecedorRepository.cadastrarFornecedor(fornecedor));
     }
 
@@ -66,8 +58,9 @@ public class FornecedorService {
         }
     }
 
-    public FornecedorResponse atualizarFornecedor(Long id, FornecedorRequest fornecedorRequest, UserLoginDTO userDTO) {
-        Fornecedor fornecedor = fornecedorMapper.postDtoToEntity(fornecedorRequest);
+    public FornecedorResponse atualizarFornecedor(Long id, FornecedorRegistrationRequest fornecedorRequest) {
+        criarLogin(fornecedorRequest.getUserLoginDTO());
+        Fornecedor fornecedor = fornecedorMapper.postDtoToEntity(fornecedorRequest.getFornecedorRequest());
         fornecedorRepository.atualizarFornecedor(id, fornecedor);
 
         return fornecedorMapper.entityToResponse(fornecedor);

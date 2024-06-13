@@ -1,6 +1,7 @@
 package com.bd.controller;
 
 import com.bd.model.Fornecedor;
+import com.bd.model.request.FornecedorRegistrationRequest;
 import com.bd.model.request.FornecedorRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.request.UserRequest;
@@ -21,8 +22,8 @@ public class FornecedorController {
     private final FornecedorService fornecedorService;
 
     @PostMapping("/cadastrar")
-    public FornecedorResponse cadastrarFornecedor(@RequestBody FornecedorRequest fornecedor) {
-        return fornecedorService.cadastrarFornecedor(fornecedor);
+    public FornecedorResponse cadastrarFornecedor(@RequestBody FornecedorRegistrationRequest fornecedorRequest) {
+        return fornecedorService.cadastrarFornecedor(fornecedorRequest);
     }
 
     @GetMapping("")
@@ -36,8 +37,8 @@ public class FornecedorController {
     }
 
     @PutMapping
-    public ResponseEntity<FornecedorResponse> atualizarFornecedor(@PathVariable Long id, @RequestBody FornecedorRequest fornecedor, UserLoginDTO userDTO) {
-        return ResponseEntity.ok(fornecedorService.atualizarFornecedor(id, fornecedor, userDTO));
+    public ResponseEntity<FornecedorResponse> atualizarFornecedor(@PathVariable Long id, @RequestBody FornecedorRegistrationRequest fornecedorRequest) {
+        return ResponseEntity.ok(fornecedorService.atualizarFornecedor(id, fornecedorRequest));
     }
 
     @DeleteMapping("/{id}")
