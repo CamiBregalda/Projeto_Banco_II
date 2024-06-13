@@ -5,6 +5,7 @@ import com.bd.infra.Conexao;
 import com.bd.infra.Login;
 import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.Funcionario;
+import com.bd.model.request.FuncionarioRegistrationRequest;
 import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.response.FuncionarioResponse;
@@ -22,8 +23,9 @@ public class FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
     private final FuncionarioMapper funcionarioMapper;
 
-    public FuncionarioResponse cadastrarFuncionario(FuncionarioRequest funcionarioRequest) {
-        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRequest);
+    public FuncionarioResponse cadastrarFuncionario(FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
+        criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
+        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
         return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
     }
 
@@ -61,8 +63,9 @@ public class FuncionarioService {
         }
     }
 
-    public FuncionarioResponse atualizarFuncionario(Long id, FuncionarioRequest funcionarioRequest, UserLoginDTO userDTO) {
-        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRequest);
+    public FuncionarioResponse atualizarFuncionario(Long id, FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
+        criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
+        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
         funcionarioRepository.atualizarFuncionario(id, funcio);
 
         return funcionarioMapper.entityToResponse(funcio);

@@ -3,6 +3,7 @@ package com.bd.controller;
 import com.bd.model.Venda;
 import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
+import com.bd.model.request.VendaRegistrationRequest;
 import com.bd.model.request.VendaRequest;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.VendaResponse;
@@ -23,8 +24,8 @@ public class VendaController {
     private final VendaService vendaService;
 
     @PostMapping("/cadastrar")
-    public VendaResponse cadastrarVenda(@RequestBody VendaRequest venda) {
-        return vendaService.cadastrarVenda(venda);
+    public VendaResponse cadastrarVenda(@RequestBody VendaRegistrationRequest vendaRegistrationRequest) {
+        return vendaService.cadastrarVenda(vendaRegistrationRequest);
     }
 
     @PostMapping("/login")
@@ -52,8 +53,8 @@ public class VendaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<VendaResponse> atualizarVenda(@PathVariable Long id, @RequestBody VendaRequest venda, UserLoginDTO userDTO) {
-        return ResponseEntity.ok(vendaService.atualizarVenda(id, venda, userDTO));
+    public ResponseEntity<VendaResponse> atualizarVenda(@PathVariable Long id, @RequestBody VendaRegistrationRequest vendaRegistrationRequest) {
+        return ResponseEntity.ok(vendaService.atualizarVenda(id, vendaRegistrationRequest));
     }
 
     @DeleteMapping("/{id}")
