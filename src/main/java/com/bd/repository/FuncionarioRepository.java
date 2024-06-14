@@ -26,8 +26,8 @@ public class FuncionarioRepository {
                 statement.setString(3, funcio.getFun_cpf());
                 statement.setString(4, funcio.getFun_funcao());
                 statement.setString(5, funcio.getFun_senha());
-
                 statement.executeUpdate();
+
             }
 
             return funcio;

@@ -42,6 +42,7 @@ public class VendaRepository {
                             resultado.getDouble("ven_valor_total"),
                             resultado.getInt("tb_funcionarios_fun_codigo")
                     );
+                    System.out.println(venda);
                     vendas.add(venda);
                 }
                 return vendas;
