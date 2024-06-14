@@ -14,7 +14,15 @@ import java.util.List;
 public class ProdutoRepository {
     public Produto cadastrarProduto(Produto produto) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO tb_produtos (pro_codigo, pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_for_codigo) VALUES (?, ?, ?, ?, ?)";
+            String sql = "SELECT MAX(pro_codigo) as pro_codigo FROM tb_produtos";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    produto.setPro_codigo(resultado.getInt("pro_codigo") + 1);
+                }
+            }
+
+            sql = "INSERT INTO tb_produtos (pro_codigo, pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_for_codigo) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, produto.getPro_codigo());
                 statement.setString(2, produto.getPro_descricao());

@@ -14,7 +14,15 @@ public class VendaRepository {
 
     public Venda cadastrarVenda(Venda venda) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO tb_vendas (ven_codigo, ven_horario, ven_valor_total, tb_funcionarios_fun_codigo) VALUES (?, ?, ?, ?)";
+            String sql = "SELECT MAX(ven_codigo) as ven_codigo FROM tb_vendas";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    venda.setVen_codigo(resultado.getInt("ven_codigo") + 1);
+                }
+            }
+
+            sql = "INSERT INTO tb_vendas (ven_codigo, ven_horario, ven_valor_total, tb_funcionarios_fun_codigo) VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, venda.getVen_codigo());
                 statement.setTimestamp(2, Timestamp.valueOf(venda.getVen_horario()));

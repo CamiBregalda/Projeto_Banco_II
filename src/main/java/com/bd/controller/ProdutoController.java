@@ -24,13 +24,13 @@ public class ProdutoController {
     }
 
     @GetMapping("")
-    public List<ProdutoResponse> buscarProdutos(@RequestBody UserLoginDTO userDTO) {
-        return produtoService.buscarProdutos(userDTO);
+    public List<ProdutoResponse> buscarProdutos(@RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return produtoService.buscarProdutos(new UserLoginDTO(username, password));
     }
 
     @GetMapping("/{id}")
-    public ProdutoResponse buscarProdutosPeloId(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
-        return produtoService.buscarProdutoPeloId(id, userDTO);
+    public ProdutoResponse buscarProdutosPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return produtoService.buscarProdutoPeloId(id, new UserLoginDTO(username, password));
     }
 
     @PutMapping("/{id}")

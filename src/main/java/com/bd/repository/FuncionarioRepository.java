@@ -15,22 +15,28 @@ import java.util.List;
 @Repository
 public class FuncionarioRepository {
 
-
-    public Funcionario cadastrarFuncionario(Funcionario funcio) {
+    public Funcionario cadastrarFuncionario(Funcionario funcionario) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_funcao, fun_senha) VALUES ( ?, ?, ?, ?, ?)";
-            System.out.println(funcio.toString());
+            String sql = "SELECT MAX(fun_codigo) as fun_codigo FROM tb_funcionarios";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, funcio.getFun_codigo());
-                statement.setString(2, funcio.getFun_nome());
-                statement.setString(3, funcio.getFun_cpf());
-                statement.setString(4, funcio.getFun_funcao());
-                statement.setString(5, funcio.getFun_senha());
-                statement.executeUpdate();
-
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    funcionario.setFun_codigo(resultado.getInt("fun_codigo") + 1);
+                }
             }
 
-            return funcio;
+            sql = "INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_funcao, fun_senha) VALUES ( ?, ?, ?, ?, ?)";
+            System.out.println(funcionario.toString());
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, funcionario.getFun_codigo());
+                statement.setString(2, funcionario.getFun_nome());
+                statement.setString(3, funcionario.getFun_cpf());
+                statement.setString(4, funcionario.getFun_funcao());
+                statement.setString(5, funcionario.getFun_senha());
+                statement.executeUpdate();
+            }
+
+            return funcionario;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao cadastrar funcionario", ex);
         }
@@ -108,5 +114,4 @@ public class FuncionarioRepository {
             throw new RuntimeException("Erro ao deletar funcionario", ex);
         }
     }
-
 }

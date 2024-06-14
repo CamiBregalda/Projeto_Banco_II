@@ -16,7 +16,15 @@ import java.util.List;
 public class FornecedorRepository {
     public Fornecedor cadastrarFornecedor(Fornecedor fornecedor) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO tb_fornecedores (for_codigo, for_descricao) VALUES (?, ?)";
+            String sql = "SELECT MAX(for_codigo) as for_codigo FROM tb_fornecedores";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    fornecedor.setFor_codigo(resultado.getInt("for_codigo") + 1);
+                }
+            }
+
+            sql = "INSERT INTO tb_fornecedores (for_codigo, for_descricao) VALUES (?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, fornecedor.getFor_codigo());
                 statement.setString(2, fornecedor.getFor_descricao());

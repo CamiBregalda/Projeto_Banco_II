@@ -42,13 +42,13 @@ public class FuncionarioController {
     }
 
     @GetMapping("")
-    public List<FuncionarioResponse> buscarFuncionarios(@RequestBody UserLoginDTO userDTO) {
-        return funcionarioService.buscarFuncionarios(userDTO);
+    public List<FuncionarioResponse> buscarFuncionarios(@RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return funcionarioService.buscarFuncionarios(new UserLoginDTO(username, password));
     }
 
     @GetMapping("/{id}")
-    public FuncionarioResponse buscarFuncionarioPeloId(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
-        return funcionarioService.buscarFuncionarioPeloId(id, userDTO);
+    public FuncionarioResponse buscarFuncionarioPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return funcionarioService.buscarFuncionarioPeloId(id, new UserLoginDTO(username, password));
     }
 
     @PutMapping("/{id}")
@@ -63,6 +63,16 @@ public class FuncionarioController {
             return ResponseEntity.ok("Usuário deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar usuário: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/realizar-backup")
+    public ResponseEntity<String> deletarItem() {
+        try {
+            funcionarioService.realizarBackup();
+            return ResponseEntity.ok("Backup realizado com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao realizar backup: " + e.getMessage());
         }
     }
 }
