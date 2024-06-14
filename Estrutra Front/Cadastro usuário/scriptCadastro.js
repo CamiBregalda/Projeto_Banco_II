@@ -9,30 +9,6 @@ const confirmaSenha = document.getElementById('confirmaSenha');
 
 //contato com o back
 function cadastrar (){
-    /*
-    --Método de pegar todos os usuários
-    fetch("http://localhost:8080/users", {
-
-        headers: {
-            'Content-Type': 'application/json',
-            'username': 'login_banco',
-            'password': 'senha_banco'
-        },
-        method: "GET"
-    })
-    .then(res => {
-        if (res.ok) {
-            return res.json();
-        } else {
-            throw new Error("Erro ao buscar usuários");
-        }
-    })
-    .then(data => {
-        console.log("Usuário existentes no banco:", data);
-    })
-    .catch(error => {
-        console.error("Erro na requisição", error);
-    });*/
     
     fetch("http://localhost:8080/users/cadastrar", {
 
@@ -50,8 +26,8 @@ function cadastrar (){
                 user_senha: senhaUsuario.value
             },
             userLoginDTO: {
-                username: "login_banco",
-                password: "senha_banco" 
+                username: "postgres",
+                password: "postgress" 
             }
         })
     })
@@ -68,7 +44,7 @@ function cadastrar (){
     .catch(error => {
         console.error("Erro na requisição", error);
     });
-*/
+
 };
 
 /*function limpar() {
