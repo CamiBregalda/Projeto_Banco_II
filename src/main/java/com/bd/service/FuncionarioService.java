@@ -32,6 +32,7 @@ public class FuncionarioService {
        FuncionarioResponse teste = funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
         System.out.println(teste.toString());
         return teste;
+        //return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
     }
 
     public boolean validarFuncionario(UserLoginDTO userDTO) {
@@ -72,7 +73,7 @@ public class FuncionarioService {
         criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
         Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
         funcionarioRepository.atualizarFuncionario(id, funcio);
-
+        funcio.setFun_codigo(Math.toIntExact(id));
         return funcionarioMapper.entityToResponse(funcio);
     }
 

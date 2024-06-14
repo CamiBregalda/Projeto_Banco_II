@@ -19,7 +19,7 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ven_codigo;
     private LocalDateTime ven_horario;
-    private double ven_valor_total;
+    private Double ven_valor_total;
     private Integer tb_funcionarios_fun_codigo;
 
 

@@ -13,5 +13,5 @@ public interface VendaMapper {
 
     Venda postDtoToEntity(VendaRequest vendaRequest);
 
-    VendaResponse entityToResponse(Venda vendas);
+    VendaResponse entityToResponse(Venda venda);
 }
