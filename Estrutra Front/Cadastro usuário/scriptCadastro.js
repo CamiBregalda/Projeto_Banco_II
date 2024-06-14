@@ -19,15 +19,14 @@ function cadastrar (){
 
         body: JSON.stringify({
             userRequest: {
-                user_codigo: 1000,
                 user_nome: nomeCompletoUsuario.value,
                 user_cpf: cpfUsuario.value,
                 user_username: nomeUsuario.value,
                 user_senha: senhaUsuario.value
             },
             userLoginDTO: {
-                username: "postgres",
-                password: "postgress" 
+                username: "user_login",
+                password: "user_senha" 
             }
         })
     })

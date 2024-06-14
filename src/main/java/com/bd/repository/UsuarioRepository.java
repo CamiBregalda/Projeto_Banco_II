@@ -16,7 +16,15 @@ public class UsuarioRepository {
 
     public Usuario cadastrarUsuario(Usuario user) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO tb_usuario (user_codigo, user_nome, user_cpf, user_username, user_senha) VALUES (?, ?, ?, ?, ?)";
+            String sql = "SELECT MAX(user_codigo) as user_codigo FROM tb_usuario";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    user.setUser_codigo(resultado.getInt("user_codigo") + 1);
+                }
+            }
+
+            sql = "INSERT INTO tb_usuario (user_codigo, user_nome, user_cpf, user_username, user_senha) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, user.getUser_codigo());
                 statement.setString(2, user.getUser_nome());

@@ -17,7 +17,15 @@ public class ItemRepository {
 
     public Item cadastrarItem(Item item) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO tb_itens (ite_codigo, ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo) VALUES (?, ?, ?, ?, ?)";
+            String sql = "SELECT MAX(ite_codigo) as ite_codigo FROM tb_itens";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    item.setIte_codigo(resultado.getInt("ite_codigo") + 1);
+                }
+            }
+
+            sql = "INSERT INTO tb_itens (ite_codigo, ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, item.getIte_codigo());
                 statement.setInt(2, item.getIte_quantidade());

@@ -24,8 +24,8 @@ function cadastrar (){
                 fun_funcao: cargoFuncionario.value
             },
             userLoginDTO: {
-                username: "postgres",
-                password: "postgress" 
+                username: "user_login",
+                password: "user_senha" 
             }
             
         })

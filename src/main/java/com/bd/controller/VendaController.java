@@ -43,13 +43,13 @@ public class VendaController {
     }
 
     @GetMapping("")
-    public List<VendaResponse> buscarVendas(@RequestBody UserLoginDTO userDTO) {
-        return vendaService.buscarVendas(userDTO);
+    public List<VendaResponse> buscarVendas(@RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return vendaService.buscarVendas(new UserLoginDTO(username, password));
     }
 
     @GetMapping("/{id}")
-    public VendaResponse buscarVendaPeloId(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
-        return vendaService.buscarVendaPeloId(id, userDTO);
+    public VendaResponse buscarVendaPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return vendaService.buscarVendaPeloId(id, new UserLoginDTO(username, password));
     }
 
     @PutMapping("/{id}")

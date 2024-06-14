@@ -13,12 +13,12 @@ import com.bd.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FuncionarioService {
-
 
     private final FuncionarioRepository funcionarioRepository;
     private final FuncionarioMapper funcionarioMapper;
@@ -80,6 +80,17 @@ public class FuncionarioService {
     public boolean deletarFuncionario(Long id, UserLoginDTO userDTO) {
         return funcionarioRepository.deletarFuncionario(id);
     }
+
+    public void realizarBackup(){
+        try {
+            String comando = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PostgreSQL 14\\SQL Shell (psql).Ink";;
+            Process exec = Runtime.getRuntime().exec( comando );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void criarLogin(UserLoginDTO userDTO) {
         Login login = Login.getInstance();
         login.setUser(userDTO.getUsername());
