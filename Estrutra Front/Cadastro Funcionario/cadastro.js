@@ -17,7 +17,6 @@ function cadastrar (){
 
         body: JSON.stringify({
             funcionarioRegistrationRequest: {
-                fun_codigo: 10,
                 fun_nome: nomeFuncionario.value,
                 fun_cpf: cpfFuncionario.value,
                 fun_senha: senhaFuncionario.value, 
