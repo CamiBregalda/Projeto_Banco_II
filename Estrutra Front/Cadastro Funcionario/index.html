@@ -8,21 +8,42 @@
 </head>
 <body>
     <div class="container">
+
+
         <h1>Cadastro do Funcionario</h1>
+
+
         <form id = "form-cadastro">
-            <input type="text" id="nomeCompleto" placeholder="Nome Completo do Funcionario" required>
-            <p class="erro">
-                <b>O nome precisa estar completo</b>
-            </p>
-            <input type="cpf" id="cpf-funcionario" placeholder="CPF" required>
-            <p class="erro-cpf">
-                <b>O CPF precisa ser válido</b>
-            </p>
-            <input type="password" id="senha" placeholder="Senha" required>
-            <input type="hole" id="cargo" placeholder="Cargo do Funcionario" required>
+
+
+            <div class = "nome-completo">
+                <label for = "nomeCompleto"> Nome Completo: </label>
+                <input type="text" id="nomeCompleto" placeholder="Nome Completo do Funcionario" required>
+                <label class = "erro"> O Nome precisa ser <b>Completo</b>  </label> <br>
+            </div>
+
+            <div class ="cpf-do-usuario">
+                <label for = "cpf-funcionario"> CPF: </label>
+                <input type="cpf" id="cpf-funcionario" placeholder="CPF" required>
+            </div>
+
+            <div class = "senha-do-usuario">
+                <label for = "senha"> Senha: </label>
+                <input type="password" id="senha" placeholder="Senha" required>
+            </div>
+
+            <div class="cargo">
+                <label for = "cargo"> Cargo: </label>
+                <input type="hole" id="cargo" placeholder="Cargo do Funcionario" required>
+            </div>  
+          
+
             <button type="submit">Cadastrar</button>
         </form>
     </div>
+
+
+
     <script src = "cadastro.js" > </script>
 </body>
 </html>

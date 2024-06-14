@@ -18,14 +18,16 @@ public class FuncionarioRepository {
 
     public Funcionario cadastrarFuncionario(Funcionario funcio) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_senha, fun_funcao) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_funcao, fun_senha) VALUES ( ?, ?, ?, ?, ?)";
+            System.out.println(funcio.toString());
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, funcio.getFun_codigo());
                 statement.setString(2, funcio.getFun_nome());
                 statement.setString(3, funcio.getFun_cpf());
-                statement.setString(4, funcio.getFun_senha());
-                statement.setString(5, funcio.getFun_funcao());
+                statement.setString(4, funcio.getFun_funcao());
+                statement.setString(5, funcio.getFun_senha());
                 statement.executeUpdate();
+
             }
 
             return funcio;

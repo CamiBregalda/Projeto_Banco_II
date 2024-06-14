@@ -1,5 +1,6 @@
 package com.bd.controller;
 
+import com.bd.model.request.ItemRegistrationRequest;
 import com.bd.model.request.ItemRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.request.UserRegistrationRequest;
@@ -15,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Itens")
+@RequestMapping("/itens")
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
 
     @PostMapping("/cadastrar")
-    public ItemResponse cadastrarItem(@RequestBody ItemRequest item) {
-        return itemService.cadastrarItem(item);
+    public ItemResponse cadastrarItem(@RequestBody ItemRegistrationRequest itemRequest) {
+        return itemService.cadastrarItem(itemRequest);
     }
 
     @GetMapping("")
@@ -36,8 +37,8 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ItemResponse> atualizarItem(@PathVariable Long id, @RequestBody ItemRequest item, UserLoginDTO userDTO) {
-        return ResponseEntity.ok(itemService.atualizarItem(id, item, userDTO));
+    public ResponseEntity<ItemResponse> atualizarItem(@PathVariable Long id, @RequestBody ItemRegistrationRequest itemRequest) {
+        return ResponseEntity.ok(itemService.atualizarItem(id, itemRequest));
     }
 
     @DeleteMapping("/{id}")

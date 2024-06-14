@@ -5,6 +5,7 @@ import com.bd.infra.Conexao;
 import com.bd.infra.Login;
 import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.Funcionario;
+import com.bd.model.request.FuncionarioRegistrationRequest;
 import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.response.FuncionarioResponse;
@@ -22,9 +23,16 @@ public class FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
     private final FuncionarioMapper funcionarioMapper;
 
-    public FuncionarioResponse cadastrarFuncionario(FuncionarioRequest funcionarioRequest) {
-        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRequest);
-        return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
+    public FuncionarioResponse cadastrarFuncionario(FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
+        criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
+        System.out.println(funcionarioRegistrationRequest.getFuncionarioRequest().toString());
+        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
+        System.out.println(funcio.toString());
+
+       FuncionarioResponse teste = funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
+        System.out.println(teste.toString());
+        return teste;
+        //return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
     }
 
     public boolean validarFuncionario(UserLoginDTO userDTO) {
@@ -61,10 +69,11 @@ public class FuncionarioService {
         }
     }
 
-    public FuncionarioResponse atualizarFuncionario(Long id, FuncionarioRequest funcionarioRequest, UserLoginDTO userDTO) {
-        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRequest);
+    public FuncionarioResponse atualizarFuncionario(Long id, FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
+        criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
+        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
         funcionarioRepository.atualizarFuncionario(id, funcio);
-
+        funcio.setFun_codigo(Math.toIntExact(id));
         return funcionarioMapper.entityToResponse(funcio);
     }
 

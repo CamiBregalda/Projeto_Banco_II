@@ -13,7 +13,7 @@ import org.mapstruct.Mapper;
  public interface FuncionarioMapper {
         Funcionario postDtoToEntity(FuncionarioRequest funcionarioRequest);
 
-        FuncionarioResponse entityToResponse(Funcionario funcionarios);
+        FuncionarioResponse entityToResponse(Funcionario funcionario);
 
  }
 

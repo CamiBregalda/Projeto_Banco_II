@@ -1,6 +1,7 @@
 package com.bd.controller;
 
 import com.bd.model.Funcionario;
+import com.bd.model.request.FuncionarioRegistrationRequest;
 import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.request.UserRequest;
@@ -22,8 +23,8 @@ public class FuncionarioController {
     private final FuncionarioService funcionarioService;
 
     @PostMapping("/cadastrar")
-    public FuncionarioResponse cadastrarFuncionario(@RequestBody FuncionarioRequest funcio) {
-        return funcionarioService.cadastrarFuncionario(funcio);
+    public FuncionarioResponse cadastrarFuncionario(@RequestBody FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
+        return funcionarioService.cadastrarFuncionario(funcionarioRegistrationRequest);
     }
 
     @PostMapping("/login")
@@ -51,8 +52,8 @@ public class FuncionarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FuncionarioResponse> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionarioRequest funcio, UserLoginDTO userDTO) {
-        return ResponseEntity.ok(funcionarioService.atualizarFuncionario(id, funcio, userDTO));
+    public ResponseEntity<FuncionarioResponse> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
+        return ResponseEntity.ok(funcionarioService.atualizarFuncionario(id, funcionarioRegistrationRequest));
     }
 
     @DeleteMapping("/{id}")

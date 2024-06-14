@@ -25,4 +25,7 @@ public class Produto {
         this.pro_quantidade = pro_quantidade;
         this.tb_fornecedores_for_codigo = tb_fornecedores_for_codigo;
     }
+
+
+
 }
