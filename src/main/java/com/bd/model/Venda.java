@@ -21,4 +21,16 @@ public class Venda {
     private LocalDateTime ven_horario;
     private double ven_valor_total;
     private Integer tb_funcionarios_fun_codigo;
+
+
+    @Override
+    public String toString() {
+        return "Venda{" +
+                "ven_codigo=" + ven_codigo + '\'' +
+                ", ven_horario=" + ven_horario + '\'' +
+                ", ven_valor_total=" + ven_valor_total + '\'' +
+                ", ven_tb_funcionarios_fun_codigo=" + tb_funcionarios_fun_codigo + '\'' +
+                '}';
+    }
+
 }
