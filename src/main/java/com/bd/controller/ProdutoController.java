@@ -33,12 +33,12 @@ public class ProdutoController {
         return produtoService.buscarProdutoPeloId(id, userDTO);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponse> atualizarProdutos(@PathVariable Long id, @RequestBody ProdutoRegistrationRequest produtoRequest) {
         return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoRequest));
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarProduto(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         try {
             produtoService.deletarProduto(id, userDTO);

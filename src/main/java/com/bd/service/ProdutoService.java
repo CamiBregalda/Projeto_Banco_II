@@ -48,7 +48,10 @@ public class ProdutoService {
 
     public ProdutoResponse buscarProdutoPeloId(Long id, UserLoginDTO userDTO) {
         try {
+            criarLogin(userDTO);
+            System.out.println(id);
             Produto produto = produtoRepository.buscarProdutoPeloId(id);
+            System.out.println(produto);
             return produtoMapper.entityToResponse(produto);
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar produto: " + e.getMessage());
@@ -59,11 +62,14 @@ public class ProdutoService {
         criarLogin(produtoRequest.getUserLoginDTO());
         Produto produto = produtoMapper.postDtoToEntity(produtoRequest.getProdutoRequest());
         produtoRepository.atualizarProduto(id, produto);
+        produto.setPro_codigo(Math.toIntExact(id));
         return produtoMapper.entityToResponse(produto);
     }
 
     public boolean deletarProduto(Long id, UserLoginDTO userDTO) {
+        criarLogin(userDTO);
         return produtoRepository.deletarProduto(id);
+
     }
 
     private void criarLogin(UserLoginDTO userDTO) {
