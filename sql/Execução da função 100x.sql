@@ -113,7 +113,7 @@ DECLARE
     fornecedor INTEGER;
 
 BEGIN
-    WHILE i <= 1000 LOOP
+    WHILE i <= 10000 LOOP
         posicao := FLOOR(RANDOM() * 20 + 1)::INTEGER;
         valor := FLOOR((RANDOM() * 100000) / 100.0) + 100;  -- Gera um valor randômico entre 0 e 100
         quantidade := FLOOR(RANDOM() * 100 + 1)::INTEGER;   -- Gera uma quantidade randômica entre 1 e 100
@@ -152,7 +152,6 @@ select * from tb_produtos;
 
 
 
-select *from tb_funcionarios;
 
 CREATE OR REPLACE FUNCTION gerar_registros_funcionarios()
 RETURNS VOID AS
@@ -169,7 +168,7 @@ DECLARE
     funcao TEXT;
     funcoes TEXT[] := ARRAY['vendedor', 'encarregado', 'gerente'];
 BEGIN
-    WHILE i <= 100 LOOP
+    WHILE i <= 1000 LOOP
         -- Formatar o CPF para ter 11 dígitos
         cpf_text := LPAD(CAST(1000000000 + i AS TEXT), 11, '0');
         
@@ -215,7 +214,7 @@ DECLARE
     funcionario_codigo BIGINT;
     produto_codigo BIGINT;
 BEGIN
-    WHILE i <= 1000 LOOP
+    WHILE i <= 10000 LOOP
         -- Gerar um horário aleatório nos últimos 30 dias
         horario := NOW() - INTERVAL '1 day' * FLOOR(RANDOM() * 30);
         
@@ -264,7 +263,7 @@ DECLARE
     produto_codigo BIGINT;
     venda_codigo BIGINT;
 BEGIN
-    WHILE i <= 1000 LOOP
+    WHILE i <= 10000 LOOP
         -- Selecionar um código de produto aleatório da tabela tb_produtos
         SELECT pro_codigo
         INTO produto_codigo
@@ -321,7 +320,7 @@ WHERE tf.for_descricao LIKE 'Eletrolux' AND tp.pro_valor > 300
 GROUP BY tp.pro_descricao, tf.for_descricao, tp.pro_valor, tp.pro_quantidade
 ORDER BY valor_por_produto;
 
-set enable_seqscan = OFF;
+set enable_seqscan = off;
 set enable_indexscan = OFF;
 set enable_bitmapscan = OFF;
 set enable_hashjoin = OFF;
@@ -329,50 +328,59 @@ set enable_mergejoin = OFF;
 set enable_indexonlyscan = OFF;
 set enable_nestloop = OFF;
 
-
+--2027
 DISCARD PLANS;
-DISCARD ALL;
+--DISCARD ALL;
 
 
 
-CREATE INDEX IF NOT EXISTS consultaBtree ON tb_itens USING btree(ite_vendas);
-CREATE INDEX IF NOT EXISTS consultaBtree ON tb_itens USING btree(ite_codigo);
 CREATE INDEX IF NOT EXISTS consultaBtree ON tb_fornecedores USING btree(for_codigo);
 CREATE INDEX IF NOT EXISTS consultaBtree ON tb_fornecedores USING btree(for_descricao);
 CREATE INDEX IF NOT EXISTS consultaBtree ON tb_vendas USING btree(ven_codigo);
 CREATE INDEX IF NOT EXISTS consultaBtree ON tb_vendas USING btree(ven_valor_total);
+CREATE INDEX IF NOT EXISTS consultaBtree ON tb_produtos USING btree(pro_descricao);
+CREATE INDEX IF NOT EXISTS consultaBtree ON tb_produtos USING btree(pro_codigo);
+CREATE INDEX IF NOT EXISTS consultaBtree ON tb_produtos USING btree(pro_valor);
 DROP INDEX consultaBtree;
 
-CREATE INDEX IF NOT EXISTS consultaHash ON tb_itens USING hash(ite_vendas);
 CREATE INDEX IF NOT EXISTS consultaHash ON tb_itens USING hash(ite_codigo);
 CREATE INDEX IF NOT EXISTS consultaHash ON tb_fornecedores USING hash(for_codigo);
 CREATE INDEX IF NOT EXISTS consultaHash ON tb_fornecedores USING hash(for_descricao);
 CREATE INDEX IF NOT EXISTS consultaHash ON tb_vendas USING hash(ven_codigo);
 CREATE INDEX IF NOT EXISTS consultaHash ON tb_vendas USING hash(ven_valor_total);
+CREATE INDEX IF NOT EXISTS consultaHash ON tb_produtos USING hash(pro_descricao);
+CREATE INDEX IF NOT EXISTS consultaHash ON tb_produtos USING hash(pro_codigo);
+CREATE INDEX IF NOT EXISTS consultaHash ON tb_produtos USING hash(pro_valor);
 DROP INDEX consultaHash;
 
-CREATE INDEX IF NOT EXISTS consultaGin ON tb_itens USING gin (ite_vendas gin_trgm_ops);
 CREATE INDEX IF NOT EXISTS consultaGin ON tb_itens USING gin (ite_codigo gin_trgm_ops);
 CREATE INDEX IF NOT EXISTS consultaGin ON tb_fornecedores USING gin (for_codigo gin_trgm_ops);
 CREATE INDEX IF NOT EXISTS consultaGin ON tb_fornecedores USING gin (for_descricao gin_trgm_ops);
 CREATE INDEX IF NOT EXISTS consultaGin ON tb_vendas USING gin (ven_codigo gin_trgm_ops);
 CREATE INDEX IF NOT EXISTS consultaGin ON tb_vendas USING gin (ven_valor_total gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS consultaGin ON tb_produtos USING gin(pro_descricao gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS consultaGin ON tb_produtos USING gin(pro_codigo gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS consultaGin ON tb_produtos USING gin(pro_valor gin_trgm_ops);
 DROP INDEX consultaGin;
 
-CREATE INDEX IF NOT EXISTS consultaBrin ON tb_itens USING brin (ite_vendas);
 CREATE INDEX IF NOT EXISTS consultaBrin ON tb_itens USING brin (ite_codigo);
 CREATE INDEX IF NOT EXISTS consultaBrin ON tb_fornecedores USING brin (for_codigo);
 CREATE INDEX IF NOT EXISTS consultaBrin ON tb_fornecedores USING brin (for_descricao);
 CREATE INDEX IF NOT EXISTS consultaBrin ON tb_vendas USING brin (ven_codigo);
 CREATE INDEX IF NOT EXISTS consultaBrin ON tb_vendas USING brin (ven_valor_total);
+CREATE INDEX IF NOT EXISTS consultaBrin ON tb_produtos USING brin(pro_descricao);
+CREATE INDEX IF NOT EXISTS consultaBrin ON tb_produtos USING brin(pro_codigo);
+CREATE INDEX IF NOT EXISTS consultaBrin ON tb_produtos USING brin(pro_valor);
 DROP INDEX consultaBrin;
 
-CREATE INDEX IF NOT EXISTS consultaGist ON tb_itens USING gist  (ite_vendas);
 CREATE INDEX IF NOT EXISTS consultaGist ON tb_itens USING gist  (ite_codigo);
 CREATE INDEX IF NOT EXISTS consultaGist ON tb_fornecedores USING gist  (for_codigo);
 CREATE INDEX IF NOT EXISTS consultaGist ON tb_fornecedores USING gist  (for_descricao);
 CREATE INDEX IF NOT EXISTS consultaGist ON tb_vendas USING gist  (ven_codigo);
 CREATE INDEX IF NOT EXISTS consultaGist ON tb_vendas USING gist  (ven_valor_total);
+CREATE INDEX IF NOT EXISTS consultaGist ON tb_produtos USING gist(pro_descricao);
+CREATE INDEX IF NOT EXISTS consultaGist ON tb_produtos USING gist(pro_codigo);
+CREATE INDEX IF NOT EXISTS consultaGist ON tb_produtos USING gist(pro_valor);
 DROP INDEX consultaGist;
 
 DROP TABLE tempo_execucao_1_consulta;
