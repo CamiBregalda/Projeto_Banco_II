@@ -14,6 +14,7 @@ public class Painel_Funcionario extends javax.swing.JFrame {
      * Creates new form Painel_Funcionario
      */
     public Painel_Funcionario() {
+        setTitle("Tela Estoque de Funcionario");
         initComponents();
     }
 
@@ -26,21 +27,129 @@ public class Painel_Funcionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTFBarraPesquisa = new javax.swing.JTextField();
+        jBTNBarraPesquisa = new javax.swing.JButton();
+        jLBProdutos = new javax.swing.JLabel();
+        jLBTituloDaPagina = new javax.swing.JLabel();
+        jLBBarraPesquisa = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTBProdutos = new javax.swing.JTable();
+        jBTCadastrarProduto = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jBTNBarraPesquisa.setText("Pesquisar");
+        jBTNBarraPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNBarraPesquisaMouseClicked(evt);
+            }
+        });
+
+        jLBProdutos.setText("Produtos:");
+
+        jLBTituloDaPagina.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLBTituloDaPagina.setText("Estoque de Produtos");
+
+        jLBBarraPesquisa.setText("Buscar Produto:");
+
+        jTBProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nome", "Preço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTBProdutos.setColumnSelectionAllowed(true);
+        jTBProdutos.getTableHeader().setReorderingAllowed(false);
+        jTBProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTBProdutosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTBProdutos);
+
+        jBTCadastrarProduto.setText("Cadastrar Novo Produto");
+        jBTCadastrarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTCadastrarProdutoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(292, 292, 292)
+                .addComponent(jLBTituloDaPagina)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBProdutos)
+                            .addComponent(jLBBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBTNBarraPesquisa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBTCadastrarProduto))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jLBBarraPesquisa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBTNBarraPesquisa)
+                    .addComponent(jBTCadastrarProduto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLBProdutos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
+
+    private void jTBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBProdutosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBProdutosMouseClicked
+
+    private void jBTCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCadastrarProdutoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTCadastrarProdutoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +187,13 @@ public class Painel_Funcionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTCadastrarProduto;
+    private javax.swing.JButton jBTNBarraPesquisa;
+    private javax.swing.JLabel jLBBarraPesquisa;
+    private javax.swing.JLabel jLBProdutos;
+    private javax.swing.JLabel jLBTituloDaPagina;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTBProdutos;
+    private javax.swing.JTextField jTFBarraPesquisa;
     // End of variables declaration//GEN-END:variables
 }
