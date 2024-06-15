@@ -52,8 +52,8 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace pref="48" max="32767" attributes="0"/>
-                                  <Component id="jBTNOcultarProduto" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                                  <Component id="jBTNDeletarProduto" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -100,7 +100,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jBTNOcultarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBTNDeletarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBTNAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="64" max="32767" attributes="0"/>
@@ -152,11 +152,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alterar"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNAlterarMouseClicked"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jBTNOcultarProduto">
+        <Component class="javax.swing.JButton" name="jBTNDeletarProduto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ocultar Produto"/>
+            <Property name="text" type="java.lang.String" value="Deletar Produto"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNDeletarProdutoMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

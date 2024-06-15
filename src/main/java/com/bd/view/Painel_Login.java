@@ -2,6 +2,7 @@ package com.bd.view;
 
 import com.bd.infra.Login;
 import com.bd.mapper.FuncionarioMapper;
+import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.FuncionarioRepository;
 import com.bd.service.FuncionarioService;
 
@@ -114,11 +115,17 @@ public class Painel_Login extends javax.swing.JDialog {
             telaCadastro.dispose();
         } else {
             inicializandoClasses();
-            funcionarioService.buscarFuncionarioPeloNome(username);
+            FuncionarioResponse funcionario = funcionarioService.buscarFuncionarioPeloNome(username);
 
-            Painel_Usuario usuario = new Painel_Usuario();
-            usuario.setLocationRelativeTo(this);
-            usuario.setVisible(true);
+            if(funcionario.fun_funcao() == "Gerente"){
+                Painel_Gerente gerente = new Painel_Gerente();
+                gerente.setLocationRelativeTo(this);
+                gerente.setVisible(true);
+            } else {
+                Painel_Funcionario fun = new Painel_Funcionario();
+                fun.setLocationRelativeTo(this);
+                fun.setVisible(true);
+            }
             
             this.dispose();
             telaCadastro.dispose();
