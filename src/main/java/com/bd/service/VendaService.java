@@ -16,6 +16,7 @@ import com.bd.model.response.VendaResponse;
 import com.bd.repository.FuncionarioRepository;
 import com.bd.repository.VendaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class VendaService {
         login.setUser(userDTO.getUsername());
         login.setSenha(userDTO.getPassword());
     }
-
+  
     public String realizarVenda(long funcionario_codigo, long produto_codigo, int quantidade_venda) {
         try{
             vendaRepository.realizarVenda(funcionario_codigo, produto_codigo, quantidade_venda);
@@ -100,5 +101,4 @@ public class VendaService {
             throw new BusinessException("Erro ao realizar venda: " + e.getMessage());
         }
     }
-
 }
