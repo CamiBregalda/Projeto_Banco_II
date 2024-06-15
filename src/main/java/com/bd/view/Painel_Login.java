@@ -1,5 +1,7 @@
 package com.bd.view;
 
+import com.bd.model.request.UserLoginDTO;
+
 public class Painel_Login extends javax.swing.JDialog {
 
     String pessoa;
@@ -35,19 +37,7 @@ public class Painel_Login extends javax.swing.JDialog {
 
         jLBNomeLogin.setText("Informe seu Nome:");
 
-        jTFNomeLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFNomeLoginActionPerformed(evt);
-            }
-        });
-
         jLBSenhaLogin.setText("Informe sua Senha:");
-
-        jTFSenhaLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFSenhaLoginActionPerformed(evt);
-            }
-        });
 
         jBTNEntrar.setText("Entrar");
         jBTNEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -108,16 +98,19 @@ public class Painel_Login extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFNomeLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNomeLoginActionPerformed
-
-    private void jTFSenhaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFSenhaLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFSenhaLoginActionPerformed
-
     private void jBTNEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNEntrarMouseClicked
-        // TODO add your handling code here:
+        String username = jTFNomeLogin.getText();
+        String password = jTFSenhaLogin.getText();
+        
+        UserLoginDTO login = new UserLoginDTO(username, password);
+        
+        if(pessoa == "Usuario"){
+            UsuarioService user = new UsuarioService();
+            user.logarUsuario(login);
+        } else {
+            FuncionarioService funcionario = new FuncionarioService();
+            funcionario.logarFuncionario(login);
+        }
     }//GEN-LAST:event_jBTNEntrarMouseClicked
 
     /**
