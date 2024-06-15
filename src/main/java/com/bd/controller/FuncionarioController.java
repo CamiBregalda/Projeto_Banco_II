@@ -44,23 +44,23 @@ public class FuncionarioController {
 
     @GetMapping("")
     public List<FuncionarioResponse> buscarFuncionarios(@RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return funcionarioService.buscarFuncionarios(new UserLoginDTO(username, password));
+        return funcionarioService.buscarFuncionarios();
     }
 
     @GetMapping("/{id}")
     public FuncionarioResponse buscarFuncionarioPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return funcionarioService.buscarFuncionarioPeloId(id, new UserLoginDTO(username, password));
+        return funcionarioService.buscarFuncionarioPeloId(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FuncionarioResponse> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
-        return ResponseEntity.ok(funcionarioService.atualizarFuncionario(id, funcionarioRegistrationRequest));
+    public ResponseEntity<FuncionarioResponse> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionarioRequest funcionarioRequest) {
+        return ResponseEntity.ok(funcionarioService.atualizarFuncionario(id, funcionarioRequest));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarFuncionario(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         try {
-            funcionarioService.deletarFuncionario(id, userDTO);
+            funcionarioService.deletarFuncionario(id);
             return ResponseEntity.ok("Usuário deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar usuário: " + e.getMessage());

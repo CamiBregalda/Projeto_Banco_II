@@ -44,23 +44,23 @@ public class VendaController {
 
     @GetMapping("")
     public List<VendaResponse> buscarVendas(@RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return vendaService.buscarVendas(new UserLoginDTO(username, password));
+        return vendaService.buscarVendas();
     }
 
     @GetMapping("/{id}")
     public VendaResponse buscarVendaPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return vendaService.buscarVendaPeloId(id, new UserLoginDTO(username, password));
+        return vendaService.buscarVendaPeloId(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<VendaResponse> atualizarVenda(@PathVariable Long id, @RequestBody VendaRegistrationRequest vendaRegistrationRequest) {
-        return ResponseEntity.ok(vendaService.atualizarVenda(id, vendaRegistrationRequest));
+    public ResponseEntity<VendaResponse> atualizarVenda(@PathVariable Long id, @RequestBody VendaRequest vendaRequest) {
+        return ResponseEntity.ok(vendaService.atualizarVenda(id, vendaRequest));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarVenda(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         try {
-            vendaService.deletarVenda(id, userDTO);
+            vendaService.deletarVenda(id);
             return ResponseEntity.ok("Venda deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar venda: " + e.getMessage());

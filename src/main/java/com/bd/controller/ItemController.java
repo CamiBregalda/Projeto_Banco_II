@@ -28,23 +28,23 @@ public class ItemController {
 
     @GetMapping("")
     public List<ItemResponse> buscarItens(@RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return itemService.buscarItens(new UserLoginDTO(username, password));
+        return itemService.buscarItens();
     }
 
     @GetMapping("/{id}")
     public ItemResponse buscarItemPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return itemService.buscarItemPeloId(id, new UserLoginDTO(username, password));
+        return itemService.buscarItemPeloId(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ItemResponse> atualizarItem(@PathVariable Long id, @RequestBody ItemRegistrationRequest itemRequest) {
+    public ResponseEntity<ItemResponse> atualizarItem(@PathVariable Long id, @RequestBody ItemRequest itemRequest) {
         return ResponseEntity.ok(itemService.atualizarItem(id, itemRequest));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarItem(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         try {
-           itemService.deletarItem(id, userDTO);
+           itemService.deletarItem(id);
             return ResponseEntity.ok("Item deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar item: " + e.getMessage());

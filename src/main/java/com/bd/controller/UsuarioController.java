@@ -41,23 +41,23 @@ public class UsuarioController {
 
     @GetMapping
     public List<UserResponse> buscarUsuarios(@RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return usuarioService.buscarUsuarios(new UserLoginDTO(username, password));
+        return usuarioService.buscarUsuarios();
     }
 
     @GetMapping("/{id}")
     public UserResponse buscarUsuarioPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String passwor) {
-        return usuarioService.buscarUsuarioPeloId(id, new UserLoginDTO(username, passwor));
+        return usuarioService.buscarUsuarioPeloId(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> atualizarUsuario(@PathVariable Long id, @RequestBody UserRegistrationRequest userRequest) {
+    public ResponseEntity<UserResponse> atualizarUsuario(@PathVariable Long id, @RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(usuarioService.atualizarUsuario(id, userRequest));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarUsuario(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         try {
-            usuarioService.deletarUsuario(id, userDTO);
+            usuarioService.deletarUsuario(id);
             return ResponseEntity.ok("Usuário deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar usuário: " + e.getMessage());

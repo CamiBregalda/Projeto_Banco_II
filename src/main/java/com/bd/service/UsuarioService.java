@@ -36,9 +36,8 @@ public class UsuarioService {
         return Conexao.authenticateUser();
     }
 
-    public List<UserResponse> buscarUsuarios(UserLoginDTO userDTO) {
+    public List<UserResponse> buscarUsuarios() {
         try {
-            criarLogin(userDTO);
             List<Usuario> usuarios = usuarioRepository.buscarUsuarios();
 
             List<UserResponse> userResponses = new ArrayList<>();
@@ -52,9 +51,8 @@ public class UsuarioService {
         }
     }
 
-    public UserResponse buscarUsuarioPeloId(Long id, UserLoginDTO userDTO) {
+    public UserResponse buscarUsuarioPeloId(Long id) {
         try {
-            criarLogin(userDTO);
             Usuario usuario = usuarioRepository.buscarUsuarioPeloId(id);
             return usuarioMapper.entityToResponse(usuario);
         } catch (Exception e) {
@@ -62,16 +60,14 @@ public class UsuarioService {
         }
     }
 
-    public UserResponse atualizarUsuario(Long id, UserRegistrationRequest userRequest) {
-        criarLogin(userRequest.getUserLoginDTO());
-        Usuario user = usuarioMapper.postDtoToEntity(userRequest.getUserRequest());
+    public UserResponse atualizarUsuario(Long id, UserRequest userRequest) {
+        Usuario user = usuarioMapper.postDtoToEntity(userRequest);
         usuarioRepository.atualizarUsuario(id, user);
 
         return usuarioMapper.entityToResponse(user);
     }
 
-    public boolean deletarUsuario(Long id, UserLoginDTO userDTO) {
-        criarLogin(userDTO);
+    public boolean deletarUsuario(Long id) {
         return usuarioRepository.deletarUsuario(id);
     }
 

@@ -28,23 +28,23 @@ public class FornecedorController {
 
     @GetMapping("")
     public List<FornecedorResponse> buscarFornecedores(@RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return fornecedorService.buscarFornecedores(new UserLoginDTO(username, password));
+        return fornecedorService.buscarFornecedores();
     }
 
     @GetMapping("/{id}")
     public FornecedorResponse buscarFornecedoresPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return fornecedorService.buscarFornecedorPeloId(id, new UserLoginDTO(username, password));
+        return fornecedorService.buscarFornecedorPeloId(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FornecedorResponse> atualizarFornecedor(@PathVariable Long id, @RequestBody FornecedorRegistrationRequest fornecedorRequest) {
+    public ResponseEntity<FornecedorResponse> atualizarFornecedor(@PathVariable Long id, @RequestBody FornecedorRequest fornecedorRequest) {
         return ResponseEntity.ok(fornecedorService.atualizarFornecedor(id, fornecedorRequest));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarFornecedor(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
         try {
-            fornecedorService.deletarFornecedor(id, new UserLoginDTO(username, password));
+            fornecedorService.deletarFornecedor(id);
             return ResponseEntity.ok("fornecedor deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar fornecedor: " + e.getMessage());

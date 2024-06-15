@@ -25,23 +25,23 @@ public class ProdutoController {
 
     @GetMapping("")
     public List<ProdutoResponse> buscarProdutos(@RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return produtoService.buscarProdutos(new UserLoginDTO(username, password));
+        return produtoService.buscarProdutos();
     }
 
     @GetMapping("/{id}")
     public ProdutoResponse buscarProdutosPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
-        return produtoService.buscarProdutoPeloId(id, new UserLoginDTO(username, password));
+        return produtoService.buscarProdutoPeloId(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoResponse> atualizarProdutos(@PathVariable Long id, @RequestBody ProdutoRegistrationRequest produtoRequest) {
+    public ResponseEntity<ProdutoResponse> atualizarProdutos(@PathVariable Long id, @RequestBody ProdutoRequest produtoRequest) {
         return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoRequest));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarProduto(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         try {
-            produtoService.deletarProduto(id, userDTO);
+            produtoService.deletarProduto(id);
             return ResponseEntity.ok("Produto deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar produto: " + e.getMessage());

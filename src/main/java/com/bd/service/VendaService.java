@@ -42,9 +42,8 @@ public class VendaService {
         return Conexao.authenticateUser();
     }
 
-    public List<VendaResponse> buscarVendas(UserLoginDTO userDTO) {
+    public List<VendaResponse> buscarVendas() {
         try {
-            criarLogin(userDTO);
             List<Venda> vendas = vendaRepository.buscarVendas();
 
             for (Venda venda : vendas) {
@@ -67,10 +66,8 @@ public class VendaService {
         }
     }
 
-    public VendaResponse buscarVendaPeloId(Long id, UserLoginDTO userDTO) {
+    public VendaResponse buscarVendaPeloId(Long id) {
         try {
-            criarLogin(userDTO);
-
             Venda venda = vendaRepository.buscarVendaPeloId(id);
             return vendaMapper.entityToResponse(venda);
         } catch (Exception e) {
@@ -78,15 +75,14 @@ public class VendaService {
         }
     }
 
-    public VendaResponse atualizarVenda(Long id, VendaRegistrationRequest vendaRegistrationRequest) {
-        criarLogin(vendaRegistrationRequest.getUserLoginDTO());
-        Venda venda = vendaMapper.postDtoToEntity(vendaRegistrationRequest.getVendaRequest());
+    public VendaResponse atualizarVenda(Long id, VendaRequest vendaRequest) {
+        Venda venda = vendaMapper.postDtoToEntity(vendaRequest);
         vendaRepository.atualizarVenda(id, venda);
 
         return vendaMapper.entityToResponse(venda);
     }
 
-    public boolean deletarVenda(Long id, UserLoginDTO userDTO) {
+    public boolean deletarVenda(Long id) {
         return vendaRepository.deletarVenda(id);
     }
     private void criarLogin(UserLoginDTO userDTO) {

@@ -29,7 +29,7 @@ public class ItemService {
         return itemMapper.entityToResponse(itemRepository.cadastrarItem(item));
     }
 
-    public List<ItemResponse> buscarItens(UserLoginDTO userDTO) {
+    public List<ItemResponse> buscarItens() {
         try {
             List<Item> itens = itemRepository.buscarItens();
 
@@ -52,15 +52,14 @@ public class ItemService {
         }
     }
 
-    public ItemResponse atualizarItem(Long id, ItemRegistrationRequest itemRequest) {
-        criarLogin(itemRequest.getUserLoginDTO());
-        Item item = itemMapper.postDtoToEntity(itemRequest.getItemRequest());
+    public ItemResponse atualizarItem(Long id, ItemRequest itemRequest) {
+        Item item = itemMapper.postDtoToEntity(itemRequest);
         itemRepository.atualizarItem(id, item);
 
         return itemMapper.entityToResponse(item);
     }
 
-    public boolean deletarItem(Long id, UserLoginDTO userDTO) {
+    public boolean deletarItem(Long id) {
         return itemRepository.deletarItem(id);
     }
 

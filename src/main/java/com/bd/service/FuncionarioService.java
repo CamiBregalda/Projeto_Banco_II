@@ -38,9 +38,8 @@ public class FuncionarioService {
         return Conexao.authenticateUser();
     }
 
-    public List<FuncionarioResponse> buscarFuncionarios(UserLoginDTO userDTO) {
+    public List<FuncionarioResponse> buscarFuncionarios() {
         try {
-            criarLogin(userDTO);
             List<Funcionario> funcionarios = funcionarioRepository.buscarFuncionarios();
 
             List<FuncionarioResponse> funcionarioResponses = new ArrayList<>();
@@ -53,10 +52,8 @@ public class FuncionarioService {
         }
     }
 
-    public FuncionarioResponse buscarFuncionarioPeloId(Long id, UserLoginDTO userDTO) {
+    public FuncionarioResponse buscarFuncionarioPeloId(Long id) {
         try {
-            criarLogin(userDTO);
-
             Funcionario funcionario = funcionarioRepository.buscarFuncionarioPeloId(id);
             return funcionarioMapper.entityToResponse(funcionario);
         } catch (Exception e) {
@@ -64,15 +61,14 @@ public class FuncionarioService {
         }
     }
 
-    public FuncionarioResponse atualizarFuncionario(Long id, FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
-        criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
-        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
+    public FuncionarioResponse atualizarFuncionario(Long id, FuncionarioRequest funcionarioRequest) {
+        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRequest);
         funcionarioRepository.atualizarFuncionario(id, funcio);
         funcio.setFun_codigo(Math.toIntExact(id));
         return funcionarioMapper.entityToResponse(funcio);
     }
 
-    public boolean deletarFuncionario(Long id, UserLoginDTO userDTO) {
+    public boolean deletarFuncionario(Long id) {
         return funcionarioRepository.deletarFuncionario(id);
     }
 

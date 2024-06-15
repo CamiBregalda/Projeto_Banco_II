@@ -32,7 +32,7 @@ public class ProdutoService {
         return produtoMapper.entityToResponse(produtoRepository.cadastrarProduto(produto));
     }
 
-    public List<ProdutoResponse> buscarProdutos(UserLoginDTO userDTO) {
+    public List<ProdutoResponse> buscarProdutos() {
         try {
             List<Produto> produtos = produtoRepository.buscarProdutos();
 
@@ -46,28 +46,23 @@ public class ProdutoService {
         }
     }
 
-    public ProdutoResponse buscarProdutoPeloId(Long id, UserLoginDTO userDTO) {
+    public ProdutoResponse buscarProdutoPeloId(Long id) {
         try {
-            criarLogin(userDTO);
-            System.out.println(id);
             Produto produto = produtoRepository.buscarProdutoPeloId(id);
-            System.out.println(produto);
             return produtoMapper.entityToResponse(produto);
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar produto: " + e.getMessage());
         }
     }
 
-    public ProdutoResponse atualizarProduto(Long id, ProdutoRegistrationRequest produtoRequest) {
-        criarLogin(produtoRequest.getUserLoginDTO());
-        Produto produto = produtoMapper.postDtoToEntity(produtoRequest.getProdutoRequest());
+    public ProdutoResponse atualizarProduto(Long id, ProdutoRequest produtoRequest) {
+        Produto produto = produtoMapper.postDtoToEntity(produtoRequest);
         produtoRepository.atualizarProduto(id, produto);
         produto.setPro_codigo(Math.toIntExact(id));
         return produtoMapper.entityToResponse(produto);
     }
 
-    public boolean deletarProduto(Long id, UserLoginDTO userDTO) {
-        criarLogin(userDTO);
+    public boolean deletarProduto(Long id) {
         return produtoRepository.deletarProduto(id);
 
     }
