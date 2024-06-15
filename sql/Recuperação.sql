@@ -4,12 +4,12 @@
 um contexto onde haverá uma verificação se os dados estão corretos, caso sim “Commit” caso
 contrário Exception (no PLPgSQL o Exception em uma função é considerado um Rollback).*/
 
-CREATE OR REPLACE FUNCTION realizarVenda(produto_codigo BIGINT, quantidade_venda INT)
-RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION realizarVenda(funcionario_codigo BIGINT, produto_codigo BIGINT, quantidade_venda INT)
+RETURNS VARCHAR AS $$
 DECLARE
 	quantidade_estoque INTEGER;
-	quantidade_vendas INTEGER;
-	id_itens INTEGER;
+	id_vendas INTEGER;
+	id_item INTEGER;
 	valor_produto DECIMAL;
 	valor_total DECIMAL;
     venda_id BIGINT;
@@ -24,38 +24,43 @@ BEGIN
             SELECT pro_valor INTO valor_produto FROM tb_produtos WHERE pro_codigo = produto_codigo;
             UPDATE tb_produtos SET pro_quantidade = pro_quantidade - quantidade_venda WHERE pro_codigo = produto_codigo;
             
-            RAISE NOTICE 'Valor do produto: %', valor_produto;
             valor_total := quantidade_venda * valor_produto;
-			RAISE NOTICE 'Valor do total: %', valor_total;
 			
-            SELECT COUNT(*) INTO quantidade_vendas FROM tb_vendas;
-            INSERT INTO tb_vendas (ven_codigo, ven_horario, ven_valor_total) 
-            VALUES (quantidade_vendas + 1, CURRENT_TIMESTAMP, valor_total) RETURNING ven_codigo INTO venda_id;
+            SELECT MAX(ven_codigo) INTO id_vendas FROM tb_vendas;
+            INSERT INTO tb_vendas (ven_codigo, ven_horario, ven_valor_total, tb_funcionarios_fun_codigo) 
+				
+            VALUES (id_vendas + 1, CURRENT_TIMESTAMP, valor_total, funcionario_codigo) RETURNING ven_codigo INTO venda_id;
             
-            SELECT COUNT(*) INTO id_itens FROM tb_itens;
+            SELECT COUNT(*) INTO id_item FROM tb_itens;
             INSERT INTO tb_itens (ite_codigo, ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo)
-            VALUES (id_itens + 1, quantidade_venda, valor_total, produto_codigo, quantidade_vendas + 1);
+            VALUES (id_item + 1, quantidade_venda, valor_total, produto_codigo, venda_id);
             
-            RAISE NOTICE 'Venda realizada com sucesso!';
+            RETURN 'Venda realizada com sucesso!';
         ELSE
-            RAISE EXCEPTION 'Quantidade em estoque insuficiente para realizar a venda.';
+			ROLLBACK;
         END IF;
     EXCEPTION
         WHEN others THEN
-            RAISE NOTICE 'Erro ao realizar a venda. Rollback executado.';
             ROLLBACK;
     END;
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT realizarVenda(1, 10);
+SELECT realizarVenda(1, 2, 20);
 
-select * from tb_produtos WHERE pro_codigo = 1;
-
-
+select * from tb_produtos WHERE pro_codigo = 2;
 
 
+DROP FUNCTION realizarVenda
 
+DO $$
+DECLARE
+    resultado VARCHAR;
+BEGIN
+    resultado := realizarVenda(2, 10);
+    RAISE NOTICE 'Resultado da função: %', resultado;
+END;
+$$ LANGUAGE plpgsql;
 
 
 
