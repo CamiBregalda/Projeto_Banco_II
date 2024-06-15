@@ -34,14 +34,14 @@ public class VendaService {
         Venda venda = vendaMapper.postDtoToEntity(vendaRegistrationRequestRequest.getVendaRequest());
         return vendaMapper.entityToResponse(vendaRepository.cadastrarVenda(venda));
     }
-
+/*
     public boolean validarVenda(UserLoginDTO userDTO) {
         Login login = Login.getInstance();
         login.setUser(userDTO.getUsername());
         login.setSenha(userDTO.getPassword());
 
         return Conexao.authenticateUser();
-    }
+    }*/
 
     public List<VendaResponse> buscarVendas() {
         try {

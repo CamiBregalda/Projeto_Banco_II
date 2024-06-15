@@ -27,7 +27,7 @@ public class FuncionarioController {
     public FuncionarioResponse cadastrarFuncionario(@RequestBody FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
         return funcionarioService.cadastrarFuncionario(funcionarioRegistrationRequest);
     }
-
+/*
     @PostMapping("/login")
     public ResponseEntity<String> loginFuncionario(@RequestBody UserLoginDTO userDTO) {
         try {
@@ -40,7 +40,7 @@ public class FuncionarioController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao realizar login: " + e.getMessage());
         }
-    }
+    }*/
 
     @GetMapping("")
     public List<FuncionarioResponse> buscarFuncionarios(@RequestHeader("username") String username, @RequestHeader("password") String password) {

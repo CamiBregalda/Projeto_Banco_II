@@ -24,7 +24,7 @@ public class UsuarioController {
     public UserResponse cadastrarUsuario(@RequestBody UserRegistrationRequest userRequest) {
         return usuarioService.cadastrarUsuario(userRequest);
     }
-
+/*
     @PostMapping("/login")
     public ResponseEntity<String> loginUsuario(@RequestBody UserLoginDTO userDTO) {
         try {
@@ -37,7 +37,7 @@ public class UsuarioController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao realizar login: " + e.getMessage());
         }
-    }
+    }*/
 
     @GetMapping
     public List<UserResponse> buscarUsuarios(@RequestHeader("username") String username, @RequestHeader("password") String password) {

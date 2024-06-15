@@ -16,29 +16,6 @@ public class Conexao {
         }
     }
 
-    public static boolean authenticateUser() {
-        String user = Login.getInstance().getUser();
-        String senha = Login.getInstance().getSenha();
-
-        try (Connection connection = getConnection()) {;
-            String sql = "SELECT authenticate_user(?, ?)";
-
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, user);
-            statement.setString(2, senha);
-
-            ResultSet resultado = statement.executeQuery();
-
-            if (!resultado.next()) {
-                throw new InvalidLoginException("Usuário ou senha inválidos");
-            } else {
-                return true;
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao autenticar usuário", ex);
-        }
-    }
-
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
