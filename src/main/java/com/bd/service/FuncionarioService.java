@@ -88,4 +88,8 @@ public class FuncionarioService {
         login.setSenha(userDTO.getPassword());
     }
 
+    public void cadastrarRole (){
+
+    }
+
 }
