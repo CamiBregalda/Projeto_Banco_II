@@ -33,12 +33,18 @@ public class UsuarioRepository {
                 statement.setString(5, user.getUser_senha());
                 statement.executeUpdate();
             }
-
+            sql = "SELECT cadastrar_usuario(?, ?)";
+            try(PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, user.getUser_username());
+                statement.setString(2, user.getUser_senha());
+            }
             return user;
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao cadastrar usuário", ex);
+            throw new RuntimeException("Erro ao cadastrar role", ex);
         }
     }
+
+
 
     public List<Usuario> buscarUsuarios() {
         try (Connection connection = Conexao.getConnection()) {
@@ -112,4 +118,6 @@ public class UsuarioRepository {
             throw new RuntimeException("Erro ao deletar usuário", ex);
         }
     }
+
+
 }

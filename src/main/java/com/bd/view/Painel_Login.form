@@ -95,6 +95,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFNomeLogin">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFNomeLoginActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLBSenhaLogin">
           <Properties>
@@ -102,11 +105,17 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFSenhaLogin">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFSenhaLoginActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBTNEntrar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Entrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNEntrarMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

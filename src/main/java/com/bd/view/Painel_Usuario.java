@@ -54,6 +54,11 @@ public class Painel_Usuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jBTNBarraPesquisa.setText("Pesquisar");
+        jBTNBarraPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNBarraPesquisaMouseClicked(evt);
+            }
+        });
 
         jLBProdutos.setText("Produtos:");
 
@@ -88,6 +93,11 @@ public class Painel_Usuario extends javax.swing.JFrame {
         });
         jTBProdutos.setColumnSelectionAllowed(true);
         jTBProdutos.getTableHeader().setReorderingAllowed(false);
+        jTBProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTBProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTBProdutos);
         jTBProdutos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -150,6 +160,14 @@ public class Painel_Usuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
+
+    private void jTBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBProdutosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBProdutosMouseClicked
 
     /**
      * @param args the command line arguments
