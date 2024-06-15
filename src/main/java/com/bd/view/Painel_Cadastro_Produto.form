@@ -105,11 +105,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNCadastrarProdutoMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFQuantidadeProduto">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFQuantidadeProdutoActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -15,6 +15,7 @@ public class Painel_Vendas extends javax.swing.JDialog {
      */
     public Painel_Vendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setTitle("Venda de Itens");
         initComponents();
     }
 
@@ -62,6 +63,11 @@ public class Painel_Vendas extends javax.swing.JDialog {
         jLBQtdEstoque.setText("Disponível em estoque:");
 
         jBTNComprar.setText("Comprar");
+        jBTNComprar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNComprarMouseClicked(evt);
+            }
+        });
 
         jCBListaFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -143,6 +149,10 @@ public class Painel_Vendas extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBTNComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNComprarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNComprarMouseClicked
 
     /**
      * @param args the command line arguments

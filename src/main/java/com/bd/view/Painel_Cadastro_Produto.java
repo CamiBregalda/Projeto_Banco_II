@@ -51,10 +51,9 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
         jLBQuantidadeProduto.setText("Quantidade:");
 
         jBTNCadastrarProduto.setText("Cadastrar");
-
-        jTFQuantidadeProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFQuantidadeProdutoActionPerformed(evt);
+        jBTNCadastrarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNCadastrarProdutoMouseClicked(evt);
             }
         });
 
@@ -105,9 +104,9 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFQuantidadeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFQuantidadeProdutoActionPerformed
+    private void jBTNCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCadastrarProdutoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFQuantidadeProdutoActionPerformed
+    }//GEN-LAST:event_jBTNCadastrarProdutoMouseClicked
 
     /**
      * @param args the command line arguments
