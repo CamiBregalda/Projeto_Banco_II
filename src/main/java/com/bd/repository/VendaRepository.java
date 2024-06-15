@@ -6,6 +6,7 @@ import com.bd.model.Venda;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,6 +107,22 @@ public class VendaRepository {
             }
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao deletar venda", ex);
+        }
+    }
+
+    public String realizarVenda( long fun_codigo, long pro_codigo, int ite_quantidade) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT realizar_venda(?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                
+                statement.setLong(1, fun_codigo);
+                statement.setLong(2, pro_codigo);
+                statement.setInt(3, ite_quantidade);
+                statement.executeUpdate();
+            }
+            return "Venda Realizada.";
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao realizar venda", ex);
         }
     }
 

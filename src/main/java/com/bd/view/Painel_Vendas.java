@@ -28,18 +28,132 @@ public class Painel_Vendas extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLBNomeProduto = new javax.swing.JLabel();
+        jSPNQuantidade = new javax.swing.JSpinner();
+        jLBQuantidade = new javax.swing.JLabel();
+        jLBPreco = new javax.swing.JLabel();
+        jLBPrecoMostrar = new javax.swing.JLabel();
+        jLBValorTotal = new javax.swing.JLabel();
+        jLBValorTotalMostrar = new javax.swing.JLabel();
+        jLBCodProduto = new javax.swing.JLabel();
+        jLBCodProdutoMostrar = new javax.swing.JLabel();
+        jLBQtdEstoque = new javax.swing.JLabel();
+        jLBQtdEstoqueMostrar = new javax.swing.JLabel();
+        jLBCodFuncionario = new javax.swing.JLabel();
+        jLBCodFunconarioMostrar = new javax.swing.JLabel();
+        jBTNComprar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLBNomeProduto.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLBNomeProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLBNomeProduto.setText("Nome do Produto");
+
+        jSPNQuantidade.setBorder(null);
+
+        jLBQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLBQuantidade.setText("Quantidade:");
+
+        jLBPreco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLBPreco.setText("Preço:");
+
+        jLBValorTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLBValorTotal.setText("Valor total:");
+
+        jLBCodProduto.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        jLBCodProduto.setText("Codigo Produto:");
+
+        jLBCodProdutoMostrar.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        jLBCodProdutoMostrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLBQtdEstoque.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLBQtdEstoque.setText("Disponível em estoque:");
+
+        jLBCodFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        jLBCodFuncionario.setText("Codigo do Funcionário:");
+
+        jLBCodFunconarioMostrar.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        jLBCodFunconarioMostrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jBTNComprar.setText("Comprar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addComponent(jLBNomeProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLBQuantidade)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(jSPNQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLBPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(jLBPrecoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLBQtdEstoque)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLBQtdEstoqueMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLBValorTotal)
+                                    .addGap(37, 37, 37)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLBValorTotalMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(11, 11, 11)
+                                            .addComponent(jBTNComprar)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLBCodProduto)
+                                .addGap(180, 180, 180)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLBCodProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLBCodFuncionario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLBCodFunconarioMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLBNomeProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLBCodProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLBCodFunconarioMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLBCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLBCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBPreco)
+                            .addComponent(jLBPrecoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLBQtdEstoque)
+                            .addComponent(jLBQtdEstoqueMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLBQuantidade)
+                            .addComponent(jSPNQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBValorTotal)
+                            .addComponent(jLBValorTotalMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addComponent(jBTNComprar)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -99,6 +213,20 @@ public class Painel_Vendas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTNComprar;
+    private javax.swing.JLabel jLBCodFuncionario;
+    private javax.swing.JLabel jLBCodFunconarioMostrar;
+    private javax.swing.JLabel jLBCodProduto;
+    private javax.swing.JLabel jLBCodProdutoMostrar;
+    private javax.swing.JLabel jLBNomeProduto;
+    private javax.swing.JLabel jLBPreco;
+    private javax.swing.JLabel jLBPrecoMostrar;
+    private javax.swing.JLabel jLBQtdEstoque;
+    private javax.swing.JLabel jLBQtdEstoqueMostrar;
+    private javax.swing.JLabel jLBQuantidade;
+    private javax.swing.JLabel jLBValorTotal;
+    private javax.swing.JLabel jLBValorTotalMostrar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner jSPNQuantidade;
     // End of variables declaration//GEN-END:variables
 }
