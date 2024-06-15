@@ -27,17 +27,114 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLBNomeCompleto = new javax.swing.JLabel();
+        jTFNomeCompleto = new javax.swing.JTextField();
+        jLBNomeUsuario = new javax.swing.JLabel();
+        jTFNomeUsuario = new javax.swing.JTextField();
+        jLBcpfUsuario = new javax.swing.JLabel();
+        jTFcpfUsuario = new javax.swing.JTextField();
+        jLBSenhaUsuario = new javax.swing.JLabel();
+        jPFSenhaUsuario = new javax.swing.JPasswordField();
+        jLBConfirmarSenha = new javax.swing.JLabel();
+        jTFConfirmarSenha = new javax.swing.JTextField();
+        jBTNCadastrar = new javax.swing.JButton();
+        jBTNLogar = new javax.swing.JButton();
+        jLBTituloDaPagina = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLBNomeCompleto.setText("Nome Completo:");
+
+        jLBNomeUsuario.setText("Nome de Usuário:");
+
+        jLBcpfUsuario.setText("CPF:");
+
+        jLBSenhaUsuario.setText("Senha:");
+
+        jLBConfirmarSenha.setText("Confirme sua Senha:");
+
+        jBTNCadastrar.setText("Cadastrar");
+
+        jBTNLogar.setText("Logar");
+
+        jLBTituloDaPagina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLBTituloDaPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLBTituloDaPagina.setText("Cadastre-se");
+        jLBTituloDaPagina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jBTNLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addComponent(jBTNCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))
+                    .addComponent(jLBSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLBcpfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNomeCompleto)
+                    .addComponent(jTFcpfUsuario)
+                    .addComponent(jPFSenhaUsuario)
+                    .addComponent(jTFConfirmarSenha)
+                    .addComponent(jLBNomeCompleto)
+                    .addComponent(jLBNomeUsuario)
+                    .addComponent(jTFNomeUsuario)
+                    .addComponent(jLBConfirmarSenha))
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBNomeCompleto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBNomeUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBcpfUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFcpfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLBSenhaUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPFSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBConfirmarSenha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBTNLogar)
+                    .addComponent(jBTNCadastrar))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -86,5 +183,19 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTNCadastrar;
+    private javax.swing.JButton jBTNLogar;
+    private javax.swing.JLabel jLBConfirmarSenha;
+    private javax.swing.JLabel jLBNomeCompleto;
+    private javax.swing.JLabel jLBNomeUsuario;
+    private javax.swing.JLabel jLBSenhaUsuario;
+    private javax.swing.JLabel jLBTituloDaPagina;
+    private javax.swing.JLabel jLBcpfUsuario;
+    private javax.swing.JPasswordField jPFSenhaUsuario;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTFConfirmarSenha;
+    private javax.swing.JTextField jTFNomeCompleto;
+    private javax.swing.JTextField jTFNomeUsuario;
+    private javax.swing.JTextField jTFcpfUsuario;
     // End of variables declaration//GEN-END:variables
 }
