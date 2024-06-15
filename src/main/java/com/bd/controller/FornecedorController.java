@@ -44,7 +44,7 @@ public class FornecedorController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarFornecedor(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
         try {
-            fornecedorService.deletarFornecedor(id, userDTO);
+            fornecedorService.deletarFornecedor(id, new UserLoginDTO(username, password));
             return ResponseEntity.ok("fornecedor deletado com sucesso");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar fornecedor: " + e.getMessage());
