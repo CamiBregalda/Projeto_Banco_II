@@ -3,6 +3,9 @@
 -- Mostrar usuários existentes
 SELECT * FROM pg_user; 
 
+-- Mostrar roles existentes
+SELECT rolname FROM  pg_roles;
+
 --Checar quais usuários fazem parte de uma role específica
 SELECT pg_roles.rolname AS role_name,
        member.rolname AS member_name
@@ -53,8 +56,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT cadastrar_role('newRole', ARRAY['novoUsuario', 'novoUsuario2']);
-
+SELECT cadastrar_role('newRole1', ARRAY['postgres', 'novoUsuario3']);
 
 
 --(Pontos 0,2) Adicionar os usuários aos grupos.
