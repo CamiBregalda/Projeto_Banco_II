@@ -31,14 +31,6 @@ public class FuncionarioService {
         return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
     }
 
-    public boolean validarFuncionario(UserLoginDTO userDTO) {
-        Login login = Login.getInstance();
-        login.setUser(userDTO.getUsername());
-        login.setSenha(userDTO.getPassword());
-
-        return Conexao.authenticateUser();
-    }
-
     public List<FuncionarioResponse> buscarFuncionarios() {
         try {
             List<Funcionario> funcionarios = funcionarioRepository.buscarFuncionarios();
@@ -56,6 +48,15 @@ public class FuncionarioService {
     public FuncionarioResponse buscarFuncionarioPeloId(Long id) {
         try {
             Funcionario funcionario = funcionarioRepository.buscarFuncionarioPeloId(id);
+            return funcionarioMapper.entityToResponse(funcionario);
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao buscar funcionario: " + e.getMessage());
+        }
+    }
+
+    public FuncionarioResponse buscarFuncionarioPeloNome(String nome) {
+        try {
+            Funcionario funcionario = funcionarioRepository.buscarFuncionarioPeloNome(nome);
             return funcionarioMapper.entityToResponse(funcionario);
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar funcionario: " + e.getMessage());

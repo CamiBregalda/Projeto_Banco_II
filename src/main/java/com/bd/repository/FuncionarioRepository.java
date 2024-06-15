@@ -82,6 +82,27 @@ public class FuncionarioRepository {
         }
     }
 
+    public Funcionario buscarFuncionarioPeloNome(String nome) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT fun_codigo, fun_nome, fun_cpf, fun_funcao FROM tb_funcionarios WHERE fun_nome = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, nome);
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    return new Funcionario(
+                            resultado.getInt("fun_codigo"),
+                            resultado.getString("fun_nome"),
+                            resultado.getString("fun_cpf"),
+                            resultado.getString("fun_funcao")
+                    );
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar funcionário: ", ex);
+        }
+    }
+
     public Funcionario atualizarFuncionario(Long id, Funcionario funcio){
         try (Connection connection = Conexao.getConnection()) {
             String sql = "UPDATE tb_funcionarios SET fun_nome = ?, fun_cpf = ?, fun_funcao = ?, fun_senha = ? WHERE fun_codigo = ?";

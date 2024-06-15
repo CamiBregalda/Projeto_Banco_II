@@ -28,14 +28,6 @@ public class UsuarioService {
         return usuarioMapper.entityToResponse(usuarioRepository.cadastrarUsuario(user));
     }
 
-    public boolean validarUsuario(UserLoginDTO userDTO) {
-        Login login = Login.getInstance();
-        login.setUser(userDTO.getUsername());
-        login.setSenha(userDTO.getPassword());
-
-        return Conexao.authenticateUser();
-    }
-
     public List<UserResponse> buscarUsuarios() {
         try {
             List<Usuario> usuarios = usuarioRepository.buscarUsuarios();

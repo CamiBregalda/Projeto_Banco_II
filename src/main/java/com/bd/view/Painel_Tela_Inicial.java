@@ -106,6 +106,7 @@ public class Painel_Tela_Inicial extends javax.swing.JFrame {
     private void jTBEntrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBEntrarUsuarioMouseClicked
        Painel_Login login = new Painel_Login(this, true);
        login.pessoa = "Usuario";
+       login.telaCadastro = this;
        login.setLocationRelativeTo(this);
        login.setVisible(true);
     }//GEN-LAST:event_jTBEntrarUsuarioMouseClicked
@@ -113,6 +114,7 @@ public class Painel_Tela_Inicial extends javax.swing.JFrame {
     private void jTBEntrarFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBEntrarFuncionarioMouseClicked
        Painel_Login login = new Painel_Login(this, true);
        login.pessoa = "Funcionario";  
+       login.telaCadastro = this;
        login.setLocationRelativeTo(this);
        login.setVisible(true);
     }//GEN-LAST:event_jTBEntrarFuncionarioMouseClicked
@@ -144,7 +146,8 @@ public class Painel_Tela_Inicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Painel_Tela_Inicial().setVisible(true);
+                Painel_Tela_Inicial telaInicial = new Painel_Tela_Inicial();
+                telaInicial.setVisible(true);
             }
         });
     }
