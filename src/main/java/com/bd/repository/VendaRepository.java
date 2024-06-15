@@ -110,17 +110,17 @@ public class VendaRepository {
         }
     }
 
-    public String realizarVenda( long fun_codigo, long pro_codigo, int ite_quantidade) {
+    public String realizarVenda(long funcionario_codigo, long produto_codigo, int quantidade_venda) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT realizar_venda(?, ?, ?)";
+            String sql = "SELECT realizarVenda(?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                
-                statement.setLong(1, fun_codigo);
-                statement.setLong(2, pro_codigo);
-                statement.setInt(3, ite_quantidade);
+
+                statement.setLong(1, funcionario_codigo);
+                statement.setLong(2, produto_codigo);
+                statement.setInt(3, quantidade_venda);
                 statement.executeUpdate();
             }
-            return "Venda Realizada.";
+            return "Venda realizada com sucesso!";
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao realizar venda", ex);
         }
