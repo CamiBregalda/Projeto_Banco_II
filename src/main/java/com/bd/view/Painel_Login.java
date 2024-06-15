@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.bd.view;
 
-/**
- *
- * @author Camil
- */
 public class Painel_Login extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Painel_Login
-     */
+    String pessoa;
+    
     public Painel_Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Realizar Login");
@@ -44,9 +35,26 @@ public class Painel_Login extends javax.swing.JDialog {
 
         jLBNomeLogin.setText("Informe seu Nome:");
 
+        jTFNomeLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNomeLoginActionPerformed(evt);
+            }
+        });
+
         jLBSenhaLogin.setText("Informe sua Senha:");
 
+        jTFSenhaLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFSenhaLoginActionPerformed(evt);
+            }
+        });
+
         jBTNEntrar.setText("Entrar");
+        jBTNEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNEntrarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,6 +107,18 @@ public class Painel_Login extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTFNomeLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNomeLoginActionPerformed
+
+    private void jTFSenhaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFSenhaLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFSenhaLoginActionPerformed
+
+    private void jBTNEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNEntrarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNEntrarMouseClicked
 
     /**
      * @param args the command line arguments

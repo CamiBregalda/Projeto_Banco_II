@@ -122,6 +122,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pesquisar"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNBarraPesquisaMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLBProdutos">
           <Properties>
@@ -175,6 +178,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTBProdutosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -5,10 +5,7 @@ import com.bd.model.Funcionario;
 import com.bd.model.Usuario;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,4 +111,84 @@ public class FuncionarioRepository {
             throw new RuntimeException("Erro ao deletar funcionario", ex);
         }
     }
+
+    public void cadastrarRole (String role,  String[] usernames) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT cadastrar_role(?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                Array array = connection.createArrayOf("VARCHAR", usernames);
+                statement.setString(1, role);
+                statement.setArray(2, array);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao cadastrar role", e);
+        }
+    }
+
+    public void atualizarUsersRole (String role,  String[] usernames) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT atualizar_users_role(?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                Array array = connection.createArrayOf("VARCHAR", usernames);
+                statement.setString(1, role);
+                statement.setArray(2, array);
+                statement.executeUpdate();
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar role", e);
+        }
+
+    }
+
+    public ArrayList<String> buscarRoles() {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT rolname FROM pg_roles";
+            try(PreparedStatement statement = connection.prepareStatement(sql)){
+                ResultSet resultado = statement.executeQuery();
+                ArrayList<String> roles = new ArrayList<>();
+                while (resultado.next()) {
+                    roles.add(resultado.getString("rolname"));
+                }
+                return roles;
+            }
+        } catch (SQLException e){
+            throw new RuntimeException("Erro ao mostrar roles", e);
+        }
+    }
+
+    public void concederPrivilegioGrupo (String nameGrupo,  String nomeDaTabela, String[] privilegios) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT conceder_privilegio_grupo(?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                Array array = connection.createArrayOf("VARCHAR", privilegios);
+                statement.setString(1, nameGrupo);
+                statement.setString(2, nomeDaTabela);
+                statement.setArray(3, array);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao conceder privilegio ao grupo", e);
+        }
+    }
+
+    public void concederPrivilegioUsuario (String nameUsuario,  String nomeDaTabela, String[] privilegios) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT conceder_privilegio_usuario(?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                Array array = connection.createArrayOf("VARCHAR", privilegios);
+                statement.setString(1, nameUsuario);
+                statement.setString(2, nomeDaTabela);
+                statement.setArray(3, array);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao conceder privilegio ao grupo", e);
+        }
+    }
+
+
+
+
+
 }

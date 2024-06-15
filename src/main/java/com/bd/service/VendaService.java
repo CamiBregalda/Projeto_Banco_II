@@ -91,8 +91,7 @@ public class VendaService {
         login.setUser(userDTO.getUsername());
         login.setSenha(userDTO.getPassword());
     }
-
-
+  
     public String realizarVenda(long funcionario_codigo, long produto_codigo, int quantidade_venda) {
         try{
             vendaRepository.realizarVenda(funcionario_codigo, produto_codigo, quantidade_venda);
