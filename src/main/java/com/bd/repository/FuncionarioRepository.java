@@ -141,7 +141,7 @@ public class FuncionarioRepository {
 
     }
 
-    public ArrayList<String> buscarRoles () {
+    public ArrayList<String> buscarRoles() {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT rolname FROM pg_roles";
             try(PreparedStatement statement = connection.prepareStatement(sql)){
@@ -157,7 +157,35 @@ public class FuncionarioRepository {
         }
     }
 
+    public void concederPrivilegioGrupo (String nameGrupo,  String nomeDaTabela, String[] privilegios) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT conceder_privilegio_grupo(?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                Array array = connection.createArrayOf("VARCHAR", privilegios);
+                statement.setString(1, nameGrupo);
+                statement.setString(2, nomeDaTabela);
+                statement.setArray(3, array);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao conceder privilegio ao grupo", e);
+        }
+    }
 
+    public void concederPrivilegioUsuario (String nameUsuario,  String nomeDaTabela, String[] privilegios) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT conceder_privilegio_usuario(?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                Array array = connection.createArrayOf("VARCHAR", privilegios);
+                statement.setString(1, nameUsuario);
+                statement.setString(2, nomeDaTabela);
+                statement.setArray(3, array);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao conceder privilegio ao grupo", e);
+        }
+    }
 
 
 

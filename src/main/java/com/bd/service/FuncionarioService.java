@@ -11,6 +11,7 @@ import com.bd.model.request.UserLoginDTO;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -88,8 +89,53 @@ public class FuncionarioService {
         login.setSenha(userDTO.getPassword());
     }
 
-    public void cadastrarRole (){
+    public String cadastrarRole(String role, ArrayList<String> usernames){
+        try{
+            funcionarioRepository.cadastrarRole(role, (String[]) usernames.toArray());
+            return "Role foi cadastrada com sucesso!";
+        }catch (Exception e){
+            throw new BusinessException("Erro ao cadastrar role: " + e.getMessage());
+        }
+    }
+
+    public String atualizarUsersRole(String role, ArrayList<String> usernames){
+        try{
+            funcionarioRepository.atualizarUsersRole(role, (String[]) usernames.toArray());
+            return "Role foi atualizada com sucesso!";
+        }catch (Exception e){
+            throw new BusinessException("Erro ao atualizar role: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<String> buscarRoles(){
+        try {
+            List<String> roles = funcionarioRepository.buscarRoles();
+            return new ArrayList<>(roles);
+        }catch (Exception e){
+            throw new BusinessException("Erro ao mostrar roles: " + e.getMessage());
+        }
+    }
+
+    public String concederPrivilegioGrupo (String nameGrupo, String nomeDaTabela, String[] privilegios) {
+        try {
+            funcionarioRepository.concederPrivilegioGrupo(nameGrupo, nomeDaTabela, privilegios);
+            return "privilegio ao grupo foi concedido com sucesso!";
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao conceder privilegio a grupo: " + e.getMessage());
+        }
 
     }
+
+    public String concederPrivilegioUsuario (String nameUsuario, String nomeDaTabela, String[] privilegios) {
+        try {
+            funcionarioRepository.concederPrivilegioUsuario(nameUsuario, nomeDaTabela, privilegios);
+            return "privilegio ao usuario foi cadastrada com sucesso!";
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao conceder privilegio ao usuario: " + e.getMessage());
+        }
+
+    }
+
+
 
 }
