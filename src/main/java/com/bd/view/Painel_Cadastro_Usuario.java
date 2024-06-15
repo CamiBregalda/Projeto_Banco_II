@@ -15,6 +15,7 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
      */
     public Painel_Cadastro_Usuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setTitle("Cadastrar usuário");
         initComponents();
     }
 
