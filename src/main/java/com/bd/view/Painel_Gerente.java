@@ -44,10 +44,25 @@ public class Painel_Gerente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jBTNBarraPesquisa.setText("Pesquisar");
+        jBTNBarraPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNBarraPesquisaMouseClicked(evt);
+            }
+        });
 
         jCBFuncionario.setText("Funcionário");
+        jCBFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCBFuncionarioMouseClicked(evt);
+            }
+        });
 
         jCBFornecedor.setText("Fornecedor");
+        jCBFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCBFornecedorMouseClicked(evt);
+            }
+        });
 
         jLBFuncionario.setText("Funcionários:");
 
@@ -55,6 +70,11 @@ public class Painel_Gerente extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        jLSTFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLSTFuncionarioMouseClicked(evt);
+            }
         });
         jSPFuncionario.setViewportView(jLSTFuncionario);
 
@@ -65,11 +85,26 @@ public class Painel_Gerente extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        jLSTFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLSTFornecedorMouseClicked(evt);
+            }
+        });
         jSPFornecedor.setViewportView(jLSTFornecedor);
 
         jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBFuncoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCBFuncoesMouseClicked(evt);
+            }
+        });
 
         jBTNAplicarFuncoes.setText("Aplicar");
+        jBTNAplicarFuncoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNAplicarFuncoesMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,8 +114,8 @@ public class Painel_Gerente extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCBFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jCBFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCBFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -143,6 +178,34 @@ public class Painel_Gerente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
+
+    private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNAplicarFuncoesMouseClicked
+
+    private void jCBFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBFuncoesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBFuncoesMouseClicked
+
+    private void jLSTFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLSTFuncionarioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLSTFuncionarioMouseClicked
+
+    private void jLSTFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLSTFornecedorMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLSTFornecedorMouseClicked
+
+    private void jCBFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBFornecedorMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBFornecedorMouseClicked
+
+    private void jCBFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBFuncionarioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBFuncionarioMouseClicked
 
     /**
      * @param args the command line arguments

@@ -39,7 +39,6 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
         jLBCargoFuncionario = new javax.swing.JLabel();
         jTFCargoFuncionario = new javax.swing.JTextField();
         jBTNCadastrar = new javax.swing.JButton();
-        jBTNLogar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,8 +56,11 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
         jLBCargoFuncionario.setText("Cargo:");
 
         jBTNCadastrar.setText("Cadastrar");
-
-        jBTNLogar.setText("Logar");
+        jBTNCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNCadastrarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,7 +70,7 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
                 .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 65, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLBCargoFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLBSenhaFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -77,14 +79,12 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
                     .addComponent(jTFcpfFuncionario, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPFSenhaFuncionario, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFCargoFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jBTNLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBTNCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
                     .addComponent(jTFNomeFuncionario, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(63, 63, 63))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(jBTNCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,11 +107,9 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
                 .addComponent(jLBCargoFuncionario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBTNLogar)
-                    .addComponent(jBTNCadastrar))
-                .addGap(38, 38, 38))
+                .addGap(40, 40, 40)
+                .addComponent(jBTNCadastrar)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,6 +125,10 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBTNCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCadastrarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNCadastrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,7 +175,6 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNCadastrar;
-    private javax.swing.JButton jBTNLogar;
     private javax.swing.JLabel jLBCargoFuncionario;
     private javax.swing.JLabel jLBNomeFuncionario;
     private javax.swing.JLabel jLBSenhaFuncionario;

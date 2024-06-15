@@ -10,9 +10,8 @@ package com.bd.view;
  */
 public class Painel_Login extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Painel_Login
-     */
+    String pessoa;
+    
     public Painel_Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Realizar Login");

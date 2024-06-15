@@ -41,48 +41,19 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
         jTFConfirmarSenha = new javax.swing.JTextField();
         jBTNCadastrar = new javax.swing.JButton();
         jLBTituloDaPagina = new javax.swing.JLabel();
+        jBTNLogar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLBNomeCompleto.setText("Nome Completo:");
 
-        jTFNomeCompleto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFNomeCompletoActionPerformed(evt);
-            }
-        });
-
         jLBNomeUsuario.setText("Nome de Usuário:");
-
-        jTFNomeUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFNomeUsuarioActionPerformed(evt);
-            }
-        });
 
         jLBcpfUsuario.setText("CPF:");
 
-        jTFcpfUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFcpfUsuarioActionPerformed(evt);
-            }
-        });
-
         jLBSenhaUsuario.setText("Senha:");
 
-        jPFSenhaUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPFSenhaUsuarioActionPerformed(evt);
-            }
-        });
-
         jLBConfirmarSenha.setText("Confirme sua Senha:");
-
-        jTFConfirmarSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFConfirmarSenhaActionPerformed(evt);
-            }
-        });
 
         jBTNCadastrar.setText("Cadastrar");
         jBTNCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,30 +67,38 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
         jLBTituloDaPagina.setText("Cadastre-se");
         jLBTituloDaPagina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jBTNLogar.setText("Logar");
+        jBTNLogar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNLogarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLBSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLBcpfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFNomeCompleto)
-                            .addComponent(jTFcpfUsuario)
-                            .addComponent(jPFSenhaUsuario)
-                            .addComponent(jTFConfirmarSenha)
-                            .addComponent(jLBNomeCompleto)
-                            .addComponent(jLBNomeUsuario)
-                            .addComponent(jTFNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLBConfirmarSenha)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(jBTNCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLBSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLBcpfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNomeCompleto)
+                    .addComponent(jTFcpfUsuario)
+                    .addComponent(jPFSenhaUsuario)
+                    .addComponent(jTFConfirmarSenha)
+                    .addComponent(jLBNomeCompleto)
+                    .addComponent(jLBNomeUsuario)
+                    .addComponent(jTFNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLBConfirmarSenha))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBTNLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
+                .addComponent(jBTNCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,9 +125,11 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
                 .addComponent(jLBConfirmarSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jBTNCadastrar)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBTNCadastrar)
+                    .addComponent(jBTNLogar))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,29 +148,13 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFNomeCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeCompletoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNomeCompletoActionPerformed
-
-    private void jTFNomeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNomeUsuarioActionPerformed
-
-    private void jTFcpfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFcpfUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFcpfUsuarioActionPerformed
-
-    private void jPFSenhaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFSenhaUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPFSenhaUsuarioActionPerformed
-
-    private void jTFConfirmarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFConfirmarSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFConfirmarSenhaActionPerformed
-
     private void jBTNCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCadastrarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jBTNCadastrarMouseClicked
+
+    private void jBTNLogarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNLogarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNLogarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -235,6 +200,7 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNCadastrar;
+    private javax.swing.JButton jBTNLogar;
     private javax.swing.JLabel jLBConfirmarSenha;
     private javax.swing.JLabel jLBNomeCompleto;
     private javax.swing.JLabel jLBNomeUsuario;
