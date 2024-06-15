@@ -27,21 +27,84 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLBTituloDaPagina = new javax.swing.JLabel();
+        jLBDescricaoProduto = new javax.swing.JLabel();
+        jTFDescricaoProduto = new javax.swing.JTextField();
+        jLBValorProduto = new javax.swing.JLabel();
+        jTFValorProduto = new javax.swing.JTextField();
+        jLBQuantidadeProduto = new javax.swing.JLabel();
+        jBTNCadastrarProduto = new javax.swing.JButton();
+        jTFQuantidadeProduto = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLBTituloDaPagina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLBTituloDaPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLBTituloDaPagina.setText("Cadastre o Produto");
+        jLBTituloDaPagina.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLBDescricaoProduto.setText("Descrição do Produto:");
+
+        jLBValorProduto.setText("Valor:");
+
+        jLBQuantidadeProduto.setText("Quantidade:");
+
+        jBTNCadastrarProduto.setText("Cadastrar");
+
+        jTFQuantidadeProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFQuantidadeProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(167, 167, 167)
+                .addComponent(jBTNCadastrarProduto)
+                .addContainerGap(168, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTFValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFDescricaoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                    .addComponent(jLBDescricaoProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLBQuantidadeProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLBValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFQuantidadeProduto))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBDescricaoProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBValorProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jLBQuantidadeProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(jBTNCadastrarProduto)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTFQuantidadeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFQuantidadeProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFQuantidadeProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -86,5 +149,13 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTNCadastrarProduto;
+    private javax.swing.JLabel jLBDescricaoProduto;
+    private javax.swing.JLabel jLBQuantidadeProduto;
+    private javax.swing.JLabel jLBTituloDaPagina;
+    private javax.swing.JLabel jLBValorProduto;
+    private javax.swing.JTextField jTFDescricaoProduto;
+    private javax.swing.JTextField jTFQuantidadeProduto;
+    private javax.swing.JTextField jTFValorProduto;
     // End of variables declaration//GEN-END:variables
 }
