@@ -25,14 +25,9 @@ public class FuncionarioService {
 
     public FuncionarioResponse cadastrarFuncionario(FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
         criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
-        System.out.println(funcionarioRegistrationRequest.getFuncionarioRequest().toString());
         Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
-        System.out.println(funcio.toString());
 
-       FuncionarioResponse teste = funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
-        System.out.println(teste.toString());
-        return teste;
-        //return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
+        return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
     }
 
     public boolean validarFuncionario(UserLoginDTO userDTO) {

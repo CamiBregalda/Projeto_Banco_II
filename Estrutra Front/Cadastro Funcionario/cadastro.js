@@ -16,7 +16,7 @@ function cadastrar (){
         method: "POST",
 
         body: JSON.stringify({
-            funcionarioRegistrationRequest: {
+            funcionarioRequest: {
                 fun_nome: nomeFuncionario.value,
                 fun_cpf: cpfFuncionario.value,
                 fun_senha: senhaFuncionario.value, 
@@ -33,11 +33,11 @@ function cadastrar (){
         if (res.ok) {
             return res.json();
         } else {
-            throw new Error("Erro ao cadastrar usuário");
+            throw new Error("Erro ao cadastrar Funcionário");
         }
     })
     .then(data => {
-        console.log("Usuário cadastrado com sucesso:", data);
+        console.log("Funcionário cadastrado com sucesso:", data);
     })
     .catch(error => {
         console.error("Erro na requisição", error);
