@@ -15,6 +15,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
      */
     public Painel_Venda_Funcionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setTitle("Venda Funcionário");
         initComponents();
     }
 
@@ -165,7 +166,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
                     }
                 });
                 dialog.setVisible(true);
-  jBTNOcultarProduto  });
+            }});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
