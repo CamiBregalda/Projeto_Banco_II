@@ -14,6 +14,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
      * Creates new form Painel_Funcionario
      */
     public Painel_Gerente() {
+        setTitle("Tela Gerente");
         initComponents();
     }
 
@@ -31,14 +32,14 @@ public class Painel_Gerente extends javax.swing.JFrame {
         jBTNBarraPesquisa = new javax.swing.JButton();
         jCBFuncionario = new javax.swing.JCheckBox();
         jCBFornecedor = new javax.swing.JCheckBox();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLBFuncionario = new javax.swing.JLabel();
         jSPFuncionario = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jLSTFuncionario = new javax.swing.JList<>();
         jLBFornecedor = new javax.swing.JLabel();
         jSPFornecedor = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
+        jLSTFornecedor = new javax.swing.JList<>();
+        jCBFuncoes = new javax.swing.JComboBox<>();
+        jBTNAplicarFuncoes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,27 +49,27 @@ public class Painel_Gerente extends javax.swing.JFrame {
 
         jCBFornecedor.setText("Fornecedor");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLBFuncionario.setText("Funcionários:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        jLSTFuncionario.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jSPFuncionario.setViewportView(jList1);
+        jSPFuncionario.setViewportView(jLSTFuncionario);
 
         jLBFornecedor.setText("Fornecedores:");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        jLSTFornecedor.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jSPFornecedor.setViewportView(jList2);
+        jSPFornecedor.setViewportView(jLSTFornecedor);
 
-        jButton2.setText("jButton2");
+        jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jBTNAplicarFuncoes.setText("Aplicar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,7 +81,8 @@ public class Painel_Gerente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jCBFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCBFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCBFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,9 +101,9 @@ public class Painel_Gerente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBTNBarraPesquisa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jCBFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBTNAplicarFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(48, 48, 48))
         );
         jPanel1Layout.setVerticalGroup(
@@ -111,8 +113,8 @@ public class Painel_Gerente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBTNBarraPesquisa)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jCBFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBTNAplicarFuncoes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBFuncionario)
@@ -179,15 +181,15 @@ public class Painel_Gerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTNAplicarFuncoes;
     private javax.swing.JButton jBTNBarraPesquisa;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCBFornecedor;
     private javax.swing.JCheckBox jCBFuncionario;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCBFuncoes;
     private javax.swing.JLabel jLBFornecedor;
     private javax.swing.JLabel jLBFuncionario;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jLSTFornecedor;
+    private javax.swing.JList<String> jLSTFuncionario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jSPFornecedor;
     private javax.swing.JScrollPane jSPFuncionario;
