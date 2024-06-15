@@ -15,6 +15,7 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
      */
     public Painel_Cadastro_Produto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setTitle("Cadastro de Produto");
         initComponents();
     }
 
@@ -68,14 +69,16 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
                 .addContainerGap(168, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTFValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFDescricaoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                    .addComponent(jLBDescricaoProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLBQuantidadeProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLBValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFQuantidadeProduto))
-                .addGap(22, 22, 22))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTFDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLBDescricaoProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLBQuantidadeProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLBValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTFValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFQuantidadeProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,9 +97,9 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
                 .addComponent(jLBQuantidadeProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(40, 40, 40)
                 .addComponent(jBTNCadastrarProduto)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
