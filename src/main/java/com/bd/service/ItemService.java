@@ -43,7 +43,7 @@ public class ItemService {
         }
     }
 
-    public ItemResponse buscarItemPeloId(Long id, UserLoginDTO userDTO) {
+    public ItemResponse buscarItemPeloId(Long id) {
         try {
             Item item = itemRepository.buscarItemPeloId(id);
             return itemMapper.entityToResponse(item);
