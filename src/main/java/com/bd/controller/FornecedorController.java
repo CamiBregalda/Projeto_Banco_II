@@ -36,7 +36,7 @@ public class FornecedorController {
         return fornecedorService.buscarFornecedorPeloId(id, userDTO);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<FornecedorResponse> atualizarFornecedor(@PathVariable Long id, @RequestBody FornecedorRegistrationRequest fornecedorRequest) {
         return ResponseEntity.ok(fornecedorService.atualizarFornecedor(id, fornecedorRequest));
     }
@@ -45,9 +45,9 @@ public class FornecedorController {
     public ResponseEntity<String> deletarFornecedor(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
         try {
             fornecedorService.deletarFornecedor(id, userDTO);
-            return ResponseEntity.ok("Usuário deletado com sucesso");
+            return ResponseEntity.ok("fornecedor deletado com sucesso");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar produto: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar fornecedor: " + e.getMessage());
         }
     }
 }

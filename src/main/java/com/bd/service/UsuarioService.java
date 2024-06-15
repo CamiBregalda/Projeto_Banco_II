@@ -55,7 +55,6 @@ public class UsuarioService {
     public UserResponse buscarUsuarioPeloId(Long id, UserLoginDTO userDTO) {
         try {
             criarLogin(userDTO);
-
             Usuario usuario = usuarioRepository.buscarUsuarioPeloId(id);
             return usuarioMapper.entityToResponse(usuario);
         } catch (Exception e) {

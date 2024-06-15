@@ -37,8 +37,8 @@ public class FornecedorService {
 
     public List<FornecedorResponse> buscarFornecedores(UserLoginDTO userDTO) {
         try {
+            criarLogin(userDTO);
             List<Fornecedor> fornecedores = fornecedorRepository.buscarFornecedores();
-
             List<FornecedorResponse> fornecedorResponses = new ArrayList<>();
             for (Fornecedor fornecedor : fornecedores) {
                 fornecedorResponses.add(fornecedorMapper.entityToResponse(fornecedor));
@@ -51,6 +51,7 @@ public class FornecedorService {
 
     public FornecedorResponse buscarFornecedorPeloId(Long id, UserLoginDTO userDTO) {
         try {
+            criarLogin(userDTO);
             Fornecedor fornecedor = fornecedorRepository.buscarFornecedorPeloId(id);
             return fornecedorMapper.entityToResponse(fornecedor);
         } catch (Exception e) {
@@ -62,11 +63,12 @@ public class FornecedorService {
         criarLogin(fornecedorRequest.getUserLoginDTO());
         Fornecedor fornecedor = fornecedorMapper.postDtoToEntity(fornecedorRequest.getFornecedorRequest());
         fornecedorRepository.atualizarFornecedor(id, fornecedor);
-
+        fornecedor.setFor_codigo(Math.toIntExact(id));
         return fornecedorMapper.entityToResponse(fornecedor);
     }
 
     public boolean deletarFornecedor(Long id, UserLoginDTO userDTO) {
+        criarLogin(userDTO);
         return fornecedorRepository.deletarFornecedor(id);
     }
 

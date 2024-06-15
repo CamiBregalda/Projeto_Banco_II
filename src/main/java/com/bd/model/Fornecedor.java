@@ -17,9 +17,9 @@ public class Fornecedor {
     private String for_descricao;
 
 
-    public Fornecedor(Integer forCodigo, String forDescricao) {
-        this.for_codigo = forCodigo;
-        this.for_descricao = forDescricao;
+    public Fornecedor(Integer for_codigo, String for_descricao) {
+        this.for_codigo = for_codigo;
+        this.for_descricao = for_descricao;
     }
 
     @Override
