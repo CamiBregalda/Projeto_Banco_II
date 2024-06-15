@@ -9,25 +9,40 @@ const confirmaSenha = document.getElementById('confirmaSenha');
 
 //contato com o back
 function cadastrar (){
-
+    
     fetch("http://localhost:8080/users/cadastrar", {
 
         headers: {
-            'Accept': 'aplication/json',
             'Content-Type': 'application/json'
         },
         method: "POST",
 
         body: JSON.stringify({
-            nomeCompleto: nomeCompletoUsuario.value,
-            nome: nomeUsuario.value,
-            cpf: cpfUsuario.value,
-            senha: senhaUsuario.value
+            userRequest: {
+                user_nome: nomeCompletoUsuario.value,
+                user_cpf: cpfUsuario.value,
+                user_username: nomeUsuario.value,
+                user_senha: senhaUsuario.value
+            },
+            userLoginDTO: {
+                username: "user_login",
+                password: "user_senha" 
+            }
         })
     })
-
-    .then(function(res) { console.log(res) })
-    .catch(function(res){ console.log(res) });
+    .then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            throw new Error("Erro ao cadastrar usuário");
+        }
+    })
+    .then(data => {
+        console.log("Usuário cadastrado com sucesso:", data);
+    })
+    .catch(error => {
+        console.error("Erro na requisição", error);
+    });
 
 };
 

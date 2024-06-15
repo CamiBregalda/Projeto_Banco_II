@@ -13,20 +13,26 @@ import com.bd.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FuncionarioService {
 
-
     private final FuncionarioRepository funcionarioRepository;
     private final FuncionarioMapper funcionarioMapper;
 
     public FuncionarioResponse cadastrarFuncionario(FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
         criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
+        System.out.println(funcionarioRegistrationRequest.getFuncionarioRequest().toString());
         Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
-        return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
+        System.out.println(funcio.toString());
+
+       FuncionarioResponse teste = funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
+        System.out.println(teste.toString());
+        return teste;
+        //return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
     }
 
     public boolean validarFuncionario(UserLoginDTO userDTO) {
@@ -67,13 +73,24 @@ public class FuncionarioService {
         criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
         Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
         funcionarioRepository.atualizarFuncionario(id, funcio);
-
+        funcio.setFun_codigo(Math.toIntExact(id));
         return funcionarioMapper.entityToResponse(funcio);
     }
 
     public boolean deletarFuncionario(Long id, UserLoginDTO userDTO) {
         return funcionarioRepository.deletarFuncionario(id);
     }
+
+    public void realizarBackup(){
+        try {
+            String comando = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PostgreSQL 14\\SQL Shell (psql).Ink";;
+            Process exec = Runtime.getRuntime().exec( comando );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void criarLogin(UserLoginDTO userDTO) {
         Login login = Login.getInstance();
         login.setUser(userDTO.getUsername());

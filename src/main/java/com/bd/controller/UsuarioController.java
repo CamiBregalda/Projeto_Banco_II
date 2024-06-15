@@ -6,7 +6,6 @@ import com.bd.model.request.UserRequest;
 import com.bd.model.response.UserResponse;
 import com.bd.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.mapping.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -39,14 +39,14 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("")
-    public List<UserResponse> buscarUsuarios(@RequestBody UserLoginDTO userDTO) {
-        return usuarioService.buscarUsuarios(userDTO);
+    @GetMapping
+    public List<UserResponse> buscarUsuarios(@RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return usuarioService.buscarUsuarios(new UserLoginDTO(username, password));
     }
 
     @GetMapping("/{id}")
-    public UserResponse buscarUsuarioPeloId(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
-        return usuarioService.buscarUsuarioPeloId(id, userDTO);
+    public UserResponse buscarUsuarioPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String passwor) {
+        return usuarioService.buscarUsuarioPeloId(id, new UserLoginDTO(username, passwor));
     }
 
     @PutMapping("/{id}")

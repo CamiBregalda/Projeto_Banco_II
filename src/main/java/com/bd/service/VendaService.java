@@ -47,10 +47,20 @@ public class VendaService {
             criarLogin(userDTO);
             List<Venda> vendas = vendaRepository.buscarVendas();
 
+            for (Venda venda : vendas) {
+                System.out.println(venda);
+            }
+
             List<VendaResponse> vendaResponses = new ArrayList<>();
             for (Venda venda : vendas) {
                 vendaResponses.add(vendaMapper.entityToResponse(venda));
             }
+
+            for (VendaResponse venda : vendaResponses) {
+                System.out.println(venda);
+            }
+
+            System.out.println("teste");
             return vendaResponses;
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar vendas: " + e.getMessage());

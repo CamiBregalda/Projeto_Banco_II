@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Itens")
+@RequestMapping("/itens")
 @RequiredArgsConstructor
 public class ItemController {
     private final ItemService itemService;
@@ -27,13 +27,13 @@ public class ItemController {
     }
 
     @GetMapping("")
-    public List<ItemResponse> buscarItens(@RequestBody UserLoginDTO userDTO) {
-        return itemService.buscarItens(userDTO);
+    public List<ItemResponse> buscarItens(@RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return itemService.buscarItens(new UserLoginDTO(username, password));
     }
 
     @GetMapping("/{id}")
-    public ItemResponse buscarItemPeloId(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
-        return itemService.buscarItemPeloId(id, userDTO);
+    public ItemResponse buscarItemPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return itemService.buscarItemPeloId(id, new UserLoginDTO(username, password));
     }
 
     @PutMapping("/{id}")

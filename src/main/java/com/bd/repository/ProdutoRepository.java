@@ -1,11 +1,8 @@
 package com.bd.repository;
 
 import com.bd.infra.Conexao;
-import com.bd.model.Fornecedor;
 import com.bd.model.Produto;
-import com.bd.model.Usuario;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,13 +14,21 @@ import java.util.List;
 public class ProdutoRepository {
     public Produto cadastrarProduto(Produto produto) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "INSERT INTO usuarios (produto_pro_codigo, produto_pro_descricao, produto_pro_valor, produto_pro_quantidade, produto_pro_tb_fornecedores_for_codigo) VALUES (?, ?, ?, ?, ?)";
+            String sql = "SELECT MAX(pro_codigo) as pro_codigo FROM tb_produtos";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, String.valueOf(produto.getPro_codigo()));
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    produto.setPro_codigo(resultado.getInt("pro_codigo") + 1);
+                }
+            }
+
+            sql = "INSERT INTO tb_produtos (pro_codigo, pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_for_codigo) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, produto.getPro_codigo());
                 statement.setString(2, produto.getPro_descricao());
-                statement.setString(5, String.valueOf(produto.getPro_valor()));
-                statement.setInt(6, produto.getPro_quantidade());
-                statement.setInt(7, produto.getTb_fornecedores_for_codigo());
+                statement.setDouble(3, produto.getPro_valor());
+                statement.setInt(4, produto.getPro_quantidade());
+                statement.setInt(5, produto.getTb_fornecedores_for_codigo());
                 statement.executeUpdate();
             }
 
@@ -35,7 +40,7 @@ public class ProdutoRepository {
 
     public List<Produto> buscarProdutos() {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT produto_pro_codigo, produto_pro_descricao, produto_pro_valor, produto_pro_quantidade, produto_pro_tb_fornecedores_for_codigo FROM tb_fornecedor";
+            String sql = "SELECT pro_codigo, pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_for_codigo FROM tb_produtos";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 ResultSet resultado = statement.executeQuery();
                 List<Produto> produtos = new ArrayList<>();
@@ -58,7 +63,7 @@ public class ProdutoRepository {
 
     public Produto buscarProdutoPeloId(Long id) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT pro_codigo, pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_for_codigo FROM tb_produto WHERE user_codigo = ?";
+            String sql = "SELECT pro_codigo, pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_for_codigo FROM tb_produtos WHERE pro_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setLong(1, id);
                 ResultSet resultado = statement.executeQuery();
@@ -80,7 +85,7 @@ public class ProdutoRepository {
 
     public Produto atualizarProduto(Long id, Produto produto){
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "UPDATE tb_produto SET pro_descricao = ?, pro_valor = ? WHERE pro_quantidade = ?";
+            String sql = "UPDATE tb_produtos SET pro_descricao = ?, pro_valor = ?,  pro_quantidade = ? WHERE pro_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, produto.getPro_descricao());
                 statement.setDouble(2, produto.getPro_valor());
@@ -96,7 +101,7 @@ public class ProdutoRepository {
 
     public boolean deletarProduto(Long id) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "DELETE FROM tb_produto WHERE pro_codigo = ?";
+            String sql = "DELETE FROM tb_produtos WHERE pro_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setLong(1, id);
                 statement.executeUpdate();

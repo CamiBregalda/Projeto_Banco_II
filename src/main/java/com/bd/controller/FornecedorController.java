@@ -27,13 +27,13 @@ public class FornecedorController {
     }
 
     @GetMapping("")
-    public List<FornecedorResponse> buscarFornecedores(@RequestBody UserLoginDTO userDTO) {
-        return fornecedorService.buscarFornecedores(userDTO);
+    public List<FornecedorResponse> buscarFornecedores(@RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return fornecedorService.buscarFornecedores(new UserLoginDTO(username, password));
     }
 
     @GetMapping("/{id}")
-    public FornecedorResponse buscarFornecedoresPeloId(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
-        return fornecedorService.buscarFornecedorPeloId(id, userDTO);
+    public FornecedorResponse buscarFornecedoresPeloId(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
+        return fornecedorService.buscarFornecedorPeloId(id, new UserLoginDTO(username, password));
     }
 
     @PutMapping("/{id}")
@@ -42,7 +42,7 @@ public class FornecedorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarFornecedor(@PathVariable Long id, @RequestBody UserLoginDTO userDTO) {
+    public ResponseEntity<String> deletarFornecedor(@PathVariable Long id, @RequestHeader("username") String username, @RequestHeader("password") String password) {
         try {
             fornecedorService.deletarFornecedor(id, userDTO);
             return ResponseEntity.ok("fornecedor deletado com sucesso");

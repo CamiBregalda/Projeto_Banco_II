@@ -8,24 +8,41 @@ const cargoFuncionario = document.getElementById('cargo');
 
 function cadastrar (){
 
-    fetch("", {
+    fetch("http://localhost:8080/funcionarios/cadastrar", {
 
         headers: {
-            'Accept': 'aplication/json',
             'Content-Type': 'application/json'
         },
         method: "POST",
 
         body: JSON.stringify({
-            nome: nomeFuncionario.value,
-            cpf: cpfFuncionario.value,
-            senha: senhaFuncionario.value, 
-            cargo: cargoFuncionario.value
+            funcionarioRegistrationRequest: {
+                fun_nome: nomeFuncionario.value,
+                fun_cpf: cpfFuncionario.value,
+                fun_senha: senhaFuncionario.value, 
+                fun_funcao: cargoFuncionario.value
+            },
+            userLoginDTO: {
+                username: "user_login",
+                password: "user_senha" 
+            }
+            
         })
     })
+    .then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            throw new Error("Erro ao cadastrar usuário");
+        }
+    })
+    .then(data => {
+        console.log("Usuário cadastrado com sucesso:", data);
+    })
+    .catch(error => {
+        console.error("Erro na requisição", error);
+    });
 
-    .then(function(res) { console.log(res) })
-    .catch(function(res){ console.log(res) });
 
 };
 
