@@ -59,7 +59,7 @@ public class FornecedorRepository {
 
     public Fornecedor buscarFornecedorPeloId(Long id) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT fornecedor_for_codigo, fornecedor_for_descricao FROM tb_fornecedores = ?";
+            String sql = "SELECT for_codigo, for_descricao FROM tb_fornecedores WHERE for_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setLong(1, id);
                 ResultSet resultado = statement.executeQuery();
@@ -78,10 +78,10 @@ public class FornecedorRepository {
 
     public Fornecedor atualizarFornecedor(Long id, Fornecedor fornecedor){
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "UPDATE tb_fornecedor SET for_codigo = ?, for_descricao = ?, WHERE for_codigo = ?";
+            String sql = "UPDATE tb_fornecedores SET for_descricao = ? WHERE for_codigo = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, fornecedor.getFor_codigo());
-                statement.setString(2, fornecedor.getFor_descricao());
+                statement.setString(1, fornecedor.getFor_descricao());
+                statement.setLong(2, id);
                 statement.executeUpdate();
             }
             return fornecedor;
