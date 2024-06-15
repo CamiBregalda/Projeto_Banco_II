@@ -36,7 +36,7 @@ public class Painel_Usuario extends javax.swing.JFrame {
         jLBTituloDaPagina = new javax.swing.JLabel();
         jLBBarraPesquisa = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTProdutos = new javax.swing.JTable();
+        jTBProdutos = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,7 +62,7 @@ public class Painel_Usuario extends javax.swing.JFrame {
 
         jLBBarraPesquisa.setText("Buscar Produto:");
 
-        jTProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        jTBProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null}
@@ -86,10 +86,10 @@ public class Painel_Usuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTProdutos.setColumnSelectionAllowed(true);
-        jTProdutos.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTProdutos);
-        jTProdutos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTBProdutos.setColumnSelectionAllowed(true);
+        jTBProdutos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTBProdutos);
+        jTBProdutos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,8 +194,8 @@ public class Painel_Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTBProdutos;
     private javax.swing.JTextField jTFBarraPesquisa;
-    private javax.swing.JTable jTProdutos;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
