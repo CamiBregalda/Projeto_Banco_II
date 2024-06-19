@@ -76,6 +76,25 @@ public class FornecedorRepository {
         }
     }
 
+    public Fornecedor buscarFornecedorPeloNome(String descricao) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT for_codigo, for_descricao FROM tb_fornecedores WHERE for_descricao = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, descricao);
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    return new Fornecedor(
+                            resultado.getInt("for_codigo"),
+                            resultado.getString("for_descricao")
+                    );
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar fornecedor: ", ex);
+        }
+    }
+
     public Fornecedor atualizarFornecedor(Long id, Fornecedor fornecedor){
         try (Connection connection = Conexao.getConnection()) {
             String sql = "UPDATE tb_fornecedores SET for_descricao = ? WHERE for_codigo = ?";
