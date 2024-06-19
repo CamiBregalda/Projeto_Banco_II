@@ -5,16 +5,20 @@ import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.FuncionarioRepository;
 import com.bd.service.FuncionarioService;
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 public class Painel_Login extends javax.swing.JDialog {
 
     String pessoa;
     Painel_Tela_Inicial telaCadastro;
     FuncionarioService funcionarioService;
-    
+
     public Painel_Login(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super();
         setTitle("Realizar Login");
+        inicializandoClasses();
         initComponents();
     }
 
@@ -114,7 +118,6 @@ public class Painel_Login extends javax.swing.JDialog {
             this.dispose();
             telaCadastro.dispose();
         } else {
-            inicializandoClasses();
             FuncionarioResponse funcionario = funcionarioService.buscarFuncionarioPeloNome(username);
 
             if(funcionario.fun_funcao() == "Gerente"){
@@ -135,7 +138,7 @@ public class Painel_Login extends javax.swing.JDialog {
 
     private void inicializandoClasses(){
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
-        FuncionarioMapper funcionarioMapper = null;
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
         funcionarioService = new FuncionarioService(funcionarioRepository, funcionarioMapper);
     }
 
