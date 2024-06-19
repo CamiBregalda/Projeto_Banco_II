@@ -1,19 +1,13 @@
 package com.bd.view;
 
-import com.bd.mapper.FornecedorMapper;
-import com.bd.mapper.FuncionarioMapper;
-import com.bd.mapper.ProdutoMapper;
-import com.bd.mapper.UsuarioMapper;
+import com.bd.mapper.*;
+import com.bd.model.Venda;
 import com.bd.model.response.FornecedorResponse;
 import com.bd.model.response.ProdutoResponse;
-import com.bd.repository.FornecedorRepository;
-import com.bd.repository.FuncionarioRepository;
-import com.bd.repository.ProdutoRepository;
-import com.bd.repository.UsuarioRepository;
-import com.bd.service.FornecedorService;
-import com.bd.service.FuncionarioService;
-import com.bd.service.ProdutoService;
-import com.bd.service.UsuarioService;
+import com.bd.repository.*;
+import com.bd.service.*;
+import org.mapstruct.factory.Mappers;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +16,15 @@ public class Painel_Funcionario extends javax.swing.JFrame {
     
     ProdutoService produtoService;
     FornecedorService fornecedorService;
+    UsuarioService usuarioService;
+    FuncionarioService funcionarioService;
+    ItemService itemService;
+    VendaService vendaService;
     List<ProdutoResponse> produtos = new ArrayList<ProdutoResponse>();
     
     public Painel_Funcionario() {
         setTitle("Tela Estoque de Funcionario");
+        inicializandoClasses();
         initComponents();
     }
 
@@ -174,7 +173,7 @@ public class Painel_Funcionario extends javax.swing.JFrame {
         vendaFuncionario.pro_codigo = produtos.get(i).pro_codigo();
         
         //Criar método recebeProdutos que seta os valores na tela Painel_Venda_Funcionario
-        vendaFuncionario.recebeProduto(produtos.get(i).pro_descricao(), produtos.get(i).pro_valor(), produtos.get(i).pro_quantidade(), fornecedor.for_descricao());
+        //vendaFuncionario.recebeProduto(produtos.get(i).pro_descricao(), produtos.get(i).pro_valor(), produtos.get(i).pro_quantidade(), fornecedor.for_descricao());
         vendaFuncionario.setLocationRelativeTo(this);
         vendaFuncionario.setVisible(true);
     }//GEN-LAST:event_jTBProdutosMouseClicked
@@ -185,18 +184,30 @@ public class Painel_Funcionario extends javax.swing.JFrame {
         cadastroProduto.setVisible(true);
     }//GEN-LAST:event_jBTCadastrarProdutoMouseClicked
 
-     private void inicializandoClasses(){/*
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        UsuarioMapper usuarioMapper = null;
-        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);*/
-        
-        ProdutoRepository produtoRepository = new ProdutoRepository();
-        ProdutoMapper produtoMapper = null;
-        produtoService = new ProdutoService(produtoRepository, produtoMapper);
-        
+     private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();
-        FornecedorMapper fornecedorMapper = null;
+        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
         fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
+
+         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+         funcionarioService = new FuncionarioService(funcionarioRepository, funcionarioMapper);
+
+         ItemRepository itemRepository = new ItemRepository();
+         ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
+         itemService = new ItemService(itemRepository, itemMapper);
+
+         ProdutoRepository produtoRepository = new ProdutoRepository();
+         ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
+         produtoService = new ProdutoService(produtoRepository, produtoMapper);
+
+         UsuarioRepository usuarioRepository = new UsuarioRepository();
+         UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
+         usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
+
+         VendaRepository vendaRepository = new VendaRepository();
+         VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
+         vendaService = new VendaService(vendaRepository, vendaMapper);
     }
     
     public static void main(String args[]) {

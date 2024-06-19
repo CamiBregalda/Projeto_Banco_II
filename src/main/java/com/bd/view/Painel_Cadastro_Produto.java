@@ -1,10 +1,22 @@
 package com.bd.view;
 
+import com.bd.mapper.*;
+import com.bd.repository.*;
+import com.bd.service.*;
+import org.mapstruct.factory.Mappers;
+
 public class Painel_Cadastro_Produto extends javax.swing.JDialog {
+    ProdutoService produtoService;
+    FornecedorService fornecedorService;
+    UsuarioService usuarioService;
+    FuncionarioService funcionarioService;
+    ItemService itemService;
+    VendaService vendaService;
 
     public Painel_Cadastro_Produto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Cadastro de Produto");
+        inicializandoClasses();
         initComponents();
     }
 
@@ -92,6 +104,31 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
         //Pega os dados, cria um ProdutoRequest e chama a função cadastrar produto
     }//GEN-LAST:event_jBTNCadastrarProdutoMouseClicked
 
+    private void inicializandoClasses(){
+        FornecedorRepository fornecedorRepository = new FornecedorRepository();
+        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
+        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
+
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository, funcionarioMapper);
+
+        ItemRepository itemRepository = new ItemRepository();
+        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
+        itemService = new ItemService(itemRepository, itemMapper);
+
+        ProdutoRepository produtoRepository = new ProdutoRepository();
+        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
+        produtoService = new ProdutoService(produtoRepository, produtoMapper);
+
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
+        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
+
+        VendaRepository vendaRepository = new VendaRepository();
+        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
+        vendaService = new VendaService(vendaRepository, vendaMapper);
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
