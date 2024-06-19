@@ -4,6 +4,9 @@
  */
 package com.bd.view;
 
+import com.bd.model.Funcionario;
+import com.bd.service.FuncionarioService;
+
 /**
  *
  * @author Camil
@@ -180,7 +183,11 @@ public class Painel_Gerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
-        // TODO add your handling code here:
+        String pesquisa = jTFBarraPesquisa.getText();
+        
+        //Procurar o funcionario pelo nome e apresentar qual funcionario apresenta o nome desejado      
+        buscarFuncionarioPeloNome(pesquisa);
+        
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
