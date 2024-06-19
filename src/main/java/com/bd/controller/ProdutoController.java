@@ -19,7 +19,7 @@ public class ProdutoController {
     private final ProdutoService produtoService;
 
     @PostMapping("/cadastrar")
-    public ProdutoResponse cadastrarProduto(@RequestBody ProdutoRegistrationRequest produtoRequest) {
+    public ProdutoResponse cadastrarProduto(@RequestBody ProdutoRequest produtoRequest) {
         return produtoService.cadastrarProduto(produtoRequest);
     }
 

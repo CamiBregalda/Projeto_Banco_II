@@ -28,20 +28,6 @@ public class VendaController {
         return vendaService.cadastrarVenda(vendaRegistrationRequest);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> loginVenda(@RequestBody UserLoginDTO userDTO) {
-        try {
-            boolean authenticated = vendaService.validarVenda(userDTO);
-            if (authenticated) {
-                return ResponseEntity.ok("Login realizado com sucesso");
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha inválidos");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao realizar login: " + e.getMessage());
-        }
-    }
-
     @GetMapping("")
     public List<VendaResponse> buscarVendas(@RequestHeader("username") String username, @RequestHeader("password") String password) {
         return vendaService.buscarVendas();
