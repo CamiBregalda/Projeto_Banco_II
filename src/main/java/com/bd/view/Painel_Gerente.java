@@ -6,18 +6,24 @@ package com.bd.view;
 
 import com.bd.model.Funcionario;
 import com.bd.service.FuncionarioService;
+import com.bd.mapper.*;
+import com.bd.repository.*;
+import com.bd.service.*;
+import org.mapstruct.factory.Mappers;
 
-/**
- *
- * @author Camil
- */
+
 public class Painel_Gerente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Painel_Funcionario
-     */
+    ProdutoService produtoService;
+    FornecedorService fornecedorService;
+    UsuarioService usuarioService;
+    FuncionarioService funcionarioService;
+    ItemService itemService;
+    VendaService vendaService;
+
     public Painel_Gerente() {
         setTitle("Tela Gerente");
+        inicializandoClasses();
         initComponents();
     }
 
@@ -214,9 +220,32 @@ public class Painel_Gerente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBFuncionarioMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void inicializandoClasses(){
+        FornecedorRepository fornecedorRepository = new FornecedorRepository();
+        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
+        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
+
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository, funcionarioMapper);
+
+        ItemRepository itemRepository = new ItemRepository();
+        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
+        itemService = new ItemService(itemRepository, itemMapper);
+
+        ProdutoRepository produtoRepository = new ProdutoRepository();
+        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
+        produtoService = new ProdutoService(produtoRepository, produtoMapper);
+
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
+        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
+
+        VendaRepository vendaRepository = new VendaRepository();
+        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
+        vendaService = new VendaService(vendaRepository, vendaMapper);
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
