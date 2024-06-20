@@ -101,7 +101,15 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCadastrarProdutoMouseClicked
-        //Pega os dados, cria um ProdutoRequest e chama a função cadastrar produto
+     
+                
+        String descricaoProduto = jTFDescricaoProduto.getText();
+        String valorProduto = jTFValorProduto.getText();
+        String quantidadeProduto = jTFQuantidadeProduto.getText();
+
+        
+
+    //Pega os dados, cria um ProdutoRequest e chama a função cadastrar produto
     }//GEN-LAST:event_jBTNCadastrarProdutoMouseClicked
 
     private void inicializandoClasses(){

@@ -138,6 +138,12 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
 
     private void jBTNCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCadastrarMouseClicked
         // TODO add your handling code here:
+        
+        String funcionarioName = jTFNomeFuncionario.getText();
+        String cpfFuncionario = jTFcpfFuncionario.getText();
+        String senhaFuncionario = new String(jPFSenhaFuncionario.getPassword());
+        String cargoFuncionario = jTFCargoFuncionario.getText();
+        
     }//GEN-LAST:event_jBTNCadastrarMouseClicked
 
     private void inicializandoClasses(){
