@@ -7,8 +7,12 @@ package com.bd.view;
 import com.bd.model.Funcionario;
 import com.bd.service.FuncionarioService;
 import com.bd.mapper.*;
+import com.bd.model.response.FornecedorResponse;
+import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import org.mapstruct.factory.Mappers;
 
 
@@ -56,38 +60,16 @@ public class Painel_Gerente extends javax.swing.JFrame {
         });
 
         jCBFuncionario.setText("Funcionário");
-        jCBFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCBFuncionarioMouseClicked(evt);
-            }
-        });
 
         jCBFornecedor.setText("Fornecedor");
-        jCBFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCBFornecedorMouseClicked(evt);
-            }
-        });
 
         jLBFuncionario.setText("Funcionários:");
 
-        jLSTFuncionario.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jSPFuncionario.setViewportView(jLSTFuncionario);
 
         jLBFornecedor.setText("Fornecedores:");
 
-        jLSTFornecedor.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jSPFornecedor.setViewportView(jLSTFornecedor);
-
-        jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jBTNAplicarFuncoes.setText("Aplicar");
         jBTNAplicarFuncoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,36 +82,36 @@ public class Painel_Gerente extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSPFuncionario)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jCBFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCBFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLBFornecedor)
-                                    .addGap(551, 551, 551))
-                                .addComponent(jSPFornecedor))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSPFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLBFuncionario)
-                                    .addGap(551, 551, 551)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBTNBarraPesquisa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCBFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBTNAplicarFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(48, 48, 48))
+                        .addComponent(jBTNAplicarFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLBFornecedor)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSPFornecedor, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLBFuncionario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, Short.MAX_VALUE)))))
+                .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,13 +128,13 @@ public class Painel_Gerente extends javax.swing.JFrame {
                     .addComponent(jCBFornecedor))
                 .addGap(38, 38, 38)
                 .addComponent(jLBFuncionario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSPFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLBFornecedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSPFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,28 +152,43 @@ public class Painel_Gerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
+        
         String pesquisa = jTFBarraPesquisa.getText();
-
+        
+        
         //Procurar o funcionario pelo nome e apresentar qual funcionario apresenta o nome desejado      
-        funcionarioService.buscarFuncionarioPeloNome(pesquisa);  
+        List<FuncionarioResponse> funcionarios; //para passar os dados na lista
+        DefaultListModel<FuncionarioResponse> listaFuncionarios = new DefaultListModel<>();
+        List<FornecedorResponse> fornecedores;
+        DefaultListModel<FornecedorResponse> listafornecedores = new DefaultListModel<>();
+        
+        
+        if(jCBFuncionario.isSelected()){
+            for(int i =0; i < 10; i++){
+                funcionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
+            }
+            
+        } else {
+            funcionarios = funcionarioService.buscarFuncionarios();
+        }
+        
+        if(jCBFornecedor.isSelected()){
+            fornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
+        } else{
+            fornecedores = fornecedorService.buscarFornecedores();
+        }
+        
+        //mostrar as informações na tabela
+      
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
         //Aplicar a função selecionada no combo box
         //if else para o get selected, redirecionando o usuário para uma nova tela
     }//GEN-LAST:event_jBTNAplicarFuncoesMouseClicked
-//Adicionar finção para listar os nomes quando forem pesquisados
+
+//Adicionar função para listar os nomes quando forem pesquisados
     
-    private void jCBFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBFornecedorMouseClicked
-        // Quando clicar, aparecerão fornecedores
-        
-    }//GEN-LAST:event_jCBFornecedorMouseClicked
-
-    private void jCBFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBFuncionarioMouseClicked
-        // quando clicar, aparecerão Funcionarios
-        
-    }//GEN-LAST:event_jCBFuncionarioMouseClicked
-
     private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();
         FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
