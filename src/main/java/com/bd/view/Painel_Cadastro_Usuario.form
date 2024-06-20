@@ -42,7 +42,14 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jLBTituloDaPagina" alignment="0" pref="500" max="32767" attributes="0"/>
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jBTNLogar" min="-2" pref="116" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                  <Component id="jBTNCadastrar" min="-2" pref="116" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLBSenhaUsuario" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
@@ -50,20 +57,13 @@
                       <Component id="jTFNomeCompleto" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTFcpfUsuario" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPFSenhaUsuario" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTFConfirmarSenha" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLBNomeCompleto" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLBNomeUsuario" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTFNomeUsuario" alignment="0" min="-2" pref="372" max="-2" attributes="0"/>
+                      <Component id="jTFNomeUsuario" alignment="0" pref="372" max="32767" attributes="0"/>
                       <Component id="jLBConfirmarSenha" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPFConfirmarSenha" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jBTNLogar" min="-2" pref="116" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                  <Component id="jBTNCadastrar" min="-2" pref="116" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,7 +91,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLBConfirmarSenha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTFConfirmarSenha" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPFConfirmarSenha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jBTNCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -136,7 +136,7 @@
             <Property name="text" type="java.lang.String" value="Confirme sua Senha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFConfirmarSenha">
+        <Component class="javax.swing.JPasswordField" name="jPFConfirmarSenha">
         </Component>
         <Component class="javax.swing.JButton" name="jBTNCadastrar">
           <Properties>
