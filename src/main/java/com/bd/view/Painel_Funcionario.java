@@ -159,18 +159,15 @@ public class Painel_Funcionario extends javax.swing.JFrame {
 
     private void jTBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBProdutosMouseClicked
         String produtoId = jTBProdutos.getValueAt(jTBProdutos.getSelectedRow(), 0).toString();
-        int i;
+        String nomeFornecedor = jTBProdutos.getValueAt(jTBProdutos.getSelectedRow(), 2).toString();
         
-        for (i = 0; i < produtos.size(); i++) {
-            if(produtos.get(i).pro_codigo().equals(produtoId)){
-                break;
-            }  
-        }
-        
-        FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloId(Long.valueOf(produtos.get(i).tb_fornecedores_for_codigo()));
+        ProdutoResponse produto = produtoService.buscarProdutoPeloId(Long.parseLong(produtoId));
+        FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloNome(nomeFornecedor);
+
+                
+        //método recebe dados para passar os dados dos produtos e fornecedores (nome, preço e se está ou não dispinível em estoque)
         
         Painel_Venda_Funcionario vendaFuncionario = new Painel_Venda_Funcionario(this, true);
-        vendaFuncionario.pro_codigo = produtos.get(i).pro_codigo();
         
         //Criar método recebeProdutos que seta os valores na tela Painel_Venda_Funcionario
         //vendaFuncionario.recebeProduto(produtos.get(i).pro_descricao(), produtos.get(i).pro_valor(), produtos.get(i).pro_quantidade(), fornecedor.for_descricao());
