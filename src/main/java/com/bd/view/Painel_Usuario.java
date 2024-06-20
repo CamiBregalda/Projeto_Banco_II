@@ -8,7 +8,9 @@ import com.bd.mapper.*;
 import com.bd.repository.*;
 import com.bd.service.*;
 import org.mapstruct.factory.Mappers;
-
+import com.bd.model.response.ProdutoResponse;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Camil
@@ -79,18 +81,18 @@ public class Painel_Usuario extends javax.swing.JFrame {
 
         jTBProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nome", "Preço"
+                "Codigo", "Nome", "Preço"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -172,11 +174,28 @@ public class Painel_Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
-        // TODO add your handling code here:
+        String pesquisa = jTFBarraPesquisa.getText();
+        
+        List<ProdutoResponse> listaProdutos = produtoService.buscarProdutosPeloNome(pesquisa);
+        
+        DefaultTableModel tabela = (DefaultTableModel) jTBProdutos.getModel();
+        tabela.setRowCount(0);
+            
+        for (int i = 0; i < listaProdutos.size(); i++) {
+            tabela.addRow(new Object[]{listaProdutos.get(i).pro_codigo(), listaProdutos.get(i).pro_descricao(), listaProdutos.get(i).pro_valor()});
+        }            
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jTBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBProdutosMouseClicked
-        // TODO add your handling code here:
+        String produtoId =  jTBProdutos.getValueAt(jTBProdutos.getSelectedRow(), 0).toString();
+        ProdutoResponse produto = produtoService.buscarProdutoPeloId(Long.parseLong(produtoId));
+        
+        Painel_Vendas vendas = new Painel_Vendas(this, true);
+        vendas.recebeDados(produto);
+        vendas.setLocationRelativeTo(this);
+        vendas.setVisible(true);
+        
+        //quando clicado vai abrir o produto e vai direcionar para a tela "Painel_Vendas"
     }//GEN-LAST:event_jTBProdutosMouseClicked
 
     private void inicializandoClasses(){
