@@ -7,12 +7,10 @@ package com.bd.view;
 import com.bd.mapper.*;
 import com.bd.repository.*;
 import com.bd.service.*;
+import javax.swing.JOptionPane;
 import org.mapstruct.factory.Mappers;
 
-/**
- *
- * @author Camil
- */
+
 public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
 
     ProdutoService produtoService;
@@ -167,10 +165,21 @@ public class Painel_Cadastro_Usuario extends javax.swing.JDialog {
         String ConfirmarSenha = new String(jPFConfirmarSenha.getPassword());
         
         //validar as senhas
+        if (senhaUsuario == ConfirmarSenha){
+            //passar as informações em suas respectivas colunas na tabela 
+            //Chamar método cadastrar e passar as informações no new usuarioRequest
+            //user_nome = jTFNomeCompleto;
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "As senhas precisam ser iguais");
+        }
     }//GEN-LAST:event_jBTNCadastrarMouseClicked
 
     private void jBTNLogarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNLogarMouseClicked
-        // TODO add your handling code here:
+        //direcionar o Usuário para a tela de login.
+        Painel_Usuario user = new Painel_Usuario();
+        user.setLocationRelativeTo(this);
+        user.setVisible(true);
     }//GEN-LAST:event_jBTNLogarMouseClicked
 
     private void inicializandoClasses(){
