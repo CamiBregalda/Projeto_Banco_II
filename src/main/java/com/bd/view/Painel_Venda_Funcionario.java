@@ -28,6 +28,8 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLBNomeProduto = new javax.swing.JLabel();
+        jLBCodigo = new javax.swing.JLabel();
+        jLBCodigoMostrar = new javax.swing.JLabel();
         jLBPreco = new javax.swing.JLabel();
         jTFPreco = new javax.swing.JTextField();
         jLBQtdEstoque = new javax.swing.JLabel();
@@ -42,6 +44,9 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
         jLBNomeProduto.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLBNomeProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLBNomeProduto.setText("Nome do Produto");
+
+        jLBCodigo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLBCodigo.setText("Codigo:");
 
         jLBPreco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBPreco.setText("Preço:");
@@ -75,45 +80,46 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLBPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jBTNAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                                .addComponent(jBTNDeletarProduto)
-                                .addGap(12, 12, 12))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(jTFPreco))))
+                        .addGap(24, 24, 24)
+                        .addComponent(jBTNAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(jBTNDeletarProduto)
+                        .addGap(33, 33, 33))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLBQtdEstoque)
-                            .addComponent(jLBFornecedor))
+                            .addComponent(jLBFornecedor)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLBCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLBPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFEstoque)
+                            .addComponent(jTFPreco)
                             .addComponent(jLBFornecedorMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTFEstoque))))
-                .addGap(64, 64, 64))
+                            .addComponent(jLBCodigoMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLBNomeProduto)
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLBCodigo)
+                    .addComponent(jLBCodigoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLBPreco)
                     .addComponent(jTFPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLBQtdEstoque)
                     .addComponent(jTFEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLBFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLBFornecedor)
                     .addComponent(jLBFornecedorMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -138,7 +144,11 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
 
     private void jBTNAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAlterarMouseClicked
         //Pega os novos valores dos TextField e faz um ProdutoRequest, passa esse produto para o método AtualizarProduto()
+        //String codigo = String.valueOf(Long.parseLong(jLBCodigoMostrar)); //não está funcionando
+        String preco = jTFPreco.getText();
+        String estoque = jTFEstoque.getText();
         
+        //ProdutoResponse atualizar = atualizarProduto();
         this.dispose();
     }//GEN-LAST:event_jBTNAlterarMouseClicked
 
@@ -215,6 +225,8 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNAlterar;
     private javax.swing.JButton jBTNDeletarProduto;
+    private javax.swing.JLabel jLBCodigo;
+    private javax.swing.JLabel jLBCodigoMostrar;
     private javax.swing.JLabel jLBFornecedor;
     private javax.swing.JLabel jLBFornecedorMostrar;
     private javax.swing.JLabel jLBNomeProduto;

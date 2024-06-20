@@ -43,38 +43,31 @@
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLBPreco" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="jBTNAlterar" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace pref="50" max="32767" attributes="0"/>
-                                  <Component id="jBTNDeletarProduto" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                                  <Component id="jTFPreco" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jBTNAlterar" min="-2" pref="115" max="-2" attributes="0"/>
+                          <EmptySpace pref="50" max="32767" attributes="0"/>
+                          <Component id="jBTNDeletarProduto" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLBQtdEstoque" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLBFornecedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jLBCodigo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLBPreco" alignment="0" pref="50" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLBFornecedorMostrar" max="32767" attributes="0"/>
                               <Component id="jTFEstoque" max="32767" attributes="0"/>
+                              <Component id="jTFPreco" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLBFornecedorMostrar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLBCodigoMostrar" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,19 +76,24 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="jLBNomeProduto" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLBPreco" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTFPreco" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLBCodigo" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLBCodigoMostrar" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLBPreco" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTFPreco" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLBQtdEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTFEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLBFornecedor" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLBFornecedor" min="-2" max="-2" attributes="0"/>
                       <Component id="jLBFornecedorMostrar" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
@@ -117,6 +115,16 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Nome do Produto"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLBCodigo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Codigo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLBCodigoMostrar">
         </Component>
         <Component class="javax.swing.JLabel" name="jLBPreco">
           <Properties>
