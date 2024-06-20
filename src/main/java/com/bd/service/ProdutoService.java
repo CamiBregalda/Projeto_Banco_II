@@ -3,10 +3,13 @@ package com.bd.service;
 import com.bd.exception.BusinessException;
 import com.bd.infra.Login;
 import com.bd.mapper.ProdutoMapper;
+import com.bd.model.Fornecedor;
 import com.bd.model.Produto;
 import com.bd.model.request.ProdutoRegistrationRequest;
 import com.bd.model.request.ProdutoRequest;
 import com.bd.model.request.UserLoginDTO;
+import com.bd.model.response.FornecedorResponse;
+import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +52,26 @@ public class ProdutoService {
             return produtoMapper.entityToResponse(produto);
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar produto: " + e.getMessage());
+        }
+    }
+
+    public ProdutoResponse buscarProdutoPeloNome(String descricao) {
+        try {
+            Produto produto = produtoRepository.buscarProdutoPeloNome(descricao);
+            return produtoMapper.entityToResponse(produto);
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao buscar produto: " + e.getMessage());
+        }
+    }
+
+    public List<ProdutoResponse> buscarProdutosPeloNome(String descricao) {
+        try {
+            return produtoRepository.buscarProdutos().stream()
+                    .filter(produto -> !produto.getPro_descricao().contains(descricao))
+                    .map(produtoMapper::entityToResponse)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao buscar produtos: " + e.getMessage());
         }
     }
 
