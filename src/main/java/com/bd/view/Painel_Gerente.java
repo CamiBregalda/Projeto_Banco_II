@@ -24,6 +24,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
     FuncionarioService funcionarioService;
     ItemService itemService;
     VendaService vendaService;
+    DefaultListModel<FuncionarioResponse> listaFuncionarios = new DefaultListModel<>();
 
     public Painel_Gerente() {
         setTitle("Tela Gerente");
@@ -158,14 +159,14 @@ public class Painel_Gerente extends javax.swing.JFrame {
         
         //Procurar o funcionario pelo nome e apresentar qual funcionario apresenta o nome desejado      
         List<FuncionarioResponse> funcionarios; //para passar os dados na lista
-        DefaultListModel<FuncionarioResponse> listaFuncionarios = new DefaultListModel<>();
+        //DefaultListModel<FuncionarioResponse> listaFuncionarios = new DefaultListModel<>();
         List<FornecedorResponse> fornecedores;
         DefaultListModel<FornecedorResponse> listafornecedores = new DefaultListModel<>();
         
         
         if(jCBFuncionario.isSelected()){
             for(int i =0; i < 10; i++){
-                funcionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
+                listaFuncionarios.addElement(funcionarioService.buscarFuncionarioPeloNome(pesquisa));
             }
             
         } else {
