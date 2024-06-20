@@ -1,6 +1,7 @@
 package com.bd.repository;
 
 import com.bd.infra.Conexao;
+import com.bd.model.Fornecedor;
 import com.bd.model.Produto;
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
@@ -80,6 +81,28 @@ public class ProdutoRepository {
             }
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao buscar produto", ex);
+        }
+    }
+
+    public Produto buscarProdutoPeloNome(String descricao) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT pro_codigo, pro_descricao, pro_valor, pro_quantidade, tb_fornecedores_for_codigo FROM tb_produtos WHERE pro_descricao = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, descricao);
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    return new Produto(
+                            resultado.getInt("pro_codigo"),
+                            resultado.getString("pro_descricao"),
+                            resultado.getDouble("pro_valor"),
+                            resultado.getInt("pro_quantidade"),
+                            resultado.getInt("tb_fornecedores_for_codigo")
+                    );
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar produto: ", ex);
         }
     }
 

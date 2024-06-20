@@ -8,6 +8,7 @@ import com.bd.model.Funcionario;
 import com.bd.model.request.FuncionarioRegistrationRequest;
 import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
+import com.bd.model.response.FornecedorResponse;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class FuncionarioService {
@@ -60,6 +63,17 @@ public class FuncionarioService {
             return funcionarioMapper.entityToResponse(funcionario);
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar funcionario: " + e.getMessage());
+        }
+    }
+
+    public List<FuncionarioResponse> buscarFuncionariosPeloNome(String nome) {
+        try {
+            return funcionarioRepository.buscarFuncionarios().stream()
+                    .filter(funcionario -> !funcionario.getFun_nome().contains(nome))
+                    .map(funcionarioMapper::entityToResponse)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao buscar funcionarios: " + e.getMessage());
         }
     }
 
