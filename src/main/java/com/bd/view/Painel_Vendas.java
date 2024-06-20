@@ -121,11 +121,11 @@ public class Painel_Vendas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLBNomeProduto)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCBListaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLBListaFuncionarios))
-                .addGap(27, 27, 27)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLBListaFuncionarios)
+                    .addComponent(jCBListaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLBPreco)
                     .addComponent(jLBPrecoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -161,9 +161,20 @@ public class Painel_Vendas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNComprarMouseClicked
-        // TODO add your handling code here:
+       
+       //deve remover a quantidade comprada do estoque
+       
     }//GEN-LAST:event_jBTNComprarMouseClicked
 
+    public void recebeDados(ProdutoResponse produto){
+        //setar o nome do produto em jLBNomeProduto .setText();
+        //o funcionario deve aparecer na combobox  jCBListaFuncionarios
+       //vai mostrar o valor em jLBPrecoMostrar 
+       //deve aparecer a quantidade total no estoque jLBQtdEstoqueMostrar
+       //deve escolhero valor total para a compra em jSPNQuantidade
+       // mostra o valor total da compra em jLBValorTotalMostrar
+    }
+    
     private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();
         FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
