@@ -5,6 +5,7 @@
 package com.bd.view;
 
 import com.bd.mapper.*;
+import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
 import org.mapstruct.factory.Mappers;
@@ -167,11 +168,19 @@ public class Painel_Vendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTNComprarMouseClicked
 
     public void recebeDados(ProdutoResponse produto){
-        //setar o nome do produto em jLBNomeProduto .setText();
-        //o funcionario deve aparecer na combobox  jCBListaFuncionarios
+       jLBNomeProduto.setText(produto.pro_descricao());
+       //setar o nome do produto em jLBNomeProduto .setText();
+    //PRECISA VER AQUI!!!   String nomeFuncionario = jCBListaFuncionarios.getSelectedItem().toString();
+       
+       //o funcionario deve aparecer na combobox  jCBListaFuncionarios setSelected
+       jLBPrecoMostrar.setText(String.format("%.2f", produto.pro_valor()));
        //vai mostrar o valor em jLBPrecoMostrar 
+       jLBPrecoMostrar.setText(String.valueOf(produto.pro_quantidade()));
        //deve aparecer a quantidade total no estoque jLBQtdEstoqueMostrar
-       //deve escolhero valor total para a compra em jSPNQuantidade
+       int quantidadeCompra = (Integer) jSPNQuantidade.getValue();
+      //deve escolhero valor total para a compra em jSPNQuantidade
+       double total = (double) quantidadeCompra * produto.pro_valor();
+       jLBValorTotalMostrar.setText(String.format("%.2f", total));
        // mostra o valor total da compra em jLBValorTotalMostrar
     }
     

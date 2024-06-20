@@ -100,9 +100,9 @@ public class Painel_Tela_Inicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTCadastrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCadastrarUsuarioMouseClicked
-    //    Painel_Cadastro_Usuario cadastrarUsuario = new Painel_Cadastro_Usuario(this, true);
-    //    cadastrarUsuario.setLocationRelativeTo(this);
-    //    cadastrarUsuario.setVisible(true);
+        Painel_Cadastro_Usuario cadastrarUsuario = new Painel_Cadastro_Usuario(this, true);
+        cadastrarUsuario.setLocationRelativeTo(this);
+        cadastrarUsuario.setVisible(true);
     }//GEN-LAST:event_jBTCadastrarUsuarioMouseClicked
 
     private void jTBEntrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBEntrarUsuarioMouseClicked
