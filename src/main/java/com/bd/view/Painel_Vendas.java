@@ -5,9 +5,12 @@
 package com.bd.view;
 
 import com.bd.mapper.*;
+import com.bd.model.request.VendaRequest;
+import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
+import javax.swing.JOptionPane;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -22,7 +25,8 @@ public class Painel_Vendas extends javax.swing.JDialog {
     FuncionarioService funcionarioService;
     ItemService itemService;
     VendaService vendaService;
-
+    Integer produtoId;
+    
     public Painel_Vendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Venda de Itens");
@@ -162,26 +166,42 @@ public class Painel_Vendas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNComprarMouseClicked
+      
+         
+        String nomeFuncionario = jCBListaFuncionarios.getSelectedItem().toString();
+        String quantidade = jSPNQuantidade.getValue().toString();  
+        
+        FuncionarioResponse funcionario = funcionarioService.buscarFuncionarioPeloNome(nomeFuncionario);
        
-       //deve remover a quantidade comprada do estoque
+        
+        String venda = vendaService.realizarVenda(funcionario.fun_codigo(), produtoId, Integer.parseInt(quantidade));
+        
+        
+        JOptionPane.showMessageDialog(this, venda);
        
+       //deve gravar as informações e mandar para o back
     }//GEN-LAST:event_jBTNComprarMouseClicked
 
     public void recebeDados(ProdutoResponse produto){
+        //setar o nome do produto em jLBNomeProduto .setText();
        jLBNomeProduto.setText(produto.pro_descricao());
-       //setar o nome do produto em jLBNomeProduto .setText();
-    //PRECISA VER AQUI!!!   String nomeFuncionario = jCBListaFuncionarios.getSelectedItem().toString();
-       
+      
        //o funcionario deve aparecer na combobox  jCBListaFuncionarios setSelected
-       jLBPrecoMostrar.setText(String.format("%.2f", produto.pro_valor()));
+       //vai pegar a lista e passar em um for atravez de um .setSelected()
+       
+       
        //vai mostrar o valor em jLBPrecoMostrar 
-       jLBPrecoMostrar.setText(String.valueOf(produto.pro_quantidade()));
+       jLBPrecoMostrar.setText(String.format("%.2f", produto.pro_valor()));
+       
        //deve aparecer a quantidade total no estoque jLBQtdEstoqueMostrar
+       jLBPrecoMostrar.setText(String.valueOf(produto.pro_quantidade()));
+       
+       //deve escolhero valor total para a compra em jSPNQuantidade
        int quantidadeCompra = (Integer) jSPNQuantidade.getValue();
-      //deve escolhero valor total para a compra em jSPNQuantidade
+      
+      // mostra o valor total da compra em jLBValorTotalMostrar
        double total = (double) quantidadeCompra * produto.pro_valor();
        jLBValorTotalMostrar.setText(String.format("%.2f", total));
-       // mostra o valor total da compra em jLBValorTotalMostrar
     }
     
     private void inicializandoClasses(){
