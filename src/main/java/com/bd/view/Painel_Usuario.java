@@ -192,6 +192,7 @@ public class Painel_Usuario extends javax.swing.JFrame {
         
         Painel_Vendas vendas = new Painel_Vendas(this, true);
         vendas.recebeDados(produto);
+        vendas.produtoId = produto.pro_codigo();
         vendas.setLocationRelativeTo(this);
         vendas.setVisible(true);
         
