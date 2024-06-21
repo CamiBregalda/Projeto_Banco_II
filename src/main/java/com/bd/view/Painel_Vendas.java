@@ -10,6 +10,8 @@ import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
+import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.mapstruct.factory.Mappers;
 
@@ -187,6 +189,11 @@ public class Painel_Vendas extends javax.swing.JDialog {
        jLBNomeProduto.setText(produto.pro_descricao());
       
        //o funcionario deve aparecer na combobox  jCBListaFuncionarios setSelected
+        List<FuncionarioResponse> funcionarios = funcionarioService.buscarFuncionarios();
+            for (FuncionarioResponse funcionario : funcionarios) {
+            jCBListaFuncionarios.addItem(funcionario.fun_nome()); // Supondo que FuncionarioResponse tenha um método getNome()
+             }
+
        //vai pegar a lista e passar em um for atravez de um .setSelected()
        
        
