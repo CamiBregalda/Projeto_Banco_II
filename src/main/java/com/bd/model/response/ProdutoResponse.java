@@ -7,3 +7,4 @@ public record ProdutoResponse(
         Integer pro_quantidade,
         Integer tb_fornecedores_for_codigo
 ) {}
+;
