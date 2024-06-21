@@ -22,17 +22,21 @@ DECLARE
     codigo BIGINT;
 	id_funcionario BIGINT;
 BEGIN
-    -- Verifica se o nome do funcionário já existe
     SELECT fun_codigo INTO codigo FROM tb_funcionarios WHERE fun_nome = nome;
 
-    -- Se o código foi encontrado, significa que o nome já existe
+    -- Se o código foi encontrado, significa que o nome do funcionário já existe
     IF FOUND THEN
         RAISE EXCEPTION 'Erro: Funcionário com nome % já existe. Rollback necessário.', nome;
     END IF;
 
-
 	SELECT MAX(fun_codigo) INTO id_funcionario FROM tb_funcionarios;
-    INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_senha, fun_funcao) VALUES (id_funcionario + 1, nome, cpf, senha, funcao);
+    
+	BEGIN
+        INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_senha, fun_funcao) VALUES (id_funcionario + 1, nome, cpf, senha, funcao);
+    EXCEPTION
+        WHEN unique_violation THEN
+            RAISE NOTICE 'Erro de violação de unicidade. Rollback necessário.';
+    END;
 END;
 $$ LANGUAGE plpgsql;
 

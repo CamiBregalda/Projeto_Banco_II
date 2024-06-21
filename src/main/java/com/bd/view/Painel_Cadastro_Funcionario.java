@@ -144,8 +144,9 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
         fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
 
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        BackupRepository backupRepository = new BackupRepository();
         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
-        funcionarioService = new FuncionarioService(funcionarioRepository, funcionarioMapper);
+        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
 
         ItemRepository itemRepository = new ItemRepository();
         ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);

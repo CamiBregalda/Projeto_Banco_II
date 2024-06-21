@@ -3,6 +3,7 @@ package com.bd.view;
 import com.bd.infra.Login;
 import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.response.FuncionarioResponse;
+import com.bd.repository.BackupRepository;
 import com.bd.repository.FuncionarioRepository;
 import com.bd.service.FuncionarioService;
 import com.bd.service.UsuarioService;
@@ -176,8 +177,9 @@ public class Painel_Login extends javax.swing.JDialog {
 
     private void inicializandoClasses(){
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        BackupRepository backupRepository = new BackupRepository();
         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
-        funcionarioService = new FuncionarioService(funcionarioRepository, funcionarioMapper);
+        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
     }
 
     public static void main(String args[]) {

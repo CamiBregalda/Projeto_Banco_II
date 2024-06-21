@@ -30,7 +30,7 @@ public class FuncionarioRepository {
                 statement.setString(1, funcionario.getFun_nome());
                 statement.setString(2, funcionario.getFun_senha());
             }
-            
+
             return funcionario;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao cadastrar funcionario", ex);
