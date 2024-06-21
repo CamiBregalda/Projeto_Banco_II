@@ -152,9 +152,8 @@ public class Painel_Funcionario extends javax.swing.JFrame {
             
         for (int i = 0; i < produtos.size(); i++) {
             FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloId(Long.valueOf(produtos.get(i).tb_fornecedores_for_codigo()));
-            
             tabela.addRow(new Object[]{produtos.get(i).pro_codigo(), produtos.get(i).pro_descricao(), fornecedor.for_descricao()});
-        }
+        }//precisa conferir se está correto
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jTBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBProdutosMouseClicked
@@ -162,17 +161,13 @@ public class Painel_Funcionario extends javax.swing.JFrame {
         String nomeFornecedor = jTBProdutos.getValueAt(jTBProdutos.getSelectedRow(), 2).toString();
         
         ProdutoResponse produto = produtoService.buscarProdutoPeloId(Long.parseLong(produtoId));
-        FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloNome(nomeFornecedor);
-
-                
-        //método recebe dados para passar os dados dos produtos e fornecedores (nome, preço e se está ou não dispinível em estoque)
+        FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloNome(nomeFornecedor);      
         
         Painel_Venda_Funcionario vendaFuncionario = new Painel_Venda_Funcionario(this, true);
-        
-        //Criar método recebeProdutos que seta os valores na tela Painel_Venda_Funcionario
-        //vendaFuncionario.recebeProduto(produtos.get(i).pro_descricao(), produtos.get(i).pro_valor(), produtos.get(i).pro_quantidade(), fornecedor.for_descricao());
+        vendaFuncionario.recebeDados(produto, fornecedor);
         vendaFuncionario.setLocationRelativeTo(this);
         vendaFuncionario.setVisible(true);
+            
     }//GEN-LAST:event_jTBProdutosMouseClicked
 
     private void jBTCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCadastrarProdutoMouseClicked
