@@ -21,7 +21,9 @@ FROM information_schema.table_privileges
 WHERE grantee = 'newRole' AND table_name = 'tb_usuario';
 
 
-
+--Criar papeis
+CREATE ROLE funcionarios;
+CREATE ROLE gerente;
 
 --Usuário pode se cadastrar
 --Funcionário pode cadastrar tanto funcionário quanto fornecedor

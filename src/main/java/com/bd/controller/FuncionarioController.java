@@ -66,14 +66,4 @@ public class FuncionarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar usuário: " + e.getMessage());
         }
     }
-
-    @GetMapping("/realizar-backup")
-    public ResponseEntity<String> deletarItem() {
-        try {
-            funcionarioService.realizarBackup();
-            return ResponseEntity.ok("Backup realizado com sucesso");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao realizar backup: " + e.getMessage());
-        }
-    }
 }
