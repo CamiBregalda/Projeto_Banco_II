@@ -67,6 +67,13 @@ Create table tb_usuario(
 	user_senha varchar(11)
 );
 
+CREATE TABLE backup_programado (
+    id SERIAL PRIMARY KEY,
+    ultimo_backup TIMESTAMP NOT NULL,
+    proximo_backup TIMESTAMP NOT NULL
+);
+
+
 --INSERT INTO tb_funcionarios VALUES('1','Franscisco Aguiar', '081.654.759-66','12345678','gerente');
 
 CREATE OR REPLACE FUNCTION gerar_registros_fornecedores()

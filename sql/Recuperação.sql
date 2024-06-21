@@ -66,45 +66,24 @@ $$ LANGUAGE plpgsql;
 
 
 /*Desenvolver uma rotina de backup do Banco de Dados e integra-la ao sistema.*/
-CREATE OR REPLACE FUNCTION realizarBackup(nome_usuario TEXT, nome_bd TEXT)
+CREATE OR REPLACE FUNCTION atualizar_proximo_backup(proximo_backup TIMESTAMP)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE backup_programado SET proximo_backup = proximo_backup WHERE id = (SELECT MAX(id) FROM backup_programado);
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION realizar_backup()
 RETURNS VOID AS $$
 DECLARE
-    backup_filename TEXT;
-	cmd TEXT;
+    ultimo TIMESTAMP;
+    proximo TIMESTAMP;
 BEGIN
-    -- Define o nome do arquivo de backup com a data atual
-    backup_filename := 'C:/Users/Camil/Desktop/Faculdade 2024/Banco de Dados II/Trabalho Prático II/Projeto_Banco_II/sql/backup_loja_virtual_' || TO_CHAR(NOW(), 'YYYY-MM-DD_HH24-MI-SS') || '.sql';
-
-    -- Define o comando de backup
-    --EXECUTE 'pg_dump -U ' || nome_usuario || ' -d ' || nome_bd || ' > ' || quote_literal(backup_filename);
-	EXECUTE 'pg_dump ' || nome_bd || ' > ' || backup_filename;
-	--EXECUTE 'COPY (SELECT * FROM pg_dump(' || quote_literal(nome_bd) || ')) TO PROGRAM ''pg_dump ' || quote_ident(nome_bd) || ' > ' || quote_literal(backup_filename) || '''';
-	--EXECUTE 'pg_dump -d ' || nome_bd || ' > ' || backup_filename;
-	--cmd := 'COPY ' || table_name || ' TO || backup_filename || ''' WITH (FORMAT CSV, HEADER)';
-    
-    -- Executa a query
-    --EXECUTE cmd;
-	
-    RAISE NOTICE 'Backup realizado com sucesso: %', backup_filename;
+    SELECT ultimo_backup, proximo_backup INTO ultimo, proximo FROM backup_programado WHERE id = (SELECT MAX(id) FROM backup_programado);
+    INSERT INTO backup_programado (ultimo_backup, proximo_backup) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + (proximo - ultimo));
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT realizarBackup('postgres', 'loja_virtual');
 
-CREATE OR REPLACE FUNCTION pg_backup(database_name TEXT)
-RETURNS VOID AS $$
-BEGIN
-    PERFORM pg_catalog.pg_start_backup('label', true);
-
-    -- Execute the pg_dump command
-    PERFORM pg_catalog.pg_create_restore_point('backup');
-    
-    -- Aqui você pode adicionar mais lógica para gerenciar os backups, como armazenar o caminho do backup em uma tabela de auditoria.
-
-    PERFORM pg_catalog.pg_stop_backup();
-
-    RAISE NOTICE 'Backup completed for database %', database_name;
-END;
-$$ LANGUAGE plpgsql;
-
-SELECT pg_backup('loja_virtual');
+SELECT realizar_backup();

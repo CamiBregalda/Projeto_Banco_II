@@ -10,12 +10,15 @@ import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.response.FornecedorResponse;
 import com.bd.model.response.FuncionarioResponse;
+import com.bd.repository.BackupRepository;
 import com.bd.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 public class FuncionarioService {
 
     private final FuncionarioRepository funcionarioRepository;
+    private final BackupRepository backupRepository;
     private final FuncionarioMapper funcionarioMapper;
 
     public FuncionarioResponse cadastrarFuncionario(FuncionarioRequest funcionarioRequest) {
@@ -95,22 +99,6 @@ public class FuncionarioService {
         return funcionarioRepository.deletarFuncionario(id);
     }
 
-    public void realizarBackup(){
-        try {
-            String comando = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PostgreSQL 14\\SQL Shell (psql).Ink";;
-            Process exec = Runtime.getRuntime().exec( comando );
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void criarLogin(UserLoginDTO userDTO) {
-        Login login = Login.getInstance();
-        login.setUser(userDTO.getUsername());
-        login.setSenha(userDTO.getPassword());
-    }
-
     public String cadastrarRole(String role, ArrayList<String> usernames){
         try{
             funcionarioRepository.cadastrarRole(role, (String[]) usernames.toArray());
@@ -158,6 +146,22 @@ public class FuncionarioService {
 
     }
 
+    public void realizarBackup(String host, String port, String username, String database, String password){
+        try {
+            PostgreSQLBackup backup = new PostgreSQLBackup();
+            backup.realizarBackup(host, port, username, database, password);
 
+            backupRepository.realizarBackup();
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao realizar backup: " + e.getMessage());
+        }
+    }
 
+    public void programarBackup(LocalDateTime novoProximoBackup){
+        try {
+            backupRepository.programarBackup(Timestamp.valueOf(backupRepository.toString()));
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao programar backup: " + e.getMessage());
+        }
+    }
 }
