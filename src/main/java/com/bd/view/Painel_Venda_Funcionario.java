@@ -1,8 +1,12 @@
 package com.bd.view;
 
 import com.bd.mapper.*;
+import com.bd.model.request.ProdutoRequest;
+import com.bd.model.response.FornecedorResponse;
+import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
+import javax.swing.JOptionPane;
 import org.mapstruct.factory.Mappers;
 
 public class Painel_Venda_Funcionario extends javax.swing.JDialog {
@@ -18,7 +22,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     public Painel_Venda_Funcionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Venda Funcionário");
-        inicializandoClasses();
+        inicializandoClasses();//ver depois 
         initComponents();
     }
 
@@ -45,7 +49,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
         jLBNomeProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLBNomeProduto.setText("Nome do Produto");
 
-        jLBCodigo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLBCodigo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBCodigo.setText("Codigo:");
 
         jLBPreco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -91,7 +95,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
                             .addComponent(jLBFornecedor)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLBCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLBPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)))
+                                .addComponent(jLBPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTFEstoque)
@@ -141,19 +145,39 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void recebeDados(ProdutoResponse produto, FornecedorResponse fornecedor){
+        jLBNomeProduto.setText(produto.pro_descricao());
+        jLBCodigoMostrar.setText(Long.toString(produto.pro_codigo()));
+        jLBFornecedorMostrar.setText(fornecedor.for_descricao());
+        jTFPreco.setText(Double.toString(produto.pro_valor()));
+        jTFEstoque.setText(Integer.toString(produto.pro_quantidade()));
+    } 
+    
     private void jBTNAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAlterarMouseClicked
         //Pega os novos valores dos TextField e faz um ProdutoRequest, passa esse produto para o método AtualizarProduto()
-        //String codigo = String.valueOf(Long.parseLong(jLBCodigoMostrar)); //não está funcionando
-        String preco = jTFPreco.getText();
-        String estoque = jTFEstoque.getText();
+        ProdutoRequest produtoRequest = new ProdutoRequest();
+        
+        Double preco = Double.parseDouble(jTFPreco.getText());
+        int estoque = Integer.parseInt(jTFEstoque.getText());
+        
+        produtoRequest;
+        produtoRequest.pro_quantidade();
+ 
+        ProdutoResponse atualizar = produtoService.atualizarProduto(pro_codigo, codigo);
         
         //ProdutoResponse atualizar = atualizarProduto();
         this.dispose();
     }//GEN-LAST:event_jBTNAlterarMouseClicked
-
+  
     private void jBTNDeletarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNDeletarProdutoMouseClicked
-        //Passa a variável pro_codigo no método deletarProduto()
+        boolean produto = produtoService.deletarProduto(pro_codigo);
+        
+        if(produto){
+            JOptionPane.showMessageDialog(this, "Produto removido com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(this, "Produto não pode ser reemovido");
+        }
         
         this.dispose();
     }//GEN-LAST:event_jBTNDeletarProdutoMouseClicked
