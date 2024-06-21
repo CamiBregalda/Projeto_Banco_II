@@ -156,31 +156,33 @@ public class Painel_Gerente extends javax.swing.JFrame {
         
         String pesquisa = jTFBarraPesquisa.getText();
         
-        
         //Procurar o funcionario pelo nome e apresentar qual funcionario apresenta o nome desejado      
         List<FuncionarioResponse> funcionarios; //para passar os dados na lista
-        //DefaultListModel<FuncionarioResponse> listaFuncionarios = new DefaultListModel<>();
+        DefaultListModel<String> listaFuncionarios = new DefaultListModel<>();
         List<FornecedorResponse> fornecedores;
-        DefaultListModel<FornecedorResponse> listafornecedores = new DefaultListModel<>();
+        DefaultListModel<String> listaFornecedores = new DefaultListModel<>();
         
         
         if(jCBFuncionario.isSelected()){
-            for(int i =0; i < 10; i++){
-                listaFuncionarios.addElement(funcionarioService.buscarFuncionarioPeloNome(pesquisa));
-            }
-            
+           funcionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
         } else {
             funcionarios = funcionarioService.buscarFuncionarios();
         }
         
         if(jCBFornecedor.isSelected()){
             fornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
-        } else{
+        } else {
             fornecedores = fornecedorService.buscarFornecedores();
         }
         
         //mostrar as informações na tabela
-      
+        for (int i = 0; i < funcionarios.size(); i++){
+            listaFuncionarios.addElement(funcionarios.get(i).fun_nome());
+            }
+        
+        for(int i = 0; i < fornecedores.size(); i++){
+            listaFornecedores.addElement(fornecedores.get(i).for_descricao());
+        }
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
