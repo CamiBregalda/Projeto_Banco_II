@@ -66,10 +66,10 @@ $$ LANGUAGE plpgsql;
 
 
 /*Desenvolver uma rotina de backup do Banco de Dados e integra-la ao sistema.*/
-CREATE OR REPLACE FUNCTION atualizar_proximo_backup(proximo_backup TIMESTAMP)
+CREATE OR REPLACE FUNCTION atualizar_proximo_backup(prox_backup TIMESTAMP)
 RETURNS VOID AS $$
 BEGIN
-    UPDATE backup_programado SET proximo_backup = proximo_backup WHERE id = (SELECT MAX(id) FROM backup_programado);
+    UPDATE backup_programado SET proximo_backup = prox_backup WHERE id = (SELECT MAX(id) FROM backup_programado);
 END;
 $$ LANGUAGE plpgsql;
 
@@ -81,9 +81,18 @@ DECLARE
     proximo TIMESTAMP;
 BEGIN
     SELECT ultimo_backup, proximo_backup INTO ultimo, proximo FROM backup_programado WHERE id = (SELECT MAX(id) FROM backup_programado);
-    INSERT INTO backup_programado (ultimo_backup, proximo_backup) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + (proximo - ultimo));
+	
+	IF proximo IS NULL THEN
+        proximo := CURRENT_TIMESTAMP + INTERVAL '1 week';
+    ELSE
+        proximo := CURRENT_TIMESTAMP + (proximo - ultimo);
+    END IF;
+	
+    INSERT INTO backup_programado (ultimo_backup, proximo_backup) VALUES (CURRENT_TIMESTAMP, proximo);
 END;
 $$ LANGUAGE plpgsql;
 
-
 SELECT realizar_backup();
+SELECT atualizar_proximo_backup(CURRENT_TIMESTAMP);
+
+SELECT * from backup_programado;
