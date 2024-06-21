@@ -27,11 +27,18 @@ public class FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
     private final FuncionarioMapper funcionarioMapper;
 
-    public FuncionarioResponse cadastrarFuncionario(FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
-        criarLogin(funcionarioRegistrationRequest.getUserLoginDTO());
-        Funcionario funcio = funcionarioMapper.postDtoToEntity(funcionarioRegistrationRequest.getFuncionarioRequest());
+    public FuncionarioResponse cadastrarFuncionario(FuncionarioRequest funcionarioRequest) {
+        Funcionario funcionario = funcionarioMapper.postDtoToEntity(funcionarioRequest);
+        return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcionario));
+    }
 
-        return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcio));
+    public FuncionarioResponse logarFuncionario(String nome, String senha) {
+        try {
+            Funcionario funcionario = funcionarioRepository.logarFuncionario(nome, senha);
+            return funcionarioMapper.entityToResponse(funcionario);
+        } catch (Exception e) {
+            throw new BusinessException("Erro ao logar funcionario: " + e.getMessage());
+        }
     }
 
     public List<FuncionarioResponse> buscarFuncionarios() {

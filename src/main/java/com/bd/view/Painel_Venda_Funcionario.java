@@ -12,6 +12,7 @@ import org.mapstruct.factory.Mappers;
 public class Painel_Venda_Funcionario extends javax.swing.JDialog {
 
     long pro_codigo;
+    FornecedorResponse fornecedor;
     ProdutoService produtoService;
     FornecedorService fornecedorService;
     UsuarioService usuarioService;
@@ -156,15 +157,11 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     
     private void jBTNAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAlterarMouseClicked
         //Pega os novos valores dos TextField e faz um ProdutoRequest, passa esse produto para o método AtualizarProduto()
-        ProdutoRequest produtoRequest = new ProdutoRequest();
-        
+        String nome = jLBNomeProduto.getText();
         Double preco = Double.parseDouble(jTFPreco.getText());
         int estoque = Integer.parseInt(jTFEstoque.getText());
         
-        produtoRequest;
-        produtoRequest.pro_quantidade();
- 
-        ProdutoResponse atualizar = produtoService.atualizarProduto(pro_codigo, codigo);
+        ProdutoResponse atualizar = produtoService.atualizarProduto(pro_codigo, new ProdutoRequest((int) pro_codigo, nome, preco, estoque, fornecedor.for_codigo()));
         
         //ProdutoResponse atualizar = atualizarProduto();
         this.dispose();
