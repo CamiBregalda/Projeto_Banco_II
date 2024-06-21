@@ -164,10 +164,11 @@ public class Painel_Funcionario extends javax.swing.JFrame {
         FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloNome(nomeFornecedor);      
         
         Painel_Venda_Funcionario vendaFuncionario = new Painel_Venda_Funcionario(this, true);
+        vendaFuncionario.pro_codigo = Integer.parseInt(produtoId);
+        vendaFuncionario.fornecedor = fornecedor;
         vendaFuncionario.recebeDados(produto, fornecedor);
         vendaFuncionario.setLocationRelativeTo(this);
         vendaFuncionario.setVisible(true);
-            
     }//GEN-LAST:event_jTBProdutosMouseClicked
 
     private void jBTCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCadastrarProdutoMouseClicked

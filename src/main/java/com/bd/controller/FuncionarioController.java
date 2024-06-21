@@ -22,12 +22,12 @@ import java.util.List;
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
-
+/*
     @PostMapping("/cadastrar")
     public FuncionarioResponse cadastrarFuncionario(@RequestBody FuncionarioRegistrationRequest funcionarioRegistrationRequest) {
         return funcionarioService.cadastrarFuncionario(funcionarioRegistrationRequest);
     }
-/*
+
     @PostMapping("/login")
     public ResponseEntity<String> loginFuncionario(@RequestBody UserLoginDTO userDTO) {
         try {

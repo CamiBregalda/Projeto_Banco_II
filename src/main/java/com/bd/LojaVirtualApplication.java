@@ -1,5 +1,6 @@
 package com.bd;
 
+import com.bd.view.Painel_Tela_Inicial;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -10,6 +11,9 @@ public class LojaVirtualApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LojaVirtualApplication.class, args);
+
+		Painel_Tela_Inicial telaInicial = new Painel_Tela_Inicial();
+		telaInicial.setVisible(true);
 	}
 
 }

@@ -33,6 +33,7 @@ public class UsuarioRepository {
                 statement.setString(5, user.getUser_senha());
                 statement.executeUpdate();
             }
+
             sql = "SELECT cadastrar_usuario(?, ?)";
             try(PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, user.getUser_username());
@@ -44,6 +45,26 @@ public class UsuarioRepository {
         }
     }
 
+    public boolean logarUsuario(String username, String password){
+        String sql = "SELECT COUNT(*) FROM tb_usuario WHERE user_username = ? AND user_senha = ?";
+    
+        try (Connection connection = Conexao.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            try (ResultSet resultado = statement.executeQuery()) {
+                if (resultado.next()) {
+                    return resultado.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao logar usuário", ex);
+        }
+
+        return false;
+    }
 
 
     public List<Usuario> buscarUsuarios() {

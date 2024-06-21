@@ -5,15 +5,18 @@ import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.FuncionarioRepository;
 import com.bd.service.FuncionarioService;
+import com.bd.service.UsuarioService;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+import javax.swing.JOptionPane;
 
 public class Painel_Login extends javax.swing.JDialog {
 
     String pessoa;
     Painel_Tela_Inicial telaCadastro;
     FuncionarioService funcionarioService;
+    UsuarioService usuarioService;
 
     public Painel_Login(java.awt.Frame parent, boolean modal) {
         super();
@@ -111,30 +114,65 @@ public class Painel_Login extends javax.swing.JDialog {
         Login.getInstance().setUser(username);
         Login.getInstance().setSenha(password);
         
-        if(pessoa == "Usuario"){
-            Painel_Usuario usuario = new Painel_Usuario();
-            usuario.setLocationRelativeTo(this);
-            usuario.setVisible(true);
-            this.dispose();
-            telaCadastro.dispose();
+        if(Objects.equals(pessoa, "Usuario")){
+            if(usuarioService.logarUsuario(username, password)){
+                Painel_Usuario usuario = new Painel_Usuario();
+                usuario.setLocationRelativeTo(this);
+                usuario.setVisible(true);
+                this.dispose();
+                telaCadastro.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Nome ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            FuncionarioResponse funcionario = funcionarioService.buscarFuncionarioPeloNome(username);
-
-            if(funcionario.fun_funcao() == "Gerente"){
+            FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
+            
+            if(Objects.equals(funcionario.fun_funcao(), "Gerente")){
                 Painel_Gerente gerente = new Painel_Gerente();
                 gerente.setLocationRelativeTo(this);
                 gerente.setVisible(true);
             } else {
-                Painel_Funcionario fun = new Painel_Funcionario();
-                fun.setLocationRelativeTo(this);
-                fun.setVisible(true);
+                if(funcionarioService.logarFuncionario(username, password) != null){
+                    Painel_Funcionario fun = new Painel_Funcionario();
+                    fun.setLocationRelativeTo(this);
+                    fun.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nome ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            
-            this.dispose();
-            telaCadastro.dispose();
         }
+        
+        this.dispose();
+        telaCadastro.dispose();
     }//GEN-LAST:event_jBTNEntrarMouseClicked
 
+    public void teste(){
+        String username = jTFNomeLogin.getText();
+        String password = jTFSenhaLogin.getText();
+
+        // Configurar as informações de login no Singleton Login
+        Login.getInstance().setUser(username);
+        Login.getInstance().setSenha(password);
+        
+        FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
+        
+        try {
+            if(funcionario.fun_funcao().equals("Gerente")){
+                Painel_Usuario usuario = new Painel_Usuario();
+                usuario.setLocationRelativeTo(this);
+                usuario.setVisible(true);
+                this.dispose();
+                telaCadastro.dispose();
+            } else {
+
+            }
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Nome ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        this.dispose();
+        telaCadastro.dispose();
+    }
 
     private void inicializandoClasses(){
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();

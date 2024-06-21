@@ -23,7 +23,6 @@ public class FuncionarioRepository {
             }
 
             sql = "INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_funcao, fun_senha) VALUES ( ?, ?, ?, ?, ?)";
-            System.out.println(funcionario.toString());
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, funcionario.getFun_codigo());
                 statement.setString(2, funcionario.getFun_nome());
@@ -33,9 +32,36 @@ public class FuncionarioRepository {
                 statement.executeUpdate();
             }
 
+            sql = "SELECT cadastrar_usuario(?, ?)";
+            try(PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, funcionario.getFun_nome());
+                statement.setString(2, funcionario.getFun_senha());
+            }
             return funcionario;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao cadastrar funcionario", ex);
+        }
+    }
+
+    public Funcionario logarFuncionario(String nome, String senha) {
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT fun_codigo, fun_nome, fun_cpf, fun_funcao FROM tb_funcionarios WHERE fun_nome = ? && fun_senha = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(0, nome);
+                statement.setString(1, senha);
+                ResultSet resultado = statement.executeQuery();
+                if (resultado.next()) {
+                    return new Funcionario(
+                            resultado.getInt("fun_codigo"),
+                            resultado.getString("fun_nome"),
+                            resultado.getString("fun_cpf"),
+                            resultado.getString("fun_funcao")
+                    );
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao buscar funcionário: ", ex);
         }
     }
 

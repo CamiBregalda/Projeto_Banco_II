@@ -28,6 +28,10 @@ public class UsuarioService {
         return usuarioMapper.entityToResponse(usuarioRepository.cadastrarUsuario(user));
     }
 
+    public boolean logarUsuario(String username, String password){
+        return usuarioRepository.logarUsuario(username, password);
+    }
+    
     public List<UserResponse> buscarUsuarios() {
         try {
             List<Usuario> usuarios = usuarioRepository.buscarUsuarios();
