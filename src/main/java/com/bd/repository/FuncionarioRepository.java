@@ -14,22 +14,15 @@ public class FuncionarioRepository {
 
     public Funcionario cadastrarFuncionario(Funcionario funcionario) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT MAX(fun_codigo) as fun_codigo FROM tb_funcionarios";
+            String sql = "SELECT cadastrar_funcionario(?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                ResultSet resultado = statement.executeQuery();
-                if (resultado.next()) {
-                    funcionario.setFun_codigo(resultado.getInt("fun_codigo") + 1);
-                }
-            }
-
-            sql = "INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_funcao, fun_senha) VALUES ( ?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, funcionario.getFun_codigo());
-                statement.setString(2, funcionario.getFun_nome());
-                statement.setString(3, funcionario.getFun_cpf());
-                statement.setString(4, funcionario.getFun_funcao());
-                statement.setString(5, funcionario.getFun_senha());
+                statement.setString(1, funcionario.getFun_nome());
+                statement.setString(2, funcionario.getFun_cpf());
+                statement.setString(3, funcionario.getFun_funcao());
+                statement.setString(4, funcionario.getFun_senha());
                 statement.executeUpdate();
+            } catch (SQLException ex) {
+                return null;
             }
 
             sql = "SELECT cadastrar_usuario(?, ?)";
@@ -37,6 +30,7 @@ public class FuncionarioRepository {
                 statement.setString(1, funcionario.getFun_nome());
                 statement.setString(2, funcionario.getFun_senha());
             }
+            
             return funcionario;
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao cadastrar funcionario", ex);

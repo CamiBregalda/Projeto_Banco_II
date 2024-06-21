@@ -2,6 +2,46 @@
 
 /*a. (Pontos 0,5) Crie uma função e no corpo da mesma teste o comando Rollback (no PLPgSQL o 
 Exception em uma função é considerado um Rollback).*/
+
+Create table tb_funcionarios(
+	fun_codigo BIGINT PRIMARY KEY,
+	fun_nome VARCHAR(30),
+	fun_cpf VARCHAR(15),
+	fun_senha VARCHAR(11),
+	fun_funcao VARCHAR(20)
+);
+
+CREATE OR REPLACE FUNCTION cadastrar_funcionario(
+    nome VARCHAR(30),
+    cpf VARCHAR(15),
+    senha VARCHAR(11),
+    funcao VARCHAR(20)
+)
+RETURNS VOID AS $$
+DECLARE
+    codigo BIGINT;
+	id_funcionario BIGINT;
+BEGIN
+    -- Verifica se o nome do funcionário já existe
+    SELECT fun_codigo INTO codigo FROM tb_funcionarios WHERE fun_nome = nome;
+
+    -- Se o código foi encontrado, significa que o nome já existe
+    IF FOUND THEN
+        RAISE EXCEPTION 'Erro: Funcionário com nome % já existe. Rollback necessário.', nome;
+    END IF;
+
+
+	SELECT MAX(fun_codigo) INTO id_funcionario FROM tb_funcionarios;
+    INSERT INTO tb_funcionarios (fun_codigo, fun_nome, fun_cpf, fun_senha, fun_funcao) VALUES (id_funcionario + 1, nome, cpf, senha, funcao);
+END;
+$$ LANGUAGE plpgsql;
+
+select cadastrar_funcionario('Camila Bregalda', '333.333.333-33', 'senha', 'Gerente');
+
+SELECT * FROM tb_funcionarios;
+
+
+/*
 CREATE OR REPLACE FUNCTION realizar_venda(
     ven_horario TIMESTAMP,
     fun_codigo BIGINT,
@@ -73,7 +113,7 @@ $$ LANGUAGE plpgsql;
 
 drop function realizar_venda()
 --Ideia: valor pago é menor que valor total da venda
-
+*/
 
 /*b. (Pontos 0,5) Criar duas ou mais transações que utilizam um mesmo recurso de forma
 simultânea para realizar uma simulação e poder visualizar o controle de transação funcionando.*/
