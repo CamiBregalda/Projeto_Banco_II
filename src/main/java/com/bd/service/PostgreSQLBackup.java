@@ -10,48 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreSQLBackup {
-/*
-    public static void main(String[] args) {
-        realizarBackup();
 
-        /*
-        // Defina o caminho personalizado para o arquivo .pgpass
-        String outputPath = "C:\\Users\\Camil\\Desktop\\Faculdade 2024\\Banco de Dados II\\Trabalho Prático II\\Projeto_Banco_II\\sql\\Backup\\backup.sql";
-
-        // Define a variável de ambiente PGPASSFILE
-        System.setProperty("PGPASSFILE", pgpassFile);
-
-        // Exemplo de execução do comando pg_dump
-        try {
-            String[] command = {
-                    "C:\\Program Files\\PostgreSQL\\14\\bin\\pg_dump.exe",
-                    "-h", "localhost",
-                    "-p", "5432",
-                    "-U", "postgres",
-                    "-d", "loja_virtual",
-                    "-f", outputPath
-            };
-
-            // Executa o comando pg_dump
-            Process process = Runtime.getRuntime().exec(command);
-            int exitCode = process.waitFor();
-
-            if (exitCode == 0) {
-                System.out.println("Backup realizado com sucesso.");
-            } else {
-                System.err.println("Erro ao realizar o backup.");
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    public static void main(String[] args) {
-        String host = "localhost"; // Host onde o PostgreSQL está rodando
-        String port = "5432"; // Porta do PostgreSQL
-        String username = "postgres"; // Usuário do PostgreSQL
-        String database = "loja_virtual"; // Nome do banco que deseja fazer backup
-        String password = "root";
+    public void realizarBackup() {
+        String host;
+        String port;
+        String username;
+        String database;
+        String password;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String formattedDateTime = LocalDateTime.now().format(formatter);
