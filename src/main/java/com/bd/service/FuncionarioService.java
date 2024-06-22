@@ -149,14 +149,11 @@ public class FuncionarioService {
 
     public boolean realizarBackup(String host, String port, String username, String database, String password) throws RuntimeException {
         PostgreSQLBackup backup = new PostgreSQLBackup();
-        System.out.println("Aqui");
         boolean response = backup.realizarBackup(host, port, username, database, password);
             
-        System.out.println("Passei");
         if (response){
             backupRepository.realizarBackup();
         }
-        System.out.println("Final");
         
         return response;
     }

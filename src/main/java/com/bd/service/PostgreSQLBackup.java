@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreSQLBackup {
-    
+
     public boolean realizarBackup(String host, String port, String username, String database, String password) {
         String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-        String outputPath = "C:\\Users\\backup_" + formattedDateTime + ".sql";
+        String outputPath = "C:\\Backup\\backup_" + formattedDateTime + ".sql";
 
         List<String> command = new ArrayList<>();
         command.add("C:\\Program Files\\PostgreSQL\\14\\bin\\pg_dump.exe");
@@ -34,7 +34,8 @@ public class PostgreSQLBackup {
             return exitCode == 0;
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-            throw new RuntimeException(e.getMessage());
         }
+
+        return false;
     }
 }
