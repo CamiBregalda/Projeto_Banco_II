@@ -29,11 +29,36 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTFNomeNovaRole = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLListaNomeFuncionarios = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLListaNomeDefinitivo = new javax.swing.JList<>();
+        jBTCriarRole = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Criar um novo Papel");
+
+        jLabel2.setText("Nome do Novo Papel:");
+
+        jLListaNomeFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLListaNomeFuncionariosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jLListaNomeFuncionarios);
+
+        jScrollPane2.setViewportView(jLListaNomeDefinitivo);
+
+        jBTCriarRole.setText("Criar Papel");
+        jBTCriarRole.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTCriarRoleMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -41,19 +66,53 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(jLabel1)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTFNomeNovaRole, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(106, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBTCriarRole)
+                .addGap(300, 300, 300))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTFNomeNovaRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(30, 30, 30)
+                .addComponent(jBTCriarRole)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBTCriarRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCriarRoleMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTCriarRoleMouseClicked
+
+    private void jLListaNomeFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeFuncionariosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLListaNomeFuncionariosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -98,6 +157,13 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTCriarRole;
+    private javax.swing.JList<String> jLListaNomeDefinitivo;
+    private javax.swing.JList<String> jLListaNomeFuncionarios;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTFNomeNovaRole;
     // End of variables declaration//GEN-END:variables
 }
