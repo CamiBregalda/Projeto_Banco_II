@@ -14,6 +14,7 @@ import com.bd.service.VendaService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -27,6 +28,8 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     FuncionarioService funcionarioService;
     ItemService itemService;
     VendaService vendaService;
+    
+    
     /**
      * Creates new form Painel_Cadastrar_Role
      */
@@ -34,7 +37,7 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
         super(parent, modal);
         setTitle("Cadastro Papel");
         initComponents();
-    }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,21 +155,40 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
             jTFNomeNovaRole.setText(listaFuncionarios);
         }
         
-        funcionarioService.cadastrarRole(nomeRole, pessoas);
+    //    funcionarioService.cadastrarRole(nomeRole, pessoas);
     }//GEN-LAST:event_jBTCriarRoleMouseClicked
 
     private void jLListaNomeFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeFuncionariosMouseClicked
-        String nomeFuncionario = jLListaNomeFuncionarios.getSelectedValue();
-        jLListaNomeDefinitivo.add(nomeFuncionario);
-       
-        //quando clicado no nome vai adicionar na lista 2 e ser removido da 1 lista
+        DefaultListModel<String> modeloFuncionarios;
+        DefaultListModel<String> modeloDefinitivo;
+        modeloFuncionarios = new DefaultListModel<>();
+        modeloDefinitivo = new DefaultListModel<>();
+        jLListaNomeFuncionarios = new JList<>(modeloFuncionarios);
+        jLListaNomeDefinitivo = new JList<>(modeloDefinitivo);
         
+        String nomeFuncionario = jLListaNomeFuncionarios.getSelectedValue();
+    if (nomeFuncionario != null) {
+        modeloFuncionarios.removeElement(nomeFuncionario); // Remove da primeira lista
+        modeloDefinitivo.addElement(nomeFuncionario); // Adiciona à segunda lista
+        
+    }
+
         
     }//GEN-LAST:event_jLListaNomeFuncionariosMouseClicked
 
     private void jLListaNomeDefinitivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeDefinitivoMouseClicked
+        DefaultListModel<String> modeloFuncionarios;
+        DefaultListModel<String> modeloDefinitivo;
+        modeloFuncionarios = new DefaultListModel<>();
+        modeloDefinitivo = new DefaultListModel<>();
+        jLListaNomeFuncionarios = new JList<>(modeloFuncionarios);
+        jLListaNomeDefinitivo = new JList<>(modeloDefinitivo);
         
-  //   jLListaNomeDefinitivo.add(nomeFuncionario);
+        String nomeFuncionario = jLListaNomeDefinitivo.getSelectedValue();
+    if (nomeFuncionario != null) {
+        modeloDefinitivo.removeElement(nomeFuncionario); // Remove da segunda lista
+        modeloFuncionarios.addElement(nomeFuncionario); // Adiciona à primeira lista
+    }
         
              
     }//GEN-LAST:event_jLListaNomeDefinitivoMouseClicked
