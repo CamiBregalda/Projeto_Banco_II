@@ -163,7 +163,6 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
         
         ProdutoResponse atualizar = produtoService.atualizarProduto(pro_codigo, new ProdutoRequest((int) pro_codigo, nome, preco, estoque, fornecedor.for_codigo()));
         
-        new Painel_Funcionario().setVisible(true);
         
         //ProdutoResponse atualizar = atualizarProduto();
         this.dispose();
