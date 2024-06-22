@@ -72,6 +72,13 @@ public class Painel_Gerente extends javax.swing.JFrame {
 
         jSPFornecedor.setViewportView(jLSTFornecedor);
 
+        jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Backup", "Privilégios" }));
+        jCBFuncoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBFuncoesActionPerformed(evt);
+            }
+        });
+
         jBTNAplicarFuncoes.setText("Aplicar");
         jBTNAplicarFuncoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,9 +193,26 @@ public class Painel_Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
-        //Aplicar a função selecionada no combo box
-        //if else para o get selected, redirecionando o usuário para uma nova tela
+
+        String opcao = jCBFuncoes.getSelectedItem().toString();
+        System.out.print(opcao);
+        
+        if(opcao == "Backup"){            
+            Painel_Backup telaBackup = new Painel_Backup(this, true);
+            telaBackup.setLocationRelativeTo(this);
+            telaBackup.setVisible(true);
+            
+        }
+        else if(opcao == "Privilégios"){
+            Painel_Privilegios telaPrivilegios = new Painel_Privilegios(this, true);
+            telaPrivilegios.setLocationRelativeTo(this);
+            telaPrivilegios.setVisible(true);
+        }
     }//GEN-LAST:event_jBTNAplicarFuncoesMouseClicked
+
+    private void jCBFuncoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBFuncoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBFuncoesActionPerformed
 
 //Adicionar função para listar os nomes quando forem pesquisados
     

@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Repository
 public class FuncionarioRepository {
 
@@ -228,8 +229,32 @@ public class FuncionarioRepository {
         }
     }
 
+    public ArrayList<String> funcionarioPertenceRole(String rolename){
+        try (Connection connection = Conexao.getConnection()) {
+            String sql = "SELECT member.rolname AS member_name\n" +
+                    "FROM pg_roles\n" +
+                    "JOIN pg_auth_members ON pg_roles.oid = pg_auth_members.roleid\n" +
+                    "JOIN pg_roles AS member ON pg_auth_members.member = member.oid\n" +
+                    "WHERE pg_roles.rolname = (?)";
+            try(PreparedStatement statement = connection.prepareStatement(sql)){
+                    statement.setString(1, rolename);
+                    ResultSet resultado = statement.executeQuery();
+                    ArrayList<String> funcionariorole = new ArrayList<>();
+                    while (resultado.next()) {
+                        funcionariorole.add(resultado.getString("member_name"));
+                    }
+                    return funcionariorole;
+            }
+        } catch (SQLException e){
+            throw new RuntimeException("Erro ao mostrar funcionarios por roles", e);
+        }
+    }
+
+
+
 
 
 
 
 }
+

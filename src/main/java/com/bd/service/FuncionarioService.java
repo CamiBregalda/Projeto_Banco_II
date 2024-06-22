@@ -126,7 +126,7 @@ public class FuncionarioService {
         }
     }
 
-    public String concederPrivilegioGrupo (String nameGrupo, String nomeDaTabela, String[] privilegios) {
+    public String concederPrivilegioGrupo(String nameGrupo, String nomeDaTabela, String[] privilegios) {
         try {
             funcionarioRepository.concederPrivilegioGrupo(nameGrupo, nomeDaTabela, privilegios);
             return "privilegio ao grupo foi concedido com sucesso!";
@@ -144,6 +144,15 @@ public class FuncionarioService {
             throw new BusinessException("Erro ao conceder privilegio ao usuario: " + e.getMessage());
         }
 
+    }
+
+    public ArrayList<String> funcionarioPertenceRole(String rolename){
+        try {
+            List<String> funcionarioPertenceRole = funcionarioRepository.funcionarioPertenceRole(rolename);
+            return new ArrayList<>(funcionarioPertenceRole);
+        }catch (Exception e){
+            throw new BusinessException("Erro ao buscar funcionario por roles: " + e.getMessage());
+        }
     }
 
     public void realizarBackup(String host, String port, String username, String database, String password){
