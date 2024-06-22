@@ -151,6 +151,8 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
         String password = new String (jPFSenhaBanco.getPassword());
         
         funcionarioService.realizarBackup(host, porta, userName, database, password);
+        
+        this.dispose();
     }//GEN-LAST:event_jBTNConfirmarMouseClicked
 
 

@@ -15,7 +15,7 @@ public class PostgreSQLBackup {
     public void realizarBackup(String host, String port, String username, String database, String password) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String formattedDateTime = LocalDateTime.now().format(formatter);
-        String outputPath = "C:\\Backup\\backup_" + formattedDateTime + ".sql";
+        String outputPath = "C:\\backup_" + formattedDateTime + ".sql";
 
         try {
             List<String> command = new ArrayList<>();
