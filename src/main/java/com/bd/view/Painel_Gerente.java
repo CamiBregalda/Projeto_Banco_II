@@ -73,11 +73,6 @@ public class Painel_Gerente extends javax.swing.JFrame {
         jSPFornecedor.setViewportView(jLSTFornecedor);
 
         jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Backup", "Privilégios" }));
-        jCBFuncoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBFuncoesActionPerformed(evt);
-            }
-        });
 
         jBTNAplicarFuncoes.setText("Aplicar");
         jBTNAplicarFuncoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -207,10 +202,6 @@ public class Painel_Gerente extends javax.swing.JFrame {
             telaPrivilegios.setVisible(true);
         }
     }//GEN-LAST:event_jBTNAplicarFuncoesMouseClicked
-
-    private void jCBFuncoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBFuncoesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBFuncoesActionPerformed
 
 //Adicionar função para listar os nomes quando forem pesquisados
     
