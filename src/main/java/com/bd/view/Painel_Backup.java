@@ -154,8 +154,9 @@ public class Painel_Backup extends javax.swing.JDialog {
                 //relizar todo ano
              }
             funcionarioService.programarBackup(data);
-       }
-       
+        }
+        this.dispose();
+    
     }//GEN-LAST:event_jBTNAgendarBackupMouseClicked
 
     private void jBTNExecutarBackupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNExecutarBackupMouseClicked
