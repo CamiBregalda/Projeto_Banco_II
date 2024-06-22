@@ -40,6 +40,7 @@ public class Painel_Backup extends javax.swing.JDialog {
         
     public Painel_Backup(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        inicializandoClasses();
         initComponents();
     }
 
@@ -94,13 +95,14 @@ public class Painel_Backup extends javax.swing.JDialog {
                         .addComponent(jBTNAgendarBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLBTitulo)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jLBTitulo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jBTNExecutarBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBTNExecutarBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +161,6 @@ public class Painel_Backup extends javax.swing.JDialog {
        
        JOptionPane.showMessageDialog(this, "Backup agendado com sucesso!");
        this.dispose();
-       
     }//GEN-LAST:event_jBTNAgendarBackupMouseClicked
 
     private void jBTNExecutarBackupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNExecutarBackupMouseClicked
@@ -169,7 +170,7 @@ public class Painel_Backup extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jBTNExecutarBackupMouseClicked
 
-     private void inicializandoClasses(){
+    private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();
         FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
         fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);

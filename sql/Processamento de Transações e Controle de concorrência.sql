@@ -21,7 +21,7 @@ BEGIN
     RAISE NOTICE 'Fornecedor e produtos associados deletados com sucesso.';
 EXCEPTION
     WHEN OTHERS THEN
-        RAISE EXCEPTION 'Erro ao deletar fornecedor e produtos associados. Rollback necessário. Mensagem: %', SQLERRM;
+        RAISE EXCEPTION 'Erro ao deletar fornecedor e produtos associados. Mensagem: %', SQLERRM;
 END;
 $$ LANGUAGE plpgsql;
 

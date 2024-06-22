@@ -1,11 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.bd.view;
 
+import com.bd.mapper.FuncionarioMapper;
+import com.bd.repository.BackupRepository;
+import com.bd.repository.FuncionarioRepository;
 import com.bd.service.FuncionarioService;
 import javax.swing.JOptionPane;
+import org.mapstruct.factory.Mappers;
 
 
 public class Painel_Infos_Backup extends javax.swing.JDialog {
@@ -14,10 +14,10 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
     
     public Painel_Infos_Backup(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
+        inicializandoClasses();
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -29,9 +29,9 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
         jLBPorta = new javax.swing.JLabel();
         jTFPorta = new javax.swing.JTextField();
         jLBUserName = new javax.swing.JLabel();
-        jTFUserName = new javax.swing.JTextField();
-        jLBDatabase = new javax.swing.JLabel();
         jTFDatabase = new javax.swing.JTextField();
+        jLBDatabase = new javax.swing.JLabel();
+        jTFUsername = new javax.swing.JTextField();
         jLBSenhaBanco = new javax.swing.JLabel();
         jPFSenhaBanco = new javax.swing.JPasswordField();
         jBTNConfirmar = new javax.swing.JButton();
@@ -81,7 +81,7 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLBDatabase)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTFUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTFDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLBUserName)
@@ -89,16 +89,17 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPFSenhaBanco, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                            .addComponent(jTFDatabase))))
+                            .addComponent(jTFUsername))))
                 .addGap(28, 28, 28))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jLBCredenciais)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jLBCredenciais))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jBTNConfirmar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBTNConfirmar)
-                .addGap(145, 145, 145))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,11 +117,11 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLBDatabase)
-                    .addComponent(jTFUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLBUserName)
-                    .addComponent(jTFDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLBSenhaBanco)
@@ -148,15 +149,27 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
         String host = jTFHost.getText();
         String porta = jTFPorta.getText();
         String database = jTFDatabase.getText();
-        String userName = new String (jTFUserName.getText());
+        String username = jTFUsername.getText();
         String password = new String (jPFSenhaBanco.getPassword());
         
-        funcionarioService.realizarBackup(host, porta, userName, database, password);
-        JOptionPane.showMessageDialog(this, "Backup realizado com sucesso!");
+        boolean backup = funcionarioService.realizarBackup(host, porta, username, database, password);
+        
+        if (backup == true){
+            JOptionPane.showMessageDialog(this, "Backup realizado com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Backup não pôde ser realizado!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
         this.dispose();
     }//GEN-LAST:event_jBTNConfirmarMouseClicked
 
-
+    private void inicializandoClasses(){
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        BackupRepository backupRepository = new BackupRepository();
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -209,6 +222,6 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
     private javax.swing.JTextField jTFDatabase;
     private javax.swing.JTextField jTFHost;
     private javax.swing.JTextField jTFPorta;
-    private javax.swing.JTextField jTFUserName;
+    private javax.swing.JTextField jTFUsername;
     // End of variables declaration//GEN-END:variables
 }
