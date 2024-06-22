@@ -4,12 +4,29 @@
  */
 package com.bd.view;
 
+import com.bd.model.response.FuncionarioResponse;
+import com.bd.service.FornecedorService;
+import com.bd.service.FuncionarioService;
+import com.bd.service.ItemService;
+import com.bd.service.ProdutoService;
+import com.bd.service.UsuarioService;
+import com.bd.service.VendaService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author gui
  */
 public class Painel_Cadastrar_Role extends javax.swing.JDialog {
-
+    
+    ProdutoService produtoService;
+    FornecedorService fornecedorService;
+    UsuarioService usuarioService;
+    FuncionarioService funcionarioService;
+    ItemService itemService;
+    VendaService vendaService;
     /**
      * Creates new form Painel_Cadastrar_Role
      */
@@ -36,6 +53,7 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jLListaNomeDefinitivo = new javax.swing.JList<>();
         jBTCriarRole = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,6 +69,11 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jLListaNomeFuncionarios);
 
+        jLListaNomeDefinitivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLListaNomeDefinitivoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jLListaNomeDefinitivo);
 
         jBTCriarRole.setText("Criar Papel");
@@ -60,30 +83,36 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setText("Selecione as pessoas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTFNomeNovaRole, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(106, Short.MAX_VALUE))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTFNomeNovaRole, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(jBTCriarRole))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(88, 88, 88))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBTCriarRole)
-                .addGap(300, 300, 300))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(219, 219, 219))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,25 +123,53 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTFNomeNovaRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addComponent(jBTCriarRole)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTCriarRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCriarRoleMouseClicked
-        // TODO add your handling code here:
+        String nomeRole = jTFNomeNovaRole.getText();
+        
+        List<FuncionarioResponse> pessoas = funcionarioService.buscarFuncionarios();
+        List<String> funcionario = null;
+        for(FuncionarioResponse elementoPessoa : pessoas){
+            funcionario.add(elementoPessoa.fun_nome());
+        }
+    //    DefaultListModel<String> modeloLista = (DefaultListModel<String>) jTFNomeNovaRole.getModel();
+    //    modeloLista.clear();
+        
+        for(String listaFuncionarios : funcionario){
+            jTFNomeNovaRole.setText(listaFuncionarios);
+        }
+        
+        funcionarioService.cadastrarRole(nomeRole, pessoas);
     }//GEN-LAST:event_jBTCriarRoleMouseClicked
 
     private void jLListaNomeFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeFuncionariosMouseClicked
-        // TODO add your handling code here:
+        String nomeFuncionario = jLListaNomeFuncionarios.getSelectedValue();
+        jLListaNomeDefinitivo.add(nomeFuncionario);
+       
+        //quando clicado no nome vai adicionar na lista 2 e ser removido da 1 lista
+        
+        
     }//GEN-LAST:event_jLListaNomeFuncionariosMouseClicked
+
+    private void jLListaNomeDefinitivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeDefinitivoMouseClicked
+        
+  //   jLListaNomeDefinitivo.add(nomeFuncionario);
+        
+             
+    }//GEN-LAST:event_jLListaNomeDefinitivoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,6 +219,7 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     private javax.swing.JList<String> jLListaNomeFuncionarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFNomeNovaRole;
