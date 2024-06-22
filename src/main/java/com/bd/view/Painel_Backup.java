@@ -25,6 +25,7 @@ import com.bd.service.ProdutoService;
 import com.bd.service.UsuarioService;
 import com.bd.service.VendaService;
 import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 import org.mapstruct.factory.Mappers;
 
 
@@ -155,6 +156,8 @@ public class Painel_Backup extends javax.swing.JDialog {
              }
             funcionarioService.programarBackup(data);
        }
+       
+       JOptionPane.showMessageDialog(this, "Backup agendado com sucesso!");
        this.dispose();
        
     }//GEN-LAST:event_jBTNAgendarBackupMouseClicked
