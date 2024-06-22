@@ -110,46 +110,6 @@ public class Painel_Login extends javax.swing.JDialog {
     private void jBTNEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNEntrarMouseClicked
         String username = jTFNomeLogin.getText();
         String password = jTFSenhaLogin.getText();
-        
-        // Configurar as informações de login no Singleton Login
-        Login.getInstance().setUser(username);
-        Login.getInstance().setSenha(password);
-        
-        if(Objects.equals(pessoa, "Usuario")){
-            if(usuarioService.logarUsuario(username, password)){
-                Painel_Usuario usuario = new Painel_Usuario();
-                usuario.setLocationRelativeTo(this);
-                usuario.setVisible(true);
-                this.dispose();
-                telaCadastro.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Nome ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
-            
-            if(Objects.equals(funcionario.fun_funcao(), "Gerente")){
-                Painel_Gerente gerente = new Painel_Gerente();
-                gerente.setLocationRelativeTo(this);
-                gerente.setVisible(true);
-            } else {
-                if(funcionarioService.logarFuncionario(username, password) != null){
-                    Painel_Funcionario fun = new Painel_Funcionario();
-                    fun.setLocationRelativeTo(this);
-                    fun.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Nome ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-        
-        this.dispose();
-        telaCadastro.dispose();
-    }//GEN-LAST:event_jBTNEntrarMouseClicked
-
-    public void teste(){
-        String username = jTFNomeLogin.getText();
-        String password = jTFSenhaLogin.getText();
 
         // Configurar as informações de login no Singleton Login
         Login.getInstance().setUser(username);
@@ -165,7 +125,9 @@ public class Painel_Login extends javax.swing.JDialog {
                 this.dispose();
                 telaCadastro.dispose();
             } else {
-
+                Painel_Funcionario fun = new Painel_Funcionario();
+                fun.setLocationRelativeTo(this);
+                fun.setVisible(true);
             }
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(this, "Nome ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -173,7 +135,7 @@ public class Painel_Login extends javax.swing.JDialog {
         
         this.dispose();
         telaCadastro.dispose();
-    }
+    }//GEN-LAST:event_jBTNEntrarMouseClicked
 
     private void inicializandoClasses(){
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();

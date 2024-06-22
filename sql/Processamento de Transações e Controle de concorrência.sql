@@ -11,6 +11,22 @@ Create table tb_funcionarios(
 	fun_funcao VARCHAR(20)
 );
 
+CREATE OR REPLACE FUNCTION deletar_fornecedor_e_produtos(for_codigo BIGINT)
+RETURNS VOID AS $$
+BEGIN
+    DELETE FROM tb_produtos WHERE tb_fornecedores_for_codigo = for_codigo;
+
+    DELETE FROM tb_fornecedores WHERE for_codigo = for_codigo;
+
+    RAISE NOTICE 'Fornecedor e produtos associados deletados com sucesso.';
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Erro ao deletar fornecedor e produtos associados. Rollback necessário. Mensagem: %', SQLERRM;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT deletar_fornecedor_e_produtos(1);
+
 CREATE OR REPLACE FUNCTION cadastrar_funcionario(
     nome VARCHAR(30),
     cpf VARCHAR(15),

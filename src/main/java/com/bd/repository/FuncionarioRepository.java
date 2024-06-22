@@ -222,7 +222,7 @@ public class FuncionarioRepository {
                 statement.setString(1, nameUsuario);
                 statement.setString(2, nomeDaTabela);
                 statement.setArray(3, array);
-                statement.executeUpdate()
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao conceder privilegio ao grupo", e);
