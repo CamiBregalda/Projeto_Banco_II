@@ -159,7 +159,7 @@ public class Painel_Backup extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTNAgendarBackupMouseClicked
 
     private void jBTNExecutarBackupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNExecutarBackupMouseClicked
-        funcionarioService.realizarBackup(host, port, username, database, password);
+        //funcionarioService.realizarBackup(host, port, username, database, password);
         //adicionar os outros dois parametros e pegar do service
     }//GEN-LAST:event_jBTNExecutarBackupMouseClicked
 
