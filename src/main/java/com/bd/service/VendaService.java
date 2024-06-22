@@ -1,24 +1,16 @@
 package com.bd.service;
 
 import com.bd.exception.BusinessException;
-import com.bd.infra.Conexao;
 import com.bd.infra.Login;
-import com.bd.mapper.FuncionarioMapper;
 import com.bd.mapper.VendaMapper;
-import com.bd.model.Funcionario;
 import com.bd.model.Venda;
-import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.request.VendaRegistrationRequest;
 import com.bd.model.request.VendaRequest;
-import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.VendaResponse;
-import com.bd.repository.FuncionarioRepository;
 import com.bd.repository.VendaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +26,6 @@ public class VendaService {
         Venda venda = vendaMapper.postDtoToEntity(vendaRegistrationRequestRequest.getVendaRequest());
         return vendaMapper.entityToResponse(vendaRepository.cadastrarVenda(venda));
     }
-/*
-    public boolean validarVenda(UserLoginDTO userDTO) {
-        Login login = Login.getInstance();
-        login.setUser(userDTO.getUsername());
-        login.setSenha(userDTO.getPassword());
-
-        return Conexao.authenticateUser();
-    }*/
 
     public List<VendaResponse> buscarVendas() {
         try {
@@ -91,7 +75,7 @@ public class VendaService {
         login.setUser(userDTO.getUsername());
         login.setSenha(userDTO.getPassword());
     }
-  
+
     public String realizarVenda(long funcionario_codigo, long produto_codigo, int quantidade_venda) {
         try{
             vendaRepository.realizarVenda(funcionario_codigo, produto_codigo, quantidade_venda);

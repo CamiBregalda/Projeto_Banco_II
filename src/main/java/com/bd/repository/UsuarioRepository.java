@@ -3,7 +3,6 @@ package com.bd.repository;
 import com.bd.infra.Conexao;
 import com.bd.model.Usuario;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -139,6 +138,4 @@ public class UsuarioRepository {
             throw new RuntimeException("Erro ao deletar usuário", ex);
         }
     }
-
-
 }

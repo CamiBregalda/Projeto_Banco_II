@@ -134,6 +134,4 @@ public class ProdutoRepository {
             throw new RuntimeException("Erro ao deletar produto", ex);
         }
     }
-
-
 }

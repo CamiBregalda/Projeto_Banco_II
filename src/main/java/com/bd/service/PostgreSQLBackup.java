@@ -1,10 +1,6 @@
 package com.bd.service;
 
-import com.bd.exception.BusinessException;
-import com.bd.infra.Login;
-
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

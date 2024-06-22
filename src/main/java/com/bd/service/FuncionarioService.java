@@ -168,7 +168,7 @@ public class FuncionarioService {
 
     public void programarBackup(LocalDateTime novoProximoBackup){
         try {
-            backupRepository.programarBackup(Timestamp.valueOf(backupRepository.toString()));
+            backupRepository.programarBackup(Timestamp.valueOf(novoProximoBackup));
         } catch (Exception e) {
             throw new BusinessException("Erro ao programar backup: " + e.getMessage());
         }

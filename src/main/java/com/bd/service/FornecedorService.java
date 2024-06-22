@@ -1,29 +1,16 @@
 package com.bd.service;
 
 import com.bd.exception.BusinessException;
-import com.bd.infra.Conexao;
 import com.bd.infra.Login;
 import com.bd.mapper.FornecedorMapper;
-import com.bd.mapper.UsuarioMapper;
 import com.bd.model.Fornecedor;
-import com.bd.model.Funcionario;
-import com.bd.model.Usuario;
 import com.bd.model.request.FornecedorRegistrationRequest;
 import com.bd.model.request.FornecedorRequest;
 import com.bd.model.request.UserLoginDTO;
-import com.bd.model.request.UserRequest;
 import com.bd.model.response.FornecedorResponse;
-import com.bd.model.response.FuncionarioResponse;
-import com.bd.model.response.UserResponse;
 import com.bd.repository.FornecedorRepository;
-import com.bd.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -98,6 +85,4 @@ public class FornecedorService {
         login.setUser(userDTO.getUsername());
         login.setSenha(userDTO.getPassword());
     }
-
-
 }

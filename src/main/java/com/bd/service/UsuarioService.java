@@ -1,7 +1,6 @@
 package com.bd.service;
 
 import com.bd.exception.BusinessException;
-import com.bd.infra.Conexao;
 import com.bd.infra.Login;
 import com.bd.mapper.UsuarioMapper;
 import com.bd.model.Usuario;
@@ -12,7 +11,6 @@ import com.bd.model.response.UserResponse;
 import com.bd.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
