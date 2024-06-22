@@ -14,6 +14,7 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
     
     public Painel_Infos_Backup(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
+        setTitle("Tela de Credenciais de Backup");
         inicializandoClasses();
         initComponents();
     }

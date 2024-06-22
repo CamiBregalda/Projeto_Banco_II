@@ -40,6 +40,7 @@ public class Painel_Backup extends javax.swing.JDialog {
         
     public Painel_Backup(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setTitle("Tela de Backup");
         inicializandoClasses();
         initComponents();
     }
