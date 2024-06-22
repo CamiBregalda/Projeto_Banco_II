@@ -4,15 +4,33 @@
  */
 package com.bd.view;
 
+import com.bd.model.response.FuncionarioResponse;
+import com.bd.service.FornecedorService;
+import com.bd.service.FuncionarioService;
+import com.bd.service.ItemService;
+import com.bd.service.ProdutoService;
+import com.bd.service.UsuarioService;
+import com.bd.service.VendaService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Element;
+
 /**
  *
  * @author gui
  */
 public class Painel_Roles extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Painel_Roles
-     */
+    ProdutoService produtoService;
+    FornecedorService fornecedorService;
+    UsuarioService usuarioService;
+    FuncionarioService funcionarioService;
+    ItemService itemService;
+    VendaService vendaService;
+
     public Painel_Roles(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,7 +51,7 @@ public class Painel_Roles extends javax.swing.JDialog {
         jLBTituloDaPagina = new javax.swing.JLabel();
         jLBBarraPesquisa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jLListaFuncionarios = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,7 +69,7 @@ public class Painel_Roles extends javax.swing.JDialog {
 
         jLBBarraPesquisa.setText("Buscar Papel:");
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jLListaFuncionarios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,16 +113,20 @@ public class Painel_Roles extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
-      /*  String pesquisa = jTFBarraPesquisa.getText();
+        String pesquisa = jTFBarraPesquisa.getText();
+        jLListaFuncionarios.setEnabled(false);
+        
+        List<String> listaFuncionarios = funcionarioService.funcionarioPertenceRole(pesquisa);
 
-        List<ProdutoResponse> listaProdutos = produtoService.buscarProdutosPeloNome(pesquisa);
+        // Limpa o modelo da lista existente antes de adicionar novos elementos
+        DefaultListModel<String> modeloLista = (DefaultListModel<String>) jLListaFuncionarios.getModel();
+        modeloLista.clear();
 
-        DefaultTableModel tabela = (DefaultTableModel) jTBProdutos.getModel();
-        tabela.setRowCount(0);
+        
+        for (String funcionario : listaFuncionarios) {
+            modeloLista.addElement(funcionario);
+        }
 
-        for (int i = 0; i < listaProdutos.size(); i++) {
-            tabela.addRow(new Object[]{listaProdutos.get(i).pro_codigo(), listaProdutos.get(i).pro_descricao(), listaProdutos.get(i).pro_valor()});
-        }*/
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     /**
@@ -154,7 +176,7 @@ public class Painel_Roles extends javax.swing.JDialog {
     private javax.swing.JLabel jLBBarraPesquisa;
     private javax.swing.JLabel jLBProdutos;
     private javax.swing.JLabel jLBTituloDaPagina;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jLListaFuncionarios;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFBarraPesquisa;
     // End of variables declaration//GEN-END:variables
