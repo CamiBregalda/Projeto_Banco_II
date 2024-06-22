@@ -39,7 +39,7 @@ public class Painel_Backup extends javax.swing.JDialog {
             }
         });
 
-        jCBAgendarBackup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diariamente", "Semanalmente", "Mensalmente", "Anualmente" }));
+        jCBAgendarBackup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Diariamente", "Semanalmente", "Mensalmente", "Anualmente" }));
 
         jLBTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLBTitulo.setText("Backup");
