@@ -155,6 +155,7 @@ public class Painel_Backup extends javax.swing.JDialog {
              }
             funcionarioService.programarBackup(data);
        }
+       this.dispose();
        
     }//GEN-LAST:event_jBTNAgendarBackupMouseClicked
 
@@ -162,6 +163,7 @@ public class Painel_Backup extends javax.swing.JDialog {
         Painel_Infos_Backup infos = new Painel_Infos_Backup(this, true);
         infos.setLocationRelativeTo(this);
         infos.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBTNExecutarBackupMouseClicked
 
      private void inicializandoClasses(){
