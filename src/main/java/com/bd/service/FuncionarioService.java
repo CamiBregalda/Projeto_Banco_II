@@ -1,22 +1,14 @@
 package com.bd.service;
 
 import com.bd.exception.BusinessException;
-import com.bd.infra.Conexao;
-import com.bd.infra.Login;
 import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.Funcionario;
-import com.bd.model.request.FuncionarioRegistrationRequest;
 import com.bd.model.request.FuncionarioRequest;
-import com.bd.model.request.UserLoginDTO;
-import com.bd.model.response.FornecedorResponse;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.BackupRepository;
 import com.bd.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -157,11 +149,14 @@ public class FuncionarioService {
 
     public boolean realizarBackup(String host, String port, String username, String database, String password) throws RuntimeException {
         PostgreSQLBackup backup = new PostgreSQLBackup();
+        System.out.println("Aqui");
         boolean response = backup.realizarBackup(host, port, username, database, password);
             
+        System.out.println("Passei");
         if (response){
             backupRepository.realizarBackup();
         }
+        System.out.println("Final");
         
         return response;
     }
