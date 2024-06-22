@@ -72,7 +72,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
 
         jSPFornecedor.setViewportView(jLSTFornecedor);
 
-        jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Backup", "Privilégios" }));
+        jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Backup", "Privilégios" }));
         jCBFuncoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBFuncoesActionPerformed(evt);

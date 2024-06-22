@@ -178,9 +178,10 @@
         <Component class="javax.swing.JComboBox" name="jCBFuncoes">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Backup"/>
-                <StringItem index="1" value="Privil&#xe9;gios"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Selecione"/>
+                <StringItem index="1" value="Backup"/>
+                <StringItem index="2" value="Privil&#xe9;gios"/>
               </StringArray>
             </Property>
           </Properties>
