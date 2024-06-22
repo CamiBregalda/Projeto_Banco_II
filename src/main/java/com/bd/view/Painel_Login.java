@@ -35,7 +35,7 @@ public class Painel_Login extends javax.swing.JDialog {
         jLBNomeLogin = new javax.swing.JLabel();
         jTFNomeLogin = new javax.swing.JTextField();
         jLBSenhaLogin = new javax.swing.JLabel();
-        jTFSenhaLogin = new javax.swing.JTextField();
+        jPFSenhaLogin = new javax.swing.JPasswordField();
         jBTNEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -62,18 +62,18 @@ public class Painel_Login extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFNomeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLBNomeLogin)
-                    .addComponent(jLBSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(127, 127, 127)
                 .addComponent(jBTNEntrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTFNomeLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(jLBNomeLogin)
+                    .addComponent(jLBSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPFSenhaLogin))
+                .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +87,7 @@ public class Painel_Login extends javax.swing.JDialog {
                 .addGap(40, 40, 40)
                 .addComponent(jLBSenhaLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPFSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(jBTNEntrar)
                 .addContainerGap(49, Short.MAX_VALUE))
@@ -109,15 +109,16 @@ public class Painel_Login extends javax.swing.JDialog {
 
     private void jBTNEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNEntrarMouseClicked
         String username = jTFNomeLogin.getText();
-        String password = jTFSenhaLogin.getText();
+        String password = new String (jPFSenhaLogin.getPassword());
 
+        try {
         // Configurar as informações de login no Singleton Login
         Login.getInstance().setUser(username);
         Login.getInstance().setSenha(password);
         
         FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
         
-        try {
+        
             if(funcionario.fun_funcao().equals("Gerente")){
                 Painel_Gerente gerente = new Painel_Gerente();
                 gerente.setLocationRelativeTo(this);
@@ -186,8 +187,8 @@ public class Painel_Login extends javax.swing.JDialog {
     private javax.swing.JLabel jLBNomeLogin;
     private javax.swing.JLabel jLBSenhaLogin;
     private javax.swing.JLabel jLBTituloDaPagina;
+    private javax.swing.JPasswordField jPFSenhaLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFNomeLogin;
-    private javax.swing.JTextField jTFSenhaLogin;
     // End of variables declaration//GEN-END:variables
 }
