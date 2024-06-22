@@ -25,9 +25,6 @@ public class PostgreSQLBackup {
         command.add("-f");
         command.add(outputPath);
 
-        for(String comando : command){
-            System.out.println(comando);
-        }
         ProcessBuilder pb = new ProcessBuilder(command);
         pb.environment().put("PGPASSWORD", password);
 
