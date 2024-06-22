@@ -153,7 +153,7 @@ public class Painel_Funcionario extends javax.swing.JFrame {
         for (int i = 0; i < produtos.size(); i++) {
             FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloId(Long.valueOf(produtos.get(i).tb_fornecedores_for_codigo()));
             tabela.addRow(new Object[]{produtos.get(i).pro_codigo(), produtos.get(i).pro_descricao(), fornecedor.for_descricao()});
-        }//precisa conferir se está correto
+        }
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jTBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBProdutosMouseClicked
