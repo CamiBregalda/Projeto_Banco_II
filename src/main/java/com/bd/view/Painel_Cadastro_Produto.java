@@ -1,8 +1,12 @@
 package com.bd.view;
 
 import com.bd.mapper.*;
+import com.bd.model.request.ProdutoRequest;
+import com.bd.model.response.FornecedorResponse;
+import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
+import java.util.List;
 import org.mapstruct.factory.Mappers;
 
 public class Painel_Cadastro_Produto extends javax.swing.JDialog {
@@ -32,6 +36,8 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
         jLBQuantidadeProduto = new javax.swing.JLabel();
         jBTNCadastrarProduto = new javax.swing.JButton();
         jTFQuantidadeProduto = new javax.swing.JTextField();
+        jLBFonecedores = new javax.swing.JLabel();
+        jCBFornecedores = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,6 +59,8 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
             }
         });
 
+        jLBFonecedores.setText("Fornecedores:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,15 +72,17 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
                 .addContainerGap(168, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLBFonecedores)
+                    .addComponent(jTFDescricaoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLBDescricaoProduto, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLBQuantidadeProduto, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLBValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTFValorProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFQuantidadeProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTFQuantidadeProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)))
+                    .addComponent(jCBFornecedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -92,26 +102,43 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
                 .addComponent(jLBQuantidadeProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
+                .addComponent(jLBFonecedores)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jBTNCadastrarProduto)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCadastrarProdutoMouseClicked
-     
-                
         String descricaoProduto = jTFDescricaoProduto.getText();
         String valorProduto = jTFValorProduto.getText();
         String quantidadeProduto = jTFQuantidadeProduto.getText();
-
+        String fornecedor = jCBFornecedores.getSelectedItem().toString();
         
+        
+        String[] partes = fornecedor.split(" - ");
+        int fornecedorId = 0;
+        if (partes.length > 0) {
+             fornecedorId = Integer.parseInt(partes[0]);
+        }
 
-    //Pega os dados, cria um ProdutoRequest e chama a função cadastrar produto
+        ProdutoResponse produto = produtoService.cadastrarProduto(new ProdutoRequest( null, descricaoProduto, Double.parseDouble(valorProduto), Integer.parseInt(quantidadeProduto), fornecedorId));
+  
     }//GEN-LAST:event_jBTNCadastrarProdutoMouseClicked
 
+       private void recebeDados (FornecedorResponse fornecedor){
+       List<FornecedorResponse> fornecedores = fornecedorService.buscarFornecedores();
+       
+       for (int i = 0; i < fornecedores.size(); i++){
+           jCBFornecedores.addItem(fornecedores.get(i).for_codigo().toString() + " - " + fornecedores.get(i).for_descricao());
+       }
+    }
+    
     private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();
         FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
@@ -180,7 +207,9 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNCadastrarProduto;
+    private javax.swing.JComboBox<String> jCBFornecedores;
     private javax.swing.JLabel jLBDescricaoProduto;
+    private javax.swing.JLabel jLBFonecedores;
     private javax.swing.JLabel jLBQuantidadeProduto;
     private javax.swing.JLabel jLBTituloDaPagina;
     private javax.swing.JLabel jLBValorProduto;

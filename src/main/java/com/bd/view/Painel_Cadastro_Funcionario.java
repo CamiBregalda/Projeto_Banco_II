@@ -6,9 +6,11 @@ package com.bd.view;
 
 import com.bd.mapper.*;
 import com.bd.model.request.FuncionarioRequest;
+import com.bd.model.response.FornecedorResponse;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
+import java.util.List;
 import org.mapstruct.factory.Mappers;
 
 public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
@@ -128,7 +130,7 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jBTNCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCadastrarMouseClicked
         String nome = jTFNomeFuncionario.getText();
         String cpf = jTFcpfFuncionario.getText();
@@ -138,6 +140,7 @@ public class Painel_Cadastro_Funcionario extends javax.swing.JDialog {
         FuncionarioResponse funcionario = funcionarioService.cadastrarFuncionario(new FuncionarioRequest(null, nome, cpf, cargo, senha));
     }//GEN-LAST:event_jBTNCadastrarMouseClicked
 
+    
     private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();
         FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
