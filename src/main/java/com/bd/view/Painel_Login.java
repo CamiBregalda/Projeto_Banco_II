@@ -112,12 +112,11 @@ public class Painel_Login extends javax.swing.JDialog {
         String password = new String (jPFSenhaLogin.getPassword());
 
         try {
-        // Configurar as informações de login no Singleton Login
-        Login.getInstance().setUser(username);
-        Login.getInstance().setSenha(password);
-        
-        FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
-        
+            // Configurar as informações de login no Singleton Login
+            Login.getInstance().setUser(username);
+            Login.getInstance().setSenha(password);
+
+            FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
         
             if(funcionario.fun_funcao().equals("Gerente")){
                 Painel_Gerente gerente = new Painel_Gerente();
