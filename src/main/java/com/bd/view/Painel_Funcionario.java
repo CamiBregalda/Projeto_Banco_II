@@ -173,6 +173,7 @@ public class Painel_Funcionario extends javax.swing.JFrame {
 
     private void jBTCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCadastrarProdutoMouseClicked
         Painel_Cadastro_Produto cadastroProduto = new Painel_Cadastro_Produto(this, true);
+        cadastroProduto.recebeDados();
         cadastroProduto.setLocationRelativeTo(this);
         cadastroProduto.setVisible(true);
     }//GEN-LAST:event_jBTCadastrarProdutoMouseClicked
