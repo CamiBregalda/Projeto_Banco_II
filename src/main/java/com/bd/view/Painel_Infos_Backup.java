@@ -5,6 +5,7 @@
 package com.bd.view;
 
 import com.bd.service.FuncionarioService;
+import javax.swing.JOptionPane;
 
 
 public class Painel_Infos_Backup extends javax.swing.JDialog {
@@ -151,7 +152,7 @@ public class Painel_Infos_Backup extends javax.swing.JDialog {
         String password = new String (jPFSenhaBanco.getPassword());
         
         funcionarioService.realizarBackup(host, porta, userName, database, password);
-        
+        JOptionPane.showMessageDialog(this, "Backup realizado com sucesso!");
         this.dispose();
     }//GEN-LAST:event_jBTNConfirmarMouseClicked
 
