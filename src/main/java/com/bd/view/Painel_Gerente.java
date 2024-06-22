@@ -193,9 +193,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
-
         String opcao = jCBFuncoes.getSelectedItem().toString();
-        System.out.print(opcao);
         
         if(opcao == "Backup"){            
             Painel_Backup telaBackup = new Painel_Backup(this, true);
