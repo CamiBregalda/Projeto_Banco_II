@@ -89,11 +89,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Executar"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNExecutarBackupMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBTNAgendarBackup">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aplicar"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNAgendarBackupMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jCBAgendarBackup">
           <Properties>

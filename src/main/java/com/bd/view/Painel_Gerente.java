@@ -193,21 +193,21 @@ public class Painel_Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
     private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
-        //Aplicar a função selecionada no combo box
+
         String opcao = jCBFuncoes.getSelectedItem().toString();
         System.out.print(opcao);
         
-        if(opcao == "Backup"){
-            
+        if(opcao == "Backup"){            
             Painel_Backup telaBackup = new Painel_Backup(this, true);
             telaBackup.setLocationRelativeTo(this);
             telaBackup.setVisible(true);
             
         }
         else if(opcao == "Privilégios"){
-            
+            Painel_Privilegios telaPrivilegios = new Painel_Privilegios(this, true);
+            telaPrivilegios.setLocationRelativeTo(this);
+            telaPrivilegios.setVisible(true);
         }
-        //if else para o get selected, redirecionando o usuário para uma nova tela
     }//GEN-LAST:event_jBTNAplicarFuncoesMouseClicked
 
     private void jCBFuncoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBFuncoesActionPerformed
