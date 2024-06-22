@@ -1,10 +1,7 @@
 package com.bd.repository;
 
-
 import com.bd.infra.Conexao;
-import com.bd.model.Usuario;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 
 @Repository

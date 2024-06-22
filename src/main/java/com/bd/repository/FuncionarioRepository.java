@@ -2,13 +2,10 @@ package com.bd.repository;
 
 import com.bd.infra.Conexao;
 import com.bd.model.Funcionario;
-import com.bd.model.Usuario;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Repository
 public class FuncionarioRepository {
@@ -42,8 +39,8 @@ public class FuncionarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT fun_codigo, fun_nome, fun_cpf, fun_funcao FROM tb_funcionarios WHERE fun_nome = ? && fun_senha = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(0, nome);
-                statement.setString(1, senha);
+                statement.setString(1, nome);
+                statement.setString(2, senha);
                 ResultSet resultado = statement.executeQuery();
                 if (resultado.next()) {
                     return new Funcionario(
@@ -249,12 +246,5 @@ public class FuncionarioRepository {
             throw new RuntimeException("Erro ao mostrar funcionarios por roles", e);
         }
     }
-
-
-
-
-
-
-
 }
 

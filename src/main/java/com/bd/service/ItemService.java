@@ -8,11 +8,9 @@ import com.bd.model.request.ItemRegistrationRequest;
 import com.bd.model.request.ItemRequest;
 import com.bd.model.request.UserLoginDTO;
 import com.bd.model.response.ItemResponse;
-import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 

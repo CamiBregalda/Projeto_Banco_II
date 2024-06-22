@@ -2,9 +2,7 @@ package com.bd.repository;
 
 import com.bd.infra.Conexao;
 import com.bd.model.Fornecedor;
-import com.bd.model.Usuario;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -108,9 +106,10 @@ public class FornecedorRepository {
             throw new RuntimeException("Erro ao atualizar fornecedor", ex);
         }
     }
+
     public boolean deletarFornecedor(Long id) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "DELETE FROM tb_fornecedores WHERE for_codigo = ?";
+            String sql = "SELECT deletar_fornecedor_e_produtos(?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setLong(1, id);
                 statement.executeUpdate();
@@ -120,8 +119,4 @@ public class FornecedorRepository {
             throw new RuntimeException("Erro ao deletar fornecedor", ex);
         }
     }
-
-
-
 }
-

@@ -2,9 +2,7 @@ package com.bd.repository;
 
 import com.bd.infra.Conexao;
 import com.bd.model.Item;
-import com.bd.model.Venda;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

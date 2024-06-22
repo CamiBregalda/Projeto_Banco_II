@@ -1,12 +1,9 @@
 package com.bd.repository;
 
 import com.bd.infra.Conexao;
-import com.bd.model.Usuario;
 import com.bd.model.Venda;
 import org.springframework.stereotype.Repository;
-
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,5 +122,4 @@ public class VendaRepository {
             throw new RuntimeException("Erro ao realizar venda", ex);
         }
     }
-
 }

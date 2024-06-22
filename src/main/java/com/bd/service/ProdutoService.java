@@ -1,21 +1,13 @@
 package com.bd.service;
 
 import com.bd.exception.BusinessException;
-import com.bd.infra.Login;
 import com.bd.mapper.ProdutoMapper;
-import com.bd.model.Fornecedor;
 import com.bd.model.Produto;
-import com.bd.model.request.ProdutoRegistrationRequest;
 import com.bd.model.request.ProdutoRequest;
-import com.bd.model.request.UserLoginDTO;
-import com.bd.model.response.FornecedorResponse;
-import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -86,5 +78,4 @@ public class ProdutoService {
         return produtoRepository.deletarProduto(id);
 
     }
-
 }
