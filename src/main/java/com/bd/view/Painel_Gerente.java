@@ -72,6 +72,8 @@ public class Painel_Gerente extends javax.swing.JFrame {
 
         jSPFornecedor.setViewportView(jLSTFornecedor);
 
+        jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Backup", "Conceder Privilégios" }));
+
         jBTNAplicarFuncoes.setText("Aplicar");
         jBTNAplicarFuncoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
