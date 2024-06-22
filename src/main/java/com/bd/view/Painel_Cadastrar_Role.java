@@ -159,10 +159,6 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTCriarRoleMouseClicked
 
     private void jLListaNomeFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeFuncionariosMouseClicked
-        //String nomeFuncionario = jLListaNomeFuncionarios.getSelectedValue();
-        //jLListaNomeFuncionarios.getSelectedValue();
-        //jLListaNomeFuncionarios.removeElement();
-        //quando clicado no nome vai adicionar na lista 2 e ser removido da 1 lista
         DefaultListModel<String> modeloFuncionarios;
         DefaultListModel<String> modeloDefinitivo;
         modeloFuncionarios = new DefaultListModel<>();
