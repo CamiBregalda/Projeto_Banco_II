@@ -145,11 +145,13 @@ public class Painel_Funcionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
-        produtos = produtoService.buscarProdutos();
-        
+        String pesquisa = jTFBarraPesquisa.getText();
+
+        produtos = produtoService.buscarProdutosPeloNome(pesquisa);
+
         DefaultTableModel tabela = (DefaultTableModel) jTBProdutos.getModel();
         tabela.setRowCount(0);
-            
+
         for (int i = 0; i < produtos.size(); i++) {
             FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloId(Long.valueOf(produtos.get(i).tb_fornecedores_for_codigo()));
             tabela.addRow(new Object[]{produtos.get(i).pro_codigo(), produtos.get(i).pro_descricao(), fornecedor.for_descricao()});
@@ -177,6 +179,18 @@ public class Painel_Funcionario extends javax.swing.JFrame {
         cadastroProduto.setLocationRelativeTo(this);
         cadastroProduto.setVisible(true);
     }//GEN-LAST:event_jBTCadastrarProdutoMouseClicked
+
+    public void receberDados(){
+        produtos = produtoService.buscarProdutos();
+
+        DefaultTableModel tabela = (DefaultTableModel) jTBProdutos.getModel();
+        tabela.setRowCount(0);
+
+        for (int i = 0; i < produtos.size(); i++) {
+            FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloId(Long.valueOf(produtos.get(i).tb_fornecedores_for_codigo()));
+            tabela.addRow(new Object[]{produtos.get(i).pro_codigo(), produtos.get(i).pro_descricao(), fornecedor.for_descricao()});
+        }
+    }
 
      private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();

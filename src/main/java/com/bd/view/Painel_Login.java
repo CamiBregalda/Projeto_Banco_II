@@ -132,6 +132,7 @@ public class Painel_Login extends javax.swing.JDialog {
                 } else {
                     System.out.print(password);
                     Painel_Funcionario fun = new Painel_Funcionario();
+                    fun.receberDados();
                     fun.setLocationRelativeTo(this);
                     fun.setVisible(true);
                 }           
