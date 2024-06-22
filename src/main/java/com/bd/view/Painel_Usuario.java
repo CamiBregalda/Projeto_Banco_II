@@ -189,13 +189,13 @@ public class Painel_Usuario extends javax.swing.JFrame {
     private void jTBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBProdutosMouseClicked
         String produtoId =  jTBProdutos.getValueAt(jTBProdutos.getSelectedRow(), 0).toString();
         ProdutoResponse produto = produtoService.buscarProdutoPeloId(Long.parseLong(produtoId));
-        
+       /* 
         Painel_Vendas vendas = new Painel_Vendas(this, true);
         vendas.recebeDados(produto);
         vendas.produtoId = produto.pro_codigo();
         vendas.setLocationRelativeTo(this);
         vendas.setVisible(true);
-        
+        */
         //quando clicado vai abrir o produto e vai direcionar para a tela "Painel_Vendas"
     }//GEN-LAST:event_jTBProdutosMouseClicked
 

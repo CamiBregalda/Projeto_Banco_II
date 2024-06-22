@@ -25,7 +25,7 @@ public class Painel_Vendas extends javax.swing.JDialog {
     VendaService vendaService;
     Integer produtoId;
     
-    public Painel_Vendas(java.awt.Frame parent, boolean modal) {
+    public Painel_Vendas(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setTitle("Venda de Itens");
         inicializandoClasses();
@@ -250,7 +250,7 @@ public class Painel_Vendas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Painel_Vendas dialog = new Painel_Vendas(new javax.swing.JFrame(), true);
+                Painel_Vendas dialog = new Painel_Vendas(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

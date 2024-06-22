@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jButton2"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -39,17 +51,10 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jLBNomeProduto" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jBTNAlterar" min="-2" pref="115" max="-2" attributes="0"/>
-                          <EmptySpace pref="50" max="32767" attributes="0"/>
-                          <Component id="jBTNDeletarProduto" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLBQtdEstoque" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLBFornecedor" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -57,15 +62,18 @@
                                   <Component id="jLBCodigo" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLBPreco" alignment="0" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="jBTNAlterar" min="-2" pref="143" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTFEstoque" max="32767" attributes="0"/>
+                              <Component id="jTFEstoque" pref="146" max="32767" attributes="0"/>
                               <Component id="jTFPreco" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLBFornecedorMostrar" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLBCodigoMostrar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jBTNDeletarProduto" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="jBTNVender" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
@@ -96,12 +104,14 @@
                       <Component id="jLBFornecedor" min="-2" max="-2" attributes="0"/>
                       <Component id="jLBFornecedorMostrar" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <Component id="jBTNVender" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jBTNDeletarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBTNAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="64" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -166,10 +176,18 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBTNDeletarProduto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Deletar Produto"/>
+            <Property name="text" type="java.lang.String" value="Deletar "/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNDeletarProdutoMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBTNVender">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vender"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNVenderMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
