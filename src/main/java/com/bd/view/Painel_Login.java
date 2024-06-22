@@ -130,6 +130,7 @@ public class Painel_Login extends javax.swing.JDialog {
                     gerente.setVisible(true);
                 } else {
                     Painel_Funcionario fun = new Painel_Funcionario();
+                    fun.receberDados();
                     fun.setLocationRelativeTo(this);
                     fun.setVisible(true);
                 }           
