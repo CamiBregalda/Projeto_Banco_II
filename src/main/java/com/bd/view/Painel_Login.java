@@ -119,11 +119,9 @@ public class Painel_Login extends javax.swing.JDialog {
         
         try {
             if(funcionario.fun_funcao().equals("Gerente")){
-                Painel_Usuario usuario = new Painel_Usuario();
-                usuario.setLocationRelativeTo(this);
-                usuario.setVisible(true);
-                this.dispose();
-                telaCadastro.dispose();
+                Painel_Gerente gerente = new Painel_Gerente();
+                gerente.setLocationRelativeTo(this);
+                gerente.setVisible(true);
             } else {
                 Painel_Funcionario fun = new Painel_Funcionario();
                 fun.setLocationRelativeTo(this);

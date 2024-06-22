@@ -37,7 +37,7 @@ public class FuncionarioRepository {
 
     public Funcionario logarFuncionario(String nome, String senha) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT fun_codigo, fun_nome, fun_cpf, fun_funcao FROM tb_funcionarios WHERE fun_nome = ? && fun_senha = ?";
+            String sql = "SELECT fun_codigo, fun_nome, fun_cpf, fun_funcao FROM tb_funcionarios WHERE fun_nome = ? AND fun_senha = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, nome);
                 statement.setString(2, senha);
@@ -53,7 +53,7 @@ public class FuncionarioRepository {
                 return null;
             }
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao buscar funcionário: ", ex);
+            throw new RuntimeException("Erro ao logar funcionário: ", ex);
         }
     }
 
