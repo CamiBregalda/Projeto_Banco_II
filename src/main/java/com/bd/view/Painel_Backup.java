@@ -4,9 +4,39 @@
  */
 package com.bd.view;
 
+import com.bd.mapper.FornecedorMapper;
+import com.bd.mapper.FuncionarioMapper;
+import com.bd.mapper.ItemMapper;
+import com.bd.mapper.ProdutoMapper;
+import com.bd.mapper.UsuarioMapper;
+import com.bd.mapper.VendaMapper;
+import com.bd.repository.BackupRepository;
+import com.bd.repository.FornecedorRepository;
+import com.bd.repository.FuncionarioRepository;
+import com.bd.repository.ItemRepository;
+import com.bd.repository.ProdutoRepository;
+import com.bd.repository.UsuarioRepository;
+import com.bd.repository.VendaRepository;
+import com.bd.service.FornecedorService;
+import com.bd.service.FuncionarioService;
+import com.bd.service.ItemService;
+import com.bd.service.PostgreSQLBackup;
+import com.bd.service.ProdutoService;
+import com.bd.service.UsuarioService;
+import com.bd.service.VendaService;
+import java.time.LocalDateTime;
+import org.mapstruct.factory.Mappers;
+
 
 public class Painel_Backup extends javax.swing.JDialog {
 
+    ProdutoService produtoService;
+    FornecedorService fornecedorService;
+    UsuarioService usuarioService;
+    FuncionarioService funcionarioService;
+    ItemService itemService;
+    VendaService vendaService;
+        
     public Painel_Backup(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -102,13 +132,63 @@ public class Painel_Backup extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNAgendarBackupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAgendarBackupMouseClicked
-        //uasr get selected
+       //atualizar no banco, e realizar o backup de maneira automatica
+       String periodo = jCBAgendarBackup.getSelectedItem().toString();
+       LocalDateTime data = LocalDateTime.now();
+        
+       if (periodo != "Selecione"){
+            if(periodo == "Diariamente"){
+                data = data.plusDays(1);
+                //realizar todo dia
+            }
+            if (periodo == "Semanalmente"){
+                data = data.plusDays(7);
+                //realizar toda semana
+            }
+            if (periodo == "Mensalmente"){
+                data = data.plusDays(30);
+                //realizar todo mes
+            }
+            if (periodo == "Anualmente"){
+                data = data.plusDays(365);
+                //relizar todo ano
+             }
+            funcionarioService.programarBackup(data);
+       }
+       
     }//GEN-LAST:event_jBTNAgendarBackupMouseClicked
 
     private void jBTNExecutarBackupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNExecutarBackupMouseClicked
-        
+        funcionarioService.realizarBackup(host, port, username, database, password);
+        //adicionar os outros dois parametros e pegar do service
     }//GEN-LAST:event_jBTNExecutarBackupMouseClicked
 
+     private void inicializandoClasses(){
+        FornecedorRepository fornecedorRepository = new FornecedorRepository();
+        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
+        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
+
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        BackupRepository backupRepository = new BackupRepository();
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
+
+        ItemRepository itemRepository = new ItemRepository();
+        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
+        itemService = new ItemService(itemRepository, itemMapper);
+
+        ProdutoRepository produtoRepository = new ProdutoRepository();
+        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
+        produtoService = new ProdutoService(produtoRepository, produtoMapper);
+
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
+        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
+
+        VendaRepository vendaRepository = new VendaRepository();
+        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
+        vendaService = new VendaService(vendaRepository, vendaMapper);
+    }
     /**
      * @param args the command line arguments
      */
