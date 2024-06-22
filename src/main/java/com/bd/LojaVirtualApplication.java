@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 public class LojaVirtualApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LojaVirtualApplication.class, args);
+            SpringApplication.run(LojaVirtualApplication.class, args);
 
-		Painel_Tela_Inicial telaInicial = new Painel_Tela_Inicial();
-		telaInicial.setVisible(true);
+            Painel_Tela_Inicial telaInicial = new Painel_Tela_Inicial();
+            telaInicial.setVisible(true);
 	}
 
 }

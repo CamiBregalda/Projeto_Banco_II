@@ -117,22 +117,29 @@ public class Painel_Login extends javax.swing.JDialog {
             Login.getInstance().setSenha(password);
 
             FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
-        
-            if(funcionario.fun_funcao().equals("Gerente")){
-                Painel_Gerente gerente = new Painel_Gerente();
-                gerente.setLocationRelativeTo(this);
-                gerente.setVisible(true);
+            boolean backupPlanejado = funcionarioService.checarBackup();
+            
+            if(backupPlanejado){
+                Painel_Infos_Backup infos = new Painel_Infos_Backup(this, true);
+                infos.setLocationRelativeTo(this);
+                infos.setVisible(true);
             } else {
-                Painel_Funcionario fun = new Painel_Funcionario();
-                fun.setLocationRelativeTo(this);
-                fun.setVisible(true);
+                if(funcionario.fun_funcao().equals("Gerente")){
+                    Painel_Gerente gerente = new Painel_Gerente();
+                    gerente.setLocationRelativeTo(this);
+                    gerente.setVisible(true);
+                } else {
+                    Painel_Funcionario fun = new Painel_Funcionario();
+                    fun.setLocationRelativeTo(this);
+                    fun.setVisible(true);
+                }           
             }
+            
+            this.dispose();
+            telaCadastro.dispose();
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(this, "Nome ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
-        this.dispose();
-        telaCadastro.dispose();
     }//GEN-LAST:event_jBTNEntrarMouseClicked
 
     private void inicializandoClasses(){

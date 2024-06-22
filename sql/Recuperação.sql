@@ -66,13 +66,14 @@ $$ LANGUAGE plpgsql;
 
 
 /*Desenvolver uma rotina de backup do Banco de Dados e integra-la ao sistema.*/
-CREATE OR REPLACE FUNCTION atualizar_proximo_backup(prox_backup TIMESTAMP)
+CREATE OR REPLACE FUNCTION programar_backup(prox_backup TIMESTAMP)
 RETURNS VOID AS $$
 BEGIN
     UPDATE backup_programado SET proximo_backup = prox_backup WHERE id = (SELECT MAX(id) FROM backup_programado);
 END;
 $$ LANGUAGE plpgsql;
 
+select * from backup_programado
 
 CREATE OR REPLACE FUNCTION realizar_backup()
 RETURNS VOID AS $$

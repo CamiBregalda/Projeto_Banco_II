@@ -1,7 +1,7 @@
 package com.bd.view;
 
 public class Painel_Tela_Inicial extends javax.swing.JFrame {
-
+    
     public Painel_Tela_Inicial() {
         setTitle("Tela Inicial");
         initComponents();
@@ -54,7 +54,6 @@ public class Painel_Tela_Inicial extends javax.swing.JFrame {
 
     private void jTBEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBEntrarMouseClicked
        Painel_Login login = new Painel_Login(this, true);
-       login.pessoa = "Gerente";  
        login.telaCadastro = this;
        login.setLocationRelativeTo(this);
        login.setVisible(true);

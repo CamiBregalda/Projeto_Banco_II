@@ -155,15 +155,15 @@ public class FuncionarioService {
         }
     }
 
-    public void realizarBackup(String host, String port, String username, String database, String password){
-        try {
-            PostgreSQLBackup backup = new PostgreSQLBackup();
-            backup.realizarBackup(host, port, username, database, password);
-
+    public boolean realizarBackup(String host, String port, String username, String database, String password) throws RuntimeException {
+        PostgreSQLBackup backup = new PostgreSQLBackup();
+        boolean response = backup.realizarBackup(host, port, username, database, password);
+            
+        if (response){
             backupRepository.realizarBackup();
-        } catch (Exception e) {
-            throw new BusinessException("Erro ao realizar backup: " + e.getMessage());
         }
+        
+        return response;
     }
 
     public void programarBackup(LocalDateTime novoProximoBackup){
@@ -172,5 +172,10 @@ public class FuncionarioService {
         } catch (Exception e) {
             throw new BusinessException("Erro ao programar backup: " + e.getMessage());
         }
+    }
+    
+    public boolean checarBackup(){
+        Timestamp proxBackup = backupRepository.checarBackup();
+        return proxBackup.before(new Timestamp(System.currentTimeMillis()));
     }
 }

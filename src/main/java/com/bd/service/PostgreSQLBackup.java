@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostgreSQLBackup {
-
-    public void realizarBackup(String host, String port, String username, String database, String password) {
+    
+    public boolean realizarBackup(String host, String port, String username, String database, String password) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String formattedDateTime = LocalDateTime.now().format(formatter);
-        String outputPath = "C:\\backup_" + formattedDateTime + ".sql";
+        String outputPath = "C:\\Users\\Camil\\Desktop\\Faculdade 2024\\Banco de Dados II\\Trabalho Prático II\\Projeto_Banco_II\\sql\\Backup\\backup_" + formattedDateTime + ".sql";
 
         try {
             List<String> command = new ArrayList<>();
@@ -33,13 +33,14 @@ public class PostgreSQLBackup {
             Process process = pb.start();
 
             int exitCode = process.waitFor();
-            if (exitCode == 0) {
-                System.out.println("Backup realizado com sucesso em: " + outputPath);
+            
+            if (exitCode == 0) {               
+                return true;
             } else {
-                System.out.println("Erro ao realizar o backup. Código de saída: " + exitCode);
+                return false;
             }
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

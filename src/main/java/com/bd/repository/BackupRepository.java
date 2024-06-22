@@ -27,4 +27,30 @@ public class BackupRepository {
             throw new RuntimeException("Erro ao realizar backup", ex);
         }
     }
+
+    public Timestamp checarBackup() {
+        String sqlMaxId = "SELECT MAX(id) as id FROM backup_programado";
+        String sqlProximoBackup = "SELECT proximo_backup FROM backup_programado WHERE id = ?";
+
+        try (Connection connection = Conexao.getConnection()) {
+            try (PreparedStatement statementMaxId = connection.prepareStatement(sqlMaxId)) {
+                ResultSet resultadoMaxId = statementMaxId.executeQuery();
+                if (resultadoMaxId.next()) {
+                    int maxId = resultadoMaxId.getInt("id");
+
+                    try (PreparedStatement statementProximoBackup = connection.prepareStatement(sqlProximoBackup)) {
+                        statementProximoBackup.setInt(1, maxId);
+                        ResultSet resultadoProximoBackup = statementProximoBackup.executeQuery();
+                        if (resultadoProximoBackup.next()) {
+                            return resultadoProximoBackup.getTimestamp("proximo_backup");
+                        }
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao obter o próximo backup", ex);
+        }
+
+        return null;
+    }
 }

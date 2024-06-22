@@ -54,7 +54,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLBDatabase" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jTFUserName" min="-2" pref="155" max="-2" attributes="0"/>
+                          <Component id="jTFDatabase" min="-2" pref="155" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -64,21 +64,24 @@
                           <EmptySpace pref="45" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jPFSenhaBanco" pref="155" max="32767" attributes="0"/>
-                              <Component id="jTFDatabase" max="32767" attributes="0"/>
+                              <Component id="jTFUsername" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                  <Component id="jLBCredenciais" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="jLBCredenciais" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="jBTNConfirmar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jBTNConfirmar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,12 +103,12 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLBDatabase" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTFUserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTFDatabase" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLBUserName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTFDatabase" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTFUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -156,7 +159,7 @@
             <Property name="text" type="java.lang.String" value="Nome de Usuario:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFUserName">
+        <Component class="javax.swing.JTextField" name="jTFDatabase">
         </Component>
         <Component class="javax.swing.JLabel" name="jLBDatabase">
           <Properties>
@@ -166,7 +169,7 @@
             <Property name="text" type="java.lang.String" value="Banco de Dados:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTFDatabase">
+        <Component class="javax.swing.JTextField" name="jTFUsername">
         </Component>
         <Component class="javax.swing.JLabel" name="jLBSenhaBanco">
           <Properties>
