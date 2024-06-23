@@ -197,33 +197,28 @@ public class FuncionarioRepository {
         }
     }
 
-    public void concederPrivilegioGrupo (String nameGrupo,  String nomeDaTabela, String[] privilegios) {
+    public void concederPrivilegioGrupo (String nameGrupo,  String nomeDaTabela, String privilegios) {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT conceder_privilegio_grupo(?, ?, ?)";
-            System.out.println("nameGrupo: " + nameGrupo);
-            System.out.println("nomeDaTabela: " + nomeDaTabela);
-            System.out.println("Privilegios: " + privilegios);
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("VARCHAR", privilegios);
                 statement.setString(1, nameGrupo);
                 statement.setString(2, nomeDaTabela);
-                statement.setArray(3, array);
-                statement.executeUpdate();
+                statement.setString(3, privilegios);
+                statement.execute();
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao conceder privilegio ao grupo", e);
+            throw new RuntimeException("Erro ao conceder privilegio ao grupo", e.getCause());
         }
     }
 
-    public void concederPrivilegioUsuario (String nameUsuario,  String nomeDaTabela, String[] privilegios) {
+    public void concederPrivilegioUsuario (String nameUsuario,  String nomeDaTabela, String privilegios) {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT conceder_privilegio_usuario(?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("TEXT", privilegios);
                 statement.setString(1, nameUsuario);
                 statement.setString(2, nomeDaTabela);
-                statement.setArray(3, array);
-                statement.executeUpdate();
+                statement.setString(3, privilegios);
+                statement.execute();
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao conceder privilegio ao grupo", e);
