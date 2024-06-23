@@ -12,7 +12,7 @@ SELECT pg_roles.rolname AS role_name,
 FROM pg_roles
 JOIN pg_auth_members ON pg_roles.oid = pg_auth_members.roleid
 JOIN pg_roles AS member ON pg_auth_members.member = member.oid
-WHERE pg_roles.rolname = 'Vendedores';
+WHERE pg_roles.rolname = 'nãoAguentoMais';
 
 select * from tb_funcionarios
 UPDATE tb_funcionarios
@@ -26,7 +26,7 @@ select * from tb_vendas
 -- Verificando privilégios de um grupo ou usuário
 SELECT * --grantee, privilege_type 
 FROM information_schema.table_privileges 
-WHERE grantee = 'Vendedores' AND table_name = 'tb_funcionarios';
+WHERE grantee = 'Camila Bregalda' AND table_name = 'tb_funcionarios';
 
 --Criar papeis
 CREATE ROLE funcionarios;
@@ -48,66 +48,72 @@ SELECT cadastrar_usuario('Guilherme Lago', 'root');
 --Gerentes concedem privilégios e criam novos grupos
 --Podem existir funcionários e gerentes
 --Criar alguns grupos(Pontos 0,1)
-CREATE OR REPLACE FUNCTION cadastrar_role(new_role TEXT, users TEXT[])
+CREATE OR REPLACE FUNCTION cadastrar_role(new_role TEXT, users TEXT)
 RETURNS VOID AS $$
 DECLARE
-	cont INTEGER;
-	usuario TEXT;
+    usuario TEXT;
+    user_array TEXT[];
 BEGIN
-	EXECUTE format('CREATE ROLE %I', new_role);
+    EXECUTE format('CREATE ROLE %I', new_role);
+    
+    user_array := string_to_array(users, ',');
 	
-	-- Adicionar cada usuário à role
-	FOR i IN 1..array_length(users, 1)
+    FOREACH usuario IN ARRAY user_array
     LOOP
-		usuario := users[i];
-		EXECUTE format('GRANT %I TO %I', new_role, usuario);
+        EXECUTE format('GRANT %I TO %I', new_role, usuario);
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT cadastrar_role('Vendedores', ARRAY['Camila Bregalda', 'Guilherme Lago']);
+SELECT cadastrar_role('nãoAguentoMais', 'joao,manuel');
 
 DROP FUNCTION cadastrar_role
+
+
 --(Pontos 0,2) Adicionar os usuários aos grupos.
 --Fazer login com diferentes usuários e testar os privilégios cedidos aos grupos e testar privilégios não cedidos aos grupos.
-CREATE OR REPLACE FUNCTION atualizar_users_role(name_role TEXT, users TEXT[])
+CREATE OR REPLACE FUNCTION atualizar_users_role(name_role TEXT, users TEXT)
 RETURNS VOID AS $$
 DECLARE
-	cont INTEGER;
+    usuario TEXT;
+	user_array TEXT[];
 BEGIN
-	FOR i IN 1..array_length(users, 1)
+	user_array := string_to_array(users, ',');
+
+	FOREACH usuario IN ARRAY user_array
     LOOP
-		EXECUTE format('GRANT %I TO %I', name_role, users[i]);
+        EXECUTE format('GRANT %I TO %I', name_role, usuario);
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT atualizar_users_role('newRole', ARRAY['novoUsuario3']);
+SELECT atualizar_users_role('nãoAguentoMais', 'novoUsuario3');
 
 
 --(Pontos 0,1) Conceder diferentes privilégios aos grupos.
-CREATE OR REPLACE FUNCTION conceder_privilegio_grupo(name_grupo TEXT, nome_da_tabela TEXT, privilegios TEXT[])
+CREATE OR REPLACE FUNCTION conceder_privilegio_grupo(name_grupo TEXT, nome_da_tabela TEXT, privilegios TEXT)
 RETURNS VOID AS $$
 DECLARE
-    i INTEGER;
+    privilegio TEXT;
 BEGIN
-    -- Loop para passar por todos os privilégios
-    FOR i IN 1..array_length(privilegios, 1)
+    FOREACH privilegio IN ARRAY string_to_array(privilegios, ',')
     LOOP
-        IF privilegios[i] = 'SELECT' THEN
+        IF privilegio = 'SELECT' THEN
             EXECUTE format('GRANT SELECT ON %I TO %I', nome_da_tabela, name_grupo);
-        ELSIF privilegios[i] = 'INSERT' THEN
+        ELSIF privilegio = 'INSERT' THEN
             EXECUTE format('GRANT INSERT ON %I TO %I', nome_da_tabela, name_grupo);
-        ELSIF privilegios[i] = 'DELETE' THEN
+        ELSIF privilegio = 'DELETE' THEN
             EXECUTE format('GRANT DELETE ON %I TO %I', nome_da_tabela, name_grupo);
-        ELSIF privilegios[i] = 'UPDATE' THEN
+        ELSIF privilegio = 'UPDATE' THEN
             EXECUTE format('GRANT UPDATE ON %I TO %I', nome_da_tabela, name_grupo);
+        ELSE
+            RAISE EXCEPTION 'Privilégio desconhecido: %', privilegio;
         END IF;
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT conceder_privilegio_grupo('novoUsuario', 'tb_usuario', ARRAY['SELECT', 'INSERT']);
+SELECT conceder_privilegio_grupo('novoUsuario', 'tb_funcionarios', 'SELECT,INSERT');
 
 
 
@@ -115,26 +121,27 @@ SELECT conceder_privilegio_grupo('novoUsuario', 'tb_usuario', ARRAY['SELECT', 'I
 --se o banco cedeu o “novo” privilégio ao usuário.
 --(Pontos 0,7) Testar se outro usuário pertencente ao mesmo grupo da questão ‘e’ também
 --recebeu o “novo” privilégio.
-CREATE OR REPLACE FUNCTION conceder_privilegio_usuario(name_usuario TEXT, nome_da_tabela TEXT, privilegios TEXT[])
+CREATE OR REPLACE FUNCTION conceder_privilegio_usuario(name_usuario TEXT, nome_da_tabela TEXT, privilegios TEXT)
 RETURNS VOID AS $$
 DECLARE
-    i INTEGER;
+    privilegio TEXT;
 BEGIN
-    FOR i IN 1..array_length(privilegios, 1) LOOP
-		IF privilegios[i] = 'SELECT' THEN
+	FOREACH privilegio IN ARRAY string_to_array(privilegios, ',')
+    LOOP
+        IF privilegio = 'SELECT' THEN
             EXECUTE format('GRANT SELECT ON %I TO %I', nome_da_tabela, name_usuario);
-        ELSIF privilegios[i] = 'INSERT' THEN
+        ELSIF privilegio = 'INSERT' THEN
             EXECUTE format('GRANT INSERT ON %I TO %I', nome_da_tabela, name_usuario);
-        ELSIF privilegios[i] = 'DELETE' THEN
+        ELSIF privilegio = 'DELETE' THEN
             EXECUTE format('GRANT DELETE ON %I TO %I', nome_da_tabela, name_usuario);
-        ELSIF privilegios[i] = 'UPDATE' THEN
+        ELSIF privilegio = 'UPDATE' THEN
             EXECUTE format('GRANT UPDATE ON %I TO %I', nome_da_tabela, name_usuario);
         END IF;
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT conceder_privilegio_usuario('novoUsuario', 'tb_usuario', ARRAY['SELECT']);
+SELECT conceder_privilegio_usuario('novoUsuario', 'tb_funcionarios', 'SELECT,DELETE');
 
 SELECT grantee, privilege_type 
 FROM information_schema.table_privileges 
