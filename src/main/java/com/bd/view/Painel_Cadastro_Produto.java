@@ -131,7 +131,7 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
   
     }//GEN-LAST:event_jBTNCadastrarProdutoMouseClicked
 
-       private void recebeDados (FornecedorResponse fornecedor){
+    public void recebeDados (){
        List<FornecedorResponse> fornecedores = fornecedorService.buscarFornecedores();
        
        for (int i = 0; i < fornecedores.size(); i++){
