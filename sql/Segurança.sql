@@ -26,7 +26,7 @@ select * from tb_vendas
 -- Verificando privilégios de um grupo ou usuário
 SELECT * --grantee, privilege_type 
 FROM information_schema.table_privileges 
-WHERE grantee = 'Camila Bregalda' AND table_name = 'tb_funcionarios';
+WHERE grantee = 'Guilherme Lago' AND table_name = 'tb_produtos';
 
 --Criar papeis
 CREATE ROLE funcionarios;
@@ -65,7 +65,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT cadastrar_role('nãoAguentoMais', 'joao,manuel');
+SELECT cadastrar_role('novoUsuario', 'joao,manuel');
 
 DROP FUNCTION cadastrar_role
 
