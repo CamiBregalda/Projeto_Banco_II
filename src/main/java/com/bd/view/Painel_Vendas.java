@@ -57,6 +57,11 @@ public class Painel_Vendas extends javax.swing.JDialog {
         jLBNomeProduto.setText("Nome do Produto");
 
         jSPNQuantidade.setBorder(null);
+        jSPNQuantidade.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSPNQuantidadeStateChanged(evt);
+            }
+        });
 
         jLBQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBQuantidade.setText("Quantidade:");
@@ -77,8 +82,6 @@ public class Painel_Vendas extends javax.swing.JDialog {
             }
         });
 
-        jCBListaFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLBListaFuncionarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBListaFuncionarios.setText("Funcionário responsável:");
 
@@ -92,27 +95,25 @@ public class Painel_Vendas extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLBValorTotal)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jBTNComprar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(jLBValorTotalMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(112, 112, 112)
+                        .addComponent(jLBValorTotalMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLBPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLBQtdEstoque)
                             .addComponent(jLBQuantidade)
                             .addComponent(jLBListaFuncionarios))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCBListaFuncionarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSPNQuantidade)
                             .addComponent(jLBQtdEstoqueMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLBPrecoMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))))
                 .addGap(53, 53, 53))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(jBTNComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,31 +170,25 @@ public class Painel_Vendas extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, venda);
     }//GEN-LAST:event_jBTNComprarMouseClicked
 
-    public void recebeDados(ProdutoResponse produto){
-        //setar o nome do produto em jLBNomeProduto .setText();
-       jLBNomeProduto.setText(produto.pro_descricao());
-      
-       //o funcionario deve aparecer na combobox  jCBListaFuncionarios setSelected
-        List<FuncionarioResponse> funcionarios = funcionarioService.buscarFuncionarios();
-            for (FuncionarioResponse funcionario : funcionarios) {
-            jCBListaFuncionarios.addItem(funcionario.fun_nome()); // Supondo que FuncionarioResponse tenha um método getNome()
-             }
-
-       //vai pegar a lista e passar em um for atravez de um .setSelected()
-       
-       
-       //vai mostrar o valor em jLBPrecoMostrar 
-       jLBPrecoMostrar.setText(String.format("%.2f", produto.pro_valor()));
-       
-       //deve aparecer a quantidade total no estoque jLBQtdEstoqueMostrar
-       jLBPrecoMostrar.setText(String.valueOf(produto.pro_quantidade()));
-       
-       //deve escolhero valor total para a compra em jSPNQuantidade
+    private void jSPNQuantidadeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSPNQuantidadeStateChanged
+       double valor = Double.parseDouble(jLBPrecoMostrar.toString());
        int quantidadeCompra = (Integer) jSPNQuantidade.getValue();
       
-      // mostra o valor total da compra em jLBValorTotalMostrar
-       double total = (double) quantidadeCompra * produto.pro_valor();
-       jLBValorTotalMostrar.setText(String.format("%.2f", total));
+       double preco = valor * quantidadeCompra;
+       jLBValorTotalMostrar.setText(String.format("%.2f", preco));
+    }//GEN-LAST:event_jSPNQuantidadeStateChanged
+
+    public void recebeDados(ProdutoResponse produto){
+       jLBNomeProduto.setText(produto.pro_descricao());
+      
+        List<FuncionarioResponse> funcionarios = funcionarioService.buscarFuncionarios();
+        for (FuncionarioResponse funcionario : funcionarios) {
+            jCBListaFuncionarios.addItem(funcionario.fun_nome()); // Supondo que FuncionarioResponse tenha um método getNome()
+        }
+
+       jLBPrecoMostrar.setText(String.format("%.2f", produto.pro_valor()));
+       jLBQtdEstoqueMostrar.setText(String.valueOf(produto.pro_quantidade()));
+       jLBValorTotalMostrar.setText("0.0");
     }
     
     private void inicializandoClasses(){

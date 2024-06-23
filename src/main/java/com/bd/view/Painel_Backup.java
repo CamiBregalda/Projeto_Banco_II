@@ -136,32 +136,29 @@ public class Painel_Backup extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNAgendarBackupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAgendarBackupMouseClicked
-       //atualizar no banco, e realizar o backup de maneira automatica
-       String periodo = jCBAgendarBackup.getSelectedItem().toString();
-       LocalDateTime data = LocalDateTime.now();
+        String periodo = jCBAgendarBackup.getSelectedItem().toString();
+        LocalDateTime data = LocalDateTime.now();
         
-       if (periodo != "Selecione"){
+        if (periodo != "Selecione"){
             if(periodo == "Diariamente"){
                 data = data.plusDays(1);
-                //realizar todo dia
             }
             if (periodo == "Semanalmente"){
                 data = data.plusDays(7);
-                //realizar toda semana
             }
             if (periodo == "Mensalmente"){
                 data = data.plusDays(30);
-                //realizar todo mes
             }
             if (periodo == "Anualmente"){
                 data = data.plusDays(365);
-                //relizar todo ano
              }
             funcionarioService.programarBackup(data);
-       }
-       
-       JOptionPane.showMessageDialog(this, "Backup agendado com sucesso!");
-       this.dispose();
+            
+            JOptionPane.showMessageDialog(this, "Backup agendado com sucesso!");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Backup não pôde ser agendada!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBTNAgendarBackupMouseClicked
 
     private void jBTNExecutarBackupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNExecutarBackupMouseClicked
