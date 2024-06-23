@@ -65,6 +65,11 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         jLBConcederPapel.setText("Deseja conceder a quem:");
 
         jCBFuncionariosRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+        jCBFuncionariosRole.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCBFuncionariosRoleMouseClicked(evt);
+            }
+        });
 
         jLBTabelaDesejada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLBTabelaDesejada.setText("Tabela desejada:");
@@ -195,11 +200,21 @@ public class Painel_Privilegios extends javax.swing.JFrame {
     private void jCBRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBRolesMouseClicked
         String opcao = jCBRoles.getSelectedItem().toString();
 
+        for(int i = 1; i < jCBFuncionariosRole.getItemCount(); i++){
+            jCBFuncionariosRole.remove(i);
+        }
+
         List<String> funcionariosRole = funcionarioService.funcionarioPertenceRole(opcao);
 
         for(int i = 0; i < funcionariosRole.size(); i++){
             jCBFuncionariosRole.addItem(funcionariosRole.get(i));
         }
+
+       // List<String> listaFuncionariosDaRole = funcionarioService.funcionarioPertenceRole(jCBRoles.getSelectedItem().toString());
+
+        //for(int i = 0; i < listaFuncionariosDaRole.size(); i++){
+        //    jCBFuncionariosRole.addItem(listaFuncionariosDaRole.get(i));
+        //}
 
     }//GEN-LAST:event_jCBRolesMouseClicked
 
@@ -258,6 +273,13 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         cadastroRole.setLocationRelativeTo(this);
         cadastroRole.setVisible(true);
     }//GEN-LAST:event_jBTNovoPapelMouseClicked
+
+    private void jCBFuncionariosRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBFuncionariosRoleMouseClicked
+        // TODO add your handling code here:
+
+        List<String> listaFuncionariosDaRole = funcionarioService.funcionarioPertenceRole(jCBRoles.getSelectedItem().toString());
+
+    }//GEN-LAST:event_jCBFuncionariosRoleMouseClicked
 
     public void receberDados(){
         List<String> listaRoles = funcionarioService.buscarRoles();
