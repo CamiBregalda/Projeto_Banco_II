@@ -110,7 +110,7 @@ public class Painel_Login extends javax.swing.JDialog {
     private void jBTNEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNEntrarMouseClicked
         String username = jTFNomeLogin.getText();
         String password = new String (jPFSenhaLogin.getPassword());
-        
+ 
         try {
             // Configurar as informações de login no Singleton Login
             Login.getInstance().setUser(username);
@@ -135,7 +135,7 @@ public class Painel_Login extends javax.swing.JDialog {
                 fun.receberDados();
                 fun.setLocationRelativeTo(this);
                 fun.setVisible(true);
-            }           
+            }    
             
             this.dispose();
             telaCadastro.dispose();

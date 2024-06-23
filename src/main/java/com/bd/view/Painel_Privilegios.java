@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.bd.view;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author user
- */
 public class Painel_Privilegios extends javax.swing.JDialog {
 
  
@@ -45,13 +37,8 @@ public class Painel_Privilegios extends javax.swing.JDialog {
         jLBTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLBTitulo.setText("Privilégios");
 
-<<<<<<< HEAD
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Privilégios");
-=======
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Deseja conceder privilegios à :");
->>>>>>> 8ddac2e3d53061d06bb1d287c33d1ad8f7c09f5f
 
         jCBFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Indivídio", "Grupo" }));
 
