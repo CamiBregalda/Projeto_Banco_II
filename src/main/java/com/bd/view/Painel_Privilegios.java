@@ -19,8 +19,7 @@ public class Painel_Privilegios extends javax.swing.JFrame {
     ItemService itemService;
     VendaService vendaService;
  
-    public Painel_Privilegios(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Painel_Privilegios() {
         setTitle("Tela de Privilégio");
         initComponents();
         inicializandoClasses();
@@ -81,11 +80,6 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         jCHBDelete.setText("DELETE TABLE");
 
         jBTNovoPapel.setText("Criar");
-        jBTNovoPapel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBTNovoPapelMouseClicked(evt);
-            }
-        });
 
         jBTNAtualizarPapel.setText("Atualizar");
         jBTNAtualizarPapel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,13 +163,6 @@ public class Painel_Privilegios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBTNovoPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNovoPapelMouseClicked
-       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-       Painel_Cadastrar_Role cadatroRole = new Painel_Cadastrar_Role(this, true);//não sabemos o erro
-       cadatroRole.setLocationRelativeTo(this);
-       cadatroRole.setVisible(true);
-    }//GEN-LAST:event_jBTNovoPapelMouseClicked
 
     private void jCBRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBRolesMouseClicked
         String opcao = jCBRoles.getSelectedItem().toString();
@@ -295,7 +282,7 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Painel_Privilegios dialog = new Painel_Privilegios(new javax.swing.JFrame(), true);
+                Painel_Privilegios dialog = new Painel_Privilegios();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

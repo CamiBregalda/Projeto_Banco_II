@@ -34,7 +34,7 @@ import javax.swing.text.Element;
 import org.mapstruct.factory.Mappers;
 
 
-public class Painel_Roles extends javax.swing.JDialog {
+public class Painel_Atualizar_Roles extends javax.swing.JDialog {
 
     ProdutoService produtoService;
     FornecedorService fornecedorService;
@@ -42,8 +42,9 @@ public class Painel_Roles extends javax.swing.JDialog {
     FuncionarioService funcionarioService;
     ItemService itemService;
     VendaService vendaService;
+    List<String> papeis = new ArrayList<>();
 
-    public Painel_Roles(java.awt.Frame parent, boolean modal) {
+    public Painel_Atualizar_Roles(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         recebeDados();
         inicializandoClasses();
@@ -59,13 +60,12 @@ public class Painel_Roles extends javax.swing.JDialog {
         jLBProdutos = new javax.swing.JLabel();
         jLBTituloDaPagina = new javax.swing.JLabel();
         jLBBarraPesquisa = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jLListaFuncionarios = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jLListaFuncionarios1 = new javax.swing.JList<>();
         jLBProdutos1 = new javax.swing.JLabel();
         jBTNBarraPesquisa1 = new javax.swing.JButton();
-        jBTNCriar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTBFuncionarios = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTBFuncionariosRole = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,13 +79,10 @@ public class Painel_Roles extends javax.swing.JDialog {
         jLBProdutos.setText("Funcionários que não estão na role:");
 
         jLBTituloDaPagina.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLBTituloDaPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLBTituloDaPagina.setText("Buscar Papeis");
 
         jLBBarraPesquisa.setText("Buscar Papel/Adicionar novo:");
-
-        jScrollPane1.setViewportView(jLListaFuncionarios);
-
-        jScrollPane2.setViewportView(jLListaFuncionarios1);
 
         jLBProdutos1.setText("Funcionários da role:");
 
@@ -96,52 +93,68 @@ public class Painel_Roles extends javax.swing.JDialog {
             }
         });
 
-        jBTNCriar.setText("Criar");
-        jBTNCriar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBTNCriarMouseClicked(evt);
+        jTBFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        jScrollPane3.setViewportView(jTBFuncionarios);
+
+        jTBFuncionariosRole.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTBFuncionariosRole);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(jLBTituloDaPagina)
-                .addGap(0, 258, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLBBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                            .addComponent(jTFBarraPesquisa)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(79, 79, 79)
-                                .addComponent(jBTNCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLBProdutos1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBTNBarraPesquisa1)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBTNAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(85, 85, 85)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLBProdutos1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jBTNBarraPesquisa1)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(275, 275, 275)
+                        .addComponent(jBTNAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLBBarraPesquisa)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -152,43 +165,25 @@ public class Painel_Roles extends javax.swing.JDialog {
                     .addComponent(jLBProdutos)
                     .addComponent(jLBProdutos1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBTNCriar)
-                    .addComponent(jBTNAtualizar))
-                .addGap(33, 33, 33))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jBTNAtualizar)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNBarraPesquisa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisa1MouseClicked
-                                             
         String pesquisa = jTFBarraPesquisa.getText();
-        jLListaFuncionarios.setEnabled(false);
+        
+        List<String> papel = funcionarioService.buscarRoles();
         
         List<String> listaFuncionarios = funcionarioService.funcionarioPertenceRole(pesquisa);
 
-        // Limpa o modelo da lista existente antes de adicionar novos elementos
-        DefaultListModel<String> modeloLista = (DefaultListModel<String>) jLListaFuncionarios.getModel();
-        modeloLista.clear();
-
-        //utilizar o "is empty"
-        
-        for (String funcionario : listaFuncionarios) {
-            modeloLista.addElement(funcionario);
-        }  // TODO add your handling code here:
     }//GEN-LAST:event_jBTNBarraPesquisa1MouseClicked
-
-    private void jBTNCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCriarMouseClicked
-        Painel_Cadastrar_Role cadastrar = new Painel_Cadastrar_Role(this, true);
-        cadastrar.setLocationRelativeTo(this);
-        cadastrar.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jBTNCriarMouseClicked
 
     private void jBTNAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarMouseClicked
         // conferir se a role existe
@@ -196,16 +191,18 @@ public class Painel_Roles extends javax.swing.JDialog {
 
     private void recebeDados(){
         List<FuncionarioResponse> listaFuncionarios = funcionarioService.buscarFuncionarios();
-        String role = jTFBarraPesquisa.getText();
-        ArrayList<String> papel = funcionarioService.buscarRoles();
+        papeis = funcionarioService.buscarRoles();
         
-
-        DefaultTableModel tabelaSemRole = (DefaultTableModel) jLListaFuncionarios.getModel();
-        tabelaSemRole.setRowCount(0);
+        DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionarios.getModel();
+        tabelaFuncionarios.setRowCount(0);
         
-        DefaultTableModel tabelaComRole = (DefaultTableModel) jLListaFuncionarios1.getModel();
-        tabelaComRole.setRowCount(0);
-        
+        DefaultTableModel tabelaFuncionariosRole = (DefaultTableModel) jTBFuncionarios.getModel();
+        tabelaFuncionariosRole.setRowCount(0);
+/*
+        for (int i = 0; i < produtos.size(); i++) {
+            FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloId(Long.valueOf(produtos.get(i).tb_fornecedores_for_codigo()));
+            tabela.addRow(new Object[]{produtos.get(i).pro_codigo(), produtos.get(i).pro_descricao(), fornecedor.for_descricao()});
+        }
         
         for (int i = 0; i < papel.size(); i++) {
             funcionarios.add(listaFuncionarios.get(i).fun_nome());
@@ -223,7 +220,7 @@ public class Painel_Roles extends javax.swing.JDialog {
                 } 
             }
         }
-        
+        */
         //funcionarioPertenceRole
     }
     
@@ -262,7 +259,7 @@ public class Painel_Roles extends javax.swing.JDialog {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Painel_Roles dialog = new Painel_Roles(new javax.swing.JFrame(), true);
+                Painel_Atualizar_Roles dialog = new Painel_Atualizar_Roles(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -277,15 +274,14 @@ public class Painel_Roles extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNAtualizar;
     private javax.swing.JButton jBTNBarraPesquisa1;
-    private javax.swing.JButton jBTNCriar;
     private javax.swing.JLabel jLBBarraPesquisa;
     private javax.swing.JLabel jLBProdutos;
     private javax.swing.JLabel jLBProdutos1;
     private javax.swing.JLabel jLBTituloDaPagina;
-    private javax.swing.JList<String> jLListaFuncionarios;
-    private javax.swing.JList<String> jLListaFuncionarios1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTBFuncionarios;
+    private javax.swing.JTable jTBFuncionariosRole;
     private javax.swing.JTextField jTFBarraPesquisa;
     // End of variables declaration//GEN-END:variables
 }

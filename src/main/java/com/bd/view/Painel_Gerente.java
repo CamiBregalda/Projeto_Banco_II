@@ -211,7 +211,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
 
         }
         else if(opcao == "Privilégios"){
-            Painel_Privilegios telaPrivilegios = new Painel_Privilegios(this, true);
+            Painel_Privilegios telaPrivilegios = new Painel_Privilegios();
             telaPrivilegios.setLocationRelativeTo(this);
             telaPrivilegios.setVisible(true);
         }
