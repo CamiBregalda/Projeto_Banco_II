@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Painel_Privilegios extends javax.swing.JDialog {
+public class Painel_Privilegios extends javax.swing.JFrame {
 
     ProdutoService produtoService;
     FornecedorService fornecedorService;
@@ -174,7 +174,7 @@ public class Painel_Privilegios extends javax.swing.JDialog {
 
     private void jBTNovoPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNovoPapelMouseClicked
        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-       Painel_Cadastrar_Role cadatroRole = new Painel_Cadastrar_Role(this, true);
+       Painel_Cadastrar_Role cadatroRole = new Painel_Cadastrar_Role(this, true);//não sabemos o erro
        cadatroRole.setLocationRelativeTo(this);
        cadatroRole.setVisible(true);
     }//GEN-LAST:event_jBTNovoPapelMouseClicked

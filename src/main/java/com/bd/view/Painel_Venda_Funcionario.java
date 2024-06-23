@@ -23,7 +23,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     public Painel_Venda_Funcionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Venda Funcionário");
-        inicializandoClasses();//ver depois 
+        inicializandoClasses();
         initComponents();
     }
 
