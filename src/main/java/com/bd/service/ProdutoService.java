@@ -59,7 +59,7 @@ public class ProdutoService {
     public List<ProdutoResponse> buscarProdutosPeloNome(String descricao) {
         try {
             return produtoRepository.buscarProdutos().stream()
-                    .filter(produto -> !produto.getPro_descricao().contains(descricao))
+                    .filter(produto -> produto.getPro_descricao().contains(descricao))
                     .map(produtoMapper::entityToResponse)
                     .collect(Collectors.toList());
         } catch (Exception e) {

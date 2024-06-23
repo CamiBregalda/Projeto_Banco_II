@@ -61,7 +61,7 @@ public class FornecedorService {
     public List<FornecedorResponse> buscarFornecedoresPeloNome(String descricao) {
         try {
             return fornecedorRepository.buscarFornecedores().stream()
-                    .filter(fornecedor -> !fornecedor.getFor_descricao().contains(descricao))
+                    .filter(fornecedor -> fornecedor.getFor_descricao().contains(descricao))
                     .map(fornecedorMapper::entityToResponse)
                     .collect(Collectors.toList());
         } catch (Exception e) {
