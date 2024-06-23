@@ -222,31 +222,39 @@ public class Painel_Gerente extends javax.swing.JFrame {
         String pesquisa = jTFBarraPesquisa.getText();
 
         //Procurar o funcionario pelo nome e apresentar qual funcionario apresenta o nome desejado
-        List<FuncionarioResponse> funcionarios; //para passar os dados na lista
-        DefaultListModel<String> listaFuncionarios = new DefaultListModel<>();
-        List<FornecedorResponse> fornecedores;
-        DefaultListModel<String> listaFornecedores = new DefaultListModel<>();
+        // para passar os dados na lista
+        List<FuncionarioResponse> listaFuncionarios;
+        List<FornecedorResponse> listaFornecedores;
 
-        if(jCBFuncionario.isSelected()){
-            funcionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
-        } else {
-            funcionarios = funcionarioService.buscarFuncionarios();
+        DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionario.getModel();
+        tabelaFuncionarios.setRowCount(0);
+
+        DefaultTableModel tabelaFornecedores = (DefaultTableModel) jTBFornecedor.getModel();
+        tabelaFornecedores.setRowCount(0);
+
+        if(jCBFuncionario.isSelected() && jCBFornecedor.isSelected()){
+            listaFuncionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
+            listaFornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
+            for(int i = 0; i < listaFuncionarios.size(); i++){
+                tabelaFuncionarios.addRow(new Object[]{listaFuncionarios.get(i).fun_codigo().toString(), listaFuncionarios.get(i).fun_nome(), listaFuncionarios.get(i).fun_funcao()});
+            }
+            for(int i = 0; i < listaFornecedores.size(); i++){
+                tabelaFornecedores.addRow(new Object[]{listaFornecedores.get(i).for_codigo(), listaFornecedores.get(i).for_descricao()});
+            }
+        } else if(jCBFuncionario.isSelected() && !jCBFornecedor.isSelected()){
+            listaFuncionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
+            for(int i = 0; i < listaFuncionarios.size(); i++){
+                tabelaFuncionarios.addRow(new Object[]{listaFuncionarios.get(i).fun_codigo().toString(), listaFuncionarios.get(i).fun_nome(), listaFuncionarios.get(i).fun_funcao()});
+            }
+
+        } else if(!jCBFuncionario.isSelected() && jCBFornecedor.isSelected()){
+            listaFornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
+            for(int i = 0; i < listaFornecedores.size(); i++){
+                tabelaFornecedores.addRow(new Object[]{listaFornecedores.get(i).for_codigo(), listaFornecedores.get(i).for_descricao()});
+            }
+
         }
 
-        if(jCBFornecedor.isSelected()){
-            fornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
-        } else {
-            fornecedores = fornecedorService.buscarFornecedores();
-        }
-
-        //mostrar as informações na tabela
-        for (int i = 0; i < funcionarios.size(); i++){
-            listaFuncionarios.addElement(funcionarios.get(i).fun_nome());
-        }
-
-        for(int i = 0; i < fornecedores.size(); i++){
-            listaFornecedores.addElement(fornecedores.get(i).for_descricao());
-        }
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
 //Adicionar função para listar os nomes quando forem pesquisados
@@ -266,7 +274,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
             tabelaFuncionarios.addRow(new Object[]{listaFuncionarios.get(i).fun_codigo().toString(), listaFuncionarios.get(i).fun_nome(), listaFuncionarios.get(i).fun_funcao()});
         }
 
-        for (int i = 0; i < listaFuncionarios.size(); i++) {
+        for (int i = 0; i < listaFornecedores.size(); i++) {
             tabelaFornecedores.addRow(new Object[]{listaFornecedores.get(i).for_codigo(), listaFornecedores.get(i).for_descricao()});
         }
 
