@@ -201,6 +201,7 @@ public class FuncionarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT conceder_privilegio_grupo(?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                System.out.println("afi");
                 Array array = connection.createArrayOf("VARCHAR", privilegios);
                 statement.setString(1, nameGrupo);
                 statement.setString(2, nomeDaTabela);
