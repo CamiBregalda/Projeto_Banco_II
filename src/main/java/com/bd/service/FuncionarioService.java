@@ -114,7 +114,7 @@ public class FuncionarioService {
         }
     }
 
-    public ArrayList<String> buscarRoles(){
+    public List<String> buscarRoles(){
         try {
             return funcionarioRepository.buscarRoles();
         }catch (Exception e){
