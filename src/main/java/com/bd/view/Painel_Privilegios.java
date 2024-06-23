@@ -1,14 +1,29 @@
 package com.bd.view;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import com.bd.mapper.*;
+import com.bd.model.response.FuncionarioResponse;
+import com.bd.repository.*;
+import com.bd.service.*;
+import org.mapstruct.factory.Mappers;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Painel_Privilegios extends javax.swing.JDialog {
 
+    ProdutoService produtoService;
+    FornecedorService fornecedorService;
+    UsuarioService usuarioService;
+    FuncionarioService funcionarioService;
+    ItemService itemService;
+    VendaService vendaService;
  
     public Painel_Privilegios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Tela de Privilegio");
+        receberDados();
+        inicializandoClasses();
         initComponents();
     }
 
@@ -19,9 +34,9 @@ public class Painel_Privilegios extends javax.swing.JDialog {
 
         jLBTitulo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jCBFuncionario = new javax.swing.JComboBox<>();
+        jCBRoles = new javax.swing.JComboBox<>();
         jLBConcederPapel = new javax.swing.JLabel();
-        jCBConcederPapel = new javax.swing.JComboBox<>();
+        jCBFuncionariosRole = new javax.swing.JComboBox<>();
         jLBTabelaDesejada = new javax.swing.JLabel();
         jCBTabelaDesejada = new javax.swing.JComboBox<>();
         jLbPrivilegiosConcedidos = new javax.swing.JLabel();
@@ -38,14 +53,18 @@ public class Painel_Privilegios extends javax.swing.JDialog {
         jLBTitulo.setText("Privilégios");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Deseja conceder privilegios à :");
+        jLabel3.setText("Deseja conceder privilegios ao papel :");
 
-        jCBFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Indivídio", "Grupo" }));
+        jCBRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCBRolesMouseClicked(evt);
+            }
+        });
 
         jLBConcederPapel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLBConcederPapel.setText("Deseja conceder o papel:");
+        jLBConcederPapel.setText("Deseja conceder a quem:");
 
-        jCBConcederPapel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBFuncionariosRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
 
         jLBTabelaDesejada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLBTabelaDesejada.setText("Tabela desejada:");
@@ -71,6 +90,11 @@ public class Painel_Privilegios extends javax.swing.JDialog {
         });
 
         jBTNAtualizarPapel.setText("Atualizar");
+        jBTNAtualizarPapel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNAtualizarPapelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,8 +112,8 @@ public class Painel_Privilegios extends javax.swing.JDialog {
                             .addComponent(jLBConcederPapel)
                             .addComponent(jLBTabelaDesejada)
                             .addComponent(jCBTabelaDesejada, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCBConcederPapel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCBFuncionario, 0, 306, Short.MAX_VALUE)))
+                            .addComponent(jCBFuncionariosRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBRoles, 0, 306, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,11 +141,11 @@ public class Painel_Privilegios extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLBConcederPapel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCBConcederPapel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBFuncionariosRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLBTabelaDesejada)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -139,7 +163,7 @@ public class Painel_Privilegios extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCHBDelete)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBTNovoPapel)
                     .addComponent(jBTNAtualizarPapel))
                 .addGap(36, 36, 36))
@@ -154,6 +178,100 @@ public class Painel_Privilegios extends javax.swing.JDialog {
        cadatroRole.setLocationRelativeTo(this);
        cadatroRole.setVisible(true);
     }//GEN-LAST:event_jBTNovoPapelMouseClicked
+
+    private void jCBRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBRolesMouseClicked
+        String opcao = jCBRoles.getSelectedItem().toString();
+
+        List<String> funcionariosRole = funcionarioService.funcionarioPertenceRole(opcao);
+
+        for(int i = 0; i < funcionariosRole.size(); i++){
+            jCBFuncionariosRole.addItem(funcionariosRole.get(i));
+        }
+
+    }//GEN-LAST:event_jCBRolesMouseClicked
+
+    private void jBTNAtualizarPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelMouseClicked
+        // TODO add your handling code here:
+
+        ArrayList<String> permissoes = new ArrayList<>();
+
+        if(jCHBSelect.isSelected()){
+            permissoes.add("SELECT");
+        }
+        else if(jCHBInsert.isSelected()){
+            permissoes.add("INSERT");
+        }
+        else if(jCHBUpdate.isSelected()){
+            permissoes.add("UPDATE");
+        }
+        else if(jCHBDelete.isSelected()){
+            permissoes.add("DELETE");
+        }
+
+        String[] listaPermissoes = new String[permissoes.size()];
+
+        for(int i = 0; i < listaPermissoes.length; i++){
+            listaPermissoes[i] = permissoes.get(i);
+        }
+
+        if(jCBFuncionariosRole.getSelectedItem().toString().equals("Todos")){
+            funcionarioService.concederPrivilegioGrupo(jCBRoles.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), listaPermissoes);
+        } else{
+           funcionarioService.concederPrivilegioUsuario(jCBFuncionariosRole.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), listaPermissoes);
+        }
+
+        JOptionPane.showMessageDialog(this, "Privilégios atualizados com sucesso!");
+        this.dispose();
+    }//GEN-LAST:event_jBTNAtualizarPapelMouseClicked
+
+    public void receberDados(){
+
+        List<String> listaRoles = funcionarioService.buscarRoles();
+
+        String[] tabelas = new String[5];
+
+        tabelas[0] = "tb_fornecedores";
+        tabelas[1] = "tb_funcionarios";
+        tabelas[2] = "tb_itens";
+        tabelas[3] = "tb_produtos";
+        tabelas[4] = "tb_vendas";
+
+        for(int i = 0; i < tabelas.length; i++){
+            jCBTabelaDesejada.addItem(tabelas[i]);
+        }
+
+        for(int i = 0; i < listaRoles.size(); i++){
+            jCBRoles.addItem(listaRoles.get(i));
+        }
+
+    }
+
+    private void inicializandoClasses(){
+        FornecedorRepository fornecedorRepository = new FornecedorRepository();
+        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
+        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
+
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        BackupRepository backupRepository = new BackupRepository();
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
+
+        ItemRepository itemRepository = new ItemRepository();
+        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
+        itemService = new ItemService(itemRepository, itemMapper);
+
+        ProdutoRepository produtoRepository = new ProdutoRepository();
+        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
+        produtoService = new ProdutoService(produtoRepository, produtoMapper);
+
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
+        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
+
+        VendaRepository vendaRepository = new VendaRepository();
+        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
+        vendaService = new VendaService(vendaRepository, vendaMapper);
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -197,8 +315,8 @@ public class Painel_Privilegios extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNAtualizarPapel;
     private javax.swing.JButton jBTNovoPapel;
-    private javax.swing.JComboBox<String> jCBConcederPapel;
-    private javax.swing.JComboBox<String> jCBFuncionario;
+    private javax.swing.JComboBox<String> jCBFuncionariosRole;
+    private javax.swing.JComboBox<String> jCBRoles;
     private javax.swing.JComboBox<String> jCBTabelaDesejada;
     private javax.swing.JCheckBox jCHBDelete;
     private javax.swing.JCheckBox jCHBInsert;

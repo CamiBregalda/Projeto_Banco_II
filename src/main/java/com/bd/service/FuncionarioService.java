@@ -111,8 +111,7 @@ public class FuncionarioService {
 
     public ArrayList<String> buscarRoles(){
         try {
-            List<String> roles = funcionarioRepository.buscarRoles();
-            return new ArrayList<>(roles);
+            return funcionarioRepository.buscarRoles();
         }catch (Exception e){
             throw new BusinessException("Erro ao mostrar roles: " + e.getMessage());
         }
@@ -138,10 +137,9 @@ public class FuncionarioService {
 
     }
 
-    public ArrayList<String> funcionarioPertenceRole(String rolename){
+    public List<String> funcionarioPertenceRole(String rolename){
         try {
-            List<String> funcionarioPertenceRole = funcionarioRepository.funcionarioPertenceRole(rolename);
-            return new ArrayList<>(funcionarioPertenceRole);
+            return funcionarioRepository.funcionarioPertenceRole(rolename);
         }catch (Exception e){
             throw new BusinessException("Erro ao buscar funcionario por roles: " + e.getMessage());
         }
