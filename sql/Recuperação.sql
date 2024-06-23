@@ -14,7 +14,6 @@ DECLARE
 	valor_total DECIMAL;
     venda_id BIGINT;
 BEGIN
-    -- Iniciar transação
     BEGIN
         SELECT pro_quantidade INTO quantidade_estoque FROM tb_produtos WHERE pro_codigo = produto_codigo;
         
@@ -34,6 +33,7 @@ BEGIN
             VALUES (id_item + 1, quantidade_venda, valor_total, produto_codigo, venda_id);
             
             RETURN 'Venda realizada com sucesso!'; 
+			COMMIT;
 		ELSE
 			RETURN 'Quantidade insuficiente em estoque!';
 		END IF;
