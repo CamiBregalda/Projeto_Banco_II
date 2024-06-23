@@ -205,6 +205,7 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         }
 
         List<String> funcionariosRole = funcionarioService.funcionarioPertenceRole(opcao);
+        System.out.println(funcionariosRole);
 
         for(int i = 0; i < funcionariosRole.size(); i++){
             jCBFuncionariosRole.addItem(funcionariosRole.get(i));
@@ -251,7 +252,9 @@ public class Painel_Privilegios extends javax.swing.JFrame {
 
         for(int i = 0; i < listaPermissoes.length; i++){
             listaPermissoes[i] = permissoes.get(i);
+            System.out.println(listaPermissoes[i]);
         }
+
 
         if(jCBFuncionariosRole.getSelectedItem().toString().equals("Todos")){
             funcionarioService.concederPrivilegioGrupo(jCBRoles.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), listaPermissoes);
