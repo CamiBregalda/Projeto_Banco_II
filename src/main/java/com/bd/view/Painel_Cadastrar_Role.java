@@ -17,8 +17,7 @@ import com.bd.service.UsuarioService;
 import com.bd.service.VendaService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import org.mapstruct.factory.Mappers;
 
@@ -190,9 +189,12 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
             }
         }
 
-        System.out.println(nomeFuncionario);
+        String resposta = funcionarioService.cadastrarRole(nomeRole, nomeFuncionario);
 
-        funcionarioService.cadastrarRole(nomeRole, nomeFuncionario);
+        if(resposta != null)
+            JOptionPane.showMessageDialog(this, resposta);
+
+        this.dispose();
     }//GEN-LAST:event_jBTCriarRoleMouseClicked
 
     private void jTBFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBFuncionariosMouseClicked

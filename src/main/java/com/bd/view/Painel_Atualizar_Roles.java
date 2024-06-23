@@ -194,8 +194,11 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
                 usernames += ",";
             }
         }
-        System.out.println(usernames);
-        funcionarioService.atualizarUsersRole(role, usernames);
+        String resposta = funcionarioService.atualizarUsersRole(role, usernames);
+        if(resposta != null)
+            JOptionPane.showMessageDialog(this, resposta);
+
+        this.dispose();
     }//GEN-LAST:event_jBTNAtualizarMouseClicked
 
     private void jTBFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBFuncionariosMouseClicked
