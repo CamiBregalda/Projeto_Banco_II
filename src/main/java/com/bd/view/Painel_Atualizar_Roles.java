@@ -174,6 +174,7 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
     private void jBTNAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarMouseClicked
         List<String> funcionarios = new ArrayList<>();
         String role = jCBPapel.getSelectedItem().toString();
+
         
         for (int i = 0; i < jTBFuncionariosRole.getRowCount(); i++) {
             String nomeFuncionario = (String) jTBFuncionariosRole.getValueAt(i, 0);
@@ -186,7 +187,12 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
             .filter(funcionario -> !fun.contains(funcionario))
             .collect(Collectors.toList());
 
-        funcionarioService.atualizarUsersRole(role, funcionarios);
+        String usernames = new String();
+        for(int i = 0; i < funcionarios.size(); i++){
+            usernames = usernames + (String) funcionarios.get(i) + ",";
+        }
+        System.out.println(usernames);
+        funcionarioService.atualizarUsersRole(role, usernames);
     }//GEN-LAST:event_jBTNAtualizarMouseClicked
 
     private void jTBFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBFuncionariosMouseClicked

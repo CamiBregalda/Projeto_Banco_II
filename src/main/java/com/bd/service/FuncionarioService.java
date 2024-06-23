@@ -96,18 +96,18 @@ public class FuncionarioService {
         return funcionarioRepository.deletarFuncionario(id);
     }
 
-    public String cadastrarRole(String role, ArrayList<String> usernames){
+    public String cadastrarRole(String role, String usernames){
         try{
-            funcionarioRepository.cadastrarRole(role, (String[]) usernames.toArray());
+            funcionarioRepository.cadastrarRole(role, usernames);
             return "Role foi cadastrada com sucesso!";
         }catch (Exception e){
             throw new BusinessException("Erro ao cadastrar role: " + e.getMessage());
         }
     }
 
-    public String atualizarUsersRole(String role, List<String> usernames){
+    public String atualizarUsersRole(String role, String usernames){
         try{
-            funcionarioRepository.atualizarUsersRole(role, (String[]) usernames.toArray());
+            funcionarioRepository.atualizarUsersRole(role, usernames);
             return "Role foi atualizada com sucesso!";
         }catch (Exception e){
             throw new BusinessException("Erro ao atualizar role: " + e.getMessage());
