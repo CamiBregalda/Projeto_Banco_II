@@ -24,8 +24,8 @@ public class VendaController {
     private final VendaService vendaService;
 
     @PostMapping("/cadastrar")
-    public VendaResponse cadastrarVenda(@RequestBody VendaRegistrationRequest vendaRegistrationRequest) {
-        return vendaService.cadastrarVenda(vendaRegistrationRequest);
+    public VendaResponse cadastrarVenda(@RequestBody VendaRequest vendaRequest) {
+        return vendaService.cadastrarVenda(vendaRequest);
     }
 
     @GetMapping("")

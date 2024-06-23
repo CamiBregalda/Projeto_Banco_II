@@ -190,6 +190,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
 
         Painel_Vendas vender = new Painel_Vendas(this, true);
         vender.setLocationRelativeTo(this);
+        vender.produtoId = produto.pro_codigo();
         vender.recebeDados(produto);
         vender.setVisible(true);
         this.dispose();
