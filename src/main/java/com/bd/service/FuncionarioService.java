@@ -72,7 +72,7 @@ public class FuncionarioService {
     public List<FuncionarioResponse> buscarFuncionariosPeloNome(String nome) {
         try {
             return funcionarioRepository.buscarFuncionarios().stream()
-                    .filter(funcionario -> !funcionario.getFun_nome().contains(nome))
+                    .filter(funcionario -> funcionario.getFun_nome().contains(nome))
                     .map(funcionarioMapper::entityToResponse)
                     .collect(Collectors.toList());
         } catch (Exception e) {
