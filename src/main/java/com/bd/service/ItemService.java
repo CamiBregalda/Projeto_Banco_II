@@ -23,7 +23,6 @@ public class ItemService {
     public ItemResponse cadastrarItem(ItemRegistrationRequest itemRequest) {
         criarLogin(itemRequest.getUserLoginDTO());
         Item item =itemMapper.postDtoToEntity(itemRequest.getItemRequest());
-        System.out.println(item);
         return itemMapper.entityToResponse(itemRepository.cadastrarItem(item));
     }
 

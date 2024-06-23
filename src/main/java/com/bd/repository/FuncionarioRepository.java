@@ -5,6 +5,7 @@ import com.bd.model.Funcionario;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -155,8 +156,7 @@ public class FuncionarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT cadastrar_role(?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("VARCHAR", usernames);
-                System.out.println("Array: " + array);
+                Array array = connection.createArrayOf("TEXT", usernames);
                 statement.setString(1, role);
                 statement.setArray(2, array);
                 statement.executeUpdate();
@@ -170,7 +170,7 @@ public class FuncionarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT atualizar_users_role(?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("VARCHAR", usernames);
+                Array array = connection.createArrayOf("TEXT", usernames);
                 statement.setString(1, role);
                 statement.setArray(2, array);
                 statement.executeUpdate();
@@ -201,7 +201,7 @@ public class FuncionarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT conceder_privilegio_grupo(?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("VARCHAR", privilegios);
+                Array array = connection.createArrayOf("TEXT", privilegios);
                 statement.setString(1, nameGrupo);
                 statement.setString(2, nomeDaTabela);
                 statement.setArray(3, array);
@@ -216,7 +216,7 @@ public class FuncionarioRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT conceder_privilegio_usuario(?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("VARCHAR", privilegios);
+                Array array = connection.createArrayOf("TEXT", privilegios);
                 statement.setString(1, nameUsuario);
                 statement.setString(2, nomeDaTabela);
                 statement.setArray(3, array);
@@ -241,7 +241,6 @@ public class FuncionarioRepository {
                     while (resultado.next()) {
                         funcionariorole.add(resultado.getString("member_name"));
                     }
-                System.out.println(funcionariorole);
                     return funcionariorole;
             }
         } catch (SQLException e){
