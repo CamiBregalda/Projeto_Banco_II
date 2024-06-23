@@ -160,14 +160,6 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void recebeDados(ProdutoResponse produto, FornecedorResponse fornecedor){
-        jLBNomeProduto.setText(produto.pro_descricao());
-        jLBCodigoMostrar.setText(Long.toString(produto.pro_codigo()));
-        jLBFornecedorMostrar.setText(fornecedor.for_descricao());
-        jTFPreco.setText(Double.toString(produto.pro_valor()));
-        jTFEstoque.setText(Integer.toString(produto.pro_quantidade()));
-    } 
-    
     private void jBTNAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAlterarMouseClicked
         //Pega os novos valores dos TextField e faz um ProdutoRequest, passa esse produto para o método AtualizarProduto()
         String nome = jLBNomeProduto.getText();
@@ -175,9 +167,7 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
         int estoque = Integer.parseInt(jTFEstoque.getText());
         
         ProdutoResponse atualizar = produtoService.atualizarProduto(pro_codigo, new ProdutoRequest((int) pro_codigo, nome, preco, estoque, fornecedor.for_codigo()));
-        
-        
-        //ProdutoResponse atualizar = atualizarProduto();
+
         this.dispose();
     }//GEN-LAST:event_jBTNAlterarMouseClicked
   
@@ -194,11 +184,24 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTNDeletarProdutoMouseClicked
 
     private void jBTNVenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNVenderMouseClicked
+        String codigoProduto = jLBCodigoMostrar.getText();
+
+        ProdutoResponse produto = produtoService.buscarProdutoPeloId(Long.parseLong(codigoProduto));
+
         Painel_Vendas vender = new Painel_Vendas(this, true);
         vender.setLocationRelativeTo(this);
+        vender.recebeDados(produto);
         vender.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBTNVenderMouseClicked
+
+    public void recebeDados(ProdutoResponse produto, FornecedorResponse fornecedor){
+        jLBNomeProduto.setText(produto.pro_descricao());
+        jLBCodigoMostrar.setText(Long.toString(produto.pro_codigo()));
+        jLBFornecedorMostrar.setText(fornecedor.for_descricao());
+        jTFPreco.setText(Double.toString(produto.pro_valor()));
+        jTFEstoque.setText(Integer.toString(produto.pro_quantidade()));
+    }
 
     private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();

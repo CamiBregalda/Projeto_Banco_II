@@ -31,14 +31,32 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="556" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jTFBarraPesquisa" min="-2" pref="300" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBTNBarraPesquisa" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLBBarraPesquisa" min="-2" pref="202" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jBTNBarraPesquisa2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLBProdutos" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" pref="291" max="32767" attributes="0"/>
+                                  <Component id="jTFBarraPesquisa" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLBProdutos1" min="-2" pref="202" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="jBTNBarraPesquisa" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jBTNBarraPesquisa1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="jLBProdutos" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLBBarraPesquisa" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -51,16 +69,27 @@
               <Component id="jLBTituloDaPagina" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jLBBarraPesquisa" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTFBarraPesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBTNBarraPesquisa1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLBProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLBProdutos1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="324" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="324" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jBTNBarraPesquisa2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBTNBarraPesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLBProdutos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="324" max="-2" attributes="0"/>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,15 +99,16 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBTNBarraPesquisa">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pesquisar"/>
+        <Property name="text" type="java.lang.String" value="Atualizar"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNBarraPesquisaMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBTNBarraPesquisaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLBProdutos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Funcionarios"/>
+        <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios que n&#xe3;o est&#xe3;o na role:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLBTituloDaPagina">
@@ -91,7 +121,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLBBarraPesquisa">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar Papel:"/>
+        <Property name="text" type="java.lang.String" value="Buscar Papel/Adicionar novo:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -113,5 +143,46 @@
         </Component>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="jLListaFuncionarios1">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLBProdutos1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios da role:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBTNBarraPesquisa1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pesquisar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNBarraPesquisa1MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBTNBarraPesquisa2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Criar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNBarraPesquisa2MouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBTNBarraPesquisa2ActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

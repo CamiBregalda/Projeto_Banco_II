@@ -71,8 +71,8 @@ public class Painel_Login extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTFNomeLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                     .addComponent(jLBNomeLogin)
-                    .addComponent(jLBSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPFSenhaLogin))
+                    .addComponent(jPFSenhaLogin)
+                    .addComponent(jLBSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(

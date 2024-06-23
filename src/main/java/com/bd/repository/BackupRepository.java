@@ -10,7 +10,7 @@ public class BackupRepository {
     public void programarBackup(Timestamp novoProximoBackup) {
         String sql = "SELECT programar_backup(?)";
         try (Connection connection = Conexao.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setTimestamp(1, novoProximoBackup);
             statement.execute();
         } catch (SQLException ex) {

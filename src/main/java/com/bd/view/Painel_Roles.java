@@ -52,24 +52,57 @@ public class Painel_Roles extends javax.swing.JDialog {
         jLBBarraPesquisa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLListaFuncionarios = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLListaFuncionarios1 = new javax.swing.JList<>();
+        jLBProdutos1 = new javax.swing.JLabel();
+        jBTNBarraPesquisa1 = new javax.swing.JButton();
+        jBTNBarraPesquisa2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jBTNBarraPesquisa.setText("Pesquisar");
+        jBTNBarraPesquisa.setText("Atualizar");
         jBTNBarraPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBTNBarraPesquisaMouseClicked(evt);
             }
         });
+        jBTNBarraPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBTNBarraPesquisaActionPerformed(evt);
+            }
+        });
 
-        jLBProdutos.setText("Funcionarios");
+        jLBProdutos.setText("Funcionários que não estão na role:");
 
         jLBTituloDaPagina.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLBTituloDaPagina.setText("Buscar Papeis");
 
-        jLBBarraPesquisa.setText("Buscar Papel:");
+        jLBBarraPesquisa.setText("Buscar Papel/Adicionar novo:");
 
         jScrollPane1.setViewportView(jLListaFuncionarios);
+
+        jScrollPane2.setViewportView(jLListaFuncionarios1);
+
+        jLBProdutos1.setText("Funcionários da role:");
+
+        jBTNBarraPesquisa1.setText("Pesquisar");
+        jBTNBarraPesquisa1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNBarraPesquisa1MouseClicked(evt);
+            }
+        });
+
+        jBTNBarraPesquisa2.setText("Criar");
+        jBTNBarraPesquisa2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNBarraPesquisa2MouseClicked(evt);
+            }
+        });
+        jBTNBarraPesquisa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBTNBarraPesquisa2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,13 +115,25 @@ public class Painel_Roles extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLBBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBTNBarraPesquisa))
-                    .addComponent(jLBProdutos)
-                    .addComponent(jLBBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jBTNBarraPesquisa2)
+                                .addGap(61, 61, 61))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                                    .addComponent(jTFBarraPesquisa))
+                                .addGap(9, 9, 9)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBProdutos1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(jBTNBarraPesquisa))
+                            .addComponent(jBTNBarraPesquisa1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,15 +143,23 @@ public class Painel_Roles extends javax.swing.JDialog {
                 .addComponent(jLBTituloDaPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(jLBBarraPesquisa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBTNBarraPesquisa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLBProdutos)
+                    .addComponent(jBTNBarraPesquisa1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLBProdutos)
+                    .addComponent(jLBProdutos1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBTNBarraPesquisa2)
+                    .addComponent(jBTNBarraPesquisa))
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -128,6 +181,22 @@ public class Painel_Roles extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
+
+    private void jBTNBarraPesquisa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisa1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNBarraPesquisa1MouseClicked
+
+    private void jBTNBarraPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNBarraPesquisaActionPerformed
+
+    private void jBTNBarraPesquisa2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisa2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNBarraPesquisa2MouseClicked
+
+    private void jBTNBarraPesquisa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisa2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNBarraPesquisa2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,11 +242,16 @@ public class Painel_Roles extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNBarraPesquisa;
+    private javax.swing.JButton jBTNBarraPesquisa1;
+    private javax.swing.JButton jBTNBarraPesquisa2;
     private javax.swing.JLabel jLBBarraPesquisa;
     private javax.swing.JLabel jLBProdutos;
+    private javax.swing.JLabel jLBProdutos1;
     private javax.swing.JLabel jLBTituloDaPagina;
     private javax.swing.JList<String> jLListaFuncionarios;
+    private javax.swing.JList<String> jLListaFuncionarios1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFBarraPesquisa;
     // End of variables declaration//GEN-END:variables
 }
