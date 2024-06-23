@@ -45,6 +45,7 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         jCHBDelete = new javax.swing.JCheckBox();
         jBTNovoPapel = new javax.swing.JButton();
         jBTNAtualizarPapel = new javax.swing.JButton();
+        jBTNConceder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,12 +80,34 @@ public class Painel_Privilegios extends javax.swing.JFrame {
 
         jCHBDelete.setText("DELETE TABLE");
 
-        jBTNovoPapel.setText("Criar");
+        jBTNovoPapel.setText("Criar Papel");
+        jBTNovoPapel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNovoPapelMouseClicked(evt);
+            }
+        });
 
-        jBTNAtualizarPapel.setText("Atualizar");
+        jBTNAtualizarPapel.setText("Atualizar Papel");
         jBTNAtualizarPapel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBTNAtualizarPapelMouseClicked(evt);
+            }
+        });
+        jBTNAtualizarPapel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBTNAtualizarPapelActionPerformed(evt);
+            }
+        });
+
+        jBTNConceder.setText("Conceder Privilégio");
+        jBTNConceder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNConcederMouseClicked(evt);
+            }
+        });
+        jBTNConceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBTNConcederActionPerformed(evt);
             }
         });
 
@@ -109,20 +132,23 @@ public class Painel_Privilegios extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jCHBSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLbPrivilegiosConcedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jBTNovoPapel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCHBUpdate))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jCHBDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCHBInsert, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jBTNAtualizarPapel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jCHBSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLbPrivilegiosConcedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jBTNovoPapel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCHBUpdate))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(78, 78, 78)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jCHBDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jCHBInsert, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(64, 64, 64)
+                                        .addComponent(jBTNAtualizarPapel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jBTNConceder, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,7 +168,7 @@ public class Painel_Privilegios extends javax.swing.JFrame {
                 .addComponent(jLBTabelaDesejada)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCBTabelaDesejada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLbPrivilegiosConcedidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +184,9 @@ public class Painel_Privilegios extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBTNovoPapel)
                     .addComponent(jBTNAtualizarPapel))
-                .addGap(36, 36, 36))
+                .addGap(18, 18, 18)
+                .addComponent(jBTNConceder)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -177,7 +205,18 @@ public class Painel_Privilegios extends javax.swing.JFrame {
 
     private void jBTNAtualizarPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelMouseClicked
         // TODO add your handling code here:
+        Painel_Atualizar_Roles roles = new Painel_Atualizar_Roles(this, true);
+        roles.setLocationRelativeTo(this);
+        roles.setVisible(true);
+        
+    }//GEN-LAST:event_jBTNAtualizarPapelMouseClicked
 
+    private void jBTNAtualizarPapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNAtualizarPapelActionPerformed
+
+    private void jBTNConcederMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNConcederMouseClicked
+        // TODO add your handling code here:
         ArrayList<String> permissoes = new ArrayList<>();
 
         if(jCHBSelect.isSelected()){
@@ -207,7 +246,18 @@ public class Painel_Privilegios extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Privilégios atualizados com sucesso!");
         this.dispose();
-    }//GEN-LAST:event_jBTNAtualizarPapelMouseClicked
+    }//GEN-LAST:event_jBTNConcederMouseClicked
+
+    private void jBTNConcederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNConcederActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBTNConcederActionPerformed
+
+    private void jBTNovoPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNovoPapelMouseClicked
+        // TODO add your handling code here:
+        Painel_Cadastrar_Role cadastroRole = new Painel_Cadastrar_Role(this, true);
+        cadastroRole.setLocationRelativeTo(this);
+        cadastroRole.setVisible(true);
+    }//GEN-LAST:event_jBTNovoPapelMouseClicked
 
     public void receberDados(){
         List<String> listaRoles = funcionarioService.buscarRoles();
@@ -296,6 +346,7 @@ public class Painel_Privilegios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNAtualizarPapel;
+    private javax.swing.JButton jBTNConceder;
     private javax.swing.JButton jBTNovoPapel;
     private javax.swing.JComboBox<String> jCBFuncionariosRole;
     private javax.swing.JComboBox<String> jCBRoles;

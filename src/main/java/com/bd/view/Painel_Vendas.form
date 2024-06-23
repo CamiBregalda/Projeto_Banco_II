@@ -176,7 +176,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jBTNComprar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Comprar"/>
+            <Property name="text" type="java.lang.String" value="Vender"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNComprarMouseClicked"/>
