@@ -21,30 +21,29 @@ public class VendaService {
     private final VendaRepository vendaRepository;
     private final VendaMapper vendaMapper;
 
-    public VendaResponse cadastrarVenda(VendaRegistrationRequest vendaRegistrationRequestRequest) {
-        criarLogin(vendaRegistrationRequestRequest.getUserLoginDTO());
-        Venda venda = vendaMapper.postDtoToEntity(vendaRegistrationRequestRequest.getVendaRequest());
+    public VendaResponse cadastrarVenda(VendaRequest vendaRequest) {
+        Venda venda = vendaMapper.postDtoToEntity(vendaRequest);
         return vendaMapper.entityToResponse(vendaRepository.cadastrarVenda(venda));
     }
 
+    public String realizarVenda(long funcionario_codigo, long produto_codigo, int quantidade_venda) {
+        try{
+            return vendaRepository.realizarVenda(funcionario_codigo, produto_codigo, quantidade_venda);
+        }
+        catch (Exception e){
+            throw new BusinessException("Erro ao realizar venda: " + e.getMessage());
+        }
+    }
+    
     public List<VendaResponse> buscarVendas() {
         try {
             List<Venda> vendas = vendaRepository.buscarVendas();
-
-            for (Venda venda : vendas) {
-                System.out.println(venda);
-            }
 
             List<VendaResponse> vendaResponses = new ArrayList<>();
             for (Venda venda : vendas) {
                 vendaResponses.add(vendaMapper.entityToResponse(venda));
             }
 
-            for (VendaResponse venda : vendaResponses) {
-                System.out.println(venda);
-            }
-
-            System.out.println("teste");
             return vendaResponses;
         } catch (Exception e) {
             throw new BusinessException("Erro ao buscar vendas: " + e.getMessage());
@@ -69,20 +68,5 @@ public class VendaService {
 
     public boolean deletarVenda(Long id) {
         return vendaRepository.deletarVenda(id);
-    }
-    private void criarLogin(UserLoginDTO userDTO) {
-        Login login = Login.getInstance();
-        login.setUser(userDTO.getUsername());
-        login.setSenha(userDTO.getPassword());
-    }
-
-    public String realizarVenda(long funcionario_codigo, long produto_codigo, int quantidade_venda) {
-        try{
-            vendaRepository.realizarVenda(funcionario_codigo, produto_codigo, quantidade_venda);
-            return "Venda realizada com sucesso!";
-        }
-        catch (Exception e){
-            throw new BusinessException("Erro ao realizar venda: " + e.getMessage());
-        }
     }
 }

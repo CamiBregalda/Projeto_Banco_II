@@ -111,13 +111,18 @@ public class VendaRepository {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT realizarVenda(?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
                 statement.setLong(1, funcionario_codigo);
                 statement.setLong(2, produto_codigo);
                 statement.setInt(3, quantidade_venda);
-                statement.executeUpdate();
+                try (ResultSet rs = statement.executeQuery()) {
+                    if (rs.next()) {
+                        String result = rs.getString(1);
+                        return result;
+                    } else {
+                        throw new RuntimeException("Erro ao realizar venda: Função não retornou resultado.");
+                    }
+                }
             }
-            return "Venda realizada com sucesso!";
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao realizar venda", ex);
         }

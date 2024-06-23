@@ -42,33 +42,47 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLBValorTotal" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                          <Component id="jLBValorTotalMostrar" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLBPreco" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="jLBQtdEstoque" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLBQuantidade" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLBListaFuncionarios" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="19" pref="18" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jCBListaFuncionarios" max="32767" attributes="0"/>
-                              <Component id="jSPNQuantidade" max="32767" attributes="0"/>
-                              <Component id="jLBQtdEstoqueMostrar" max="32767" attributes="0"/>
-                              <Component id="jLBPrecoMostrar" pref="141" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jCBListaFuncionarios" max="32767" attributes="0"/>
+                                      <Component id="jLBQtdEstoqueMostrar" max="32767" attributes="0"/>
+                                      <Component id="jLBPrecoMostrar" pref="141" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Component id="jSPNQuantidade" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLBValorTotal" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                  <Component id="jBTNCalcular" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLBValorTotalMostrar" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jBTNComprar" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="39" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
-                  <Component id="jBTNComprar" min="-2" pref="87" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -97,14 +111,17 @@
                       <Component id="jLBQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jSPNQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLBValorTotal" min="-2" max="-2" attributes="0"/>
                       <Component id="jLBValorTotalMostrar" min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="jBTNComprar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBTNCalcular" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBTNComprar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -118,16 +135,6 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Nome do Produto"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="jSPNQuantidade">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSPNQuantidadeStateChanged"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLBQuantidade">
           <Properties>
@@ -192,6 +199,16 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio respons&#xe1;vel:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="jSPNQuantidade">
+        </Component>
+        <Component class="javax.swing.JButton" name="jBTNCalcular">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Calcular Total"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNCalcularMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

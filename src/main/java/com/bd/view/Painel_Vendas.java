@@ -4,6 +4,7 @@
  */
 package com.bd.view;
 
+import com.bd.infra.Login;
 import com.bd.mapper.*;
 import com.bd.model.request.VendaRequest;
 import com.bd.model.response.FuncionarioResponse;
@@ -38,7 +39,6 @@ public class Painel_Vendas extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLBNomeProduto = new javax.swing.JLabel();
-        jSPNQuantidade = new javax.swing.JSpinner();
         jLBQuantidade = new javax.swing.JLabel();
         jLBPreco = new javax.swing.JLabel();
         jLBPrecoMostrar = new javax.swing.JLabel();
@@ -49,19 +49,14 @@ public class Painel_Vendas extends javax.swing.JDialog {
         jBTNComprar = new javax.swing.JButton();
         jCBListaFuncionarios = new javax.swing.JComboBox<>();
         jLBListaFuncionarios = new javax.swing.JLabel();
+        jSPNQuantidade = new javax.swing.JSpinner();
+        jBTNCalcular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLBNomeProduto.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLBNomeProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLBNomeProduto.setText("Nome do Produto");
-
-        jSPNQuantidade.setBorder(null);
-        jSPNQuantidade.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSPNQuantidadeStateChanged(evt);
-            }
-        });
 
         jLBQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBQuantidade.setText("Quantidade:");
@@ -85,6 +80,13 @@ public class Painel_Vendas extends javax.swing.JDialog {
         jLBListaFuncionarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBListaFuncionarios.setText("Funcionário responsável:");
 
+        jBTNCalcular.setText("Calcular Total");
+        jBTNCalcular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBTNCalcularMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -93,27 +95,35 @@ public class Painel_Vendas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLBValorTotal)
-                        .addGap(112, 112, 112)
-                        .addComponent(jLBValorTotalMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLBPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLBQtdEstoque)
                             .addComponent(jLBQuantidade)
                             .addComponent(jLBListaFuncionarios))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBListaFuncionarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSPNQuantidade)
-                            .addComponent(jLBQtdEstoqueMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLBPrecoMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jCBListaFuncionarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLBQtdEstoqueMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLBPrecoMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jSPNQuantidade))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBValorTotal)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jBTNCalcular)))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLBValorTotalMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBTNComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 39, Short.MAX_VALUE)))))
                 .addGap(53, 53, 53))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jBTNComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,13 +146,15 @@ public class Painel_Vendas extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLBQuantidade)
                     .addComponent(jSPNQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLBValorTotal)
                     .addComponent(jLBValorTotalMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(jBTNComprar)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBTNCalcular)
+                    .addComponent(jBTNComprar))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,20 +182,21 @@ public class Painel_Vendas extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, venda);
     }//GEN-LAST:event_jBTNComprarMouseClicked
 
-    private void jSPNQuantidadeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSPNQuantidadeStateChanged
-       double valor = Double.parseDouble(jLBPrecoMostrar.toString());
-       int quantidadeCompra = (Integer) jSPNQuantidade.getValue();
+    private void jBTNCalcularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCalcularMouseClicked
+        double valor = Double.parseDouble(jLBPrecoMostrar.getText().replace(",", "."));
+        int quantidadeCompra = (Integer) jSPNQuantidade.getValue();
       
-       double preco = valor * quantidadeCompra;
-       jLBValorTotalMostrar.setText(String.format("%.2f", preco));
-    }//GEN-LAST:event_jSPNQuantidadeStateChanged
+        double preco = valor * quantidadeCompra;
+        System.out.println("Preco: " + preco);
+        jLBValorTotalMostrar.setText(String.format("%.2f", preco));
+    }//GEN-LAST:event_jBTNCalcularMouseClicked
 
     public void recebeDados(ProdutoResponse produto){
        jLBNomeProduto.setText(produto.pro_descricao());
       
         List<FuncionarioResponse> funcionarios = funcionarioService.buscarFuncionarios();
         for (FuncionarioResponse funcionario : funcionarios) {
-            jCBListaFuncionarios.addItem(funcionario.fun_nome()); // Supondo que FuncionarioResponse tenha um método getNome()
+            jCBListaFuncionarios.addItem(funcionario.fun_nome());
         }
 
        jLBPrecoMostrar.setText(String.format("%.2f", produto.pro_valor()));
@@ -219,30 +232,6 @@ public class Painel_Vendas extends javax.swing.JDialog {
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Painel_Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Painel_Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Painel_Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Painel_Vendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Painel_Vendas dialog = new Painel_Vendas(new javax.swing.JDialog(), true);
@@ -258,6 +247,7 @@ public class Painel_Vendas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTNCalcular;
     private javax.swing.JButton jBTNComprar;
     private javax.swing.JComboBox<String> jCBListaFuncionarios;
     private javax.swing.JLabel jLBListaFuncionarios;
