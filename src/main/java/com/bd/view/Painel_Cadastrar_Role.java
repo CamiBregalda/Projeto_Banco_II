@@ -4,7 +4,10 @@
  */
 package com.bd.view;
 
+import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.response.FuncionarioResponse;
+import com.bd.repository.BackupRepository;
+import com.bd.repository.FuncionarioRepository;
 import com.bd.service.FornecedorService;
 import com.bd.service.FuncionarioService;
 import com.bd.service.ItemService;
@@ -15,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.table.DefaultTableModel;
+import org.mapstruct.factory.Mappers;
 
 /**
  *
@@ -22,21 +27,16 @@ import javax.swing.JList;
  */
 public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     
-    ProdutoService produtoService;
-    FornecedorService fornecedorService;
-    UsuarioService usuarioService;
     FuncionarioService funcionarioService;
-    ItemService itemService;
-    VendaService vendaService;
-    
-    
-    /**
-     * Creates new form Painel_Cadastrar_Role
-     */
+    List<String> listaPapeis = new ArrayList<>();
+    List<FuncionarioResponse> listaFuncionarios = new ArrayList<>();
+
     public Painel_Cadastrar_Role(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setTitle("Cadastro Papel");
         initComponents();
+        inicializandoClasses();
+        recebeDados();
    }
 
     /**
@@ -51,33 +51,20 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTFNomeNovaRole = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jLListaNomeFuncionarios = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jLListaNomeDefinitivo = new javax.swing.JList<>();
         jBTCriarRole = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTBFuncionarios = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTBFuncionariosRole = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Criar um novo Papel");
 
         jLabel2.setText("Nome do Novo Papel:");
-
-        jLListaNomeFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLListaNomeFuncionariosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jLListaNomeFuncionarios);
-
-        jLListaNomeDefinitivo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLListaNomeDefinitivoMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jLListaNomeDefinitivo);
 
         jBTCriarRole.setText("Criar Papel");
         jBTCriarRole.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,34 +75,90 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
 
         jLabel3.setText("Selecione as pessoas");
 
+        jTBFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Todos os Funcionarios"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTBFuncionarios);
+
+        jTBFuncionariosRole.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Funcionarios Adicionados"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTBFuncionariosRole);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTFNomeNovaRole, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3))
-                        .addGap(18, 18, 18))
+                        .addGap(106, 106, 106))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(294, 294, 294)
-                        .addComponent(jBTCriarRole))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(88, 88, 88))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(219, 219, 219))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(288, 288, 288)
+                .addComponent(jBTCriarRole)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,11 +173,11 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
                 .addComponent(jBTCriarRole)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,44 +201,25 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     //    funcionarioService.cadastrarRole(nomeRole, pessoas);
     }//GEN-LAST:event_jBTCriarRoleMouseClicked
 
-    private void jLListaNomeFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeFuncionariosMouseClicked
-        DefaultListModel<String> modeloFuncionarios;
-        DefaultListModel<String> modeloDefinitivo;
-        modeloFuncionarios = new DefaultListModel<>();
-        modeloDefinitivo = new DefaultListModel<>();
-        jLListaNomeFuncionarios = new JList<>(modeloFuncionarios);
-        jLListaNomeDefinitivo = new JList<>(modeloDefinitivo);
+    private void recebeDados(){
+        listaFuncionarios = funcionarioService.buscarFuncionarios();
+        listaPapeis = funcionarioService.buscarRoles();
         
-        String nomeFuncionario = jLListaNomeFuncionarios.getSelectedValue();
-    if (nomeFuncionario != null) {
-        modeloFuncionarios.removeElement(nomeFuncionario); // Remove da primeira lista
-        modeloDefinitivo.addElement(nomeFuncionario); // Adiciona à segunda lista
+        DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionarios.getModel();
+        tabelaFuncionarios.setRowCount(0);
         
+        for (FuncionarioResponse funcionario : listaFuncionarios){
+            tabelaFuncionarios.addRow(new Object[]{funcionario.fun_nome()});
+        }
     }
-
-        
-    }//GEN-LAST:event_jLListaNomeFuncionariosMouseClicked
-
-    private void jLListaNomeDefinitivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLListaNomeDefinitivoMouseClicked
-        DefaultListModel<String> modeloFuncionarios;
-        DefaultListModel<String> modeloDefinitivo;
-        modeloFuncionarios = new DefaultListModel<>();
-        modeloDefinitivo = new DefaultListModel<>();
-        jLListaNomeFuncionarios = new JList<>(modeloFuncionarios);
-        jLListaNomeDefinitivo = new JList<>(modeloDefinitivo);
-        
-        String nomeFuncionario = jLListaNomeDefinitivo.getSelectedValue();
-    if (nomeFuncionario != null) {
-        modeloDefinitivo.removeElement(nomeFuncionario); // Remove da segunda lista
-        modeloFuncionarios.addElement(nomeFuncionario); // Adiciona à primeira lista
+    
+    private void inicializandoClasses(){
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        BackupRepository backupRepository = new BackupRepository();
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
     }
-        
-             
-    }//GEN-LAST:event_jLListaNomeDefinitivoMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -237,13 +261,13 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTCriarRole;
-    private javax.swing.JList<String> jLListaNomeDefinitivo;
-    private javax.swing.JList<String> jLListaNomeFuncionarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTBFuncionarios;
+    private javax.swing.JTable jTBFuncionariosRole;
     private javax.swing.JTextField jTFNomeNovaRole;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Element;
 import org.mapstruct.factory.Mappers;
@@ -36,19 +37,15 @@ import org.mapstruct.factory.Mappers;
 
 public class Painel_Atualizar_Roles extends javax.swing.JDialog {
 
-    ProdutoService produtoService;
-    FornecedorService fornecedorService;
-    UsuarioService usuarioService;
     FuncionarioService funcionarioService;
-    ItemService itemService;
-    VendaService vendaService;
-    List<String> papeis = new ArrayList<>();
+    List<String> listaPapeis = new ArrayList<>();
+    List<FuncionarioResponse> listaFuncionarios = new ArrayList<>();
 
     public Painel_Atualizar_Roles(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        recebeDados();
-        inicializandoClasses();
         initComponents();
+        inicializandoClasses();
+        recebeDados();
     }
 
     @SuppressWarnings("unchecked")
@@ -95,28 +92,58 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
 
         jTBFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Funcionarios Não Pertencentes a Role"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTBFuncionarios);
 
         jTBFuncionariosRole.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Funcionarios Pertencentes a Role"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(jTBFuncionariosRole);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,12 +204,31 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNBarraPesquisa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisa1MouseClicked
-        String pesquisa = jTFBarraPesquisa.getText();
+        String role = jTFBarraPesquisa.getText();
         
-        List<String> papel = funcionarioService.buscarRoles();
+        DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionarios.getModel();
+        tabelaFuncionarios.setRowCount(0);
         
-        List<String> listaFuncionarios = funcionarioService.funcionarioPertenceRole(pesquisa);
-
+        DefaultTableModel tabelaFuncionariosRole = (DefaultTableModel) jTBFuncionarios.getModel();
+        tabelaFuncionariosRole.setRowCount(0);
+        
+        if(!role.isEmpty()){
+            if(listaPapeis.contains(role)){
+                List<String> fun = funcionarioService.funcionarioPertenceRole(role);
+                
+                for (String funcionario : fun){
+                    tabelaFuncionariosRole.addRow(new Object[]{funcionario});
+                }
+                
+                for (FuncionarioResponse funcionario : listaFuncionarios){
+                    if(!fun.contains(funcionario.fun_nome())){
+                        tabelaFuncionarios.addRow(new Object[]{funcionario.fun_nome()});
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Papel não encontrado!");
+            }
+        }
     }//GEN-LAST:event_jBTNBarraPesquisa1MouseClicked
 
     private void jBTNAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarMouseClicked
@@ -190,72 +236,29 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTNAtualizarMouseClicked
 
     private void recebeDados(){
-        List<FuncionarioResponse> listaFuncionarios = funcionarioService.buscarFuncionarios();
-        papeis = funcionarioService.buscarRoles();
+        listaFuncionarios = funcionarioService.buscarFuncionarios();
+        listaPapeis = funcionarioService.buscarRoles();
         
         DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionarios.getModel();
         tabelaFuncionarios.setRowCount(0);
         
-        DefaultTableModel tabelaFuncionariosRole = (DefaultTableModel) jTBFuncionarios.getModel();
-        tabelaFuncionariosRole.setRowCount(0);
-/*
-        for (int i = 0; i < produtos.size(); i++) {
-            FornecedorResponse fornecedor = fornecedorService.buscarFornecedorPeloId(Long.valueOf(produtos.get(i).tb_fornecedores_for_codigo()));
-            tabela.addRow(new Object[]{produtos.get(i).pro_codigo(), produtos.get(i).pro_descricao(), fornecedor.for_descricao()});
+        for (FuncionarioResponse funcionario : listaFuncionarios){
+            tabelaFuncionarios.addRow(new Object[]{funcionario.fun_nome()});
         }
-        
-        for (int i = 0; i < papel.size(); i++) {
-            funcionarios.add(listaFuncionarios.get(i).fun_nome());
-        }
-        
-       
-        
-        if(!role.isEmpty()){
-            for (int i = 0; i < papel.size(); i++) {
-                if(papel.get(i) == role){
-                    List<String> funcionarios = funcionarioService.funcionarioPertenceRole(role);
-                    tabelaComRole.addRow(new Object[]{funcionarioService.funcionarioPertenceRole(papel.get(i))}); 
-                   
-                    tabelaSemRole.addRow(new Object[]{funcionarioService.buscarFuncionarios()});
-                } 
-            }
-        }
-        */
-        //funcionarioPertenceRole
     }
     
     private void inicializandoClasses(){
-        FornecedorRepository fornecedorRepository = new FornecedorRepository();
-        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
-        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
-
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
         BackupRepository backupRepository = new BackupRepository();
         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
         funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
-
-        ItemRepository itemRepository = new ItemRepository();
-        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
-        itemService = new ItemService(itemRepository, itemMapper);
-
-        ProdutoRepository produtoRepository = new ProdutoRepository();
-        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
-        produtoService = new ProdutoService(produtoRepository, produtoMapper);
-
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
-        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
-
-        VendaRepository vendaRepository = new VendaRepository();
-        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
-        vendaService = new VendaService(vendaRepository, vendaMapper);
     }
     
     
     public static void main(String args[]) {
         
         Login.getInstance().setUser("postgres");//remover antes de subir no git
-        Login.getInstance().setSenha("postgress");//possibilidade de logar
+        Login.getInstance().setSenha("root");//possibilidade de logar
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
