@@ -189,7 +189,10 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
 
         String usernames = new String();
         for(int i = 0; i < funcionarios.size(); i++){
-            usernames = usernames + (String) funcionarios.get(i) + ",";
+            usernames += (String) funcionarios.get(i);
+            if (i < funcionarios.size() - 1) {
+                usernames += ",";
+            }
         }
         System.out.println(usernames);
         funcionarioService.atualizarUsersRole(role, usernames);

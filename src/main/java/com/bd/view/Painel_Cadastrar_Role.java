@@ -183,8 +183,11 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
         String nomeFuncionario = new String();
         
         for (int i = 0; i < jTBFuncionariosRole.getRowCount(); i++) {
-            nomeFuncionario = nomeFuncionario + (String) jTBFuncionariosRole.getValueAt(i, 0) + ",";
-
+            //nomeFuncionario ="," + nomeFuncionario + (String) jTBFuncionariosRole.getValueAt(i, 0);
+            nomeFuncionario += (String) jTBFuncionariosRole.getValueAt(i, 0);
+            if (i < jTBFuncionariosRole.getRowCount() - 1) {
+                nomeFuncionario += ",";
+            }
         }
 
         System.out.println(nomeFuncionario);
