@@ -124,6 +124,7 @@ public class FuncionarioService {
 
     public String concederPrivilegioGrupo(String nameGrupo, String nomeDaTabela, String[] privilegios) {
         try {
+            System.out.println("chegou no privilegio");
             funcionarioRepository.concederPrivilegioGrupo(nameGrupo, nomeDaTabela, privilegios);
             return "privilegio ao grupo foi concedido com sucesso!";
         } catch (Exception e) {
@@ -142,8 +143,9 @@ public class FuncionarioService {
 
     }
 
-    public List<String> funcionarioPertenceRole(String rolename){
+    public ArrayList<String> funcionarioPertenceRole(String rolename){
         try {
+            System.out.println("chegou");
             return funcionarioRepository.funcionarioPertenceRole(rolename);
         }catch (Exception e){
             throw new BusinessException("Erro ao buscar funcionario por roles: " + e.getMessage());
