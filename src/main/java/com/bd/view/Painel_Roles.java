@@ -198,6 +198,7 @@ public class Painel_Roles extends javax.swing.JDialog {
         List<FuncionarioResponse> listaFuncionarios = funcionarioService.buscarFuncionarios();
         String role = jTFBarraPesquisa.getText();
         ArrayList<String> papel = funcionarioService.buscarRoles();
+        
 
         DefaultTableModel tabelaSemRole = (DefaultTableModel) jLListaFuncionarios.getModel();
         tabelaSemRole.setRowCount(0);
@@ -205,14 +206,21 @@ public class Painel_Roles extends javax.swing.JDialog {
         DefaultTableModel tabelaComRole = (DefaultTableModel) jLListaFuncionarios1.getModel();
         tabelaComRole.setRowCount(0);
         
+        
+        for (int i = 0; i < papel.size(); i++) {
+            funcionarios.add(listaFuncionarios.get(i).fun_nome());
+        }
+        
+       
+        
         if(!role.isEmpty()){
             for (int i = 0; i < papel.size(); i++) {
                 if(papel.get(i) == role){
-                    tabelaComRole.addRow(new Object[]{funcionarioService.funcionarioPertenceRole(papel.get(i))});
+                    List<String> funcionarios = funcionarioService.funcionarioPertenceRole(role);
+                    tabelaComRole.addRow(new Object[]{funcionarioService.funcionarioPertenceRole(papel.get(i))}); 
+                   
                     tabelaSemRole.addRow(new Object[]{funcionarioService.buscarFuncionarios()});
-                } else{
-                    
-                }
+                } 
             }
         }
         
