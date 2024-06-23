@@ -16,10 +16,9 @@ WHERE pg_roles.rolname = 'newRole';
 
 
 -- Verificando privilégios de um grupo ou usuário
-SELECT grantee, privilege_type 
+SELECT * --grantee, privilege_type 
 FROM information_schema.table_privileges 
-WHERE grantee = 'newRole' AND table_name = 'tb_usuario';
-
+WHERE grantee = 'novoUsuario' AND table_name = 'tb_usuario';
 
 --Criar papeis
 CREATE ROLE funcionarios;
@@ -100,7 +99,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT conceder_privilegio_grupo('newRole', 'tb_usuario', ARRAY['SELECT', 'INSERT']);
+SELECT conceder_privilegio_grupo('novoUsuario', 'tb_usuario', ARRAY['SELECT', 'INSERT']);
 
 
 
@@ -127,7 +126,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT conceder_privilegio_usuario('novoUsuario3', 'tb_usuario', ARRAY['UPDATE']);
+SELECT conceder_privilegio_usuario('novoUsuario', 'tb_usuario', ARRAY['SELECT']);
 
 SELECT grantee, privilege_type 
 FROM information_schema.table_privileges 

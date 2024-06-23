@@ -18,8 +18,6 @@ BEGIN
     BEGIN
         SELECT pro_quantidade INTO quantidade_estoque FROM tb_produtos WHERE pro_codigo = produto_codigo;
         
-        RAISE NOTICE 'Quantidade em Estoque: %', quantidade_estoque;
-        
         IF quantidade_estoque >= quantidade_venda THEN
             SELECT pro_valor INTO valor_produto FROM tb_produtos WHERE pro_codigo = produto_codigo;
             UPDATE tb_produtos SET pro_quantidade = pro_quantidade - quantidade_venda WHERE pro_codigo = produto_codigo;
@@ -35,13 +33,13 @@ BEGIN
             INSERT INTO tb_itens (ite_codigo, ite_quantidade, ite_valor_parcial, tb_produtos_pro_codigo, tb_vendas_ven_codigo)
             VALUES (id_item + 1, quantidade_venda, valor_total, produto_codigo, venda_id);
             
-            RETURN 'Venda realizada com sucesso!';
-        ELSE
-			ROLLBACK;
-        END IF;
+            RETURN 'Venda realizada com sucesso!'; 
+		ELSE
+			RETURN 'Quantidade insuficiente em estoque!';
+		END IF;
     EXCEPTION
         WHEN others THEN
-            ROLLBACK;
+			RETURN 'Erro ao realizar venda!';
     END;
 END;
 $$ LANGUAGE plpgsql;
@@ -57,7 +55,7 @@ DO $$
 DECLARE
     resultado VARCHAR;
 BEGIN
-    resultado := realizarVenda(2, 10);
+    resultado := realizarVenda(1, 2, 20);
     RAISE NOTICE 'Resultado da função: %', resultado;
 END;
 $$ LANGUAGE plpgsql;
