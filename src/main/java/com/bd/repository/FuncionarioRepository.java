@@ -157,11 +157,13 @@ public class FuncionarioRepository {
 
     public void cadastrarRole (String role,  String usernames) {
         try (Connection connection = Conexao.getConnection()) {
+            System.out.println("taimdndsnds");
             String sql = "SELECT cadastrar_role(?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, role);
+                System.out.println("pelo amor de deus");
                 statement.setString(2, usernames);
-                statement.executeUpdate();
+                statement.execute();
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao cadastrar role", e);
@@ -170,7 +172,7 @@ public class FuncionarioRepository {
 
     public void atualizarUsersRole (String role,  String usernames) {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT atualizar_users_role(?)";
+            String sql = "SELECT atualizar_users_role(?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, role);
                 statement.setString(2, usernames);
