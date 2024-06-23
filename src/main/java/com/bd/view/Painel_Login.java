@@ -127,6 +127,7 @@ public class Painel_Login extends javax.swing.JDialog {
                     infos.setVisible(true);
                 } else {
                     Painel_Gerente gerente = new Painel_Gerente();
+                    gerente.receberDados();
                     gerente.setLocationRelativeTo(this);
                     gerente.setVisible(true);
                 }
