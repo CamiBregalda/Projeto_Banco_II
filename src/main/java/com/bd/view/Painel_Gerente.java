@@ -12,7 +12,9 @@ import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
 import java.util.List;
-import javax.swing.DefaultListModel;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import org.mapstruct.factory.Mappers;
 
 
@@ -24,8 +26,6 @@ public class Painel_Gerente extends javax.swing.JFrame {
     FuncionarioService funcionarioService;
     ItemService itemService;
     VendaService vendaService;
-    DefaultListModel<FuncionarioResponse> listaFuncionarios = new DefaultListModel<>();
-
     public Painel_Gerente() {
         setTitle("Tela Gerente");
         inicializandoClasses();
@@ -43,13 +43,13 @@ public class Painel_Gerente extends javax.swing.JFrame {
         jCBFuncionario = new javax.swing.JCheckBox();
         jCBFornecedor = new javax.swing.JCheckBox();
         jLBFuncionario = new javax.swing.JLabel();
-        jSPFuncionario = new javax.swing.JScrollPane();
-        jLSTFuncionario = new javax.swing.JList<>();
         jLBFornecedor = new javax.swing.JLabel();
-        jSPFornecedor = new javax.swing.JScrollPane();
-        jLSTFornecedor = new javax.swing.JList<>();
         jCBFuncoes = new javax.swing.JComboBox<>();
         jBTNAplicarFuncoes = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTBFuncionario = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTBFornecedor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,11 +66,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
 
         jLBFuncionario.setText("Funcionários:");
 
-        jSPFuncionario.setViewportView(jLSTFuncionario);
-
         jLBFornecedor.setText("Fornecedores:");
-
-        jSPFornecedor.setViewportView(jLSTFornecedor);
 
         jCBFuncoes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Backup", "Privilégios" }));
 
@@ -81,6 +77,55 @@ public class Painel_Gerente extends javax.swing.JFrame {
             }
         });
 
+        jTBFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Código", "Nome", "Cargo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTBFuncionario);
+
+        jTBFornecedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Código", "Nome"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTBFornecedor);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -88,7 +133,6 @@ public class Painel_Gerente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSPFuncionario)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jCBFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -98,7 +142,7 @@ public class Painel_Gerente extends javax.swing.JFrame {
                         .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBTNBarraPesquisa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jCBFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBTNAplicarFuncoes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -106,14 +150,17 @@ public class Painel_Gerente extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLBFornecedor)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jSPFornecedor, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(jLBFuncionario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, Short.MAX_VALUE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLBFuncionario)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLBFornecedor)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
@@ -131,13 +178,13 @@ public class Painel_Gerente extends javax.swing.JFrame {
                     .addComponent(jCBFornecedor))
                 .addGap(38, 38, 38)
                 .addComponent(jLBFuncionario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSPFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLBFornecedor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSPFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -154,47 +201,14 @@ public class Painel_Gerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
-        
-        String pesquisa = jTFBarraPesquisa.getText();
-        
-        //Procurar o funcionario pelo nome e apresentar qual funcionario apresenta o nome desejado      
-        List<FuncionarioResponse> funcionarios; //para passar os dados na lista
-        DefaultListModel<String> listaFuncionarios = new DefaultListModel<>();
-        List<FornecedorResponse> fornecedores;
-        DefaultListModel<String> listaFornecedores = new DefaultListModel<>();
-        
-        
-        if(jCBFuncionario.isSelected()){
-           funcionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
-        } else {
-            funcionarios = funcionarioService.buscarFuncionarios();
-        }
-        
-        if(jCBFornecedor.isSelected()){
-            fornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
-        } else {
-            fornecedores = fornecedorService.buscarFornecedores();
-        }
-        
-        //mostrar as informações na tabela
-        for (int i = 0; i < funcionarios.size(); i++){
-            listaFuncionarios.addElement(funcionarios.get(i).fun_nome());
-            }
-        
-        for(int i = 0; i < fornecedores.size(); i++){
-            listaFornecedores.addElement(fornecedores.get(i).for_descricao());
-        }
-    }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
-
     private void jBTNAplicarFuncoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAplicarFuncoesMouseClicked
         String opcao = jCBFuncoes.getSelectedItem().toString();
-        
-        if(opcao == "Backup"){            
+
+        if(opcao == "Backup"){
             Painel_Backup telaBackup = new Painel_Backup(this, true);
             telaBackup.setLocationRelativeTo(this);
             telaBackup.setVisible(true);
-            
+
         }
         else if(opcao == "Privilégios"){
             Painel_Privilegios telaPrivilegios = new Painel_Privilegios(this, true);
@@ -203,7 +217,60 @@ public class Painel_Gerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBTNAplicarFuncoesMouseClicked
 
+    private void jBTNBarraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisaMouseClicked
+
+        String pesquisa = jTFBarraPesquisa.getText();
+
+        //Procurar o funcionario pelo nome e apresentar qual funcionario apresenta o nome desejado
+        List<FuncionarioResponse> funcionarios; //para passar os dados na lista
+        DefaultListModel<String> listaFuncionarios = new DefaultListModel<>();
+        List<FornecedorResponse> fornecedores;
+        DefaultListModel<String> listaFornecedores = new DefaultListModel<>();
+
+        if(jCBFuncionario.isSelected()){
+            funcionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
+        } else {
+            funcionarios = funcionarioService.buscarFuncionarios();
+        }
+
+        if(jCBFornecedor.isSelected()){
+            fornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
+        } else {
+            fornecedores = fornecedorService.buscarFornecedores();
+        }
+
+        //mostrar as informações na tabela
+        for (int i = 0; i < funcionarios.size(); i++){
+            listaFuncionarios.addElement(funcionarios.get(i).fun_nome());
+        }
+
+        for(int i = 0; i < fornecedores.size(); i++){
+            listaFornecedores.addElement(fornecedores.get(i).for_descricao());
+        }
+    }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
+
 //Adicionar função para listar os nomes quando forem pesquisados
+
+    public void receberDados(){
+
+        List<FuncionarioResponse> listaFuncionarios = funcionarioService.buscarFuncionarios();
+        List<FornecedorResponse> listaFornecedores = fornecedorService.buscarFornecedores();
+
+        DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionario.getModel();
+        tabelaFuncionarios.setRowCount(0);
+
+        DefaultTableModel tabelaFornecedores = (DefaultTableModel) jTBFornecedor.getModel();
+        tabelaFornecedores.setRowCount(0);
+
+        for (int i = 0; i < listaFuncionarios.size(); i++) {
+            tabelaFuncionarios.addRow(new Object[]{listaFuncionarios.get(i).fun_codigo().toString(), listaFuncionarios.get(i).fun_nome(), listaFuncionarios.get(i).fun_funcao()});
+        }
+
+        for (int i = 0; i < listaFuncionarios.size(); i++) {
+            tabelaFornecedores.addRow(new Object[]{listaFornecedores.get(i).for_codigo(), listaFornecedores.get(i).for_descricao()});
+        }
+
+    }
     
     private void inicializandoClasses(){
         FornecedorRepository fornecedorRepository = new FornecedorRepository();
@@ -273,11 +340,11 @@ public class Painel_Gerente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBFuncoes;
     private javax.swing.JLabel jLBFornecedor;
     private javax.swing.JLabel jLBFuncionario;
-    private javax.swing.JList<String> jLSTFornecedor;
-    private javax.swing.JList<String> jLSTFuncionario;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jSPFornecedor;
-    private javax.swing.JScrollPane jSPFuncionario;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTBFornecedor;
+    private javax.swing.JTable jTBFuncionario;
     private javax.swing.JTextField jTFBarraPesquisa;
     // End of variables declaration//GEN-END:variables
 }
