@@ -240,6 +240,7 @@ public class FuncionarioRepository {
                     while (resultado.next()) {
                         funcionariorole.add(resultado.getString("member_name"));
                     }
+                System.out.println(funcionariorole);
                     return funcionariorole;
             }
         } catch (SQLException e){
