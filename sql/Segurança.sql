@@ -14,6 +14,14 @@ JOIN pg_auth_members ON pg_roles.oid = pg_auth_members.roleid
 JOIN pg_roles AS member ON pg_auth_members.member = member.oid
 WHERE pg_roles.rolname = 'newRole';
 
+select * from tb_funcionarios
+UPDATE tb_funcionarios
+SET fun_funcao = 'Gerente'
+WHERE fun_codigo = 5;
+
+delete from tb_funcionarios where fun_codigo = 6
+
+select * from tb_vendas
 
 -- Verificando privilégios de um grupo ou usuário
 SELECT * --grantee, privilege_type 

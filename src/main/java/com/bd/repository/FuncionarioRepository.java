@@ -182,7 +182,7 @@ public class FuncionarioRepository {
 
     public ArrayList<String> buscarRoles() {
         try (Connection connection = Conexao.getConnection()) {
-            String sql = "SELECT rolname FROM pg_roles";
+            String sql = "SELECT rolname FROM pg_roles WHERE rolcanlogin = false";
             try(PreparedStatement statement = connection.prepareStatement(sql)){
                 ResultSet resultado = statement.executeQuery();
                 ArrayList<String> roles = new ArrayList<>();

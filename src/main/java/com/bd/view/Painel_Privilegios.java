@@ -21,10 +21,10 @@ public class Painel_Privilegios extends javax.swing.JDialog {
  
     public Painel_Privilegios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setTitle("Tela de Privilegio");
-        receberDados();
-        inicializandoClasses();
+        setTitle("Tela de Privilégio");
         initComponents();
+        inicializandoClasses();
+        receberDados();
     }
 
 
@@ -68,8 +68,6 @@ public class Painel_Privilegios extends javax.swing.JDialog {
 
         jLBTabelaDesejada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLBTabelaDesejada.setText("Tabela desejada:");
-
-        jCBTabelaDesejada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLbPrivilegiosConcedidos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLbPrivilegiosConcedidos.setText("Privilégios concedidos:");
@@ -225,11 +223,13 @@ public class Painel_Privilegios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTNAtualizarPapelMouseClicked
 
     public void receberDados(){
-
         List<String> listaRoles = funcionarioService.buscarRoles();
 
+        for(int i = 0; i < listaRoles.size(); i++){
+            jCBRoles.addItem(listaRoles.get(i));
+        }
+        
         String[] tabelas = new String[5];
-
         tabelas[0] = "tb_fornecedores";
         tabelas[1] = "tb_funcionarios";
         tabelas[2] = "tb_itens";
@@ -239,11 +239,6 @@ public class Painel_Privilegios extends javax.swing.JDialog {
         for(int i = 0; i < tabelas.length; i++){
             jCBTabelaDesejada.addItem(tabelas[i]);
         }
-
-        for(int i = 0; i < listaRoles.size(); i++){
-            jCBRoles.addItem(listaRoles.get(i));
-        }
-
     }
 
     private void inicializandoClasses(){
