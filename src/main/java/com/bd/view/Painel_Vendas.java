@@ -174,7 +174,8 @@ public class Painel_Vendas extends javax.swing.JDialog {
        double valor = Double.parseDouble(jLBPrecoMostrar.toString());
        int quantidadeCompra = (Integer) jSPNQuantidade.getValue();
       
-       jLBValorTotalMostrar.setText(String.format("%.2f", valor * quantidadeCompra));
+       double preco = valor * quantidadeCompra;
+       jLBValorTotalMostrar.setText(String.format("%.2f", preco));
     }//GEN-LAST:event_jSPNQuantidadeStateChanged
 
     public void recebeDados(ProdutoResponse produto){
