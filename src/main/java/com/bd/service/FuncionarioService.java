@@ -16,13 +16,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class FuncionarioService {
 
     private final FuncionarioRepository funcionarioRepository;
     private final BackupRepository backupRepository;
     private final FuncionarioMapper funcionarioMapper;
 
+    public FuncionarioService(FuncionarioRepository funcionarioRepository, BackupRepository backupRepository, FuncionarioMapper funcionarioMapper) {
+        this.funcionarioRepository = funcionarioRepository;
+        this.backupRepository = backupRepository;
+        this.funcionarioMapper = funcionarioMapper;
+    }
+    
     public FuncionarioResponse cadastrarFuncionario(FuncionarioRequest funcionarioRequest) {
         Funcionario funcionario = funcionarioMapper.postDtoToEntity(funcionarioRequest);
         return funcionarioMapper.entityToResponse(funcionarioRepository.cadastrarFuncionario(funcionario));
