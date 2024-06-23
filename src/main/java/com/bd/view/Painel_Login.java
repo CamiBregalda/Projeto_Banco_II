@@ -110,33 +110,32 @@ public class Painel_Login extends javax.swing.JDialog {
     private void jBTNEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNEntrarMouseClicked
         String username = jTFNomeLogin.getText();
         String password = new String (jPFSenhaLogin.getPassword());
-        
-        System.out.print(password);
+ 
         try {
             // Configurar as informações de login no Singleton Login
             Login.getInstance().setUser(username);
             Login.getInstance().setSenha(password);
 
             FuncionarioResponse funcionario = funcionarioService.logarFuncionario(username, password);
-            boolean backupPlanejado = funcionarioService.checarBackup();
             
-            if(backupPlanejado){
-                Painel_Infos_Backup infos = new Painel_Infos_Backup(this, true);
-                infos.setLocationRelativeTo(this);
-                infos.setVisible(true);
-            } else {
-                if(funcionario.fun_funcao().equals("Gerente")){
+            if(funcionario.fun_funcao().equals("Gerente")){
+                boolean backupPlanejado = funcionarioService.checarBackup();
+                
+                if(backupPlanejado){
+                    Painel_Infos_Backup infos = new Painel_Infos_Backup(this, true);
+                    infos.setLocationRelativeTo(this);
+                    infos.setVisible(true);
+                } else {
                     Painel_Gerente gerente = new Painel_Gerente();
                     gerente.setLocationRelativeTo(this);
                     gerente.setVisible(true);
-                } else {
-                    System.out.print(password);
-                    Painel_Funcionario fun = new Painel_Funcionario();
-                    fun.receberDados();
-                    fun.setLocationRelativeTo(this);
-                    fun.setVisible(true);
-                }           
-            }
+                }
+            } else {
+                Painel_Funcionario fun = new Painel_Funcionario();
+                fun.receberDados();
+                fun.setLocationRelativeTo(this);
+                fun.setVisible(true);
+            }    
             
             this.dispose();
             telaCadastro.dispose();
