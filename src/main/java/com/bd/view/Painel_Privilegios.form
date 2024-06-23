@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
@@ -43,25 +43,30 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jCHBSelect" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLbPrivilegiosConcedidos" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jBTNovoPapel" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jCHBUpdate" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jCHBDelete" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jCHBInsert" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jCHBSelect" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLbPrivilegiosConcedidos" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jBTNovoPapel" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="jCHBUpdate" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jCHBDelete" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jCHBInsert" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                      <Component id="jBTNAtualizarPapel" min="-2" pref="120" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                              <Component id="jBTNAtualizarPapel" min="-2" pref="120" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jBTNConceder" alignment="0" min="-2" pref="309" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -86,7 +91,7 @@
               <Component id="jLBTabelaDesejada" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jCBTabelaDesejada" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jLbPrivilegiosConcedidos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -106,7 +111,9 @@
                   <Component id="jBTNovoPapel" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jBTNAtualizarPapel" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jBTNConceder" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -209,15 +216,28 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBTNovoPapel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Criar"/>
+        <Property name="text" type="java.lang.String" value="Criar Papel"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNovoPapelMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBTNAtualizarPapel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Atualizar"/>
+        <Property name="text" type="java.lang.String" value="Atualizar Papel"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNAtualizarPapelMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBTNAtualizarPapelActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBTNConceder">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Conceder Privil&#xe9;gio"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNConcederMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBTNConcederActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

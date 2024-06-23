@@ -70,7 +70,7 @@ public class Painel_Vendas extends javax.swing.JDialog {
         jLBQtdEstoque.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBQtdEstoque.setText("Disponível em estoque:");
 
-        jBTNComprar.setText("Comprar");
+        jBTNComprar.setText("Vender");
         jBTNComprar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBTNComprarMouseClicked(evt);

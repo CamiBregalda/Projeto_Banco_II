@@ -31,7 +31,7 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     List<String> listaPapeis = new ArrayList<>();
     List<FuncionarioResponse> listaFuncionarios = new ArrayList<>();
 
-    public Painel_Cadastrar_Role(java.awt.Dialog parent, boolean modal) {
+    public Painel_Cadastrar_Role(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Cadastro Papel");
         initComponents();
@@ -247,7 +247,7 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Painel_Cadastrar_Role dialog = new Painel_Cadastrar_Role(new javax.swing.JDialog(), true);
+                Painel_Cadastrar_Role dialog = new Painel_Cadastrar_Role(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
