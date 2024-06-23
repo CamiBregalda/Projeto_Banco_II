@@ -13,13 +13,16 @@ public class FuncionarioRepository {
 
     public Funcionario cadastrarFuncionario(Funcionario funcionario) {
         try (Connection connection = Conexao.getConnection()) {
+            System.out.println("misericorida");
             String sql = "SELECT cadastrar_funcionario(?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, funcionario.getFun_nome());
                 statement.setString(2, funcionario.getFun_cpf());
                 statement.setString(3, funcionario.getFun_funcao());
                 statement.setString(4, funcionario.getFun_senha());
+                System.out.println("misericorida2");
                 statement.executeUpdate();
+                System.out.println("misericorida3");
             } catch (SQLException ex) {
                 return null;
             }
@@ -152,13 +155,12 @@ public class FuncionarioRepository {
         }
     }
 
-    public void cadastrarRole (String role,  String[] usernames) {
+    public void cadastrarRole (String role,  String usernames) {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT cadastrar_role(?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("TEXT", usernames);
                 statement.setString(1, role);
-                statement.setArray(2, array);
+                statement.setString(2, usernames);
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -166,13 +168,12 @@ public class FuncionarioRepository {
         }
     }
 
-    public void atualizarUsersRole (String role,  String[] usernames) {
+    public void atualizarUsersRole (String role,  String usernames) {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT atualizar_users_role(?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                Array array = connection.createArrayOf("TEXT", usernames);
                 statement.setString(1, role);
-                statement.setArray(2, array);
+                statement.setString(2, usernames);
                 statement.executeUpdate();
             }
         }catch (SQLException e) {

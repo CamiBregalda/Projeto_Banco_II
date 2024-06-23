@@ -180,13 +180,16 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     private void jBTCriarRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCriarRoleMouseClicked
         String nomeRole = jTFNomeNovaRole.getText();
         ArrayList<String> funcionarios = new ArrayList<>();
+        String nomeFuncionario = new String();
         
         for (int i = 0; i < jTBFuncionariosRole.getRowCount(); i++) {
-            String nomeFuncionario = (String) jTBFuncionariosRole.getValueAt(i, 0);
-            funcionarios.add(nomeFuncionario);
+            nomeFuncionario = nomeFuncionario + (String) jTBFuncionariosRole.getValueAt(i, 0) + ",";
+
         }
 
-        funcionarioService.cadastrarRole(nomeRole, funcionarios);
+        System.out.println(nomeFuncionario);
+
+        funcionarioService.cadastrarRole(nomeRole, nomeFuncionario);
     }//GEN-LAST:event_jBTCriarRoleMouseClicked
 
     private void jTBFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBFuncionariosMouseClicked
