@@ -9,6 +9,8 @@ import com.bd.service.*;
 import java.util.List;
 import org.mapstruct.factory.Mappers;
 
+import javax.swing.*;
+
 public class Painel_Cadastro_Produto extends javax.swing.JDialog {
     ProdutoService produtoService;
     FornecedorService fornecedorService;
@@ -128,7 +130,14 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
         }
 
         ProdutoResponse produto = produtoService.cadastrarProduto(new ProdutoRequest( null, descricaoProduto, Double.parseDouble(valorProduto), Integer.parseInt(quantidadeProduto), fornecedorId));
-  
+
+        if(produto == null){
+            JOptionPane.showMessageDialog(this, "Produto não foi cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+        }
+        
+        this.dispose();
     }//GEN-LAST:event_jBTNCadastrarProdutoMouseClicked
 
     public void recebeDados (){
