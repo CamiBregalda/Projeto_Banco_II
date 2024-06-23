@@ -156,6 +156,7 @@ public class FuncionarioRepository {
             String sql = "SELECT cadastrar_role(?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 Array array = connection.createArrayOf("VARCHAR", usernames);
+                System.out.println("Array: " + array);
                 statement.setString(1, role);
                 statement.setArray(2, array);
                 statement.executeUpdate();
