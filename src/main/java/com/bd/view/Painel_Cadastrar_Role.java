@@ -124,6 +124,11 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jTBFuncionariosRole.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTBFuncionariosRoleMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTBFuncionariosRole);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,11 +179,10 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
 
     private void jBTCriarRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCriarRoleMouseClicked
         String nomeRole = jTFNomeNovaRole.getText();
-        
         ArrayList<String> funcionarios = new ArrayList<>();
         
         for (int i = 0; i < jTBFuncionariosRole.getRowCount(); i++) {
-            String nomeFuncionario = (String) jTBFuncionariosRole.getValueAt(i, 1);
+            String nomeFuncionario = (String) jTBFuncionariosRole.getValueAt(i, 0);
             funcionarios.add(nomeFuncionario);
         }
 
@@ -194,6 +198,16 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
         tabelaFuncionarios.removeRow(jTBFuncionarios.getSelectedRow());
         tabelaFuncionariosRole.addRow(new Object[] {user});
     }//GEN-LAST:event_jTBFuncionariosMouseClicked
+
+    private void jTBFuncionariosRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBFuncionariosRoleMouseClicked
+        DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionarios.getModel();
+        DefaultTableModel tabelaFuncionariosRole = (DefaultTableModel) jTBFuncionariosRole.getModel();
+       
+        String user = jTBFuncionariosRole.getValueAt(jTBFuncionariosRole.getSelectedRow(), 0).toString();
+        
+        tabelaFuncionariosRole.removeRow(jTBFuncionariosRole.getSelectedRow());
+        tabelaFuncionarios.addRow(new Object[] {user});
+    }//GEN-LAST:event_jTBFuncionariosRoleMouseClicked
 
     private void recebeDados(){
         listaFuncionarios = funcionarioService.buscarFuncionarios();

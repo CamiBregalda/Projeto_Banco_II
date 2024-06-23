@@ -4,7 +4,7 @@
 SELECT * FROM pg_user; 
 
 -- Mostrar roles existentes
-SELECT rolname FROM  pg_roles;
+SELECT * FROM  pg_roles;
 
 --Checar quais usuários fazem parte de uma role específica
 SELECT pg_roles.rolname AS role_name,
@@ -12,12 +12,12 @@ SELECT pg_roles.rolname AS role_name,
 FROM pg_roles
 JOIN pg_auth_members ON pg_roles.oid = pg_auth_members.roleid
 JOIN pg_roles AS member ON pg_auth_members.member = member.oid
-WHERE pg_roles.rolname = 'newRole';
+WHERE pg_roles.rolname = 'Vendedores';
 
 select * from tb_funcionarios
 UPDATE tb_funcionarios
 SET fun_funcao = 'Gerente'
-WHERE fun_codigo = 5;
+WHERE fun_codigo = 1;
 
 delete from tb_funcionarios where fun_codigo = 6
 
@@ -26,7 +26,7 @@ select * from tb_vendas
 -- Verificando privilégios de um grupo ou usuário
 SELECT * --grantee, privilege_type 
 FROM information_schema.table_privileges 
-WHERE grantee = 'novoUsuario' AND table_name = 'tb_usuario';
+WHERE grantee = 'Vendedores' AND table_name = 'tb_funcionarios';
 
 --Criar papeis
 CREATE ROLE funcionarios;
@@ -42,7 +42,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT cadastrar_usuario('novoUsuario3', 'root');
+SELECT cadastrar_usuario('Guilherme Lago', 'root');
 
 
 --Gerentes concedem privilégios e criam novos grupos
@@ -65,9 +65,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT cadastrar_role('newRole1', ARRAY['postgres', 'novoUsuario3']);
+SELECT cadastrar_role('Vendedores', ARRAY['Camila Bregalda', 'Guilherme Lago']);
 
-
+DROP FUNCTION cadastrar_role
 --(Pontos 0,2) Adicionar os usuários aos grupos.
 --Fazer login com diferentes usuários e testar os privilégios cedidos aos grupos e testar privilégios não cedidos aos grupos.
 CREATE OR REPLACE FUNCTION atualizar_users_role(name_role TEXT, users TEXT[])
