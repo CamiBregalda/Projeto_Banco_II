@@ -1,5 +1,6 @@
 package com.bd.view;
 
+import com.bd.infra.Login;
 import com.bd.mapper.*;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.*;
@@ -12,12 +13,7 @@ import java.util.List;
 
 public class Painel_Privilegios extends javax.swing.JFrame {
 
-    ProdutoService produtoService;
-    FornecedorService fornecedorService;
-    UsuarioService usuarioService;
     FuncionarioService funcionarioService;
-    ItemService itemService;
-    VendaService vendaService;
  
     public Painel_Privilegios() {
         setTitle("Tela de Privilégio");
@@ -301,38 +297,13 @@ public class Painel_Privilegios extends javax.swing.JFrame {
     }
 
     private void inicializandoClasses(){
-        FornecedorRepository fornecedorRepository = new FornecedorRepository();
-        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
-        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
-
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
         BackupRepository backupRepository = new BackupRepository();
         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
         funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
-
-        ItemRepository itemRepository = new ItemRepository();
-        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
-        itemService = new ItemService(itemRepository, itemMapper);
-
-        ProdutoRepository produtoRepository = new ProdutoRepository();
-        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
-        produtoService = new ProdutoService(produtoRepository, produtoMapper);
-
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
-        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
-
-        VendaRepository vendaRepository = new VendaRepository();
-        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
-        vendaService = new VendaService(vendaRepository, vendaMapper);
     }
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public static void main(String args[]) {        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
