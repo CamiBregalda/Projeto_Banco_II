@@ -201,18 +201,10 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         }
 
         List<String> funcionariosRole = funcionarioService.funcionarioPertenceRole(opcao);
-        System.out.println(funcionariosRole);
 
         for(int i = 0; i < funcionariosRole.size(); i++){
             jCBFuncionariosRole.addItem(funcionariosRole.get(i));
         }
-
-       // List<String> listaFuncionariosDaRole = funcionarioService.funcionarioPertenceRole(jCBRoles.getSelectedItem().toString());
-
-        //for(int i = 0; i < listaFuncionariosDaRole.size(); i++){
-        //    jCBFuncionariosRole.addItem(listaFuncionariosDaRole.get(i));
-        //}
-
     }//GEN-LAST:event_jCBRolesMouseClicked
 
     private void jBTNAtualizarPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelMouseClicked
@@ -220,7 +212,6 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         Painel_Atualizar_Roles roles = new Painel_Atualizar_Roles(this, true);
         roles.setLocationRelativeTo(this);
         roles.setVisible(true);
-        
     }//GEN-LAST:event_jBTNAtualizarPapelMouseClicked
 
     private void jBTNAtualizarPapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelActionPerformed
@@ -234,13 +225,16 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         if(jCHBSelect.isSelected()){
             permissoes.add("SELECT");
         }
-        else if(jCHBInsert.isSelected()){
+        
+        if(jCHBInsert.isSelected()){
             permissoes.add("INSERT");
         }
-        else if(jCHBUpdate.isSelected()){
+        
+        if(jCHBUpdate.isSelected()){
             permissoes.add("UPDATE");
         }
-        else if(jCHBDelete.isSelected()){
+        
+        if(jCHBDelete.isSelected()){
             permissoes.add("DELETE");
         }
 
@@ -248,14 +242,21 @@ public class Painel_Privilegios extends javax.swing.JFrame {
 
         for(int i = 0; i < listaPermissoes.length; i++){
             listaPermissoes[i] = permissoes.get(i);
-            System.out.println(listaPermissoes[i]);
+        }
+        
+        String permissoesString = "";
+        
+        for (int i = 0; i < listaPermissoes.length; i++){
+            permissoesString += listaPermissoes[i];
+            if (i < listaPermissoes.length - 1) {
+                permissoesString += ",";
+            }
         }
 
-
         if(jCBFuncionariosRole.getSelectedItem().toString().equals("Todos")){
-            funcionarioService.concederPrivilegioGrupo(jCBRoles.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), listaPermissoes);
+            funcionarioService.concederPrivilegioGrupo(jCBRoles.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), permissoesString);
         } else{
-           funcionarioService.concederPrivilegioUsuario(jCBFuncionariosRole.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), listaPermissoes);
+           funcionarioService.concederPrivilegioUsuario(jCBFuncionariosRole.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), permissoesString);
         }
 
         JOptionPane.showMessageDialog(this, "Privilégios atualizados com sucesso!");
