@@ -180,12 +180,12 @@ public class FuncionarioRepository {
 
     }
 
-    public ArrayList<String> buscarRoles() {
+    public List<String> buscarRoles() {
         try (Connection connection = Conexao.getConnection()) {
             String sql = "SELECT rolname FROM pg_roles";
             try(PreparedStatement statement = connection.prepareStatement(sql)){
                 ResultSet resultado = statement.executeQuery();
-                ArrayList<String> roles = new ArrayList<>();
+                List<String> roles = new ArrayList<>();
                 while (resultado.next()) {
                     roles.add(resultado.getString("rolname"));
                 }

@@ -232,28 +232,26 @@ public class Painel_Gerente extends javax.swing.JFrame {
         DefaultTableModel tabelaFornecedores = (DefaultTableModel) jTBFornecedor.getModel();
         tabelaFornecedores.setRowCount(0);
 
-        if(jCBFuncionario.isSelected() && jCBFornecedor.isSelected()){
-            listaFuncionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
-            listaFornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
-            for(int i = 0; i < listaFuncionarios.size(); i++){
-                tabelaFuncionarios.addRow(new Object[]{listaFuncionarios.get(i).fun_codigo().toString(), listaFuncionarios.get(i).fun_nome(), listaFuncionarios.get(i).fun_funcao()});
-            }
-            for(int i = 0; i < listaFornecedores.size(); i++){
-                tabelaFornecedores.addRow(new Object[]{listaFornecedores.get(i).for_codigo(), listaFornecedores.get(i).for_descricao()});
-            }
-        } else if(jCBFuncionario.isSelected() && !jCBFornecedor.isSelected()){
-            listaFuncionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
-            for(int i = 0; i < listaFuncionarios.size(); i++){
-                tabelaFuncionarios.addRow(new Object[]{listaFuncionarios.get(i).fun_codigo().toString(), listaFuncionarios.get(i).fun_nome(), listaFuncionarios.get(i).fun_funcao()});
-            }
 
-        } else if(!jCBFuncionario.isSelected() && jCBFornecedor.isSelected()){
-            listaFornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
-            for(int i = 0; i < listaFornecedores.size(); i++){
-                tabelaFornecedores.addRow(new Object[]{listaFornecedores.get(i).for_codigo(), listaFornecedores.get(i).for_descricao()});
-            }
-
+        if(jCBFuncionario.isSelected() && pesquisa != null) {
+            listaFuncionarios = funcionarioService.buscarFuncionariosPeloNome(pesquisa);
+        } else {
+            listaFuncionarios = funcionarioService.buscarFuncionarios();
         }
+        for(int i = 0; i < listaFuncionarios.size(); i++){
+            tabelaFuncionarios.addRow(new Object[]{listaFuncionarios.get(i).fun_codigo().toString(), listaFuncionarios.get(i).fun_nome(), listaFuncionarios.get(i).fun_funcao()});
+        }
+
+        if(jCBFornecedor.isSelected() && pesquisa != null){
+            listaFornecedores = fornecedorService.buscarFornecedoresPeloNome(pesquisa);
+        } else {
+            listaFornecedores = fornecedorService.buscarFornecedores();
+        }
+        for(int i = 0; i < listaFornecedores.size(); i++){
+            tabelaFornecedores.addRow(new Object[]{listaFornecedores.get(i).for_codigo(), listaFornecedores.get(i).for_descricao()});
+        }
+
+
 
     }//GEN-LAST:event_jBTNBarraPesquisaMouseClicked
 
