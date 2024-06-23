@@ -50,7 +50,7 @@ public class Painel_Privilegios extends javax.swing.JDialog {
         jLabel1.setText("Criar uma nova Papel:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Privilegios");
+        jLabel2.setText("Privilégios");
 
         jBTCriarPapel.setText("Criar");
         jBTCriarPapel.addMouseListener(new java.awt.event.MouseAdapter() {
