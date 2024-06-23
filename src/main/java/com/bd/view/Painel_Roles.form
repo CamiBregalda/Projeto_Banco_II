@@ -33,28 +33,29 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLBBarraPesquisa" min="-2" pref="202" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jBTNCriar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLBProdutos" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" alignment="0" pref="291" max="32767" attributes="0"/>
-                                  <Component id="jTFBarraPesquisa" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLBProdutos" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="291" max="32767" attributes="0"/>
+                          <Component id="jTFBarraPesquisa" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                              <Component id="jBTNCriar" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLBProdutos1" min="-2" pref="202" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="291" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="jBTNAtualizar" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLBProdutos1" min="-2" pref="202" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" min="-2" pref="291" max="-2" attributes="0"/>
+                                  <Component id="jBTNBarraPesquisa1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="jBTNBarraPesquisa1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jBTNAtualizar" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>

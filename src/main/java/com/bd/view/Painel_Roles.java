@@ -4,7 +4,21 @@
  */
 package com.bd.view;
 
+import com.bd.infra.Login;
+import com.bd.mapper.FornecedorMapper;
+import com.bd.mapper.FuncionarioMapper;
+import com.bd.mapper.ItemMapper;
+import com.bd.mapper.ProdutoMapper;
+import com.bd.mapper.UsuarioMapper;
+import com.bd.mapper.VendaMapper;
 import com.bd.model.response.FuncionarioResponse;
+import com.bd.repository.BackupRepository;
+import com.bd.repository.FornecedorRepository;
+import com.bd.repository.FuncionarioRepository;
+import com.bd.repository.ItemRepository;
+import com.bd.repository.ProdutoRepository;
+import com.bd.repository.UsuarioRepository;
+import com.bd.repository.VendaRepository;
 import com.bd.service.FornecedorService;
 import com.bd.service.FuncionarioService;
 import com.bd.service.ItemService;
@@ -17,6 +31,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Element;
+import org.mapstruct.factory.Mappers;
 
 
 public class Painel_Roles extends javax.swing.JDialog {
@@ -30,6 +45,8 @@ public class Painel_Roles extends javax.swing.JDialog {
 
     public Painel_Roles(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        recebeDados();
+        inicializandoClasses();
         initComponents();
     }
 
@@ -99,23 +116,24 @@ public class Painel_Roles extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLBBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                            .addComponent(jTFBarraPesquisa)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(jBTNCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLBProdutos1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jBTNBarraPesquisa1)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBTNCriar)
-                                .addGap(61, 61, 61))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                                    .addComponent(jTFBarraPesquisa))
-                                .addGap(9, 9, 9)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLBProdutos1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(jBTNAtualizar))
-                            .addComponent(jBTNBarraPesquisa1))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBTNAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(85, 85, 85)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -158,6 +176,7 @@ public class Painel_Roles extends javax.swing.JDialog {
         DefaultListModel<String> modeloLista = (DefaultListModel<String>) jLListaFuncionarios.getModel();
         modeloLista.clear();
 
+        //utilizar o "is empty"
         
         for (String funcionario : listaFuncionarios) {
             modeloLista.addElement(funcionario);
@@ -172,37 +191,67 @@ public class Painel_Roles extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTNCriarMouseClicked
 
     private void jBTNAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarMouseClicked
-        // TODO add your handling code here:
+        // conferir se a role existe
     }//GEN-LAST:event_jBTNAtualizarMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void recebeDados(){
+        List<FuncionarioResponse> listaFuncionarios = funcionarioService.buscarFuncionarios();
+        String role = jTFBarraPesquisa.getText();
+        ArrayList<String> papel = funcionarioService.buscarRoles();
+
+        DefaultTableModel tabelaSemRole = (DefaultTableModel) jLListaFuncionarios.getModel();
+        tabelaSemRole.setRowCount(0);
+        
+        DefaultTableModel tabelaComRole = (DefaultTableModel) jLListaFuncionarios1.getModel();
+        tabelaComRole.setRowCount(0);
+        
+        if(!role.isEmpty()){
+            for (int i = 0; i < papel.size(); i++) {
+                if(papel.get(i) == role){
+                    tabelaComRole.addRow(new Object[]{funcionarioService.funcionarioPertenceRole(papel.get(i))});
+                    tabelaSemRole.addRow(new Object[]{funcionarioService.buscarFuncionarios()});
+                } else{
+                    
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Painel_Roles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Painel_Roles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Painel_Roles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Painel_Roles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+        
+        //funcionarioPertenceRole
+    }
+    
+    private void inicializandoClasses(){
+        FornecedorRepository fornecedorRepository = new FornecedorRepository();
+        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
+        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
 
-        /* Create and display the dialog */
+        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
+        BackupRepository backupRepository = new BackupRepository();
+        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
+        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
+
+        ItemRepository itemRepository = new ItemRepository();
+        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
+        itemService = new ItemService(itemRepository, itemMapper);
+
+        ProdutoRepository produtoRepository = new ProdutoRepository();
+        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
+        produtoService = new ProdutoService(produtoRepository, produtoMapper);
+
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
+        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
+
+        VendaRepository vendaRepository = new VendaRepository();
+        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
+        vendaService = new VendaService(vendaRepository, vendaMapper);
+    }
+    
+    
+    public static void main(String args[]) {
+        
+        Login.getInstance().setUser("postgres");//remover antes de subir no git
+        Login.getInstance().setSenha("postgress");//possibilidade de logar
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Painel_Roles dialog = new Painel_Roles(new javax.swing.JFrame(), true);
