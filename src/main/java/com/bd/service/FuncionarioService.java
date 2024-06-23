@@ -105,7 +105,7 @@ public class FuncionarioService {
         }
     }
 
-    public String atualizarUsersRole(String role, ArrayList<String> usernames){
+    public String atualizarUsersRole(String role, List<String> usernames){
         try{
             funcionarioRepository.atualizarUsersRole(role, (String[]) usernames.toArray());
             return "Role foi atualizada com sucesso!";

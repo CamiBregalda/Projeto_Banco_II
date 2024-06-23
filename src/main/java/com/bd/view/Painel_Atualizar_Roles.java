@@ -5,35 +5,17 @@
 package com.bd.view;
 
 import com.bd.infra.Login;
-import com.bd.mapper.FornecedorMapper;
 import com.bd.mapper.FuncionarioMapper;
-import com.bd.mapper.ItemMapper;
-import com.bd.mapper.ProdutoMapper;
-import com.bd.mapper.UsuarioMapper;
-import com.bd.mapper.VendaMapper;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.BackupRepository;
-import com.bd.repository.FornecedorRepository;
 import com.bd.repository.FuncionarioRepository;
-import com.bd.repository.ItemRepository;
-import com.bd.repository.ProdutoRepository;
-import com.bd.repository.UsuarioRepository;
-import com.bd.repository.VendaRepository;
-import com.bd.service.FornecedorService;
 import com.bd.service.FuncionarioService;
-import com.bd.service.ItemService;
-import com.bd.service.ProdutoService;
-import com.bd.service.UsuarioService;
-import com.bd.service.VendaService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.Element;
 import org.mapstruct.factory.Mappers;
-
 
 public class Painel_Atualizar_Roles extends javax.swing.JDialog {
 
@@ -43,6 +25,7 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
 
     public Painel_Atualizar_Roles(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setTitle("Tela Atualizar Papeis");
         initComponents();
         inicializandoClasses();
         recebeDados();
@@ -52,17 +35,14 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTFBarraPesquisa = new javax.swing.JTextField();
         jBTNAtualizar = new javax.swing.JButton();
-        jLBProdutos = new javax.swing.JLabel();
         jLBTituloDaPagina = new javax.swing.JLabel();
         jLBBarraPesquisa = new javax.swing.JLabel();
-        jLBProdutos1 = new javax.swing.JLabel();
-        jBTNBarraPesquisa1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTBFuncionarios = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTBFuncionariosRole = new javax.swing.JTable();
+        jCBPapel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,22 +53,11 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
             }
         });
 
-        jLBProdutos.setText("Funcionários que não estão na role:");
-
         jLBTituloDaPagina.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLBTituloDaPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLBTituloDaPagina.setText("Buscar Papeis");
 
-        jLBBarraPesquisa.setText("Buscar Papel/Adicionar novo:");
-
-        jLBProdutos1.setText("Funcionários da role:");
-
-        jBTNBarraPesquisa1.setText("Pesquisar");
-        jBTNBarraPesquisa1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBTNBarraPesquisa1MouseClicked(evt);
-            }
-        });
+        jLBBarraPesquisa.setText("Escolher Papel:");
 
         jTBFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,14 +85,16 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jTBFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTBFuncionariosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTBFuncionarios);
 
         jTBFuncionariosRole.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Funcionarios Pertencentes a Role"
@@ -146,6 +117,12 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(jTBFuncionariosRole);
 
+        jCBPapel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBPapelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,19 +134,11 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLBBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLBProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLBProdutos1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jBTNBarraPesquisa1)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                                    .addComponent(jCBPapel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(275, 275, 275)
                         .addComponent(jBTNAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -184,32 +153,56 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLBBarraPesquisa)
                 .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFBarraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBTNBarraPesquisa1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLBProdutos)
-                    .addComponent(jLBProdutos1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jCBPapel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addComponent(jBTNAtualizar)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBTNBarraPesquisa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNBarraPesquisa1MouseClicked
-        String role = jTFBarraPesquisa.getText();
+    private void jBTNAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarMouseClicked
+        List<String> funcionarios = new ArrayList<>();
+        String role = jCBPapel.getSelectedItem().toString();
+        
+        for (int i = 0; i < jTBFuncionariosRole.getRowCount(); i++) {
+            String nomeFuncionario = (String) jTBFuncionariosRole.getValueAt(i, 0);
+            funcionarios.add(nomeFuncionario);
+        }
+        
+        List<String> fun = funcionarioService.funcionarioPertenceRole(role);
+        
+        funcionarios = funcionarios.stream()
+            .filter(funcionario -> !fun.contains(funcionario))
+            .collect(Collectors.toList());
+
+        System.out.println(funcionarios.get(0));
+        
+        funcionarioService.atualizarUsersRole(role, funcionarios);
+    }//GEN-LAST:event_jBTNAtualizarMouseClicked
+
+    private void jTBFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTBFuncionariosMouseClicked
+        DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionarios.getModel();
+        DefaultTableModel tabelaFuncionariosRole = (DefaultTableModel) jTBFuncionariosRole.getModel();
+       
+        String user = jTBFuncionarios.getValueAt(jTBFuncionarios.getSelectedRow(), 0).toString();
+        
+        tabelaFuncionarios.removeRow(jTBFuncionarios.getSelectedRow());
+        tabelaFuncionariosRole.addRow(new Object[] {user});
+    }//GEN-LAST:event_jTBFuncionariosMouseClicked
+
+    private void jCBPapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPapelActionPerformed
+        String role = jCBPapel.getSelectedItem().toString();
         
         DefaultTableModel tabelaFuncionarios = (DefaultTableModel) jTBFuncionarios.getModel();
         tabelaFuncionarios.setRowCount(0);
         
-        DefaultTableModel tabelaFuncionariosRole = (DefaultTableModel) jTBFuncionarios.getModel();
+        DefaultTableModel tabelaFuncionariosRole = (DefaultTableModel) jTBFuncionariosRole.getModel();
         tabelaFuncionariosRole.setRowCount(0);
         
         if(!role.isEmpty()){
@@ -229,11 +222,7 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Papel não encontrado!");
             }
         }
-    }//GEN-LAST:event_jBTNBarraPesquisa1MouseClicked
-
-    private void jBTNAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarMouseClicked
-        // conferir se a role existe
-    }//GEN-LAST:event_jBTNAtualizarMouseClicked
+    }//GEN-LAST:event_jCBPapelActionPerformed
 
     private void recebeDados(){
         listaFuncionarios = funcionarioService.buscarFuncionarios();
@@ -245,6 +234,10 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
         for (FuncionarioResponse funcionario : listaFuncionarios){
             tabelaFuncionarios.addRow(new Object[]{funcionario.fun_nome()});
         }
+        
+        for (String papel : listaPapeis) {
+            jCBPapel.addItem(papel);
+        }
     }
     
     private void inicializandoClasses(){
@@ -253,13 +246,8 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
         funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
     }
-    
-    
+        
     public static void main(String args[]) {
-        
-        Login.getInstance().setUser("postgres");//remover antes de subir no git
-        Login.getInstance().setSenha("root");//possibilidade de logar
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Painel_Atualizar_Roles dialog = new Painel_Atualizar_Roles(new javax.swing.JFrame(), true);
@@ -276,15 +264,12 @@ public class Painel_Atualizar_Roles extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNAtualizar;
-    private javax.swing.JButton jBTNBarraPesquisa1;
+    private javax.swing.JComboBox<String> jCBPapel;
     private javax.swing.JLabel jLBBarraPesquisa;
-    private javax.swing.JLabel jLBProdutos;
-    private javax.swing.JLabel jLBProdutos1;
     private javax.swing.JLabel jLBTituloDaPagina;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTBFuncionarios;
     private javax.swing.JTable jTBFuncionariosRole;
-    private javax.swing.JTextField jTFBarraPesquisa;
     // End of variables declaration//GEN-END:variables
 }
