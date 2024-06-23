@@ -35,7 +35,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jBTNBarraPesquisa2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBTNCriar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -52,7 +52,7 @@
                           <Component id="jScrollPane2" min="-2" pref="291" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="jBTNBarraPesquisa" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBTNAtualizar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jBTNBarraPesquisa1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -86,8 +86,8 @@
               </Group>
               <EmptySpace pref="49" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBTNBarraPesquisa2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBTNBarraPesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBTNCriar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBTNAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
@@ -97,13 +97,12 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="jTFBarraPesquisa">
     </Component>
-    <Component class="javax.swing.JButton" name="jBTNBarraPesquisa">
+    <Component class="javax.swing.JButton" name="jBTNAtualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Atualizar"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNBarraPesquisaMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBTNBarraPesquisaActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNAtualizarMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLBProdutos">
@@ -175,13 +174,12 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNBarraPesquisa1MouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jBTNBarraPesquisa2">
+    <Component class="javax.swing.JButton" name="jBTNCriar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Criar"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNBarraPesquisa2MouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBTNBarraPesquisa2ActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBTNCriarMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
