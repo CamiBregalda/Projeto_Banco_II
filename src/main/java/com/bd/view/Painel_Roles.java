@@ -165,7 +165,10 @@ public class Painel_Roles extends javax.swing.JDialog {
     }//GEN-LAST:event_jBTNBarraPesquisa1MouseClicked
 
     private void jBTNCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCriarMouseClicked
-        // TODO add your handling code here:
+        Painel_Cadastrar_Role cadastrar = new Painel_Cadastrar_Role(this, true);
+        cadastrar.setLocationRelativeTo(this);
+        cadastrar.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBTNCriarMouseClicked
 
     private void jBTNAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarMouseClicked

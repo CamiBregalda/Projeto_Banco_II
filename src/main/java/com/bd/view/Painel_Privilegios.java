@@ -174,7 +174,7 @@ public class Painel_Privilegios extends javax.swing.JDialog {
 
     private void jBTNovoPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNovoPapelMouseClicked
        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-       Painel_Cadastrar_Role cadatroRole = new Painel_Cadastrar_Role(frame, true);
+       Painel_Cadastrar_Role cadatroRole = new Painel_Cadastrar_Role(this, true);
        cadatroRole.setLocationRelativeTo(this);
        cadatroRole.setVisible(true);
     }//GEN-LAST:event_jBTNovoPapelMouseClicked
