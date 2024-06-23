@@ -180,6 +180,7 @@ public class Painel_Vendas extends javax.swing.JDialog {
         String venda = vendaService.realizarVenda(funcionario.fun_codigo(), produtoId, Integer.parseInt(quantidade));
         
         JOptionPane.showMessageDialog(this, venda);
+        this.dispose();
     }//GEN-LAST:event_jBTNComprarMouseClicked
 
     private void jBTNCalcularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNCalcularMouseClicked
@@ -187,7 +188,6 @@ public class Painel_Vendas extends javax.swing.JDialog {
         int quantidadeCompra = (Integer) jSPNQuantidade.getValue();
       
         double preco = valor * quantidadeCompra;
-        System.out.println("Preco: " + preco);
         jLBValorTotalMostrar.setText(String.format("%.2f", preco));
     }//GEN-LAST:event_jBTNCalcularMouseClicked
 
