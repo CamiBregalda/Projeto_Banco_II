@@ -1,12 +1,9 @@
 package com.bd.view;
 
-import com.bd.infra.Login;
 import com.bd.mapper.*;
-import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
 import org.mapstruct.factory.Mappers;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,11 +58,6 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         jLBConcederPapel.setText("Deseja conceder a quem:");
 
         jCBFuncionariosRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
-        jCBFuncionariosRole.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCBFuncionariosRoleMouseClicked(evt);
-            }
-        });
 
         jLBTabelaDesejada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLBTabelaDesejada.setText("Tabela desejada:");
@@ -94,21 +86,11 @@ public class Painel_Privilegios extends javax.swing.JFrame {
                 jBTNAtualizarPapelMouseClicked(evt);
             }
         });
-        jBTNAtualizarPapel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBTNAtualizarPapelActionPerformed(evt);
-            }
-        });
 
         jBTNConceder.setText("Conceder Privilégio");
         jBTNConceder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBTNConcederMouseClicked(evt);
-            }
-        });
-        jBTNConceder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBTNConcederActionPerformed(evt);
             }
         });
 
@@ -208,44 +190,25 @@ public class Painel_Privilegios extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBRolesMouseClicked
 
     private void jBTNAtualizarPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelMouseClicked
-        // TODO add your handling code here:
         Painel_Atualizar_Roles roles = new Painel_Atualizar_Roles(this, true);
         roles.setLocationRelativeTo(this);
         roles.setVisible(true);
     }//GEN-LAST:event_jBTNAtualizarPapelMouseClicked
 
-    private void jBTNAtualizarPapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBTNAtualizarPapelActionPerformed
-
     private void jBTNConcederMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNConcederMouseClicked
-        // TODO add your handling code here:
         ArrayList<String> permissoes = new ArrayList<>();
 
-        if(jCHBSelect.isSelected()){
-            permissoes.add("SELECT");
-        }
-        
-        if(jCHBInsert.isSelected()){
-            permissoes.add("INSERT");
-        }
-        
-        if(jCHBUpdate.isSelected()){
-            permissoes.add("UPDATE");
-        }
-        
-        if(jCHBDelete.isSelected()){
-            permissoes.add("DELETE");
-        }
+        if(jCHBSelect.isSelected()) permissoes.add("SELECT");
+        if(jCHBInsert.isSelected()) permissoes.add("INSERT");
+        if(jCHBUpdate.isSelected()) permissoes.add("UPDATE");
+        if(jCHBDelete.isSelected()) permissoes.add("DELETE");
 
         String[] listaPermissoes = new String[permissoes.size()];
-
         for(int i = 0; i < listaPermissoes.length; i++){
             listaPermissoes[i] = permissoes.get(i);
         }
         
         String permissoesString = "";
-        
         for (int i = 0; i < listaPermissoes.length; i++){
             permissoesString += listaPermissoes[i];
             if (i < listaPermissoes.length - 1) {
@@ -254,32 +217,22 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         }
 
         if(jCBFuncionariosRole.getSelectedItem().toString().equals("Todos")){
-            funcionarioService.concederPrivilegioGrupo(jCBRoles.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), permissoesString);
+            funcionarioService.concederPrivilegioGrupo(jCBRoles.getSelectedItem().toString(), 
+                    jCBTabelaDesejada.getSelectedItem().toString(), permissoesString);
         } else{
-           funcionarioService.concederPrivilegioUsuario(jCBFuncionariosRole.getSelectedItem().toString(), jCBTabelaDesejada.getSelectedItem().toString(), permissoesString);
+           funcionarioService.concederPrivilegioUsuario(jCBFuncionariosRole.getSelectedItem().toString(), 
+                   jCBTabelaDesejada.getSelectedItem().toString(), permissoesString);
         }
 
         JOptionPane.showMessageDialog(this, "Privilégios atualizados com sucesso!");
         this.dispose();
     }//GEN-LAST:event_jBTNConcederMouseClicked
 
-    private void jBTNConcederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNConcederActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBTNConcederActionPerformed
-
     private void jBTNovoPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNovoPapelMouseClicked
-        // TODO add your handling code here:
         Painel_Cadastrar_Role cadastroRole = new Painel_Cadastrar_Role(this, true);
         cadastroRole.setLocationRelativeTo(this);
         cadastroRole.setVisible(true);
     }//GEN-LAST:event_jBTNovoPapelMouseClicked
-
-    private void jCBFuncionariosRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBFuncionariosRoleMouseClicked
-        // TODO add your handling code here:
-
-        List<String> listaFuncionariosDaRole = funcionarioService.funcionarioPertenceRole(jCBRoles.getSelectedItem().toString());
-
-    }//GEN-LAST:event_jCBFuncionariosRoleMouseClicked
 
     public void receberDados(){
         List<String> listaRoles = funcionarioService.buscarRoles();
@@ -324,9 +277,6 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Painel_Privilegios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Painel_Privilegios dialog = new Painel_Privilegios();

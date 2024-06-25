@@ -1,30 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.bd.view;
 
-import com.bd.infra.Login;
 import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.BackupRepository;
 import com.bd.repository.FuncionarioRepository;
-import com.bd.service.FornecedorService;
 import com.bd.service.FuncionarioService;
-import com.bd.service.ItemService;
-import com.bd.service.ProdutoService;
-import com.bd.service.UsuarioService;
-import com.bd.service.VendaService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import org.mapstruct.factory.Mappers;
 
-/**
- *
- * @author gui
- */
 public class Painel_Cadastrar_Role extends javax.swing.JDialog {
     
     FuncionarioService funcionarioService;
@@ -178,11 +164,9 @@ public class Painel_Cadastrar_Role extends javax.swing.JDialog {
 
     private void jBTCriarRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTCriarRoleMouseClicked
         String nomeRole = jTFNomeNovaRole.getText();
-        ArrayList<String> funcionarios = new ArrayList<>();
         String nomeFuncionario = new String();
         
         for (int i = 0; i < jTBFuncionariosRole.getRowCount(); i++) {
-            //nomeFuncionario ="," + nomeFuncionario + (String) jTBFuncionariosRole.getValueAt(i, 0);
             nomeFuncionario += (String) jTBFuncionariosRole.getValueAt(i, 0);
             if (i < jTBFuncionariosRole.getRowCount() - 1) {
                 nomeFuncionario += ",";

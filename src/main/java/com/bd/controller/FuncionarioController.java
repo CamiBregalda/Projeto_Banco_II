@@ -1,14 +1,9 @@
 package com.bd.controller;
 
-import com.bd.model.Funcionario;
-import com.bd.model.request.FuncionarioRegistrationRequest;
 import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.request.UserLoginDTO;
-import com.bd.model.request.UserRequest;
 import com.bd.model.response.FuncionarioResponse;
-import com.bd.model.response.UserResponse;
 import com.bd.service.FuncionarioService;
-import com.bd.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
