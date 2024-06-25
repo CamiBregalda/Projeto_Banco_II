@@ -19,7 +19,6 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         receberDados();
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -48,9 +47,9 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Deseja conceder privilegios ao papel :");
 
-        jCBRoles.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCBRolesMouseClicked(evt);
+        jCBRoles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBRolesActionPerformed(evt);
             }
         });
 
@@ -175,20 +174,6 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCBRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBRolesMouseClicked
-        String opcao = jCBRoles.getSelectedItem().toString();
-
-        for(int i = 1; i < jCBFuncionariosRole.getItemCount(); i++){
-            jCBFuncionariosRole.remove(i);
-        }
-
-        List<String> funcionariosRole = funcionarioService.funcionarioPertenceRole(opcao);
-
-        for(int i = 0; i < funcionariosRole.size(); i++){
-            jCBFuncionariosRole.addItem(funcionariosRole.get(i));
-        }
-    }//GEN-LAST:event_jCBRolesMouseClicked
-
     private void jBTNAtualizarPapelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAtualizarPapelMouseClicked
         Painel_Atualizar_Roles roles = new Painel_Atualizar_Roles(this, true);
         roles.setLocationRelativeTo(this);
@@ -233,6 +218,20 @@ public class Painel_Privilegios extends javax.swing.JFrame {
         cadastroRole.setLocationRelativeTo(this);
         cadastroRole.setVisible(true);
     }//GEN-LAST:event_jBTNovoPapelMouseClicked
+
+    private void jCBRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBRolesActionPerformed
+        String opcao = jCBRoles.getSelectedItem().toString();
+
+        for(int i = 1; i < jCBFuncionariosRole.getItemCount(); i++){
+            jCBFuncionariosRole.remove(i);
+        }
+
+        List<String> funcionariosRole = funcionarioService.funcionarioPertenceRole(opcao);
+
+        for(int i = 0; i < funcionariosRole.size(); i++){
+            jCBFuncionariosRole.addItem(funcionariosRole.get(i));
+        }
+    }//GEN-LAST:event_jCBRolesActionPerformed
 
     public void receberDados(){
         List<String> listaRoles = funcionarioService.buscarRoles();
