@@ -7,7 +7,6 @@ import com.bd.model.request.FuncionarioRequest;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.BackupRepository;
 import com.bd.repository.FuncionarioRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -151,7 +150,7 @@ public class FuncionarioService {
     }
 
     public boolean realizarBackup(String host, String port, String username, String database, String password) throws RuntimeException {
-        PostgreSQLBackup backup = new PostgreSQLBackup();
+        BackupService backup = new BackupService();
         boolean response = backup.realizarBackup(host, port, username, database, password);
             
         if (response){

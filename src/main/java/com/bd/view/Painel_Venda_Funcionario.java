@@ -14,11 +14,6 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     long pro_codigo;
     FornecedorResponse fornecedor;
     ProdutoService produtoService;
-    FornecedorService fornecedorService;
-    UsuarioService usuarioService;
-    FuncionarioService funcionarioService;
-    ItemService itemService;
-    VendaService vendaService;
     
     public Painel_Venda_Funcionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -161,7 +156,6 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     
     private void jBTNAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBTNAlterarMouseClicked
-        //Pega os novos valores dos TextField e faz um ProdutoRequest, passa esse produto para o método AtualizarProduto()
         String nome = jLBNomeProduto.getText();
         Double preco = Double.parseDouble(jTFPreco.getText());
         int estoque = Integer.parseInt(jTFEstoque.getText());
@@ -205,57 +199,12 @@ public class Painel_Venda_Funcionario extends javax.swing.JDialog {
     }
 
     private void inicializandoClasses(){
-        FornecedorRepository fornecedorRepository = new FornecedorRepository();
-        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
-        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
-
-        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
-        BackupRepository backupRepository = new BackupRepository();
-        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
-        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
-
-        ItemRepository itemRepository = new ItemRepository();
-        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
-        itemService = new ItemService(itemRepository, itemMapper);
-
         ProdutoRepository produtoRepository = new ProdutoRepository();
         ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
         produtoService = new ProdutoService(produtoRepository, produtoMapper);
-
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
-        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
-
-        VendaRepository vendaRepository = new VendaRepository();
-        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
-        vendaService = new VendaService(vendaRepository, vendaMapper);
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Painel_Venda_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Painel_Venda_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Painel_Venda_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Painel_Venda_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Painel_Venda_Funcionario dialog = new Painel_Venda_Funcionario(new javax.swing.JFrame(), true);

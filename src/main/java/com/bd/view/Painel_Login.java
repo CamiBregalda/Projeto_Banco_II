@@ -6,10 +6,7 @@ import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.BackupRepository;
 import com.bd.repository.FuncionarioRepository;
 import com.bd.service.FuncionarioService;
-import com.bd.service.UsuarioService;
 import org.mapstruct.factory.Mappers;
-
-import java.util.Objects;
 import javax.swing.JOptionPane;
 
 public class Painel_Login extends javax.swing.JDialog {
@@ -17,7 +14,6 @@ public class Painel_Login extends javax.swing.JDialog {
     String pessoa;
     Painel_Tela_Inicial telaCadastro;
     FuncionarioService funcionarioService;
-    UsuarioService usuarioService;
 
     public Painel_Login(java.awt.Frame parent, boolean modal) {
         super();
@@ -153,30 +149,6 @@ public class Painel_Login extends javax.swing.JDialog {
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Painel_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Painel_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Painel_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Painel_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Painel_Login dialog = new Painel_Login(new javax.swing.JFrame(), true);

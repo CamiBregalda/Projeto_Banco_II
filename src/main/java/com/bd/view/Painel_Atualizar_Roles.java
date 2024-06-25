@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.bd.view;
 
-import com.bd.infra.Login;
 import com.bd.mapper.FuncionarioMapper;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.repository.BackupRepository;

@@ -44,6 +44,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+/*
 SELECT realizarVenda(1, 2, 20);
 
 select * from tb_produtos WHERE pro_codigo = 2;
@@ -58,7 +59,7 @@ BEGIN
     resultado := realizarVenda(1, 2, 20);
     RAISE NOTICE 'Resultado da função: %', resultado;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;*/
 
 
 
@@ -71,7 +72,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-select * from backup_programado
 
 CREATE OR REPLACE FUNCTION realizar_backup()
 RETURNS VOID AS $$
@@ -90,8 +90,5 @@ BEGIN
     INSERT INTO backup_programado (ultimo_backup, proximo_backup) VALUES (CURRENT_TIMESTAMP, proximo);
 END;
 $$ LANGUAGE plpgsql;
-
-SELECT realizar_backup();
-SELECT atualizar_proximo_backup(CURRENT_TIMESTAMP);
 
 SELECT * from backup_programado;

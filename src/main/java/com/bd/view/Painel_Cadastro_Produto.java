@@ -14,10 +14,6 @@ import javax.swing.*;
 public class Painel_Cadastro_Produto extends javax.swing.JDialog {
     ProdutoService produtoService;
     FornecedorService fornecedorService;
-    UsuarioService usuarioService;
-    FuncionarioService funcionarioService;
-    ItemService itemService;
-    VendaService vendaService;
 
     public Painel_Cadastro_Produto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -153,26 +149,9 @@ public class Painel_Cadastro_Produto extends javax.swing.JDialog {
         FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
         fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
 
-        FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
-        BackupRepository backupRepository = new BackupRepository();
-        FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
-        funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
-
-        ItemRepository itemRepository = new ItemRepository();
-        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
-        itemService = new ItemService(itemRepository, itemMapper);
-
         ProdutoRepository produtoRepository = new ProdutoRepository();
         ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
         produtoService = new ProdutoService(produtoRepository, produtoMapper);
-
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
-        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
-
-        VendaRepository vendaRepository = new VendaRepository();
-        VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
-        vendaService = new VendaService(vendaRepository, vendaMapper);
     }
 
     public static void main(String args[]) {

@@ -1,24 +1,17 @@
 package com.bd.view;
 
-import com.bd.infra.Login;
 import com.bd.mapper.*;
-import com.bd.model.request.VendaRequest;
 import com.bd.model.response.FuncionarioResponse;
 import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
 import java.util.List;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.mapstruct.factory.Mappers;
 
 public class Painel_Vendas extends javax.swing.JDialog {
 
-    ProdutoService produtoService;
-    FornecedorService fornecedorService;
-    UsuarioService usuarioService;
     FuncionarioService funcionarioService;
-    ItemService itemService;
     VendaService vendaService;
     Integer produtoId;
     
@@ -201,26 +194,10 @@ public class Painel_Vendas extends javax.swing.JDialog {
     }
     
     private void inicializandoClasses(){
-        FornecedorRepository fornecedorRepository = new FornecedorRepository();
-        FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
-        fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
-
         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
         BackupRepository backupRepository = new BackupRepository();
         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
         funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
-
-        ItemRepository itemRepository = new ItemRepository();
-        ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
-        itemService = new ItemService(itemRepository, itemMapper);
-
-        ProdutoRepository produtoRepository = new ProdutoRepository();
-        ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
-        produtoService = new ProdutoService(produtoRepository, produtoMapper);
-
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
-        usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
 
         VendaRepository vendaRepository = new VendaRepository();
         VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);

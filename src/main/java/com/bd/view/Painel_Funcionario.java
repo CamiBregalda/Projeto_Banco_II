@@ -1,13 +1,11 @@
 package com.bd.view;
 
 import com.bd.mapper.*;
-import com.bd.model.Venda;
 import com.bd.model.response.FornecedorResponse;
 import com.bd.model.response.ProdutoResponse;
 import com.bd.repository.*;
 import com.bd.service.*;
 import org.mapstruct.factory.Mappers;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -16,10 +14,6 @@ public class Painel_Funcionario extends javax.swing.JFrame {
     
     ProdutoService produtoService;
     FornecedorService fornecedorService;
-    UsuarioService usuarioService;
-    FuncionarioService funcionarioService;
-    ItemService itemService;
-    VendaService vendaService;
     List<ProdutoResponse> produtos = new ArrayList<ProdutoResponse>();
     
     public Painel_Funcionario() {
@@ -197,53 +191,12 @@ public class Painel_Funcionario extends javax.swing.JFrame {
         FornecedorMapper fornecedorMapper = Mappers.getMapper(FornecedorMapper.class);
         fornecedorService = new FornecedorService(fornecedorRepository, fornecedorMapper);
 
-         FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
-         BackupRepository backupRepository = new BackupRepository();
-         FuncionarioMapper funcionarioMapper = Mappers.getMapper(FuncionarioMapper.class);
-         funcionarioService = new FuncionarioService(funcionarioRepository, backupRepository, funcionarioMapper);
-
-         ItemRepository itemRepository = new ItemRepository();
-         ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
-         itemService = new ItemService(itemRepository, itemMapper);
-
          ProdutoRepository produtoRepository = new ProdutoRepository();
          ProdutoMapper produtoMapper = Mappers.getMapper(ProdutoMapper.class);
          produtoService = new ProdutoService(produtoRepository, produtoMapper);
-
-         UsuarioRepository usuarioRepository = new UsuarioRepository();
-         UsuarioMapper usuarioMapper = Mappers.getMapper(UsuarioMapper.class);
-         usuarioService = new UsuarioService(usuarioRepository, usuarioMapper);
-
-         VendaRepository vendaRepository = new VendaRepository();
-         VendaMapper vendaMapper = Mappers.getMapper(VendaMapper.class);
-         vendaService = new VendaService(vendaRepository, vendaMapper);
     }
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Painel_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Painel_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Painel_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Painel_Funcionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Painel_Funcionario().setVisible(true);

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostgreSQLBackup {
+public class BackupService {
 
     public boolean realizarBackup(String host, String port, String username, String database, String password) {
         String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
